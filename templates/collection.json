@@ -13,7 +13,7 @@
       "type": "collection-hero",
       "name": "Collection Hero",
       "settings": {
-        "show_rating_badge": true,
+        "show_rating_badge": false,
         "rating_text": ""
       }
     },
