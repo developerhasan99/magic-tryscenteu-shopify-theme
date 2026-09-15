@@ -1,0 +1,82 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "poland"
+  },
+  "parent": "header-group.json",
+  "sections": {
+    "blocky_lys_scrolling_text_bar_GLkKNr": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {
+        "text_XmbGh": {
+          "type": "text",
+          "disabled": false,
+          "settings": {
+            "text": "DARMOWA DOSTAWA OD 190 PLN"
+          }
+        },
+        "text_DiPtyi": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "text_XmbGh",
+        "text_KwnK4Y",
+        "text_39tt9p",
+        "text_DiPtyi",
+        "text_7Mhc9j",
+        "text_QD7JEH"
+      ]
+    },
+    "offer_timebar_4WVn7P": {
+      "settings": {
+        "prepend_text": "WYPRZEDAŻ MAGAZYNU",
+        "countdown_date": "2026/09/13 23:59:59",
+        "append_text": "Kup 3 w cenie 2",
+        "link": "shopify://collections/bestsellers"
+      },
+      "blocks": {
+        "payment_icon_MmG3KL": {
+          "settings": {
+            "icon": "shopify://shop_images/inpost.png",
+            "label": "Szybko"
+          }
+        },
+        "payment_icon_Fgdaze": {
+          "settings": {
+            "icon": "shopify://shop_images/poland_flag.png",
+            "label": "Z Polski"
+          }
+        },
+        "payment_icon_HNd7bU": {
+          "settings": {
+            "icon": "shopify://shop_images/blik.DeRA9syl.svg",
+            "label": "Wygodnie"
+          }
+        },
+        "payment_icon_EMjaQY": {
+          "settings": {
+            "icon": "shopify://shop_images/visa.CjeXrSa5.svg",
+            "label": "Bezpiecznie"
+          }
+        }
+      },
+      "block_order": [
+        "payment_icon_MmG3KL",
+        "payment_icon_Fgdaze",
+        "payment_icon_HNd7bU",
+        "payment_icon_EMjaQY"
+      ]
+    }
+  }
+}

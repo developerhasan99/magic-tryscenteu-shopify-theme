@@ -1,0 +1,102 @@
+<div class="flex flex-col bg-white p-4 shadow-sm rounded-lg relative h-full">
+    {% if product.tags contains 'bestseller' or product.tags contains 'onsale' %}
+    <div class="absolute top-3 left-4 flex gap-4">
+        {% if product.tags contains 'bestseller' %}
+        <div class="bg-blue-50 text-blue-600 px-2 py-1 text-xs rounded-full flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>  
+            <span>Bestseller</span>
+        </div>
+        {% elsif product.tags contains 'onsale' %}
+        <div class="bg-red-50 text-red-600 px-2 py-1 text-xs rounded-full">⚡ Angebot</div>
+        {% endif %}
+    </div>
+    {% endif %}
+    <a href="{{ product.url }}" class="flex relative">
+        {% if product.tags contains "local_image" %}
+          {% assign image_found = false %}
+          {% for image in product.images %}
+            {% assign curr_currency = localization.country.iso_code | prepend: "bundle_" | downcase %}
+            {% assign img_alt = image.alt | downcase %}
+            {% if img_alt contains "bundle_" and img_alt == curr_currency %}
+              {% assign image_found = true %}
+                <img
+                    class="w-full h-auto"
+                    src="{{ image.src |  image_url: width: 300 }}"
+                    alt="{{ product.title }}"
+                    height="{{ image.height }}"
+                    width="{{ image.width }}"
+                >
+            {% endif %}
+          {% endfor %}
+          {% if image_found == false %}
+            <img
+                class="w-full h-auto"
+                src="{{ product.images.first |  image_url: width: 300 }}"
+                alt="{{ product.title }}"
+                height="{{ product.images.first.height }}"
+                width="{{ product.images.first.width }}"
+            >
+          {% endif %}
+        {% else %}
+            <img
+                class="w-full h-auto"
+                src="{{ product.images.first |  image_url: width: 300 }}"
+                alt="{{ product.title }}"
+                height="{{ product.images.first.height }}"
+                width="{{ product.images.first.width }}"
+            >
+        {% endif %}
+    {% unless product.tags contains 'Bundle_Price_Show' or true %}
+      <div class="card__promo-marquee absolute left-0 right-0 bottom-0 bg-[#137c44] text-white" aria-label="Köp 3, få 1 gratis">
+        <div class="card__promo-marquee-rail">
+          <div class="card__promo-marquee-group">
+            <span class="card__promo-marquee-text">3 kaufen, 1 gratis dazu</span>
+            <span class="card__promo-marquee-dot" aria-hidden="true"></span>
+            <span class="card__promo-marquee-text">3 kaufen, 1 gratis dazu</span>
+            <span class="card__promo-marquee-dot" aria-hidden="true"></span>
+          </div>
+          <div class="card__promo-marquee-group" aria-hidden="true">
+            <span class="card__promo-marquee-text">3 kaufen, 1 gratis dazu</span>
+            <span class="card__promo-marquee-dot" aria-hidden="true"></span>
+            <span class="card__promo-marquee-text">3 kaufen, 1 gratis dazu</span>
+            <span class="card__promo-marquee-dot" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    {% endunless %}
+    </a>
+    {% comment %} <div class="line-clamp-3 text-sm [&_br]:hidden mt-2">
+    {{ product.metafields.custom.short_description | metafield_tag }}
+    </div> {% endcomment %}
+    <h3 class="mb-0">
+    <a class="no-underline text-black font-semibold text-sm md:text-base line-clamp-2" href="{{product.url}}">
+        {{ product.title }}
+    </a>
+    </h3>
+
+    {% if product.metafields.custom.inspired_by != blank %}
+    <div class="flex items-center gap-2 mt-3">
+        <img style="filter: blur(2px);" class="object-contain object-center" src="{{ product.metafields.custom.inspired_by.value.image |  image_url }}" alt="{{ product.metafields.custom.inspired_by.value.image.alt | escape }}" width="35" height="35">
+        <div>
+        <p class="text-xs my-0">Inspiriert von:</p>
+        <h4 class="text-sm font-semibold my-0 line-clamp-1 inspiration_heading">{{ product.metafields.custom.inspired_by.value.name }}</h4>
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="my-3">
+        <div class="font-bold tracking-normal text-black text-lg">
+            {{ product.price | money }}
+            {% if product.compare_at_price > product.price %}
+                <span class="line-through text-[#c8202f] font-normal text-sm">
+                    {{ product.compare_at_price | money }}
+                </span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="mt-auto">
+    <a class="hover:bg-[#17803d] bg-[#146b32] text-white uppercase text-sm font-semibold tracking-[2px] py-3 px-1 rounded-lg no-underline w-full text-center block" href="{{ product.url }}">
+        Jetzt kaufen
+    </a>
+    </div>
+</div>

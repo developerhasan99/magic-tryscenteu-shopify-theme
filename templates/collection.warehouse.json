@@ -1,0 +1,133 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection_header_zMrgV9": {
+      "type": "collection-header",
+      "blocks": {
+        "step_piURBQ": {
+          "type": "step",
+          "settings": {
+            "step_title": "Erhalten Sie 30 % Rabatt auf Ihren gesamten Warenkorb",
+            "step_description": "Wählen Sie Ihre Lieblingsdüfte aus und legen Sie sie in den Warenkorb"
+          }
+        },
+        "step_7eTiRE": {
+          "type": "step",
+          "settings": {
+            "step_title": "Mit den Paketen sparst du noch mehr!",
+            "step_description": "Kaufen Sie 3 – sparen Sie 40%. Kaufen Sie 6 – sparen Sie 48%."
+          }
+        },
+        "step_KKtVmi": {
+          "type": "step",
+          "settings": {
+            "step_title": "Bestellwert von mindestens 65 Euros",
+            "step_description": "Erhalten Sie KOSTENLOSEN Versand und KOSTENLOSE Geschenke!"
+          }
+        },
+        "guarantee_mtd9Gw": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "shopify://shop_images/sandwatch_1.svg",
+            "text": "Hält 12+ Stunden"
+          }
+        },
+        "guarantee_x7hFWP": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "shopify://shop_images/icons_quality_3.png",
+            "text": "19–21 % Duftölkonzentration"
+          }
+        },
+        "guarantee_xY66Fn": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "shopify://shop_images/sheild-star_1.svg",
+            "text": "60 Tage Geld-zurück-Garantie"
+          }
+        }
+      },
+      "block_order": [
+        "step_piURBQ",
+        "step_7eTiRE",
+        "step_KKtVmi",
+        "guarantee_mtd9Gw",
+        "guarantee_x7hFWP",
+        "guarantee_xY66Fn"
+      ],
+      "name": "Collection Header",
+      "settings": {
+        "background_color": "#f5f1e9",
+        "text_color": "#000000",
+        "bg_image": "shopify://shop_images/payday_banner.png",
+        "bg_mobile_image": "shopify://shop_images/payday_mobile_Nobottles.jpg",
+        "social_proof_text": "Von über 10.000 zufriedenen Duftliebhabern empfohlen",
+        "collection_title": "Sonderangebot zum Zahltag!",
+        "collection_description": "Kaufen Sie Ihre Lieblingsdüfte zu noch günstigeren Preisen! Und sparen Sie mit Paketangeboten noch mehr!",
+        "btn_link": "",
+        "btn_text": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40
+      }
+    },
+    "popular_products_3Lx6bB": {
+      "type": "popular-products",
+      "disabled": true,
+      "name": "Popular Products",
+      "settings": {
+        "background_color": "#fcfbf9",
+        "heading": "🔥Heißeste Sommerdüfte 2026🔥",
+        "subheading": "Entworfen und formuliert für Qualität.",
+        "collection": "neue-angesagte-dufte",
+        "show_all_button_text": "ANSEHEN",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-2"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 36,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-2",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 40,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "collection_header_zMrgV9",
+    "popular_products_3Lx6bB",
+    "banner",
+    "product-grid"
+  ]
+}

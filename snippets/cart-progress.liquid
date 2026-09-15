@@ -1,0 +1,53 @@
+<div class="bc-rewards-bars-wrap" style="flex-direction: row;">
+  <div class="bc-progress-wrap">
+    {% assign cart_count = cart.item_count %}
+    {% assign progress_percentage = cart_count | times: 25 | at_most: 100 %}
+    {% assign remaining_bottle_count = 4 | minus: cart_count %}
+
+    <div class="bc-progress-text" style="color: #000000;">
+      {% if cart_count >= 4 %}
+        {{ 'sections.cart.bundle_offer_unlocked' | t }}
+      {% else %}
+        {{ 'sections.cart.bundle_offer_remaining_html' | t: count: remaining_bottle_count }}
+      {% endif %}
+    </div>
+    <div class="bc-progress-bar" style="background-color: #E2E2E2; margin-bottom: 0;">
+      <div class="bc-progress-fill" style="width: {{ progress_percentage }}%; background-color: #93D3FF;"></div>
+      <div class="bc-checkpoints">
+        <div class="bc-checkpoint {% if cart_count >= 4 %}is-reached{% endif %}" style="left: 100%; 
+               background-color: {% if cart_count >= 4 %}#93D3FF{% else %}#E2E2E2{% endif %};
+               color: #000000;">
+          {{ 'icon-gift.svg' | inline_asset_content }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bc-progress-wrap">
+    {% assign cart_total = cart.total_price %}
+    {% assign free_shipping_threshold = 4500 %}
+    {% assign country_iso_code = localization.country.iso_code | downcase %}
+    {% if country_iso_code == 'pl' %}
+      {% assign free_shipping_threshold = 19000 %}
+    {% endif %}
+    {% assign progress_percentage = cart_total | times: 100.0 | divided_by: free_shipping_threshold | at_most: 100 %}
+    {% assign remaining_shipping_amount = free_shipping_threshold | minus: cart_total | money %}
+
+    <div class="bc-progress-text" style="color: #000000;">
+      {% if cart_total >= free_shipping_threshold %}
+        {{ 'sections.cart.free_shipping_unlocked' | t }}
+      {% else %}
+        {{ 'sections.cart.free_shipping_remaining_html' | t: amount: remaining_shipping_amount }}
+      {% endif %}
+    </div>
+    <div class="bc-progress-bar" style="background-color: #E2E2E2; margin-bottom: 0;">
+      <div class="bc-progress-fill" style="width: {{ progress_percentage }}%; background-color: #93D3FF;"></div>
+      <div class="bc-checkpoints">
+        <div class="bc-checkpoint {% if cart_total >= free_shipping_threshold %}is-reached{% endif %}" style="left: 100%; 
+               background-color: {% if cart_total >= free_shipping_threshold %}#93D3FF{% else %}#E2E2E2 {% endif %};
+               color: #000000;">
+          {{ 'icon-truck.svg' | inline_asset_content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

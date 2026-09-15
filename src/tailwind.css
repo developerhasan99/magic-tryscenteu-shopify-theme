@@ -1,0 +1,100 @@
+@tailwind utilities;
+
+.animate-move-left {
+    animation: move-left 50s linear infinite
+}
+
+@keyframes move-left {
+    0% {
+        transform: translateX(0)
+    }
+
+    to {
+        transform: translateX(-50%)
+    }
+}
+
+.shimmer-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, #fff0, #fff3, #fff0);
+    transform: skew(-25deg);
+    animation: shimmer 3s infinite;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150%;
+  }
+  80% {
+    left: 150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+@keyframes cardPromoMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(calc(-100% / 2), 0, 0);
+  }
+}
+
+.card__promo-marquee {
+  overflow: hidden;
+  padding-block: 10px;
+  white-space: nowrap;
+}
+
+.card__promo-marquee-rail {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  will-change: transform;
+  animation: cardPromoMarquee 10s linear infinite;
+}
+
+.card__promo-marquee-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 1rem;
+  padding-inline-end: 1rem;
+}
+
+.card__promo-marquee-text {
+  display: inline-block;
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.card__promo-marquee-dot {
+  display: block;
+  flex: 0 0 auto;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card__promo-marquee-rail {
+    animation: none;
+    transform: none;
+  }
+}

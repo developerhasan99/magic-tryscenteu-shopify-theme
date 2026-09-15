@@ -1,0 +1,119 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: 60px;
+    padding-bottom: 450px;
+    {% if section.settings.mobile_background_image != blank %}
+      background-image: url('{{ section.settings.mobile_background_image | image_url }}');
+    {% endif %}
+    {% if section.settings.background_color != blank %}
+      background-color: {{ section.settings.background_color }};
+    {% endif %}
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: 120px;
+      padding-bottom: 120px;
+      {% if section.settings.background_image != blank %}
+        background-image: url('{{ section.settings.background_image | image_url }}');
+      {% endif %}
+    }
+  }
+{%- endstyle -%}
+
+<div id="{{ section.id }}" class="section-{{ section.id }}-padding bg-cover bg-center">
+  <div class="page-width">
+    <div class="max-w-[500px] text-center md:text-left">
+      <h1 class="text-3xl !leading-tight md:text-5xl font-black text-black mt-0">
+        {{ section.settings.title }}
+      </h1>
+      <div class="text-3xl !leading-tight md:text-5xl font-black text-[#683d0e] pt-8 mb-8 border-0 border-t-2 border-solid border-[#683d0e]">{{ section.settings.subtitle }}</div>
+      <div class="flex gap-4 items-center justify-center md:justify-start">
+        <a href="{{ section.settings.button_link }}" class="py-4 px-6 no-underline leading-tight bg-black text-white rounded-full shadow-md shadow-white">{{ section.settings.button_text }}</a>
+        {% if section.settings.second_button_text != blank %}
+          <a href="{{ section.settings.second_button_link }}" class="py-4 px-6 no-underline leading-tight bg-black text-white rounded-full shadow-md shadow-white">{{ section.settings.second_button_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Homepage Hero",
+    "class": "homepage-hero",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#fcfbf9"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_background_image",
+        "label": "Mobile Background Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Homepage Hero"
+      }, {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Homepage Hero"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "GET NORDIC GLADE"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      }, {
+        "type": "text",
+        "id": "second_button_text",
+        "label": "Second Button Text",
+        "default": "GET NORDIC GLADE"
+      }, {
+        "type": "url",
+        "id": "second_button_link",
+        "label": "Second Button Link"
+      }, {
+        "type": "header",
+        "content": "Section Padding"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 36
+      }
+    ],
+    "presets": [
+      {
+        "name": "Homepage Hero"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,59 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "poland"
+  },
+  "parent": "collection.payday-page.json",
+  "sections": {
+    "collection_header_afwWaN": {
+      "settings": {
+        "social_proof_text": "Polecane przez ponad 10 000 zadowolonych miłośników zapachów",
+        "collection_title": "Specjalna oferta w dniu wypłaty!",
+        "collection_description": "Kup swoje ulubione zapachy w jeszcze niższych cenach! A dzięki zestawom oszczędzasz jeszcze więcej!"
+      },
+      "blocks": {
+        "step_FYgAph": {
+          "settings": {
+            "step_title": "Otrzymaj 30% zniżki na cały koszyk",
+            "step_description": "Wybierz swoje ulubione zapachy i dodaj je do koszyka"
+          }
+        },
+        "step_Qpjtmg": {
+          "settings": {
+            "step_title": "Dzięki zestawom oszczędzasz jeszcze więcej!",
+            "step_description": "Kup 3 – oszczędź 40%. Kup 6 – oszczędź 48%."
+          }
+        },
+        "step_AEkAAJ": {
+          "settings": {
+            "step_title": "Wartość zamówienia co najmniej 65 euro",
+            "step_description": "Otrzymaj DARMOWĄ wysyłkę i DARMOWE prezenty!"
+          }
+        },
+        "guarantee_Dq8WtF": {
+          "settings": {
+            "text": "Utrzymuje się 12+ godzin"
+          }
+        },
+        "guarantee_kEpmJ7": {
+          "settings": {
+            "text": "19–21% stężenia olejku zapachowego"
+          }
+        },
+        "guarantee_Hm7R4D": {
+          "settings": {
+            "text": "60-dniowa gwarancja zwrotu pieniędzy"
+          }
+        }
+      }
+    }
+  }
+}

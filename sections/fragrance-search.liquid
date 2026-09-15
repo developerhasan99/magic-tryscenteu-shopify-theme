@@ -1,0 +1,4129 @@
+{% comment %}
+  FRAGRANCE CODE SUCHE POPUP - PREMIUM DESIGN
+  - KOMPLETT HARDCODED - Jedes Parfum hat exakte Zuordnungen
+  - Strenge Marken- und Geschlechtszuordnung
+  - Zeigt Produkte der gleichen Marke bei "Das könnte dir auch gefallen"
+  - Geschlechtsspezifische Empfehlungen
+{% endcomment %}
+
+<!-- Lade unseren kuratierten Katalog -->
+<script src="{{ 'perfume-catalog-minimal.js' | asset_url }}"></script>
+
+<style>
+/* ===== PREMIUM FRAGRANCE CODE POPUP ===== */
+.fc-float-wrapper {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ===== FLOATING BUTTON ===== */
+.fc-search-toggle {
+  background: #C41E3A;
+  border-radius: 30px;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(196, 30, 58, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  border: none;
+  min-width: 130px;
+}
+
+.fc-search-toggle:hover {
+  background: #A51D36;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(165, 29, 54, 0.4);
+}
+
+.fc-search-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: #FFFFFF;
+  stroke-width: 2;
+  fill: none;
+}
+
+.fc-toggle-text {
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ===== POPUP CONTAINER ===== */
+.fc-search-popup {
+  position: fixed;
+  bottom: 110px;
+  right: 30px;
+  width: 440px;
+  max-height: 80vh;
+  background: #FFFFFF;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  overflow-y: auto;
+  transform: translateY(30px);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10000;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.fc-search-popup.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Premium Scrollbar */
+.fc-search-popup::-webkit-scrollbar {
+  width: 6px;
+}
+.fc-search-popup::-webkit-scrollbar-track {
+  background: #F8F4F0;
+  border-radius: 10px;
+}
+.fc-search-popup::-webkit-scrollbar-thumb {
+  background: #C41E3A;
+  border-radius: 10px;
+}
+
+/* ===== CLOSE BUTTON ===== */
+.fc-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  background: #F8F4F0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  color: #4A3F39;
+  transition: all 0.2s ease;
+  z-index: 10;
+  border: none;
+  opacity: 0.9;
+}
+
+.fc-close-btn:hover {
+  background: #EDE5DC;
+  color: #C41E3A;
+  transform: rotate(90deg);
+}
+
+/* ===== OFFER BANNER - PREMIUM ===== */
+.fc-offer-banner {
+  background: linear-gradient(135deg, #FFF5EB, #FFE8DA);
+  border: 2px solid #C41E3A;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin: 20px 20px 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 15px -5px rgba(196, 30, 58, 0.2);
+  transition: all 0.3s ease;
+}
+
+.fc-offer-banner.qualified {
+  background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+  border-color: #2E7D32;
+  box-shadow: 0 8px 15px -5px rgba(46, 125, 50, 0.2);
+}
+
+.fc-offer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.fc-offer-icon {
+  font-size: 28px;
+  background: #C41E3A;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 5px 10px rgba(196, 30, 58, 0.3);
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.fc-offer-banner.qualified .fc-offer-icon {
+  background: #2E7D32;
+  box-shadow: 0 5px 10px rgba(46, 125, 50, 0.3);
+}
+
+.fc-offer-text {
+  flex: 1;
+}
+
+.fc-offer-text strong {
+  display: block;
+  font-size: 15px;
+  color: #C41E3A;
+  font-weight: 800;
+  margin-bottom: 2px;
+  letter-spacing: 0.3px;
+  transition: color 0.3s ease;
+  line-height: 1.3;
+}
+
+.fc-offer-banner.qualified .fc-offer-text strong {
+  color: #2E7D32;
+}
+
+.fc-offer-text span {
+  font-size: 12px;
+  color: #4A3F39;
+  font-weight: 500;
+  display: block;
+  line-height: 1.4;
+}
+
+.fc-offer-status {
+  background: #C41E3A;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(196, 30, 58, 0.2);
+  transition: all 0.3s ease;
+  min-width: 65px;
+  text-align: center;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.fc-offer-banner.qualified .fc-offer-status {
+  background: #2E7D32;
+  box-shadow: 0 4px 8px rgba(46, 125, 50, 0.2);
+}
+
+/* Progress bar */
+.fc-offer-progress-container {
+  padding: 0 20px 15px 20px;
+}
+
+.fc-offer-progress-bar {
+  height: 6px;
+  background: #EDE5DC;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.fc-offer-progress-fill {
+  height: 100%;
+  background: #C41E3A;
+  border-radius: 10px;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.fc-offer-banner.qualified .fc-offer-progress-fill {
+  background: #2E7D32;
+}
+
+.fc-offer-message {
+  font-size: 12px;
+  color: #4A3F39;
+  margin-top: 8px;
+  text-align: right;
+  font-weight: 500;
+  padding-right: 5px;
+}
+
+/* ===== INFO SECTION ===== */
+.fc-info-section {
+  padding: 5px 20px 5px 20px;
+}
+
+.fc-info-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8A7A70;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* ===== LOGO SECTION - CLICKABLE ===== */
+.fc-logo-section {
+  padding: 0 20px 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.fc-logo-section:hover {
+  opacity: 0.8;
+}
+
+.fc-logo-red {
+  width: 60px;
+  height: 60px;
+  background: #C41E3A;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 15px rgba(196, 30, 58, 0.25);
+}
+
+.fc-logo-fc {
+  color: white;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.fc-brand-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2C2420;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* ===== SEARCH SECTION WITH CLEAR BUTTON ===== */
+.fc-search-section {
+  padding: 0 20px 20px 20px;
+  position: relative;
+}
+
+.fc-search-container {
+  position: relative;
+  border-bottom: 2px solid #EDE5DC;
+  transition: border-color 0.2s ease;
+}
+
+.fc-search-container:focus-within {
+  border-color: #C41E3A;
+}
+
+.fc-search-field {
+  width: 100%;
+  padding: 15px 45px 15px 0;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  background: transparent;
+  color: #2C2420;
+}
+
+.fc-search-field::placeholder {
+  color: #B0A298;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.fc-clear-search {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: #F8F4F0;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #8A7A70;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.fc-clear-search:hover {
+  background: #EDE5DC;
+  color: #C41E3A;
+}
+
+/* ===== STEPS SECTION - PREMIUM BOX ===== */
+.fc-steps-section {
+  padding: 0 20px 25px 20px;
+}
+
+.fc-steps-box {
+  background: #FEFCF9;
+  border: 1px solid #EDE5DC;
+  border-radius: 24px;
+  padding: 28px 20px;
+  box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.08);
+}
+
+.fc-steps-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #2C2420;
+  margin-bottom: 25px;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+}
+
+.fc-steps-title span {
+  display: block;
+  color: #C41E3A;
+  font-size: 24px;
+}
+
+.fc-step-item {
+  font-size: 15px;
+  margin: 20px 0;
+  color: #4A3F39;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.fc-step-number {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  background: #C41E3A;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 28px;
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 4px 8px rgba(196, 30, 58, 0.2);
+}
+
+/* ===== SECTION TITLES ===== */
+.fc-section-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #C41E3A;
+  margin: 20px 20px 15px 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #EDE5DC;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.fc-subsection-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2C2420;
+  margin: 20px 20px 15px 20px;
+}
+
+/* ===== REAL PERFUME LIST ===== */
+.fc-real-perfume-item {
+  background: #FFFFFF;
+  padding: 15px 20px;
+  margin: 0;
+  border-bottom: 1px solid #F0E8E0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: background 0.2s ease;
+}
+
+.fc-real-perfume-item:hover {
+  background: #FEF9F5;
+}
+
+.fc-real-perfume-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #FFFFFF;
+  padding: 5px;
+  border: 1px solid #EDE5DC;
+}
+
+.fc-real-perfume-info {
+  flex: 1;
+}
+
+.fc-real-perfume-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2C2420;
+  margin-bottom: 4px;
+}
+
+.fc-real-perfume-brand {
+  font-size: 14px;
+  color: #C41E3A;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.fc-real-perfume-year {
+  font-size: 12px;
+  color: #B0A298;
+}
+
+/* ===== PRODUCT GRID ===== */
+.fc-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding: 0 20px 20px 20px;
+}
+
+.fc-product-card {
+  text-align: center;
+}
+
+.fc-badge {
+  background: #F8F4F0;
+  padding: 6px 12px;
+  border-radius: 40px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #4A3F39;
+  margin-bottom: 12px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border: 1px solid #EDE5DC;
+}
+
+.fc-product-inner {
+  background: #FFFFFF;
+  border: 1px solid #EDE5DC;
+  border-radius: 20px;
+  padding: 18px 12px;
+  transition: all 0.2s ease;
+}
+
+.fc-product-inner:hover {
+  border-color: #C41E3A;
+  box-shadow: 0 8px 18px -8px rgba(196, 30, 58, 0.15);
+}
+
+/* ===== ENLARGED CATALOGUE IMAGES ===== */
+.fc-product-image {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.1));
+}
+
+.fc-product-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #2C2420;
+}
+
+.fc-product-price {
+  font-size: 14px;
+  font-weight: 800;
+  color: #C41E3A;
+  margin-bottom: 10px;
+}
+
+.fc-add-to-cart {
+  width: 100%;
+  background: #C41E3A;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  transition: background 0.2s ease;
+}
+
+.fc-add-to-cart:hover {
+  background: #A51D36;
+}
+
+.fc-view-link {
+  font-size: 11px;
+  color: #8A7A70;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.fc-view-link:hover {
+  color: #C41E3A;
+}
+
+/* ===== DETAILED VIEW ===== */
+.fc-detailed-view {
+  background: #FEFCF9;
+  border-radius: 24px;
+  padding: 20px;
+  margin: 0 20px 20px 20px;
+  border: 1px solid #EDE5DC;
+}
+
+.fc-back-btn {
+  background: none;
+  border: none;
+  padding: 0 20px 15px 20px;
+  font-size: 13px;
+  color: #8A7A70;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+
+.fc-back-btn:hover {
+  color: #C41E3A;
+}
+
+.fc-back-btn:before {
+  content: "←";
+  font-size: 16px;
+}
+
+.fc-detailed-header {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #EDE5DC;
+}
+
+.fc-detailed-image {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: #FFFFFF;
+  padding: 10px;
+  border: 1px solid #EDE5DC;
+}
+
+.fc-detailed-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #2C2420;
+  margin-bottom: 6px;
+}
+
+.fc-detailed-brand {
+  font-size: 15px;
+  color: #C41E3A;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.fc-detailed-meta {
+  font-size: 13px;
+  color: #8A7A70;
+  margin-top: 5px;
+}
+
+/* ===== NOTES ===== */
+.fc-notes-section {
+  margin: 20px 0;
+}
+
+.fc-note-category {
+  margin-bottom: 18px;
+}
+
+.fc-note-category h4 {
+  font-size: 13px;
+  font-weight: 800;
+  color: #C41E3A;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.fc-note-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fc-note-tag {
+  background: #FFFFFF;
+  border: 1px solid #EDE5DC;
+  padding: 6px 14px;
+  border-radius: 40px;
+  font-size: 12px;
+  color: #4A3F39;
+  font-weight: 500;
+}
+
+.fc-description {
+  margin: 20px 0 0 0;
+  padding: 18px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid #EDE5DC;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #4A3F39;
+}
+
+/* ===== NOTIFICATION ===== */
+.fc-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #2E7D32;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  z-index: 10001;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+.fc-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== LOADING & NO RESULTS ===== */
+.fc-loading, .fc-no-results {
+  text-align: center;
+  padding: 40px;
+  color: #B0A298;
+  background: #FEFCF9;
+  border-radius: 20px;
+  margin: 20px;
+  font-size: 14px;
+}
+
+/* ===== SUGGESTIONS SECTION ===== */
+.fc-suggestions-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2C2420;
+  margin: 20px 20px 10px 20px;
+}
+
+.fc-suggestion-item {
+  background: #FFFFFF;
+  padding: 15px 20px;
+  margin: 0;
+  border-bottom: 1px solid #F0E8E0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: background 0.2s ease;
+}
+
+.fc-suggestion-item:hover {
+  background: #FEF9F5;
+}
+
+.fc-suggestion-image {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #FFFFFF;
+  padding: 5px;
+  border: 1px solid #EDE5DC;
+}
+
+.fc-suggestion-info {
+  flex: 1;
+}
+
+.fc-suggestion-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2C2420;
+  margin-bottom: 2px;
+}
+
+.fc-suggestion-price {
+  font-size: 13px;
+  font-weight: 600;
+  color: #C41E3A;
+}
+
+.fc-suggestion-tag {
+  font-size: 11px;
+  color: #8A7A70;
+  margin-top: 2px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 520px) {
+  .fc-search-popup {
+    width: 90vw;
+    right: 5vw;
+    left: 5vw;
+    bottom: 100px;
+  }
+  
+  .fc-offer-banner {
+    margin: 15px 15px 15px 15px;
+    padding: 15px;
+  }
+  
+  .fc-info-section, .fc-logo-section, .fc-search-section, .fc-steps-section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .fc-steps-box {
+    padding: 20px 15px;
+  }
+  
+  .fc-offer-text strong {
+    font-size: 14px;
+  }
+  
+  .fc-offer-text span {
+    font-size: 11px;
+  }
+  
+  .fc-offer-status {
+    font-size: 13px;
+    padding: 5px 10px;
+    min-width: 55px;
+  }
+}
+</style>
+
+<!-- Define toggle function -->
+<script>
+window.fcToggleSearch = function() {
+  try {
+    const searchPopup = document.getElementById('fcSearchPopup');
+    const searchInput = document.getElementById('fcSearchInput');
+    
+    if (!searchPopup) {
+      console.warn('fcSearchPopup element not found');
+      return;
+    }
+    
+    if (searchPopup.classList.contains('active')) {
+      searchPopup.classList.remove('active');
+    } else {
+      searchPopup.classList.add('active');
+      if (searchInput) {
+        searchInput.focus();
+      }
+      if (window.fetchCartAndUpdate) {
+        window.fetchCartAndUpdate();
+      }
+    }
+  } catch (e) {
+    console.error('Error in fcToggleSearch:', e);
+  }
+};
+</script>
+
+<div class="fc-float-wrapper">
+  <!-- Floating Button -->
+  <div class="fc-search-toggle" id="fcStickyButton" onclick="window.fcToggleSearch()">
+    <svg viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8" stroke="#FFFFFF" fill="none"/>
+      <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#FFFFFF" stroke-width="2"/>
+    </svg>
+    <span class="fc-toggle-text">Suche</span>
+  </div>
+
+  <!-- Search Popup -->
+  <div class="fc-search-popup" id="fcSearchPopup">
+    <div class="fc-close-btn" onclick="window.fcToggleSearch()">✕</div>
+
+    <!-- OFFER BANNER -->
+    <div class="fc-offer-banner" id="fcOfferBanner">
+      <div class="fc-offer-left">
+        <span class="fc-offer-icon">🎁</span>
+        <div class="fc-offer-text">
+          <strong>3 KAUFEN 1 GRATIS</strong>
+          <span id="fcOfferSubtext">Füge 3 Artikel hinzu für ein gratis Geschenk</span>
+        </div>
+      </div>
+      <div class="fc-offer-status" id="fcOfferStatus">0/3</div>
+    </div>
+    
+    <!-- Progress bar -->
+    <div class="fc-offer-progress-container">
+      <div class="fc-offer-progress-bar">
+        <div class="fc-offer-progress-fill" id="fcOfferProgress" style="width: 0%;"></div>
+      </div>
+      <div class="fc-offer-message" id="fcOfferMessage">Füge 3 Artikel hinzu für ein gratis Geschenk</div>
+    </div>
+
+    <!-- INFO SECTION -->
+    <div class="fc-info-section">
+      <div class="fc-info-label">INFORMATIONEN BEREITGESTELLT VON:</div>
+    </div>
+
+    <!-- Logo Section -->
+    <a href="https://fragrancecode.com" target="_blank" style="text-decoration: none;">
+      <div class="fc-logo-section">
+        <div class="fc-logo-red">
+          <span class="fc-logo-fc">FC</span>
+        </div>
+        <span class="fc-brand-text">FRAGRANCE CODE</span>
+      </div>
+    </a>
+
+    <!-- Search Input -->
+    <div class="fc-search-section">
+      <div class="fc-search-container">
+        <input type="text" 
+               id="fcSearchInput" 
+               class="fc-search-field" 
+               placeholder="Suche nach Name, Marke, ID oder Duftnoten..."
+               autocomplete="off">
+        <button class="fc-clear-search" id="fcClearSearch">✕</button>
+      </div>
+    </div>
+
+    <!-- Steps Section -->
+    <div class="fc-steps-section" id="fcSteps">
+      <div class="fc-steps-box">
+        <div class="fc-steps-title">
+          SO FINDEST DU<br><span>DEIN PARFUM.</span>
+        </div>
+        <div class="fc-step-item">
+          <span class="fc-step-number">1</span>
+          <span>SAG MIR, WELCHES PARFUM DU LIEBST.</span>
+        </div>
+        <div class="fc-step-item">
+          <span class="fc-step-number">2</span>
+          <span>ICH SERVIERE ES DIR IN SEKUNDEN...</span>
+        </div>
+        <div class="fc-step-item">
+          <span class="fc-step-number">3</span>
+          <span>ENTDECKE DEIN NEUES LIEBLINGSPARFUM UND GENIESSE ES!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Content -->
+    <div id="fcContent"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // ===== YOUR SHOPIFY PRODUCTS =====
+  let fcProducts = [];
+  let currentView = 'search';
+  let currentSearchQuery = '';
+  
+  // Debounce timer
+  let searchTimer = null;
+
+  // Get elements
+  const stickyButton = document.getElementById('fcStickyButton');
+  const searchPopup = document.getElementById('fcSearchPopup');
+  const searchInput = document.getElementById('fcSearchInput');
+  const clearSearch = document.getElementById('fcClearSearch');
+  const steps = document.getElementById('fcSteps');
+  const content = document.getElementById('fcContent');
+  
+  // Offer elements
+  const offerBanner = document.getElementById('fcOfferBanner');
+  const offerStatus = document.getElementById('fcOfferStatus');
+  const offerProgress = document.getElementById('fcOfferProgress');
+  const offerMessage = document.getElementById('fcOfferMessage');
+  const offerSubtext = document.getElementById('fcOfferSubtext');
+
+  // ===== COMBINE ALL PERFUME CATALOGS =====
+  let allPerfumes = [];
+
+  function combineCatalogs() {
+    allPerfumes = [];
+    
+    // Check for NederlandseParfumCatalogus (Dutch/German catalog)
+    if (window.NederlandseParfumCatalogus) {
+      console.log('✓ NederlandseParfumCatalogus gevonden');
+      
+      // Add all perfumes from the catalog
+      for (let brandKey in window.NederlandseParfumCatalogus) {
+        if (brandKey.startsWith('_')) continue;
+        const perfumes = window.NederlandseParfumCatalogus[brandKey];
+        if (Array.isArray(perfumes)) {
+          allPerfumes.push(...perfumes);
+        }
+      }
+      console.log(`✓ Totaal parfums in catalogus: ${allPerfumes.length}`);
+    } else {
+      console.warn('⚠️ NederlandseParfumCatalogus niet gevonden');
+    }
+  }
+
+  // ===== EXTRACT PRODUCT NUMBER FROM TITLE =====
+  function extractProductNumber(title) {
+    if (!title) return null;
+    const match = title.match(/No\.?\s*(\d+)/i);
+    return match ? match[1] : null;
+  }
+
+  // ===== FIND PERFUME BY ID =====
+  function findPerfumeById(id) {
+    return allPerfumes.find(p => p.id === id);
+  }
+
+  // ===== COMPLETE HARDCODED PRODUCT DATABASE - 99 PRODUCTS =====
+  const hardcodedProducts = [
+    // Bundle products (1-9)
+    {
+      id: "tryscent-3x_100ml_perfume_bottles",
+      title: "3X 100ml Parfum Flaschen",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/any_3_x_100_ml_usd.png?v=1762599629",
+      url: "https://tryscent.eu/products/3x-100ml-perfume-bottles",
+      price: 6295,  // €62,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "001",
+      gender: "unisex",
+      searchTerms: ["3x", "100ml", "parfum", "flaschen", "bundle"]
+    },
+    {
+      id: "tryscent-3x_50ml_perfume_bottles",
+      title: "3X 50ml Parfum Flaschen",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/any_3_x_50_ml_usd.png?v=1762599625",
+      url: "https://tryscent.eu/products/3x-50ml-perfume-bottles",
+      price: 4495,  // €44,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "002",
+      gender: "unisex",
+      searchTerms: ["3x", "50ml", "parfum", "flaschen", "bundle"]
+    },
+    {
+      id: "tryscent-4x_100ml_perfume_bottles",
+      title: "4X 100ml Parfum Flaschen",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/usd_-_100ml_-_4_bottles.png?v=1762599631",
+      url: "https://tryscent.eu/products/4x-100ml-perfume-bottles",
+      price: 7195,  // €71,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "003",
+      gender: "unisex",
+      searchTerms: ["4x", "100ml", "parfum", "flaschen", "bundle"]
+    },
+    {
+      id: "tryscent-4x_50ml_perfume_bottles",
+      title: "4X 50ml Parfum Flaschen",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/usd_-_50ml_-_4_bottles.png?v=1762599622",
+      url: "https://tryscent.eu/products/4x-50ml-perfume-bottles",
+      price: 5395,  // €53,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "004",
+      gender: "unisex",
+      searchTerms: ["4x", "50ml", "parfum", "flaschen", "bundle"]
+    },
+    {
+      id: "tryscent-5x_100ml_perfume_bottles",
+      title: "5X 100ml Parfum Flaschen",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/any_5_x_100_ml_usd.png?v=1762599634",
+      url: "https://tryscent.eu/products/5x-100ml-perfume-bottles",
+      price: 8095,  // €80,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "005",
+      gender: "unisex",
+      searchTerms: ["5x", "100ml", "parfum", "flaschen", "bundle"]
+    },
+    {
+      id: "tryscent-5x_50ml_perfume_bottles",
+      title: "5X 50ml Parfum Flaschen",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/any_5_x_50_ml_usd.png?v=1762599615",
+      url: "https://tryscent.eu/products/5x-50ml-perfume-bottles",
+      price: 6295,  // €62,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "006",
+      gender: "unisex",
+      searchTerms: ["5x", "50ml", "parfum", "flaschen", "bundle"]
+    },
+    {
+      id: "tryscent-6x_100ml_perfume_bottles",
+      title: "6X 100ml Parfum Flaschen",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/any_6_x_100_ml_usd.png?v=1762599636",
+      url: "https://tryscent.eu/products/6x-100ml-perfume-bottles",
+      price: 8995,  // €89,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "007",
+      gender: "unisex",
+      searchTerms: ["6x", "100ml", "parfum", "flaschen", "bundle"]
+    },
+    {
+      id: "tryscent-6x_30ml_perfume_bottles",
+      title: "6X 30ml Parfum Flaschen",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/any_6_x_30_ml_usd.png?v=1762599626",
+      url: "https://tryscent.eu/products/6x-30ml-perfume-bottles",
+      price: 6600,  // €66,00
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "008",
+      gender: "unisex",
+      searchTerms: ["6x", "30ml", "parfum", "flaschen", "bundle"]
+    },
+    {
+      id: "tryscent-6x_50ml_perfume_bottles",
+      title: "6X 50ml Parfum Flaschen",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/any_6_x_50_ml_usd.png?v=1762599620",
+      url: "https://tryscent.eu/products/6x-50ml-perfume-bottles",
+      price: 7195,  // €71,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "009",
+      gender: "unisex",
+      searchTerms: ["6x", "50ml", "parfum", "flaschen", "bundle"]
+    },
+
+    // Signature collection (10-99) - ALL TITLES IN GERMAN/DUTCH
+    {
+      id: "tryscent-aldehydes_rose_sandalwood",
+      title: "Aldehydes Rose Sandalwood",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/aldehydes_rose_sandalwood_9b8fc66a-07ea-4af8-88c6-1efc8c7a1c3b.png?v=1762756845",
+      url: "https://tryscent.eu/products/aldehydes-rose-sandalwood-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Chanel",
+      brandKey: "chanel",
+      number: "010",
+      gender: "unisex",
+      searchTerms: ["aldehydes", "rose", "sandelholz", "chanel", "no5"]
+    },
+    {
+      id: "tryscent-alpha_attraction",
+      title: "Alpha Attraction",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/AlphaAttraction_197a477b-284c-4f1b-8bf3-aa774e3714d9.png?v=1762756815",
+      url: "https://tryscent.eu/products/alpha-attraction",
+      price: 2495,  // €24,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "011",
+      gender: "male",
+      searchTerms: ["alpha", "attraction", "versace", "eros"]
+    },
+    {
+      id: "tryscent-alpha_oil",
+      title: "Alpha Oil",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/AlphaOil_ee9d02b7-35f0-4251-8514-35e7e72b468c.png?v=1762756813",
+      url: "https://tryscent.eu/products/alpha-oil",
+      price: 2495,  // €24,95
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "012",
+      gender: "unisex",
+      searchTerms: ["alpha", "oil", "tobacco", "vanille", "tom ford"]
+    },
+    {
+      id: "tryscent-amalfi_coast",
+      title: "Amalfi Küste",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/AmalfiCoast_bb956989-455b-4d58-9c42-3e1e0e2ee685.png?v=1762756865",
+      url: "https://tryscent.eu/products/amalfi-coast-mandarino-di-amalfi-fragrance",
+      price: 2495,  // €24,95
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "013",
+      gender: "unisex",
+      searchTerms: ["amalfi", "küste", "mandarino", "tom ford"]
+    },
+    {
+      id: "tryscent-amber_glow",
+      title: "Amber Glow",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/AmberGlow_7b9f70eb-08df-4cfd-bd6c-87b17c423c0e.png?v=1762756808",
+      url: "https://tryscent.eu/products/amber-glow",
+      price: 2495,  // €24,95
+      brand: "Kilian",
+      brandKey: "kilian",
+      number: "014",
+      gender: "unisex",
+      searchTerms: ["amber", "bernstein", "glow", "kilian"]
+    },
+    {
+      id: "tryscent-angels_kiss",
+      title: "Engels Kuss",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Angel_sKiss_4f18bc7e-3505-43e4-a5a5-a1c7f6c47765.png?v=1762756857",
+      url: "https://tryscent.eu/products/angels-kiss-kilian-angels-share-fragrance",
+      price: 2495,  // €24,95
+      brand: "Kilian",
+      brandKey: "kilian",
+      number: "015",
+      gender: "female",
+      searchTerms: ["engel", "kuss", "angels share", "kilian"]
+    },
+    {
+      id: "tryscent-apple_cinnamon_sandalwood",
+      title: "Apple Cinnamon Sandalwood",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Apple_Cinnamon_Sandalwood_-_Hero.png?v=1751931952",
+      url: "https://tryscent.eu/products/apple-cinnamon-sandalwood",
+      price: 2495,  // €24,95
+      brand: "Hugo Boss",
+      brandKey: "hugoboss",
+      number: "016",
+      gender: "unisex",
+      searchTerms: ["apfel", "zimt", "sandelholz", "apple", "cinnamon", "bottled"]
+    },
+    {
+      id: "tryscent-arabian_nights",
+      title: "Arabian Nights",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/ArabianNights_fc6f0801-110a-497e-aed6-89e190a409ce.png?v=1762756807",
+      url: "https://tryscent.eu/products/arabian-nights",
+      price: 2495,  // €24,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "017",
+      gender: "unisex",
+      searchTerms: ["arabische", "nächte", "arabian", "nights", "tonka"]
+    },
+    {
+      id: "tryscent-bergamot_pepper_ambroxan",
+      title: "Bergamot Pepper Ambroxan",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Bergamot_Pepper_Ambroxan_-_Hero.png?v=1751940282",
+      url: "https://tryscent.eu/products/bergamot-pepper-ambroxan",
+      price: 2495,  // €24,95
+      brand: "Dior",
+      brandKey: "dior",
+      number: "018",
+      gender: "male",
+      searchTerms: ["bergamotte", "pfeffer", "ambroxan", "sauvage", "elixir"]
+    },
+    {
+      id: "tryscent-bergamot_sage_cedar",
+      title: "Bergamot Sage Cedar",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Bergamot_Sage_Cedar_-_Hero.png?v=1751940347",
+      url: "https://tryscent.eu/products/bergamot-sage-cedar-50-ml",
+      price: 2495,  // €24,95
+      brand: "Yves Saint Laurent",
+      brandKey: "ysl",
+      number: "019",
+      gender: "male",
+      searchTerms: ["bergamotte", "salbei", "zeder", "ysl", "y"]
+    },
+    {
+      id: "tryscent-blackcurrant_vanilla_woods",
+      title: "Blackcurrant Vanilla Woods",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/BlackcurrantVanillaWoods_ccd16edd-e05f-4b22-aa9a-71ff8969c652.png?v=1762756836",
+      url: "https://tryscent.eu/products/blackcurrant-vanilla-woods-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "020",
+      gender: "female",
+      searchTerms: ["schwarze", "johannisbeere", "vanille", "armani", "si"]
+    },
+    {
+      id: "tryscent-blue_steel",
+      title: "Blauer Stahl",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/BlueSteel_bb16ce0a-f9f7-40d7-be6c-7e10f75397ef.png?v=1762756800",
+      url: "https://tryscent.eu/products/blue-steel",
+      price: 2495,  // €24,95
+      brand: "Dior",
+      brandKey: "dior",
+      number: "021",
+      gender: "male",
+      searchTerms: ["blau", "stahl", "blue", "steel", "sauvage"]
+    },
+    {
+      id: "tryscent-cheap_price",
+      title: "Günstiger Preis. Bessere Qualität. Hier ist der Beweis.",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/any_3_x_30_ml_bottles_fixed_usd.png?v=1762599611",
+      url: "https://tryscent.eu/products/3-x-50ml-perfume-bottles",
+      price: 3495,  // €34,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "022",
+      gender: "unisex",
+      searchTerms: ["günstig", "preis", "bundle", "qualität"]
+    },
+    {
+      id: "tryscent-cherry_temptation",
+      title: "Cherry Temptation",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/CherryTemptation_a0457468-d98a-41c7-8fd6-e62fe9036c90.png?v=1762756797",
+      url: "https://tryscent.eu/products/cherry-temptation",
+      price: 2495,  // €24,95
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "023",
+      gender: "female",
+      searchTerms: ["kirsche", "versuchung", "cherry", "temptation", "lost cherry"]
+    },
+    {
+      id: "tryscent-cinnamon_leather_amber",
+      title: "Cinnamon Leather Amber",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Cinnamon_Leather_Amber_-_Hero.png?v=1751940409",
+      url: "https://tryscent.eu/products/cinnamon-leather-amber",
+      price: 2495,  // €24,95
+      brand: "Paco Rabanne",
+      brandKey: "pacorabanne",
+      number: "024",
+      gender: "male",
+      searchTerms: ["zimt", "leder", "bernstein", "cinnamon", "leather", "amber", "one million"]
+    },
+    {
+      id: "tryscent-magic_277",
+      title: "Riecht wie... Homme Intense - Nr. 277",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/277M_c.webp?v=1773222376",
+      url: "https://tryscent.eu/products/magic-perfume-no-277m",
+      price: 1199,  // €11,99
+      brand: "Dior",
+      brandKey: "dior",
+      number: "277",
+      gender: "male",
+      searchTerms: ["homme intense", "277", "dior", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_206",
+      title: "Riecht wie... Fahrenheit - Nr. 206",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/206M_c.webp?v=1773222410",
+      url: "https://tryscent.eu/products/magic-perfume-no-206m",
+      price: 1199,  // €11,99
+      brand: "Dior",
+      brandKey: "dior",
+      number: "206",
+      gender: "male",
+      searchTerms: ["fahrenheit", "206", "dior", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_338",
+      title: "Riecht wie... Sauvage Parfum - Nr. 338",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/338M_c.webp?v=1773222358",
+      url: "https://tryscent.eu/products/magic-perfume-no-338m",
+      price: 1199,  // €11,99
+      brand: "Dior",
+      brandKey: "dior",
+      number: "338",
+      gender: "male",
+      searchTerms: ["sauvage", "338", "dior", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_366",
+      title: "Riecht wie... Sauvage Elixir - Nr. 366",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/366M_c.webp?v=1773222448",
+      url: "https://tryscent.eu/products/magic-perfume-no-366m-2",
+      price: 1199,  // €11,99
+      brand: "Dior",
+      brandKey: "dior",
+      number: "366",
+      gender: "male",
+      searchTerms: ["sauvage elixir", "366", "dior", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_159",
+      title: "Riecht wie... J'Adore - Nr. 159",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/159W_c.webp?v=1773222432",
+      url: "https://tryscent.eu/products/magic-perfume-no-159w",
+      price: 1199,  // €11,99
+      brand: "Dior",
+      brandKey: "dior",
+      number: "159",
+      gender: "female",
+      searchTerms: ["jadore", "j'adore", "159", "dior", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_145",
+      title: "Riecht wie... Hypnotic Poison - Nr. 145",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/145W_c.webp?v=1773222426",
+      url: "https://tryscent.eu/products/magic-perfume-no-145w",
+      price: 1199,  // €11,99
+      brand: "Dior",
+      brandKey: "dior",
+      number: "145",
+      gender: "female",
+      searchTerms: ["hypnotic poison", "145", "dior", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_196",
+      title: "Riecht wie... Miss Dior Le Parfum - Nr. 196",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/196W_c.webp?v=1773222422",
+      url: "https://tryscent.eu/products/magic-perfume-no-196w",
+      price: 1199,  // €11,99
+      brand: "Dior",
+      brandKey: "dior",
+      number: "196",
+      gender: "female",
+      searchTerms: ["miss dior", "196", "dior", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_055",
+      title: "Riecht wie... Idole - Nr. 55",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/055W_c.webp?v=1773222428",
+      url: "https://tryscent.eu/products/magic-perfume-no-055w",
+      price: 1199,  // €11,99
+      brand: "Lancôme",
+      brandKey: "lancome",
+      number: "055",
+      gender: "female",
+      searchTerms: ["idole", "55", "lancome", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_252",
+      title: "Riecht wie... Bleu - Nr. 252",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/252M_c.webp?v=1773222404",
+      url: "https://tryscent.eu/products/magic-perfume-no-252m",
+      price: 1199,  // €11,99
+      brand: "Chanel",
+      brandKey: "chanel",
+      number: "252",
+      gender: "male",
+      searchTerms: ["bleu", "252", "chanel", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_222",
+      title: "Riecht wie... Allure Homme Sport - Nr. 222",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/222M_c.webp?v=1773222367",
+      url: "https://tryscent.eu/products/magic-perfume-no-222m",
+      price: 1199,  // €11,99
+      brand: "Chanel",
+      brandKey: "chanel",
+      number: "222",
+      gender: "male",
+      searchTerms: ["allure", "222", "chanel", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_079",
+      title: "Riecht wie... Coco - Nr. 079",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/079W_c.webp?v=1773222401",
+      url: "https://tryscent.eu/products/magic-perfume-no-079w",
+      price: 1199,  // €11,99
+      brand: "Chanel",
+      brandKey: "chanel",
+      number: "079",
+      gender: "female",
+      searchTerms: ["coco", "079", "chanel", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_067",
+      title: "Riecht wie... Mademoiselle Intense - Nr. 067",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/067W_c.webp?v=1773222430",
+      url: "https://tryscent.eu/products/magic-perfume-no-067w",
+      price: 1199,  // €11,99
+      brand: "Chanel",
+      brandKey: "chanel",
+      number: "067",
+      gender: "female",
+      searchTerms: ["mademoiselle", "067", "chanel", "riecht wie"]
+    },
+    {
+      id: "tryscent-mademoiselle-139",
+      title: "Riecht wie... Mademoiselle - Nr. 139",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/139W_c.webp?v=1773222437",
+      url: "https://tryscent.eu/products/magic-perfume-no-139w?variant=47831294738691",
+      price: 1199,  // €11,99
+      brand: "Chanel",
+      brandKey: "chanel",
+      number: "139",
+      gender: "female",
+      searchTerms: ["mademoiselle", "139", "chanel", "coco mademoiselle", "riecht wie"]
+    },
+    {
+      id: "tryscent-grapefruit-jasmine-musk",
+      title: "Grapefruit Jasmine Musk",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/GrapefruitJasmineMusk_8fc4ddde-a3a5-4e5b-977d-c4d6acbd462a.png?v=1762756827",
+      url: "https://tryscent.eu/products/grapefruit-jasmine-musk-50-ml-1-7-fl-oz?variant=47413074166019",
+      price: 2495,  // €24,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: null,
+      gender: "female",
+      searchTerms: ["grapefruit", "jasmine", "musk", "citrus", "floral", "fresh", "freesie", "airy musk"]
+    },
+    {
+      id: "tryscent-magic_287",
+      title: "Riecht wie... Oud Wood - Nr. 287",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/287M_c.webp?v=1773222424",
+      url: "https://tryscent.eu/products/magic-perfume-no-287m",
+      price: 1199,  // €11,99
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "287",
+      gender: "unisex",
+      searchTerms: ["oud wood", "287", "tom ford", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_232",
+      title: "Riecht wie... Fucking Fabulous - Nr. 232",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/232M_c.webp?v=1773222443",
+      url: "https://tryscent.eu/products/232m-tom-ford-fucking-fabulous-unisex-ersatz?variant=47831295230211",
+      price: 1199,  // €11,99
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "232",
+      gender: "unisex",
+      searchTerms: ["fucking fabulous", "232", "tom ford", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_193",
+      title: "Riecht wie... Tobacco Vanille - Nr. 193",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/193W_c.webp?v=1773222409",
+      url: "https://tryscent.eu/products/magic-perfume-no-193w?variant=47831293296899",
+      price: 1199,  // €11,99
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "193",
+      gender: "unisex",
+      searchTerms: ["tobacco vanille", "193", "tom ford", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_053",
+      title: "Riecht wie... Vanille Fatale - Nr. 053",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/053W_c.webp?v=1773222415",
+      url: "https://tryscent.eu/products/magic-perfume-no-053w-m?variant=47831293591811",
+      price: 1199,  // €11,99
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "053",
+      gender: "unisex",
+      searchTerms: ["vanille fatale", "053", "tom ford", "riecht wie", "vanilla"]
+    },
+    {
+      id: "tryscent-leather_luxe",
+      title: "Leather Luxe",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/LeatherLuxe.png?v=1773222400",
+      url: "https://tryscent.eu/products/leather-luxe",
+      price: 2495,  // €24,95
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "040",
+      gender: "unisex",
+      searchTerms: ["leather luxe", "040", "tom ford", "ombre leather", "leather"]
+    },
+    {
+      id: "tryscent-magic_434",
+      title: "Riecht wie... Cherry Smoke - Nr. 434",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/434W_c.webp?v=1773222329",
+      url: "https://tryscent.eu/products/magic-perfume-no-434w?variant=47831287791875",
+      price: 1199,  // €11,99
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "434",
+      gender: "unisex",
+      searchTerms: ["cherry smoke", "434", "tom ford", "riecht wie", "kirsche"]
+    },
+    {
+      id: "tryscent-midnight_drive",
+      title: "Midnight Drive",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/MidnightDrive_b5106140-2597-43d4-bf4e-5940b795020b.png?v=1762756851",
+      url: "https://tryscent.eu/products/midnight-drive-fragrance?variant=47413075345667",
+      price: 2495,  // €24,95
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "midnight_drive",
+      gender: "male",
+      searchTerms: ["midnight", "drive", "ombre nomade", "tom ford"]
+    },
+    {
+      id: "tryscent-midnight_oil",
+      title: "Midnight Oil",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/MidnightOil_60c7aeed-6881-4edc-8a5e-33f632811737.png?v=1762756855",
+      url: "https://tryscent.eu/products/midnight-oil-fragrance?variant=47413075607811",
+      price: 2495,  // €24,95
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "098",
+      gender: "unisex",
+      searchTerms: ["midnight", "oil", "ombre nomade", "tom ford"]
+    },
+    {
+      id: "tryscent-magic_083",
+      title: "Riecht wie... Opium - Nr. 083",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/083W_c.webp?v=1773222363",
+      url: "https://tryscent.eu/products/magic-perfume-no-083w",
+      price: 1199,  // €11,99
+      brand: "Yves Saint Laurent",
+      brandKey: "ysl",
+      number: "083",
+      gender: "female",
+      searchTerms: ["opium", "083", "ysl", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_134",
+      title: "Riecht wie... Manifesto - Nr. 134",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/134W_c.webp?v=1773222374",
+      url: "https://tryscent.eu/products/magic-perfume-no-134w",
+      price: 1199,  // €11,99
+      brand: "Yves Saint Laurent",
+      brandKey: "ysl",
+      number: "134",
+      gender: "female",
+      searchTerms: ["manifesto", "134", "ysl", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_221",
+      title: "Riecht wie... Acqua Di Gio - Nr. 221",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/221M_c.webp?v=1773222394",
+      url: "https://tryscent.eu/products/magic-perfume-no-221m",
+      price: 1199,  // €11,99
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "221",
+      gender: "male",
+      searchTerms: ["acqua di gio", "221", "armani", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_260",
+      title: "Riecht wie... Armani Code - Nr. 260",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/260M_c.webp?v=1773222362",
+      url: "https://tryscent.eu/products/magic-perfume-no-260m",
+      price: 1199,  // €11,99
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "260",
+      gender: "male",
+      searchTerms: ["code", "260", "armani", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_283",
+      title: "Riecht wie... Y - Nr. 283",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/283M_c.webp?v=1773222340",
+      url: "https://tryscent.eu/products/magic-perfume-no-283m",
+      price: 1199,  // €11,99
+      brand: "Yves Saint Laurent",
+      brandKey: "ysl",
+      number: "283",
+      gender: "male",
+      searchTerms: ["y", "283", "ysl", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_318",
+      title: "Riecht wie... Stronger With You Intensely - Nr. 318",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/318M_c.webp?v=1773222407",
+      url: "https://tryscent.eu/products/magic-perfume-no-318m",
+      price: 1199,  // €11,99
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "318",
+      gender: "male",
+      searchTerms: ["stronger with you", "318", "armani", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_135",
+      title: "Riecht wie... Code for Woman - Nr. 135",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/23068_366.png?v=1773222385",
+      url: "https://tryscent.eu/products/magic-perfume-no-135w",
+      price: 1199,  // €11,99
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "135",
+      gender: "female",
+      searchTerms: ["code", "135", "armani", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_140",
+      title: "Riecht wie... MY WAY - Nr. 140",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/140W_c.webp?v=1773222417",
+      url: "https://tryscent.eu/products/magic-perfume-no-140w",
+      price: 1199,  // €11,99
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "140",
+      gender: "female",
+      searchTerms: ["my way", "140", "armani", "riecht wie"]
+    },
+    {
+      id: "tryscent-terra-di-gioia",
+      title: "Terra di Gioia",
+      image: "https://tryscent.eu/cdn/shop/files/Terra_di_Gioia.webp?v=1773716005",
+      url: "https://tryscent.eu/products/terra-di-gioia",
+      price: 2495,  // €24,95
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: null,
+      gender: "female",
+      searchTerms: ["terra di gioia", "giorgio armani", "armani", "gioia", "terre"]
+    },
+    {
+      id: "tryscent-magic_436",
+      title: "Riecht wie... Terra Di Gioia - Nr. 436",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/436wc.webp?v=1773222280",
+      url: "https://tryscent.eu/products/magic-perfume-no-436w?variant=47831283990787",
+      price: 1199,  // €11,99
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "436",
+      gender: "female",
+      searchTerms: ["terra di gioia", "436", "giorgio armani", "armani", "pear", "mandarin", "bergamot", "almond blossom", "jasmine", "amber", "musk", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_437",
+      title: "Riecht wie... Paradoxe - Nr. 437",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/437W_c.webp?v=1773222276",
+      url: "https://tryscent.eu/products/magic-perfume-no-437w",
+      price: 1199,  // €11,99
+      brand: "Prada",
+      brandKey: "prada",
+      number: "437",
+      gender: "female",
+      searchTerms: ["paradoxe", "437", "prada", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_058",
+      title: "Riecht wie... Ma Vie - Nr. 058",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/058W_c.webp?v=1773222296",
+      url: "https://tryscent.eu/products/magic-perfume-no-058w",
+      price: 1199,  // €11,99
+      brand: "Hugo Boss",
+      brandKey: "hugoboss",
+      number: "058",
+      gender: "female",
+      searchTerms: ["ma vie", "058", "hugo boss", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_234",
+      title: "Riecht wie... Bottled - Nr. 234",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/234M_c.webp?v=1773222418",
+      url: "https://tryscent.eu/products/magic-perfume-no-234m",
+      price: 1199,  // €11,99
+      brand: "Hugo Boss",
+      brandKey: "hugoboss",
+      number: "234",
+      gender: "male",
+      searchTerms: ["bottled", "234", "hugo boss", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_184",
+      title: "Riecht wie... The Scent - Nr. 184",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/184W_c.webp?v=1773222359",
+      url: "https://tryscent.eu/products/magic-perfume-no-184w",
+      price: 1199,  // €11,99
+      brand: "Hugo Boss",
+      brandKey: "hugoboss",
+      number: "184",
+      gender: "male",
+      searchTerms: ["the scent", "184", "hugo boss", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_223",
+      title: "Riecht wie... Hugo - Nr. 223",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/223M_c.webp?v=1773222335",
+      url: "https://tryscent.eu/products/magic-perfume-no-223m",
+      price: 1199,  // €11,99
+      brand: "Hugo Boss",
+      brandKey: "hugoboss",
+      number: "223",
+      gender: "male",
+      searchTerms: ["hugo", "223", "hugo boss", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_242",
+      title: "Riecht wie... Emporio He - Nr. 242",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/242M_c.webp?v=1773222322",
+      url: "https://tryscent.eu/products/magic-perfume-no-293m",
+      price: 1199,  // €11,99
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "242",
+      gender: "male",
+      searchTerms: ["emporio", "242", "armani", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_060",
+      title: "Riecht wie... Boss Woman - Nr. 60",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/060W_c.webp?v=1773222397",
+      url: "https://tryscent.eu/products/magic-perfume-no-060w",
+      price: 1199,  // €11,99
+      brand: "Hugo Boss",
+      brandKey: "hugoboss",
+      number: "060",
+      gender: "female",
+      searchTerms: ["boss woman", "60", "hugo boss", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_148",
+      title: "Riecht wie... Boss Orange - Nr. 148",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/148W_c.webp?v=1773222347",
+      url: "https://tryscent.eu/products/magic-perfume-no-148w",
+      price: 1199,  // €11,99
+      brand: "Hugo Boss",
+      brandKey: "hugoboss",
+      number: "148",
+      gender: "female",
+      searchTerms: ["boss orange", "148", "hugo boss", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_275",
+      title: "Riecht wie… One Million - Nr. 275",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/275M_c.webp?v=1773222439",
+      url: "https://tryscent.eu/products/magic-perfume-no-275m",
+      price: 1199,  // €11,99
+      brand: "Paco Rabanne",
+      brandKey: "pacorabanne",
+      number: "275",
+      gender: "male",
+      searchTerms: ["one million", "275", "paco rabanne", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_228",
+      title: "Riecht wie... Invictus - Nr. 228",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/228M_c.webp?v=1773222398",
+      url: "https://tryscent.eu/products/magic-perfume-no-228m",
+      price: 1199,  // €11,99
+      brand: "Paco Rabanne",
+      brandKey: "pacorabanne",
+      number: "228",
+      gender: "male",
+      searchTerms: ["invictus", "228", "paco rabanne", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_334",
+      title: "Riecht wie... One Million Elixir - Nr. 334",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/334M_c.webp?v=1773222350",
+      url: "https://tryscent.eu/products/magic-perfume-no-334m",
+      price: 1199,  // €11,99
+      brand: "Paco Rabanne",
+      brandKey: "pacorabanne",
+      number: "334",
+      gender: "male",
+      searchTerms: ["one million elixir", "334", "paco rabanne", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_399",
+      title: "Riecht wie... Phantom - Nr. 399",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/399M_c.webp?v=1773222352",
+      url: "https://tryscent.eu/products/magic-perfume-no-399m",
+      price: 1199,  // €11,99
+      brand: "Paco Rabanne",
+      brandKey: "pacorabanne",
+      number: "399",
+      gender: "male",
+      searchTerms: ["phantom", "399", "paco rabanne", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_192",
+      title: "Riecht wie... SCANDAL - Nr. 192",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/192W_c.webp?v=1773222441",
+      url: "https://tryscent.eu/products/magic-perfume-no-192w",
+      price: 1199,  // €11,99
+      brand: "Jean Paul Gaultier",
+      brandKey: "jpg",
+      number: "192",
+      gender: "female",
+      searchTerms: ["scandal", "192", "jean paul gaultier", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_247",
+      title: "Riecht wie... Le Male - Nr. 247",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/247M_c.webp?v=1773222434",
+      url: "https://tryscent.eu/products/magic-perfume-no-247m",
+      price: 1199,  // €11,99
+      brand: "Jean Paul Gaultier",
+      brandKey: "jpg",
+      number: "247",
+      gender: "male",
+      searchTerms: ["le male", "247", "jean paul gaultier", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_349",
+      title: "Riecht wie... Ultra Male - Nr. 349",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/349M_c.webp?v=1773222382",
+      url: "https://tryscent.eu/products/magic-perfume-no-349m",
+      price: 1199,  // €11,99
+      brand: "Jean Paul Gaultier",
+      brandKey: "jpg",
+      number: "349",
+      gender: "male",
+      searchTerms: ["ultra male", "349", "jean paul gaultier", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_412",
+      title: "Riecht wie... La Belle - Nr. 412",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/412W_c.webp?v=1773222413",
+      url: "https://tryscent.eu/products/magic-perfume-no-412w",
+      price: 1199,  // €11,99
+      brand: "Jean Paul Gaultier",
+      brandKey: "jpg",
+      number: "412",
+      gender: "female",
+      searchTerms: ["la belle", "412", "jean paul gaultier", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_442",
+      title: "Riecht wie... Classique - Nr. 442",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/442W_c.webp?v=1773222399",
+      url: "https://tryscent.eu/products/magic-perfume-no-442w",
+      price: 1199,  // €11,99
+      brand: "Jean Paul Gaultier",
+      brandKey: "jpg",
+      number: "442",
+      gender: "female",
+      searchTerms: ["classique", "442", "jean paul gaultier", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_101",
+      title: "Riecht wie... La Vie Est Belle - Nr. 101",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/101W_c.webp?v=1773222447",
+      url: "https://tryscent.eu/products/magic-perfume-no-101w",
+      price: 1199,  // €11,99
+      brand: "Lancôme",
+      brandKey: "lancome",
+      number: "101",
+      gender: "female",
+      searchTerms: ["la vie est belle", "101", "lancome", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_141",
+      title: "Riecht wie... Tresor - Nr. 141",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/141W_c.webp?v=1773222392",
+      url: "https://tryscent.eu/products/magic-perfume-no-141w",
+      price: 1199,  // €11,99
+      brand: "Lancôme",
+      brandKey: "lancome",
+      number: "141",
+      gender: "female",
+      searchTerms: ["tresor", "141", "lancome", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_098",
+      title: "Riecht wie... ALIVE - No. 098",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/098W_c.webp?v=1773222383",
+      url: "https://tryscent.eu/products/magic-perfume-no-021w?variant=47831290839299",
+      price: 1199,
+      brand: "Hugo Boss",
+      brandKey: "hugo-boss",
+      number: "098",
+      gender: "female",
+      searchTerms: ["alive", "098", "hugo boss", "boss", "fruity", "woody", "spicy", "plum", "blackcurrant", "jasmine", "vanilla", "cedar", "sandalwood", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_162",
+      title: "Riecht wie... Flora - Nr. 162",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/162W_c.webp?v=1773222316",
+      url: "https://tryscent.eu/products/magic-perfume-no-162w",
+      price: 1199,  // €11,99
+      brand: "Gucci",
+      brandKey: "gucci",
+      number: "162",
+      gender: "female",
+      searchTerms: ["flora", "162", "gucci", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_163",
+      title: "Riecht wie... Rush 2 - Nr. 163",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/163W_c.webp?v=1773222389",
+      url: "https://tryscent.eu/products/magic-perfume-no-163w",
+      price: 1199,  // €11,99
+      brand: "Gucci",
+      brandKey: "gucci",
+      number: "163",
+      gender: "female",
+      searchTerms: ["rush", "163", "gucci", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_017",
+      title: "Riecht wie... Light Blue - No. 017",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/017W_c.webp?v=1773222445",
+      url: "https://tryscent.eu/products/magic-perfume-no-017w?variant=47831295328515",
+      price: 1199,
+      brand: "Lancome",
+      brandKey: "lancome",
+      number: "017",
+      gender: "female",
+      searchTerms: ["light blue", "017", "Lancome", "lancome", "citrus", "fruity", "floral", "sicilian lemon", "apple", "jasmine", "musk", "amber", "cedar", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_024",
+      title: "Riecht wie... ÄQUIVALENT - No. 024",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/024W_c.webp?v=1773222403",
+      url: "https://tryscent.eu/products/magic-perfume-no-024w?variant=47831291953411",
+      price: 1199,
+      brand: "Chloé",
+      brandKey: "chloe",
+      number: "024",
+      gender: "female",
+      searchTerms: ["chloe", "024", "chloé", "equivalent", "floral", "oriental", "rose", "peony", "freesia", "lily of the valley", "magnolia", "cedar", "musk", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_051",
+      title: "Riecht wie... Bloom - No. 051",
+      image: "https://tryscent.eu/cdn/shop/files/051wc.webp?v=1773222282&width=1200",
+      url: "https://tryscent.eu/products/magic-perfume-no-051w",
+      price: 1199,
+      brand: "Gucci",
+      brandKey: "gucci",
+      number: "051",
+      gender: "female",
+      searchTerms: ["bloom", "051", "gucci", "floral", "oriental", "neroli", "jasmine", "tuberose", "magnolia", "sandalwood", "musk", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_182",
+      title: "Riecht wie... Candy - No. 182",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/182W_c.webp?v=1773222370",
+      url: "https://tryscent.eu/products/magic-perfume-no-182w?variant=47831290151171",
+      price: 1199,
+      brand: "Prada",
+      brandKey: "prada",
+      number: "182",
+      gender: "female",
+      searchTerms: ["candy", "182", "prada", "oriental", "sweet", "caramel", "powdery", "vanilla", "benzoin", "musk", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_404",
+      title: "Riecht wie... Very Good Girl - Nr. 404",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/404W_c.webp?v=1773222354",
+      url: "https://tryscent.eu/products/magic-perfume-no-404w",
+      price: 1199,  // €11,99
+      brand: "Carolina Herrera",
+      brandKey: "carolinaherrera",
+      number: "404",
+      gender: "female",
+      searchTerms: ["very good girl", "404", "carolina herrera", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_106",
+      title: "Riecht wie... Eternity - Nr. 106",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/106W_c.webp?v=1773222436",
+      url: "https://tryscent.eu/products/magic-perfume-no-106w",
+      price: 1199,  // €11,99
+      brand: "Calvin Klein",
+      brandKey: "calvinklein",
+      number: "106",
+      gender: "female",
+      searchTerms: ["eternity", "106", "calvin klein", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_204",
+      title: "Riecht wie... Euphoria Men - No. 204",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/204Mc.webp?v=1773222303",
+      url: "https://tryscent.eu/products/magic-perfume-no-204m?variant=47831286186243",
+      price: 1199,
+      brand: "Calvin Klein",
+      brandKey: "calvinklein",
+      number: "204",
+      gender: "male",
+      searchTerms: ["euphoria men", "204", "calvin klein", "riecht wie", "woody", "spicy"]
+    },
+    {
+      id: "tryscent-magic_477",
+      title: "Riecht wie... CK Be - No. 477",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/477Wc.webp?v=1773222320",
+      url: "https://tryscent.eu/products/magic-perfume-no-477w?variant=47831287136515",
+      price: 1199,
+      brand: "Calvin Klein",
+      brandKey: "calvinklein",
+      number: "477",
+      gender: "unisex",
+      searchTerms: ["ck be", "477", "calvin klein", "riecht wie", "floral", "woody", "musk"]
+    },
+    {
+      id: "tryscent-magic_414",
+      title: "Riecht wie... CK Eternity Moment - No. 414",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/414Wc.webp?v=1773222272",
+      url: "https://tryscent.eu/products/magic-perfume-no-414w?variant=47831283597571",
+      price: 1199,
+      brand: "Calvin Klein",
+      brandKey: "calvinklein",
+      number: "414",
+      gender: "female",
+      searchTerms: ["ck eternity moment", "414", "calvin klein", "riecht wie", "floral", "lychee", "peony"]
+    },
+    {
+      id: "tryscent-magic_031",
+      title: "Riecht wie... CK Women - No. 031",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/031wc.webp?v=1773222263",
+      url: "https://tryscent.eu/products/magic-perfume-no-031?variant=47831283237123",
+      price: 1199,
+      brand: "Calvin Klein",
+      brandKey: "calvinklein",
+      number: "031",
+      gender: "female",
+      searchTerms: ["ck women", "031", "calvin klein", "riecht wie", "floral", "woody", "bergamot", "jasmine"]
+    },
+    {
+      id: "tryscent-magic_040",
+      title: "Riecht wie... Armani Diamonds - No. 040",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/040Wc.webp?v=1773222338",
+      url: "https://tryscent.eu/products/magic-perfume-no-040w?variant=47831288414467",
+      price: 1199,
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "040",
+      gender: "female",
+      searchTerms: ["armani diamonds", "040", "giorgio armani", "emporio armani", "diamonds", "floral", "oriental", "lychee", "raspberry", "vanilla", "rose", "lily of the valley", "freesia", "amber", "cedar", "vetiver", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_028",
+      title: "Riecht wie... Obsession Night WOMAN - No. 028",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/028wc.webp?v=1773222255",
+      url: "https://tryscent.eu/products/magic-perfume-no-028?variant=47831283040515",
+      price: 1199,
+      brand: "Calvin Klein",
+      brandKey: "calvinklein",
+      number: "028",
+      gender: "female",
+      searchTerms: ["obsession night", "028", "calvin klein", "riecht wie", "floral", "oriental", "woody", "vanilla"]
+    },
+    {
+      id: "tryscent-magic_209",
+      title: "Riecht wie... CK One - No. 209",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/209Mc.webp?v=1773222266",
+      url: "https://tryscent.eu/products/magic-perfume-no-209m?variant=47831283400963",
+      price: 1199,
+      brand: "Calvin Klein",
+      brandKey: "calvinklein",
+      number: "209",
+      gender: "unisex",
+      searchTerms: ["ck one", "209", "calvin klein", "riecht wie", "citrus", "fresh", "green tea"]
+    },
+    {
+      id: "tryscent-magic_113",
+      title: "Riecht wie... Angel - Nr. 113",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/113W_c.webp?v=1773222356",
+      url: "https://tryscent.eu/products/magic-perfume-no-113w",
+      price: 1199,  // €11,99
+      brand: "Mugler",
+      brandKey: "mugler",
+      number: "113",
+      gender: "female",
+      searchTerms: ["angel", "113", "mugler", "thierry", "thrry", "thierry mugler", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_166",
+      title: "Riecht wie... Angel Nova - Nr. 166",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/166W_c.webp?v=1773222292",
+      url: "https://tryscent.eu/products/magic-perfume-no-166w",
+      price: 1199,  // €11,99
+      brand: "Mugler",
+      brandKey: "mugler",
+      number: "166",
+      gender: "female",
+      searchTerms: ["angel nova", "angel", "166", "mugler", "thierry", "thrry", "nova", "thierry mugler", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_360",
+      title: "Riecht wie... Uomo Born in Roma - Nr. 360",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/360M_c.webp?v=1773222387",
+      url: "https://tryscent.eu/products/magic-perfume-no-360m",
+      price: 1199,  // €11,99
+      brand: "Valentino",
+      brandKey: "valentino",
+      number: "360",
+      gender: "male",
+      searchTerms: ["born in roma", "360", "valentino", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_498",
+      title: "Riecht wie... Fame - Nr. 498",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/498W_c.webp?v=1773222422",
+      url: "https://tryscent.eu/products/magic-perfume-no-498w",
+      price: 1199,  // €11,99
+      brand: "Paco Rabanne",
+      brandKey: "pacorabanne",
+      number: "498",
+      gender: "female",
+      searchTerms: ["fame", "498", "paco rabanne", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_227",
+      title: "Riecht wie... Terre - Nr. 227",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/227M_c.webp?v=1773222390",
+      url: "https://tryscent.eu/products/magic-perfume-no-227m",
+      price: 1199,  // €11,99
+      brand: "Hermès",
+      brandKey: "hermes",
+      number: "227",
+      gender: "male",
+      searchTerms: ["terre", "227", "hermes", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_142",
+      title: "Riecht wie... Ange Ou Demon - Nr. 142",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/142W_c.webp?v=1773222337",
+      url: "https://tryscent.eu/products/magic-perfume-no-142w",
+      price: 1199,  // €11,99
+      brand: "Givenchy",
+      brandKey: "givenchy",
+      number: "142",
+      gender: "female",
+      searchTerms: ["ange ou demon", "142", "givenchy", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_305",
+      title: "Riecht wie... Aqva Pour Homme - Nr. 305",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/305M_c.webp?v=1773222345",
+      url: "https://tryscent.eu/products/magic-perfume-no-305m",
+      price: 1199,  // €11,99
+      brand: "Bvlgari",
+      brandKey: "bvlgari",
+      number: "305",
+      gender: "male",
+      searchTerms: ["aqva", "305", "bvlgari", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_200",
+      title: "Riecht wie... Cool Water - Nr. 200",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/200M_c.webp?v=1773222348",
+      url: "https://tryscent.eu/products/magic-perfume-no-200m",
+      price: 1199,  // €11,99
+      brand: "Davidoff",
+      brandKey: "davidoff",
+      number: "200",
+      gender: "male",
+      searchTerms: ["cool water", "200", "davidoff", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_211",
+      title: "Riecht wie... Joop Homme - Nr. 211",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/211M_c.webp?v=1773222372",
+      url: "https://tryscent.eu/products/magic-perfume-no-211m",
+      price: 1199,  // €11,99
+      brand: "Joop!",
+      brandKey: "joop",
+      number: "211",
+      gender: "male",
+      searchTerms: ["joop", "211", "joop homme", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_074",
+      title: "Riecht wie... Flower - Nr. 074",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/074W_c.webp?v=1773222378",
+      url: "https://tryscent.eu/products/magic-perfume-no-074w",
+      price: 1199,  // €11,99
+      brand: "Kenzo",
+      brandKey: "kenzo",
+      number: "074",
+      gender: "female",
+      searchTerms: ["flower", "074", "kenzo", "riecht wie"]
+    },
+
+    // Premium collection (081-099)
+    {
+      id: "tryscent-jasmine_cocoa_tonka",
+      title: "Jasmine Cocoa Tonka",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Jasmine_Cocoa_Tonka_-_Hero.png?v=1751985980",
+      url: "https://tryscent.eu/products/jasmine-cocoa-tonka",
+      price: 2495,  // €24,95
+      brand: "Carolina Herrera",
+      brandKey: "carolinaherrera",
+      number: "081",
+      gender: "female",
+      searchTerms: ["jasmin", "kakao", "tonka", "good girl"]
+    },
+    {
+      id: "tryscent-saffron_rose_amber",
+      title: "Saffron Rose Amber",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Saffron_Rose_Amber_-_Hero.png?v=1751986594",
+      url: "https://tryscent.eu/products/saffron-rose-amber-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Maison Francis Kurkdjian",
+      brandKey: "mfk",
+      number: "082",
+      gender: "unisex",
+      searchTerms: ["safran", "rose", "amber", "baccarat rouge"]
+    },
+    {
+      id: "tryscent-pineapple_smoke_vanilla",
+      title: "Pineapple Smoke Vanilla",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Pineapple_Smoke_Vanilla_-_Hero.png?v=1751986452",
+      url: "https://tryscent.eu/products/pineapple-smoke-vanilla-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Creed",
+      brandKey: "creed",
+      number: "083",
+      gender: "male",
+      searchTerms: ["ananas", "rauch", "vanille", "aventus"]
+    },
+    {
+      id: "tryscent-sweet_cherry_vanilla",
+      title: "Sweet Cherry Vanilla",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Sweet_Cherry_Vanilla_-_Hero.png?v=1751986702",
+      url: "https://tryscent.eu/products/sweet-cherry-vanilla-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "084",
+      gender: "female",
+      searchTerms: ["süße", "kirsche", "vanille", "lost cherry"]
+    },
+    {
+      id: "tryscent-white_florals_lavender",
+      title: "White Florals Lavender",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/White_Florals_Lavender_-_Hero.png?v=1751986905",
+      url: "https://tryscent.eu/products/white-florals-lavender-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Yves Saint Laurent",
+      brandKey: "ysl",
+      number: "085",
+      gender: "female",
+      searchTerms: ["weiße", "blüten", "lavendel", "libre"]
+    },
+    {
+      id: "tryscent-white_florals_amber",
+      title: "White Florals Amber",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/White_Florals_Amber_-_Hero.png?v=1751986856",
+      url: "https://tryscent.eu/products/white-florals-amber-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Prada",
+      brandKey: "prada",
+      number: "086",
+      gender: "female",
+      searchTerms: ["weiße", "blüten", "amber", "paradoxe"]
+    },
+    {
+      id: "tryscent-pink_mirage",
+      title: "Pink Mirage",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Pink-Mirage-Scent.png?v=1751921561",
+      url: "https://tryscent.eu/products/pink-mirage",
+      price: 2495,  // €24,95
+      brand: "Valentino",
+      brandKey: "valentino",
+      number: "087",
+      gender: "female",
+      searchTerms: ["rosa", "fata morgana", "pink", "mirage", "born in roma", "donna"]
+    },
+    {
+      id: "tryscent-citrus_woods_incense",
+      title: "Citrus Woods Incense",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Citrus_Woods_Incense_-_Hero.png?v=1751940468",
+      url: "https://tryscent.eu/products/citrus-woods-incense-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Chanel",
+      brandKey: "chanel",
+      number: "088",
+      gender: "male",
+      searchTerms: ["zitrus", "hölzer", "weihrauch", "bleu"]
+    },
+    {
+      id: "tryscent-lavender_mint_vanilla",
+      title: "Lavender Mint Vanilla",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Lavender_Mint_Vanilla_-_Hero.png?v=1751986124",
+      url: "https://tryscent.eu/products/lavender-mint-vanilla-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Jean Paul Gaultier",
+      brandKey: "jpg",
+      number: "089",
+      gender: "male",
+      searchTerms: ["lavendel", "minze", "vanille", "le male"]
+    },
+    {
+      id: "tryscent-cling_code",
+      title: "Cling Code",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Cling-Code-Scent-1_51bf14fc-9882-45d9-b931-dd89a59090dc.png?v=1751919197",
+      url: "https://tryscent.eu/products/cling-code-50-ml-1-7-oz-fl",
+      price: 2495,  // €24,95
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "090",
+      gender: "male",
+      searchTerms: ["cling", "code", "stronger with you"]
+    },
+    {
+      id: "tryscent-orange_rose_patchouli",
+      title: "Orange Rose Patchouli",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Orange_Rose_Patchouli_-_Hero.png?v=1751986320",
+      url: "https://tryscent.eu/products/orange-rose-patchouli-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Chanel",
+      brandKey: "chanel",
+      number: "091",
+      gender: "female",
+      searchTerms: ["orange", "rose", "patchouli", "coco mademoiselle"]
+    },
+    {
+      id: "tryscent-coffee_vanilla_florals",
+      title: "Coffee Vanilla Florals",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Coffee_Vanilla_Florals_-_Hero.png?v=1751985433",
+      url: "https://tryscent.eu/products/coffee-vanilla-florals-50-ml-1-7-fl",
+      price: 2495,  // €24,95
+      brand: "Yves Saint Laurent",
+      brandKey: "ysl",
+      number: "092",
+      gender: "female",
+      searchTerms: ["kaffee", "vanille", "blüten", "black opium"]
+    },
+    {
+      id: "tryscent-lavender_cedar_musk",
+      title: "Lavender Cedar Musk",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Lavender_Cedar_Musk_-_Hero.png?v=1751986051",
+      url: "https://tryscent.eu/products/lavender-cedar-musk-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Prada",
+      brandKey: "prada",
+      number: "093",
+      gender: "male",
+      searchTerms: ["lavendel", "zeder", "moschus", "luna rossa"]
+    },
+    {
+      id: "tryscent-skin_reverie",
+      title: "Skin Reverie",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Skin-Reverie-Scent.png?v=1751921724",
+      url: "https://tryscent.eu/products/skin-reverie-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Narciso Rodriguez",
+      brandKey: "narciso",
+      number: "094",
+      gender: "female",
+      searchTerms: ["haut", "träumerei", "skin", "reverie", "narciso", "for her"]
+    },
+    {
+      id: "tryscent-ylang_ylang_rose_jasmine",
+      title: "Ylang Ylang Rose Jasmine",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Ylang_Ylang_Rose_Jasmine_-_Hero.png?v=1751986953",
+      url: "https://tryscent.eu/products/ylang-ylang-rose-jasmine-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Dior",
+      brandKey: "dior",
+      number: "095",
+      gender: "female",
+      searchTerms: ["ylang", "rose", "jasmin", "jadore"]
+    },
+    {
+      id: "tryscent-vanilla_ceremony",
+      title: "Vanilla Ceremony",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/Vanilla-Ceremony-Scent.png?v=1751986776",
+      url: "https://tryscent.eu/products/vanilla-ceremony-50-ml-1-7-fl-oz",
+      price: 2495,  // €24,95
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "096",
+      gender: "female",
+      searchTerms: ["vanille", "zeremonie", "vanilla", "ceremony", "vanille fatale"]
+    },
+    {
+      id: "tryscent-4_x_100ml_bundle",
+      title: "Designer Duft. Dupe Preis. Keine Reue.",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/usd_-_30ml_-_4_bottles.png?v=1762599611",
+      url: "https://tryscent.eu/products/4-x-100ml-perfume-bottles",
+      price: 3995,  // €39,95
+      brand: "TryScent",
+      brandKey: "tryscent",
+      number: "097",
+      gender: "unisex",
+      searchTerms: ["designer", "dupe", "preis", "bundle"]
+    },
+    {
+      id: "tryscent-midnight_oil",
+      title: "Mitternachtsöl",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/MidnightOil_60c7aeed-6881-4edc-8a5e-33f632811737.png?v=1762756855",
+      url: "https://tryscent.eu/products/midnight-oil-fragrance",
+      price: 2495,  // €24,95
+      brand: "Tom Ford",
+      brandKey: "tomford",
+      number: "098",
+      gender: "unisex",
+      searchTerms: ["mitternacht", "öl", "midnight", "oil", "ombre nomade"]
+    },
+    {
+      id: "tryscent-sweet_seduction",
+      title: "Sweet Seduction",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/SweetSeduction_322abb6e-2639-4e10-9aa0-f044b5b2af2c.png?v=1762756852",
+      url: "https://tryscent.eu/products/sweet-seduction-fragrance",
+      price: 2495,  // €24,95
+      brand: "Kilian",
+      brandKey: "kilian",
+      number: "099",
+      gender: "female",
+      searchTerms: ["süße", "verführung", "sweet", "seduction", "love don't be shy"]
+    },
+    {
+      id: "tryscent-magic_213",
+      title: "Riecht wie... Adventure - No. 213",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/213Mc.webp?v=1773222293",
+      url: "https://tryscent.eu/products/magic-perfume-no-213m?variant=47831285760259",
+      price: 1199,
+      brand: "Davidoff",
+      brandKey: "davidoff",
+      number: "213",
+      gender: "male",
+      searchTerms: ["adventure", "213", "davidoff", "aromatic", "woody", "citrus", "mandarin", "lemon", "bergamot", "tea", "pimento", "mate", "vetiver", "cedar", "musk", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_340",
+      title: "Riecht wie... Q - No. 340",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/340Mcfixed.webp?v=1773222333",
+      url: "https://tryscent.eu/products/magic-perfume-no-431w",
+      price: 1199,
+      brand: "Q",
+      brandKey: "q",
+      number: "340",
+      gender: "male",
+      searchTerms: ["q", "340", "riecht wie", "oriental", "würzig", "safran", "oud"]
+    },
+    {
+      id: "tryscent-magic_245",
+      title: "Riecht wie... 212 - No. 245",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/245mcfixed.webp?v=1773222331",
+      url: "https://tryscent.eu/products/magic-perfume-no-245m?variant=47831287955715",
+      price: 1199,
+      brand: "Carolina Herrera",
+      brandKey: "carolinaherrera",
+      number: "245",
+      gender: "male",
+      searchTerms: ["212", "245", "carolina herrera", "212 men", "aromatisch", "grapefruit", "peper", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_405",
+      title: "Riecht wie... Sweet Like Candy - No. 405",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/405wc.webp?v=1773222327",
+      url: "https://tryscent.eu/products/magic-perfume-no-405w?variant=47831287693571",
+      price: 1199,
+      brand: "Ariana Grande",
+      brandKey: "arianagrande",
+      number: "405",
+      gender: "female",
+      searchTerms: ["sweet like candy", "405", "ariana grande", "fruit", "zoet", "marshmallow", "vanille", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_254",
+      title: "Riecht wie... Energise - No. 254",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/254mc.webp?v=1773222323",
+      url: "https://tryscent.eu/products/magic-perfume-no-254m?variant=47831287333123",
+      price: 1199,
+      brand: "Hugo Boss",
+      brandKey: "hugoboss",
+      number: "254",
+      gender: "male",
+      searchTerms: ["energise", "254", "hugo boss", "dynamisch", "grapefruit", "koriander", "munt", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_008",
+      title: "Riecht wie... Dione - No. 008",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/008Wc.webp?v=1773222318",
+      url: "https://tryscent.eu/products/magic-perfume-no-008w?variant=47831287038211",
+      price: 1199,
+      brand: "Celine Dion",
+      brandKey: "celinedion",
+      number: "008",
+      gender: "female",
+      searchTerms: ["celine dion", "008", "dione", "elegante", "bloemig", "freesia", "jasmijn", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_319",
+      title: "Riecht wie... L'Homme Ideal - No. 319",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/319mc.webp?v=1773222311",
+      url: "https://tryscent.eu/products/magic-perfume-no-319m?variant=47831286677763",
+      price: 1199,
+      brand: "Guerlain",
+      brandKey: "guerlain",
+      number: "319",
+      gender: "male",
+      searchTerms: ["l'homme ideal", "319", "guerlain", "riecht wie", "man"]
+    },
+    {
+      id: "tryscent-magic_480",
+      title: "Riecht wie... Ultraviolet - No. 480",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/480wc.webp?v=1773222309",
+      url: "https://tryscent.eu/products/magic-perfume-no-480w?variant=47831286579459",
+      price: 1199,
+      brand: "Prada",
+      brandKey: "prada",
+      number: "480",
+      gender: "female",
+      searchTerms: ["ultraviolet", "480", "prada", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_421",
+      title: "Riecht wie... La Panthere - No. 421",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/421wc.webp?v=1773222307",
+      url: "https://tryscent.eu/products/magic-perfume-no-421w?variant=47831286481155",
+      price: 1199,
+      brand: "Cartier",
+      brandKey: "cartier",
+      number: "421",
+      gender: "female",
+      searchTerms: ["la panthere", "421", "cartier", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_239",
+      title: "Riecht wie... Only The Brave - No. 239",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/239mc.webp?v=1773222306",
+      url: "https://tryscent.eu/products/magic-perfume-no-239m?variant=47831286382851",
+      price: 1199,
+      brand: "Diesel",
+      brandKey: "diesel",
+      number: "239",
+      gender: "male",
+      searchTerms: ["only the brave", "239", "diesel", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_490",
+      title: "Riecht wie... Olympea Aqua - No. 490",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/490wc.webp?v=1773222305",
+      url: "https://tryscent.eu/products/magic-perfume-no-490w?variant=47831286284547",
+      price: 1199,
+      brand: "Paco Rabanne",
+      brandKey: "pacorabanne",
+      number: "490",
+      gender: "female",
+      searchTerms: ["olympea aqua", "490", "paco rabanne", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_116",
+      title: "Riecht wie... Vita - No. 116",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/116Wc.webp?v=1773222299",
+      url: "https://tryscent.eu/products/magic-perfume-no-116w?variant=47831286087939",
+      price: 1199,
+      brand: "Esprit",
+      brandKey: "esprit",
+      number: "116",
+      gender: "female",
+      searchTerms: ["vita", "116", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_459",
+      title: "Riecht wie... Bois des Iles - No. 459",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/459Wc.webp?v=1773222295",
+      url: "https://tryscent.eu/products/magic-perfume-no-459w?variant=47831285858563",
+      price: 1199,
+      brand: "Lancôme",
+      brandKey: "lancome",
+      number: "459",
+      gender: "female",
+      searchTerms: ["bois des iles", "459", "lancome", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_296",
+      title: "Riecht wie... Profumo - No. 296",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/296Mc.webp?v=1773222289",
+      url: "https://tryscent.eu/products/magic-perfume-no-296m?variant=47831285530883",
+      price: 1199,
+      brand: "Acqua di Parma",
+      brandKey: "acquadiparma",
+      number: "296",
+      gender: "male",
+      searchTerms: ["profumo", "296", "acqua di parma", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_195",
+      title: "Riecht wie... Light Blue Eau Intense - No. 195",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/195wc.webp?v=1773222287",
+      url: "https://tryscent.eu/products/magic-perfume-no-195w?variant=47831285432579",
+      price: 1199,
+      brand: "Dolce & Gabbana",
+      brandKey: "dolcegabbana",
+      number: "195",
+      gender: "female",
+      searchTerms: ["light blue eau intense", "195", "dolce gabbana", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_056",
+      title: "Riecht wie... Campbell - No. 056",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/056wc.webp?v=1773222285",
+      url: "https://tryscent.eu/products/magic-perfume-no-056w?variant=47831285334275",
+      price: 1199,
+      brand: "Campbell",
+      brandKey: "campbell",
+      number: "056",
+      gender: "female",
+      searchTerms: ["campbell", "056", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_435",
+      title: "Riecht wie... Dolci - No. 435",
+      image: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/435Wc.webp?v=1773222278",
+      url: "https://tryscent.eu/products/magic-perfume-no-435w?variant=47831283892483",
+      price: 1199,
+      brand: "Giorgio Armani",
+      brandKey: "armani",
+      number: "435",
+      gender: "female",
+      searchTerms: ["dolci", "435", "armani", "riecht wie"]
+    },
+    {
+      id: "tryscent-magic_087",
+      title: "Riecht wie... Euphoria Blossom - No. 087",
+      image: "https://tryscent.eu/cdn/shop/files/087Wc.webp?v=1773222258&width=1200",
+      url: "https://tryscent.eu/products/magic-perfume-no-087?variant=47831283138819",
+      price: 1199,
+      brand: "Calvin Klein",
+      brandKey: "calvinklein",
+      number: "087",
+      gender: "female",
+      searchTerms: ["euphoria", "blossom", "087", "calvin klein", "riecht wie"]
+    }
+  ];
+
+  // ===== IMPORTANT: Make hardcodedProducts globally available =====
+  window.hardcodedProducts = hardcodedProducts;
+
+  // ===== INITIALIZE YOUR SHOPIFY PRODUCTS =====
+  function fcInitProducts() {
+    fcProducts = (window.hardcodedProducts || hardcodedProducts).map(p => ({
+      id: p.id,
+      title: p.title,
+      image: p.image,
+      url: p.url,
+      price: p.price
+    }));
+    
+    console.log('✓ Geladen', fcProducts.length, 'hardcoded Produkte');
+  }
+
+  // ===== FORMAT PRICE CORRECTLY =====
+  function formatPrice(priceInCents) {
+    return '€' + (priceInCents / 100).toFixed(2).replace('.', ',');
+  }
+
+  // ===== FIND MATCHING PRODUCT BY PERFUME =====
+  function findMatchingProduct(perfume) {
+    if (!perfume) return null;
+    
+    console.log('🔍 Suche nach passendem Produkt für:', perfume.naam || perfume.name);
+    console.log('📋 Perfume ID:', perfume.id);
+    console.log('📋 Perfume Merk:', perfume.merk || perfume.brand);
+    
+    // HARDCODED: Light Blue (017) from Lancôme → Magic 017 (check by ID first)
+    if (perfume.id === 'lancome_light_blue') {
+      const magic017 = hardcodedProducts.find(p => p.id === 'tryscent-magic_017');
+      if (magic017) {
+        console.log('✅ Light Blue gefunden via ID:', magic017.title);
+        return magic017;
+      }
+    }
+    
+    // HARDCODED: Light Blue (017) from Lancôme → Magic 017 (by name)
+    const perfumeName = (perfume.naam || perfume.name || '').toLowerCase();
+    if (perfumeName.includes('light blue')) {
+      const brandName = (perfume.merk || perfume.brand || '').toLowerCase();
+      console.log('🔎 Light Blue gefunden, Brand check:', brandName);
+      if (brandName.includes('lancome') || brandName === 'lancôme') {
+        const magic017 = hardcodedProducts.find(p => p.id === 'tryscent-magic_017');
+        if (magic017) {
+          console.log('✅ Light Blue gefunden via name:', magic017.title);
+          return magic017;
+        }
+      }
+    }
+    
+    // Try to find by product number
+    if (perfume.productnummers && perfume.productnummers.length > 0) {
+      for (const num of perfume.productnummers) {
+        const match = hardcodedProducts.find(p => p.number === num.toString());
+        if (match) {
+          console.log(`✅ Gefunden mit Nummer ${num}:`, match.title);
+          return match;
+        }
+      }
+    }
+    
+    // Try to find by brand
+    const perfumeBrand = (perfume.merk || perfume.brand || '').toLowerCase();
+    const matches = hardcodedProducts.filter(p => 
+      p.brand.toLowerCase().includes(perfumeBrand) || 
+      perfumeBrand.includes(p.brand.toLowerCase())
+    );
+    
+    if (matches.length > 0) {
+      console.log(`✅ Gefunden ${matches.length} Treffer`);
+      return matches[0];
+    }
+    
+    return null;
+  }
+
+  // ===== GET RECOMMENDATIONS - SAME BRAND =====
+  function getRecommendations(product, perfume) {
+    if (!product) return [];
+    
+    const perfumeName = (perfume.naam || perfume.name || '').toLowerCase();
+    
+    // HARDCODED: Ombre Leather should recommend Leather Luxe
+    if (perfumeName.includes('ombre leather')) {
+      const leatherLuxe = hardcodedProducts.find(p => p.id === 'tryscent-leather_luxe');
+      if (leatherLuxe) {
+        return [leatherLuxe];
+      }
+    }
+    
+    // HARDCODED: Cherry Smoke should recommend Tobacco Vanille (similar smoky/spicy profile)
+    if (perfumeName.includes('cherry smoke')) {
+      const tobaccoVanille = hardcodedProducts.find(p => p.id === 'tryscent-magic_193');
+      if (tobaccoVanille) {
+        return [tobaccoVanille];
+      }
+    }
+    
+    // HARDCODED: Ombre Nomade should recommend Midnight Drive and Midnight Oil
+    if (perfumeName.includes('ombre nomade')) {
+      const midnightDrive = hardcodedProducts.find(p => p.id === 'tryscent-midnight_drive');
+      const midnightOil = hardcodedProducts.find(p => p.id === 'tryscent-midnight_oil');
+      const recommendations = [];
+      
+      // Only add if not the matching product
+      if (midnightDrive && midnightDrive.id !== product.id) {
+        recommendations.push(midnightDrive);
+      }
+      if (midnightOil && midnightOil.id !== product.id) {
+        recommendations.push(midnightOil);
+      }
+      
+      if (recommendations.length > 0) {
+        return recommendations;
+      }
+    }
+    
+    // HARDCODED: Coco Mademoiselle should recommend Mademoiselle 139
+    if (perfumeName.includes('coco mademoiselle')) {
+      const mademoiselle139 = hardcodedProducts.find(p => p.id === 'tryscent-mademoiselle-139');
+      if (mademoiselle139 && mademoiselle139.id !== product.id) {
+        return [mademoiselle139];
+      }
+    }
+    
+    // HARDCODED: Chloé should recommend Mademoiselle 139
+    if (perfumeName.includes('chloé') || perfumeName.includes('chloe')) {
+      const mademoiselle139 = hardcodedProducts.find(p => p.id === 'tryscent-mademoiselle-139');
+      if (mademoiselle139 && mademoiselle139.id !== product.id) {
+        return [mademoiselle139];
+      }
+    }
+    
+    // HARDCODED: Chance should recommend Grapefruit Jasmine Musk and Amalfi Coast (citrus)
+    if (perfumeName.includes('chance')) {
+      const grapefruitMusk = hardcodedProducts.find(p => p.id === 'tryscent-grapefruit-jasmine-musk');
+      const amalfiCoast = hardcodedProducts.find(p => p.id === 'tryscent-amalfi_coast');
+      const recommendations = [];
+      
+      if (grapefruitMusk && grapefruitMusk.id !== product.id) {
+        recommendations.push(grapefruitMusk);
+      }
+      if (amalfiCoast && amalfiCoast.id !== product.id) {
+        recommendations.push(amalfiCoast);
+      }
+      
+      if (recommendations.length > 0) {
+        return recommendations;
+      }
+    }
+    
+    // HARDCODED: Angel should recommend other Mugler products (Angel Nova)
+    if (perfumeName.includes('angel')) {
+      const angelNova = hardcodedProducts.find(p => p.id === 'tryscent-magic_166');
+      if (angelNova && angelNova.id !== product.id) {
+        return [angelNova];
+      }
+    }
+    
+    // HARDCODED: Alive (Hugo Boss) should recommend other Hugo Boss female products
+    if (perfumeName.includes('alive')) {
+      const otherHugoBoss = hardcodedProducts.filter(p => 
+        (p.brandKey === 'hugoboss' || p.brand.toLowerCase().includes('hugo boss')) && 
+        p.id !== product.id && 
+        p.gender === product.gender
+      );
+      if (otherHugoBoss.length > 0) {
+        return [otherHugoBoss[0]];
+      }
+    }
+    
+    // HARDCODED: Flower by Kenzo should recommend Bloom (Magic 051)
+    if (perfumeName.includes('flower')) {
+      const bloom = hardcodedProducts.find(p => p.id === 'tryscent-magic_051');
+      if (bloom && bloom.id !== product.id) {
+        return [bloom];
+      }
+    }
+    
+    // HARDCODED: Joop! Homme should recommend CK One (Magic 209)
+    if (perfumeName.includes('joop')) {
+      const ckOne = hardcodedProducts.find(p => p.id === 'tryscent-magic_209');
+      if (ckOne && ckOne.id !== product.id) {
+        return [ckOne];
+      }
+    }
+    
+    // HARDCODED: La Nuit de L'Homme should recommend Emporio He (Magic 242)
+    if (perfumeName.includes('la nuit') || perfumeName.includes('nuit')) {
+      const emporio = hardcodedProducts.find(p => p.id === 'tryscent-magic_242');
+      if (emporio && emporio.id !== product.id) {
+        return [emporio];
+      }
+    }
+    
+    // HARDCODED: Terre d'Hermès should recommend Euphoria Men (Magic 204)
+    if (perfumeName.includes('terre') && (perfumeName.includes('hermès') || perfumeName.includes('hermes'))) {
+      const euphoriaMen = hardcodedProducts.find(p => p.id === 'tryscent-magic_204');
+      if (euphoriaMen && euphoriaMen.id !== product.id) {
+        return [euphoriaMen];
+      }
+    }
+    
+    // HARDCODED: Aqva Pour Homme should recommend Adventure (Magic 213)
+    if (perfumeName.includes('aqva')) {
+      const adventure = hardcodedProducts.find(p => p.id === 'tryscent-magic_213');
+      if (adventure && adventure.id !== product.id) {
+        return [adventure];
+      }
+    }
+    
+    // HARDCODED: Ange ou Démon should recommend Candy (Magic 182)
+    if (perfumeName.includes('ange') || perfumeName.includes('démon') || perfumeName.includes('demon')) {
+      const candy = hardcodedProducts.find(p => p.id === 'tryscent-magic_182');
+      if (candy && candy.id !== product.id) {
+        return [candy];
+      }
+    }
+    
+    // HARDCODED: Q (340) should recommend Light Blue (Magic 017)
+    if (product.number === '340' || product.id === 'tryscent-magic_340') {
+      const lightBlue = hardcodedProducts.find(p => p.id === 'tryscent-magic_017');
+      if (lightBlue && lightBlue.id !== product.id) {
+        return [lightBlue];
+      }
+    }
+    
+    // HARDCODED: Sweet Like Candy (405) should recommend Candy (Magic 182)
+    if (product.number === '405' || product.id === 'tryscent-magic_405') {
+      const candy = hardcodedProducts.find(p => p.id === 'tryscent-magic_182');
+      if (candy && candy.id !== product.id) {
+        return [candy];
+      }
+    }
+    
+    // HARDCODED: Celine Dion (008) should recommend Chloé (Magic 024)
+    if ((product.number === '008' || product.id === 'tryscent-magic_008') || (perfumeName.includes('celine') && perfumeName.includes('dion'))) {
+      const chloe = hardcodedProducts.find(p => p.id === 'tryscent-magic_024');
+      if (chloe && chloe.id !== product.id) {
+        return [chloe];
+      }
+    }
+    
+    // HARDCODED: Terra di Gioia should recommend Magic product 436 and other Armani products
+    if (perfumeName.includes('terra di gioia') || (perfumeName.includes('terra') && perfumeName.includes('gioia'))) {
+      const magic436 = hardcodedProducts.find(p => p.id === 'tryscent-magic_436');
+      const otherArmani = hardcodedProducts.filter(p => p.brandKey === 'armani' && p.id !== product.id && p.id !== 'tryscent-magic_436');
+      const recommendations = [];
+      
+      if (magic436 && magic436.id !== product.id) {
+        recommendations.push(magic436);
+      }
+      if (otherArmani.length > 0) {
+        recommendations.push(otherArmani[0]);
+      }
+      
+      if (recommendations.length > 0) {
+        return recommendations;
+      }
+    }
+    
+    // HARDCODED: Calvin Klein products with matching product numbers
+    // Eternity (106) → Magic 106
+    if (perfumeName.includes('eternity') && !perfumeName.includes('moment')) {
+      const magic106 = hardcodedProducts.find(p => p.id === 'tryscent-magic_106');
+      const otherCK = hardcodedProducts.filter(p => p.brandKey === 'calvinklein' && p.id !== product.id && p.id !== 'tryscent-magic_106');
+      const recommendations = [];
+      
+      if (magic106 && magic106.id !== product.id) {
+        recommendations.push(magic106);
+      }
+      if (otherCK.length > 0) {
+        recommendations.push(otherCK[0]);
+      }
+      return recommendations.length > 0 ? recommendations : [];
+    }
+    
+    // CK Eternity Moment (414) → Magic 414
+    if (perfumeName.includes('eternity moment')) {
+      const magic414 = hardcodedProducts.find(p => p.id === 'tryscent-magic_414');
+      const otherCK = hardcodedProducts.filter(p => p.brandKey === 'calvinklein' && p.id !== product.id && p.id !== 'tryscent-magic_414');
+      const recommendations = [];
+      
+      if (magic414 && magic414.id !== product.id) {
+        recommendations.push(magic414);
+      }
+      if (otherCK.length > 0) {
+        recommendations.push(otherCK[0]);
+      }
+      return recommendations.length > 0 ? recommendations : [];
+    }
+    
+    // CK One (209) → Magic 209
+    if (perfumeName.includes('ck one')) {
+      const magic209 = hardcodedProducts.find(p => p.id === 'tryscent-magic_209');
+      const otherCK = hardcodedProducts.filter(p => p.brandKey === 'calvinklein' && p.id !== product.id && p.id !== 'tryscent-magic_209');
+      const recommendations = [];
+      
+      if (magic209 && magic209.id !== product.id) {
+        recommendations.push(magic209);
+      }
+      if (otherCK.length > 0) {
+        recommendations.push(otherCK[0]);
+      }
+      return recommendations.length > 0 ? recommendations : [];
+    }
+    
+    // CK Women (031) → Magic 031
+    if (perfumeName.includes('ck women')) {
+      const magic031 = hardcodedProducts.find(p => p.id === 'tryscent-magic_031');
+      const otherCK = hardcodedProducts.filter(p => p.brandKey === 'calvinklein' && p.id !== product.id && p.id !== 'tryscent-magic_031');
+      const recommendations = [];
+      
+      if (magic031 && magic031.id !== product.id) {
+        recommendations.push(magic031);
+      }
+      if (otherCK.length > 0) {
+        recommendations.push(otherCK[0]);
+      }
+      return recommendations.length > 0 ? recommendations : [];
+    }
+    
+    // Obsession Night Woman (028) → Magic 028
+    if (perfumeName.includes('obsession night')) {
+      const magic028 = hardcodedProducts.find(p => p.id === 'tryscent-magic_028');
+      const otherCK = hardcodedProducts.filter(p => p.brandKey === 'calvinklein' && p.id !== product.id && p.id !== 'tryscent-magic_028');
+      const recommendations = [];
+      
+      if (magic028 && magic028.id !== product.id) {
+        recommendations.push(magic028);
+      }
+      if (otherCK.length > 0) {
+        recommendations.push(otherCK[0]);
+      }
+      return recommendations.length > 0 ? recommendations : [];
+    }
+    
+    // Euphoria Men (204) → Magic 204
+    if (perfumeName.includes('euphoria men')) {
+      const magic204 = hardcodedProducts.find(p => p.id === 'tryscent-magic_204');
+      const otherCK = hardcodedProducts.filter(p => p.brandKey === 'calvinklein' && p.id !== product.id && p.id !== 'tryscent-magic_204');
+      const recommendations = [];
+      
+      if (magic204 && magic204.id !== product.id) {
+        recommendations.push(magic204);
+      }
+      if (otherCK.length > 0) {
+        recommendations.push(otherCK[0]);
+      }
+      return recommendations.length > 0 ? recommendations : [];
+    }
+    
+    // CK Be (477) → Magic 477
+    if (perfumeName.includes('ck be')) {
+      const magic477 = hardcodedProducts.find(p => p.id === 'tryscent-magic_477');
+      const otherCK = hardcodedProducts.filter(p => p.brandKey === 'calvinklein' && p.id !== product.id && p.id !== 'tryscent-magic_477');
+      const recommendations = [];
+      
+      if (magic477 && magic477.id !== product.id) {
+        recommendations.push(magic477);
+      }
+      if (otherCK.length > 0) {
+        recommendations.push(otherCK[0]);
+      }
+      return recommendations.length > 0 ? recommendations : [];
+    }
+    
+    // HARDCODED: Light Blue (017) → Other Lancôme products matching gender
+    if (perfumeName.includes('light blue')) {
+      const otherLancome = hardcodedProducts.filter(p => 
+        (p.brandKey && p.brandKey.toLowerCase() === 'lancome') && 
+        p.id !== product.id && 
+        p.gender === product.gender
+      );
+      if (otherLancome.length > 0) {
+        return otherLancome.slice(0, 1);
+      }
+    }
+    
+    // HARDCODED: Dolce (435) - Female → Recommend other female fragrances
+    if (product.number === '435' || product.id === 'tryscent-magic_435') {
+      const femaleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'female' &&
+        (p.brandKey === 'armani' || p.brand.toLowerCase().includes('armani'))
+      );
+      if (femaleFragrances.length > 0) {
+        return [femaleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: Naomi Campbell (056) - Female → Recommend other female fragrances
+    if (product.number === '056' || product.id === 'tryscent-magic_056') {
+      const femaleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'female'
+      );
+      if (femaleFragrances.length > 0) {
+        return [femaleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: Light Blue Eau Intense (195) - Female → Recommend other female fragrances
+    if (product.number === '195' || product.id === 'tryscent-magic_195') {
+      const femaleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'female' &&
+        (p.brandKey === 'dolcegabbana' || p.brand.toLowerCase().includes('dolce & gabbana'))
+      );
+      if (femaleFragrances.length > 0) {
+        return [femaleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: Acqua Di Gio Profumo (296) - Male → Recommend other male fragrances
+    if (product.number === '296' || product.id === 'tryscent-magic_296') {
+      const maleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'male'
+      );
+      if (maleFragrances.length > 0) {
+        return [maleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: Bois des Iles (459) - Female → Recommend other female fragrances
+    if (product.number === '459' || product.id === 'tryscent-magic_459') {
+      const femaleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'female'
+      );
+      if (femaleFragrances.length > 0) {
+        return [femaleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: Dolce Vita (116) - Female → Recommend other female fragrances
+    if (product.number === '116' || product.id === 'tryscent-magic_116') {
+      const femaleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'female'
+      );
+      if (femaleFragrances.length > 0) {
+        return [femaleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: Olympea Aqua (490) - Female → Recommend other female fragrances
+    if (product.number === '490' || product.id === 'tryscent-magic_490') {
+      const femaleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'female' &&
+        (p.brandKey === 'pacorabanne' || p.brand.toLowerCase().includes('paco rabanne'))
+      );
+      if (femaleFragrances.length > 0) {
+        return [femaleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: Only The Brave (239) - Male → Recommend other male fragrances
+    if (product.number === '239' || product.id === 'tryscent-magic_239') {
+      const maleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'male'
+      );
+      if (maleFragrances.length > 0) {
+        return [maleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: La Panthere (421) - Female → Recommend other female fragrances
+    if (product.number === '421' || product.id === 'tryscent-magic_421') {
+      const femaleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'female'
+      );
+      if (femaleFragrances.length > 0) {
+        return [femaleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: Ultraviolet (480) - Female → Recommend other female fragrances
+    if (product.number === '480' || product.id === 'tryscent-magic_480') {
+      const femaleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'female' &&
+        (p.brandKey === 'pacorabanne' || p.brand.toLowerCase().includes('paco rabanne'))
+      );
+      if (femaleFragrances.length > 0) {
+        return [femaleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: L'Homme Ideal (319) - Male → Recommend other male fragrances
+    if (product.number === '319' || product.id === 'tryscent-magic_319') {
+      const maleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'male'
+      );
+      if (maleFragrances.length > 0) {
+        return [maleFragrances[0]];
+      }
+    }
+    
+    // HARDCODED: Euphoria Blossom (087) - Female → Recommend other female fragrances
+    if (product.number === '087' || product.id === 'tryscent-magic_087') {
+      const femaleFragrances = hardcodedProducts.filter(p => 
+        p.id !== product.id && 
+        p.gender === 'female'
+      );
+      if (femaleFragrances.length > 0) {
+        return [femaleFragrances[0]];
+      }
+    }
+    
+    // Get other products from same brand (case-insensitive)
+    const productBrandLower = product.brandKey ? product.brandKey.toLowerCase() : '';
+    const sameBrandProducts = hardcodedProducts.filter(p => 
+      (p.brandKey && p.brandKey.toLowerCase()) === productBrandLower && 
+      p.id !== product.id
+    );
+    
+    return sameBrandProducts.slice(0, 1); // Take first one
+  }
+
+  // ===== ADVANCED TEXT NORMALIZATION =====
+  function normalizeText(text) {
+    if (!text) return '';
+    
+    let normalized = text.toLowerCase().trim();
+    
+    // Remove accents
+    const accents = {
+      'á': 'a', 'à': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'å': 'a', 'ā': 'a',
+      'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e', 'ē': 'e',
+      'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ī': 'i',
+      'ó': 'o', 'ò': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ō': 'o',
+      'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ū': 'u',
+      'ç': 'c', 'ć': 'c', 'š': 's', 'ś': 's', 'ź': 'z', 'ż': 'z',
+      'ñ': 'n', 'ń': 'n'
+    };
+    
+    for (const [accented, base] of Object.entries(accents)) {
+      normalized = normalized.split(accented).join(base);
+    }
+    
+    // Remove special characters except spaces
+    normalized = normalized.replace(/[^a-z0-9\s]/g, '');
+    
+    return normalized;
+  }
+
+  // ===== LEVENSHTEIN DISTANCE (EDIT DISTANCE) =====
+  function getLevenshteinDistance(a, b) {
+    const aLen = a.length;
+    const bLen = b.length;
+    
+    if (aLen === 0) return bLen;
+    if (bLen === 0) return aLen;
+    
+    const matrix = Array(bLen + 1).fill(null).map(() => Array(aLen + 1).fill(0));
+    
+    for (let i = 0; i <= aLen; i++) matrix[0][i] = i;
+    for (let j = 0; j <= bLen; j++) matrix[j][0] = j;
+    
+    for (let j = 1; j <= bLen; j++) {
+      for (let i = 1; i <= aLen; i++) {
+        const indicator = a[i - 1] === b[j - 1] ? 0 : 1;
+        matrix[j][i] = Math.min(
+          matrix[j][i - 1] + 1,     // deletion
+          matrix[j - 1][i] + 1,     // insertion
+          matrix[j - 1][i - 1] + indicator  // substitution
+        );
+      }
+    }
+    
+    return matrix[bLen][aLen];
+  }
+
+  // ===== TYPO TOLERANCE SCORING =====
+  function getTypoTolerantScore(query, text, maxDistance = 2) {
+    const queryNorm = normalizeText(query);
+    const textNorm = normalizeText(text);
+    
+    if (!queryNorm || !textNorm) return 0;
+    
+    // Exact match after normalization
+    if (textNorm === queryNorm) return 100;
+    if (textNorm.includes(queryNorm)) return 95;
+    
+    // Check edit distance
+    const distance = getLevenshteinDistance(queryNorm, textNorm);
+    const maxLen = Math.max(queryNorm.length, textNorm.length);
+    
+    if (distance <= maxDistance) {
+      return Math.max(0, 100 - (distance * 15));
+    }
+    
+    // Check if query is substring with typos
+    if (queryNorm.length >= 3) {
+      for (let i = 0; i <= textNorm.length - queryNorm.length; i++) {
+        const substring = textNorm.substring(i, i + queryNorm.length);
+        const subDistance = getLevenshteinDistance(queryNorm, substring);
+        if (subDistance <= maxDistance) {
+          return Math.max(0, 80 - (subDistance * 10));
+        }
+      }
+    }
+    
+    return 0;
+  }
+
+  // ===== SPACE-LESS SEARCH (e.g., "diorrose" -> "dior rose") =====
+  function getSpaceLessScore(query, text) {
+    const queryNorm = normalizeText(query).replace(/\s+/g, '');
+    const textNorm = normalizeText(text).replace(/\s+/g, '');
+    
+    if (!queryNorm || !textNorm) return 0;
+    
+    if (textNorm === queryNorm) return 100;
+    if (textNorm.includes(queryNorm)) return 90;
+    if (queryNorm.includes(textNorm)) return 85;
+    
+    // Edit distance for space-less
+    const distance = getLevenshteinDistance(queryNorm, textNorm);
+    if (distance <= 3) {
+      return Math.max(0, 80 - (distance * 10));
+    }
+    
+    return 0;
+  }
+
+  // ===== WORD-BY-WORD SEARCH =====
+  function getWordScore(query, text) {
+    const queryNorm = normalizeText(query);
+    const textNorm = normalizeText(text);
+    
+    const queryWords = queryNorm.split(/\s+/).filter(w => w.length > 0);
+    const textWords = textNorm.split(/\s+/).filter(w => w.length > 0);
+    
+    if (queryWords.length === 0 || textWords.length === 0) return 0;
+    
+    let matchedWords = 0;
+    
+    for (const qWord of queryWords) {
+      for (const tWord of textWords) {
+        // Exact word match
+        if (qWord === tWord) {
+          matchedWords++;
+          break;
+        }
+        // Word contains query word
+        else if (tWord.includes(qWord) && qWord.length >= 2) {
+          matchedWords += 0.8;
+          break;
+        }
+        // Typo tolerance per word
+        else {
+          const wordDistance = getLevenshteinDistance(qWord, tWord);
+          if (wordDistance <= 2 && Math.max(qWord.length, tWord.length) >= 3) {
+            matchedWords += 0.6;
+            break;
+          }
+        }
+      }
+    }
+    
+    return (matchedWords / queryWords.length) * 100;
+  }
+
+  // ===== COMBINED COMPREHENSIVE SEARCH SCORE =====
+  function getComprehensiveScore(query, text) {
+    if (!query || !text) return 0;
+    
+    const scores = {
+      exact: getTypoTolerantScore(query, text, 0),           // Exact/minimal typos
+      typoTolerant: getTypoTolerantScore(query, text, 2),    // 1-2 typos allowed
+      spaceLess: getSpaceLessScore(query, text),             // No spaces needed
+      wordBased: getWordScore(query, text)                   // Word by word
+    };
+    
+    // Return the best score from all strategies
+    return Math.max(scores.exact, scores.typoTolerant, scores.spaceLess, scores.wordBased);
+  }
+
+  // ===== RENDER SUGGESTIONS =====
+  function renderSuggestions() {
+    const suggestions = getPopularSuggestions();
+    
+    if (suggestions.length === 0) return '';
+    
+    let html = `<div class="fc-suggestions-title">✨ Beliebte Düfte</div>`;
+    
+    suggestions.forEach(product => {
+      const priceFormatted = formatPrice(product.price);
+      
+      html += `
+        <div class="fc-suggestion-item" onclick="window.fcViewDetails('${product.url}')">
+          <img class="fc-suggestion-image" src="${product.image}" alt="${product.title}" loading="lazy">
+          <div class="fc-suggestion-info">
+            <div class="fc-suggestion-name">${product.title}</div>
+            <div class="fc-suggestion-price">${priceFormatted}</div>
+          </div>
+        </div>
+      `;
+    });
+    
+    return html;
+  }
+
+  // ===== RENDER HARDCODED PRODUCT CARD =====
+  function renderHardcodedProductCard(product, badge) {
+    const priceFormatted = formatPrice(product.price);
+    
+    return `
+      <div class="fc-product-card">
+        <div class="fc-badge">${badge}</div>
+        <div class="fc-product-inner">
+          <img class="fc-product-image" src="${product.image}" alt="${product.title}" loading="lazy">
+          <div class="fc-product-title">${product.title}</div>
+          <div class="fc-product-price">${priceFormatted}</div>
+          <button class="fc-add-to-cart" onclick="event.stopPropagation(); window.fcAddToCart('${product.url}', event)">In den Warenkorb</button>
+          <div>
+            <span class="fc-view-link" onclick="event.stopPropagation(); window.fcViewDetails('${product.url}')">Details ansehen</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // ===== SIMPLIFIED ADD TO CART =====
+  // ===== ADD TO CART AND REDIRECT =====
+  window.fcAddToCart = function(productUrl, event) {
+    if (event) event.stopPropagation();
+    
+    const btn = event?.target || document.activeElement;
+    const originalText = btn.innerText;
+    const originalBackground = btn.style.background;
+    
+    btn.innerText = '🔄';
+    btn.disabled = true;
+    
+    // Extract product handle from URL
+    const urlParts = productUrl.split('/products/');
+    if (urlParts.length < 2) {
+      btn.innerText = '✗';
+      btn.style.background = '#c62828';
+      setTimeout(() => {
+        btn.innerText = originalText;
+        btn.style.background = originalBackground || '#C41E3A';
+        btn.disabled = false;
+      }, 1500);
+      return false;
+    }
+    
+    const productHandle = urlParts[1].split('?')[0].split('#')[0];
+    
+    // Fetch product to get variant ID
+    fetch(`/products/${productHandle}.js`)
+      .then(response => response.json())
+      .then(product => {
+        if (product && product.variants && product.variants.length > 0) {
+          const variantId = product.variants[0].id;
+          
+          // Add to cart with variant ID
+          return fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ 
+              id: variantId, 
+              quantity: 1 
+            })
+          });
+        } else {
+          throw new Error('Keine Varianten gefunden');
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.description || 'Fehler beim Hinzufügen');
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Success - show feedback
+        btn.innerText = '✓';
+        btn.style.background = '#2E7D32';
+        
+        showNotification('✓ Hinzugefügt!');
+        
+        // Redirect to cart immediately
+        setTimeout(() => {
+          window.location.href = '/cart';
+        }, 200);
+      })
+      .catch(error => {
+        console.error('Add to cart error:', error);
+        btn.innerText = '✗';
+        btn.style.background = '#c62828';
+        
+        showNotification(`Fehler: ${error.message}`);
+        
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.background = originalBackground || '#C41E3A';
+          btn.disabled = false;
+        }, 2000);
+      });
+    
+    return false;
+  };
+
+  // ===== VIEW DETAILS =====
+  window.fcViewDetails = function(url) {
+    window.location.href = url;
+  };
+
+  // ===== GO BACK =====
+  window.fcGoBack = function() {
+    currentView = 'search';
+    if (currentSearchQuery.length >= 1) {
+      performSearch(currentSearchQuery);
+    } else {
+      steps.style.display = 'block';
+      content.innerHTML = '';
+    }
+  };
+
+  // ===== SHOW NOTIFICATION =====
+  function showNotification(message) {
+    let notification = document.querySelector('.fc-notification');
+    if (!notification) {
+      notification = document.createElement('div');
+      notification.className = 'fc-notification';
+      document.body.appendChild(notification);
+    }
+    
+    notification.textContent = message;
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 2000);
+  }
+
+  // ===== UPDATE OFFER DISPLAY =====
+  function updateOfferDisplay(itemCount) {
+    if (!offerStatus || !offerProgress || !offerMessage || !offerSubtext) return;
+    
+    const percentage = Math.min((itemCount / 3) * 100, 100);
+    offerProgress.style.width = percentage + '%';
+    
+    if (itemCount >= 3) {
+      offerStatus.textContent = '🎉 GRATIS!';
+      offerSubtext.textContent = 'Du qualifizierst dich für ein gratis Geschenk!';
+      offerMessage.textContent = '🎉 Du qualifizierst dich für ein GRATIS Geschenk!';
+      offerBanner.classList.add('qualified');
+    } else {
+      const needed = 3 - itemCount;
+      offerStatus.textContent = `${itemCount}/3`;
+      offerSubtext.textContent = `Füge ${needed} mehr hinzu für ein gratis Geschenk`;
+      offerMessage.textContent = `Füge ${needed} mehr Artikel hinzu für ein gratis Geschenk`;
+      offerBanner.classList.remove('qualified');
+    }
+  }
+
+  // ===== FETCH CART AND UPDATE COUNT =====
+  window.fetchCartAndUpdate = function() {
+    return fetch('/cart.js')
+      .then(response => response.json())
+      .then(cart => {
+        updateOfferDisplay(cart.item_count);
+        return cart;
+      })
+      .catch(() => ({ item_count: 0 }));
+  };
+
+  // ===== PERFORM SEARCH =====
+  function performSearch(query) {
+    currentSearchQuery = query;
+    content.innerHTML = '<div class="fc-loading">Suche läuft...</div>';
+    steps.style.display = 'none';
+    
+    setTimeout(() => {
+      const catalogResults = [];
+      const hardcodedResults = [];
+      
+      // ===== SEARCH IN CATALOG PERFUMES WITH FUZZY MATCHING =====
+      if (allPerfumes && allPerfumes.length > 0) {
+        const queryLower = query.toLowerCase().trim();
+        const isCKSearch = queryLower === 'ck' || queryLower === 'calvin klein' || queryLower === 'calvin' || queryLower === 'klein';
+        const isYSLSearch = queryLower === 'ysl' || queryLower === 'yves' || queryLower === 'laurent';
+        const isMuglerSearch = queryLower === 'mugler' || queryLower === 'thierry';
+        
+        allPerfumes.forEach(perfume => {
+          const perfumeName = perfume.naam || perfume.name || '';
+          const perfumeBrand = perfume.merk || perfume.brand || '';
+          const brandLower = perfumeBrand.toLowerCase();
+          
+          // SPECIAL: If searching for brand only, filter to that brand
+          if (isCKSearch) {
+            if (brandLower.includes('calvin klein')) {
+              catalogResults.push({ perfume, score: 100, matchType: 'brand' });
+            }
+            return; // Skip all other perfumes for CK search
+          }
+          
+          if (isYSLSearch) {
+            if (brandLower.includes('yves saint laurent') || brandLower.includes('ysl')) {
+              catalogResults.push({ perfume, score: 100, matchType: 'brand' });
+            }
+            return; // Skip all other perfumes for YSL search
+          }
+          
+          if (isMuglerSearch) {
+            if (brandLower.includes('mugler')) {
+              catalogResults.push({ perfume, score: 100, matchType: 'brand' });
+            }
+            return; // Skip all other perfumes for Mugler search
+          }
+          
+          // NORMAL SEARCH: Use fuzzy matching
+          let nameScore = getComprehensiveScore(query, perfumeName);
+          let brandScore = getComprehensiveScore(query, perfumeBrand);
+          let maxScore = Math.max(nameScore, brandScore);
+          
+          if (maxScore >= 50) {
+            catalogResults.push({
+              perfume,
+              score: maxScore,
+              matchType: nameScore > brandScore ? 'name' : 'brand'
+            });
+          }
+        });
+      }
+      
+      // Sort by score
+      catalogResults.sort((a, b) => b.score - a.score);
+      
+      // ===== SEARCH IN HARDCODED PRODUCTS WITH FUZZY MATCHING =====
+      const queryLower = query.toLowerCase().trim();
+      const isCKSearch = queryLower === 'ck' || queryLower === 'calvin klein' || queryLower === 'calvin' || queryLower === 'klein';
+      const isYSLSearch = queryLower === 'ysl' || queryLower === 'yves' || queryLower === 'laurent';
+      const isMuglerSearch = queryLower === 'mugler' || queryLower === 'thierry';
+      
+      hardcodedProducts.forEach(product => {
+        // BRAND SEARCH: Skip expensive scoring, just filter by brand
+        if (isCKSearch) {
+          if (product.brandKey === 'calvinklein') {
+            hardcodedResults.push({ product, score: 100 });
+          }
+          return;
+        }
+        
+        if (isYSLSearch) {
+          if (product.brandKey === 'ysl') {
+            hardcodedResults.push({ product, score: 100 });
+          }
+          return;
+        }
+        
+        if (isMuglerSearch) {
+          if (product.brandKey === 'mugler') {
+            hardcodedResults.push({ product, score: 100 });
+          }
+          return;
+        }
+        
+        // NORMAL SEARCH: Use fuzzy matching
+        // Exclude bundle products when searching for specific fragrances
+        if (query.toLowerCase().includes('chance') && product.id === 'tryscent-5x_50ml_perfume_bottles') {
+          return;
+        }
+        
+        const titleScore = getComprehensiveScore(query, product.title);
+        const brandScore = getComprehensiveScore(query, product.brand);
+        const maxScore = Math.max(titleScore, brandScore);
+        
+        // Also check search terms
+        let termsScore = 0;
+        if (product.searchTerms && Array.isArray(product.searchTerms)) {
+          for (const term of product.searchTerms) {
+            termsScore = Math.max(termsScore, getComprehensiveScore(query, term));
+          }
+        }
+        
+        const finalScore = Math.max(maxScore, termsScore);
+        
+        if (finalScore >= 50) {
+          hardcodedResults.push({
+            product,
+            score: finalScore
+          });
+        }
+      });
+      
+      // Sort by score
+      catalogResults.sort((a, b) => b.score - a.score);
+      hardcodedResults.sort((a, b) => b.score - a.score);
+      
+      let html = '';
+      
+      // ===== DISPLAY CATALOG RESULTS (FIRST) =====
+      // if (catalogResults.length > 0) {
+      if (false) {
+        html += `<div class="fc-section-title">✨ Echte Parfums</div>`;
+        
+        const catalogDisplayLimit = 8;
+        catalogResults.slice(0, catalogDisplayLimit).forEach(result => {
+          const perfume = result.perfume;
+          const imageUrl = perfume.afbeelding || perfume.image || 'https://via.placeholder.com/60x60?text=Parfum';
+          const name = perfume.naam || perfume.name || 'Unbekanntes Parfum';
+          const brand = perfume.merk || perfume.brand || 'Unbekannte Marke';
+          
+          html += `
+            <div class="fc-real-perfume-item" onclick="window.fcShowPerfumeDetail('${perfume.id}')">
+              <img class="fc-real-perfume-image" src="${imageUrl}" alt="${name}" loading="lazy">
+              <div class="fc-real-perfume-info">
+                <div class="fc-real-perfume-name">${name}</div>
+                <div class="fc-real-perfume-brand">${brand}</div>
+              </div>
+            </div>
+          `;
+        });
+      }
+      
+      // ===== DISPLAY HARDCODED RESULTS =====
+      if (hardcodedResults.length > 0) {
+        html += `<div class="fc-section-title">🛍️ Unsere Kollektion</div>`;
+        
+        hardcodedResults.slice(0, 12).forEach(match => {
+          const product = match.product;
+          const priceFormatted = formatPrice(product.price);
+          
+          html += `
+            <div class="fc-real-perfume-item" onclick="window.fcViewDetails('${product.url}')">
+              <img class="fc-real-perfume-image" src="${product.image}" alt="${product.title}" loading="lazy">
+              <div class="fc-real-perfume-info">
+                <div class="fc-real-perfume-name">${product.title}</div>
+                <div class="fc-real-perfume-year">${priceFormatted}</div>
+              </div>
+            </div>
+          `;
+        });
+      }
+      
+      // ===== NO RESULTS - SHOW SUGGESTIONS =====
+      if (catalogResults.length === 0 && hardcodedResults.length === 0) {
+        html = '<div class="fc-no-results">Keine Produkte gefunden für "' + query + '"</div>';
+        html += renderSuggestions();
+      }
+      
+      content.innerHTML = html;
+    }, 300);
+  }
+
+  // ===== SEARCH HANDLER =====
+  function fcHandleSearch() {
+    const query = searchInput.value.trim();
+    
+    if (query.length < 1) {
+      if (currentView !== 'detail') {
+        steps.style.display = 'block';
+        content.innerHTML = '';
+      }
+      return;
+    }
+    
+    steps.style.display = 'none';
+    currentView = 'search';
+    
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => performSearch(query), 300);
+  }
+
+  // ===== GET POPULAR PRODUCTS FOR SUGGESTIONS =====
+  function getPopularSuggestions() {
+    return hardcodedProducts.slice(0, 8);
+  }
+
+  // ===== SHOW PERFUME DETAIL =====
+  window.fcShowPerfumeDetail = function(perfumeId) {
+    const perfume = allPerfumes.find(p => p.id === perfumeId);
+    if (!perfume) return;
+    
+    currentView = 'detail';
+    steps.style.display = 'none';
+    
+    // Find matching product
+    let matchingProduct = findMatchingProduct(perfume);
+    
+    // HARDCODED OVERRIDES
+    const perfumeName = (perfume.naam || perfume.name || '').toLowerCase();
+    
+    // HARDCODED: For Light Blue (017), always show Magic 017
+    if (perfumeName.includes('light blue')) {
+      const magic017 = hardcodedProducts.find(p => p.id === 'tryscent-magic_017');
+      if (magic017) {
+        matchingProduct = magic017;
+      }
+    }
+    
+    // HARDCODED: For Chloé (024), always show Magic 024
+    if (perfumeName.includes('chloé') || perfumeName.includes('chloe')) {
+      const magic024 = hardcodedProducts.find(p => p.id === 'tryscent-magic_024');
+      if (magic024) {
+        matchingProduct = magic024;
+      }
+    }
+    
+    // HARDCODED: For Alive (098), always show Magic 098
+    if (perfumeName.includes('alive')) {
+      const magic098 = hardcodedProducts.find(p => p.id === 'tryscent-magic_098');
+      if (magic098) {
+        matchingProduct = magic098;
+      }
+    }
+    
+    // HARDCODED: For Black Opium, always show Magic 083 (Opium)
+    if (perfumeName.includes('black opium')) {
+      const magic083 = hardcodedProducts.find(p => p.id === 'tryscent-magic_083');
+      if (magic083) {
+        matchingProduct = magic083;
+      }
+    }
+    
+    // HARDCODED: For Emporio Armani Diamonds, always show Magic 040
+    if (perfumeName.includes('diamonds') && (perfumeName.includes('emporio') || perfumeName.includes('armani'))) {
+      const magic040 = hardcodedProducts.find(p => p.id === 'tryscent-magic_040');
+      if (magic040) {
+        matchingProduct = magic040;
+      }
+    }
+    
+    // HARDCODED: For Celine Dion, always show Magic 008 (Dione)
+    if (perfumeName.includes('celine') || perfumeName.includes('dion')) {
+      const magic008 = hardcodedProducts.find(p => p.id === 'tryscent-magic_008');
+      if (magic008) {
+        matchingProduct = magic008;
+      }
+    }
+    
+    // HARDCODED: For Chance, always show Grapefruit Jasmine Musk as "Empfohlen"
+    if (perfumeName.includes('chance')) {
+      const grapefruitMusk = hardcodedProducts.find(p => p.id === 'tryscent-grapefruit-jasmine-musk');
+      if (grapefruitMusk) {
+        matchingProduct = grapefruitMusk;
+      }
+    }
+    
+    // HARDCODED: For Dolce (435), always show Magic 435
+    if (perfume.productnummers && perfume.productnummers.includes('435')) {
+      const magic435 = hardcodedProducts.find(p => p.id === 'tryscent-magic_435');
+      if (magic435) {
+        matchingProduct = magic435;
+      }
+    }
+    
+    // HARDCODED: For Naomi Campbell (056), always show Magic 056
+    if (perfume.productnummers && perfume.productnummers.includes('056')) {
+      const magic056 = hardcodedProducts.find(p => p.id === 'tryscent-magic_056');
+      if (magic056) {
+        matchingProduct = magic056;
+      }
+    }
+    
+    // HARDCODED: For Light Blue Eau Intense (195), always show Magic 195
+    if (perfume.productnummers && perfume.productnummers.includes('195')) {
+      const magic195 = hardcodedProducts.find(p => p.id === 'tryscent-magic_195');
+      if (magic195) {
+        matchingProduct = magic195;
+      }
+    }
+    
+    // HARDCODED: For Acqua Di Gio Profumo (296), always show Magic 296
+    if (perfume.productnummers && perfume.productnummers.includes('296')) {
+      const magic296 = hardcodedProducts.find(p => p.id === 'tryscent-magic_296');
+      if (magic296) {
+        matchingProduct = magic296;
+      }
+    }
+    
+    // HARDCODED: For Bois des Iles (459), always show Magic 459
+    if (perfume.productnummers && perfume.productnummers.includes('459')) {
+      const magic459 = hardcodedProducts.find(p => p.id === 'tryscent-magic_459');
+      if (magic459) {
+        matchingProduct = magic459;
+      }
+    }
+    
+    // HARDCODED: For Dolce Vita (116), always show Magic 116
+    if (perfume.productnummers && perfume.productnummers.includes('116')) {
+      const magic116 = hardcodedProducts.find(p => p.id === 'tryscent-magic_116');
+      if (magic116) {
+        matchingProduct = magic116;
+      }
+    }
+    
+    // HARDCODED: For Olympea Aqua (490), always show Magic 490
+    if (perfume.productnummers && perfume.productnummers.includes('490')) {
+      const magic490 = hardcodedProducts.find(p => p.id === 'tryscent-magic_490');
+      if (magic490) {
+        matchingProduct = magic490;
+      }
+    }
+    
+    // HARDCODED: For Only The Brave (239), always show Magic 239
+    if (perfume.productnummers && perfume.productnummers.includes('239')) {
+      const magic239 = hardcodedProducts.find(p => p.id === 'tryscent-magic_239');
+      if (magic239) {
+        matchingProduct = magic239;
+      }
+    }
+    
+    // HARDCODED: For La Panthere (421), always show Magic 421
+    if (perfume.productnummers && perfume.productnummers.includes('421')) {
+      const magic421 = hardcodedProducts.find(p => p.id === 'tryscent-magic_421');
+      if (magic421) {
+        matchingProduct = magic421;
+      }
+    }
+    
+    // HARDCODED: For Ultraviolet (480), always show Magic 480
+    if (perfume.productnummers && perfume.productnummers.includes('480')) {
+      const magic480 = hardcodedProducts.find(p => p.id === 'tryscent-magic_480');
+      if (magic480) {
+        matchingProduct = magic480;
+      }
+    }
+    
+    // HARDCODED: For L'Homme Ideal (319), always show Magic 319
+    if (perfume.productnummers && perfume.productnummers.includes('319')) {
+      const magic319 = hardcodedProducts.find(p => p.id === 'tryscent-magic_319');
+      if (magic319) {
+        matchingProduct = magic319;
+      }
+    }
+    
+    // HARDCODED: For Euphoria Blossom (087), always show Magic 087
+    if (perfume.productnummers && perfume.productnummers.includes('087')) {
+      const magic087 = hardcodedProducts.find(p => p.id === 'tryscent-magic_087');
+      if (magic087) {
+        matchingProduct = magic087;
+      }
+    }
+    
+    let html = `
+      <button class="fc-back-btn" onclick="window.fcGoBack()">Zurück</button>
+    `;
+    
+    if (matchingProduct) {
+      html += `<div class="fc-subsection-title">Unsere Version</div>`;
+      html += '<div class="fc-grid-2col">';
+      
+      // RECOMMENDED: The matching product
+      html += renderHardcodedProductCard(matchingProduct, 'Empfohlen');
+      
+      // YOU MIGHT LIKE IT: Same brand recommendation
+      const recommendations = getRecommendations(matchingProduct, perfume);
+      
+      if (recommendations.length > 0) {
+        html += renderHardcodedProductCard(recommendations[0], 'Das könnte dir auch gefallen');
+      } else {
+        html += `<div class="fc-product-card" style="visibility: hidden;"></div>`;
+      }
+      
+      html += '</div>';
+      
+      // Display additional recommendations if there are more than 1
+      if (recommendations.length > 1) {
+        html += '<div class="fc-grid-2col">';
+        for (let i = 1; i < recommendations.length; i++) {
+          html += renderHardcodedProductCard(recommendations[i], 'Das könnte dir auch gefallen');
+        }
+        html += '</div>';
+      }
+    }
+    
+    // Show catalog perfume details
+    const imageUrl = perfume.afbeelding || perfume.image || 'https://via.placeholder.com/110x110?text=Parfum';
+    const name = perfume.naam || perfume.name || 'Unbekanntes Parfum';
+    const brand = perfume.merk || perfume.brand || 'Unbekannte Marke';
+    const year = perfume.jaar || '';
+    const gender = perfume.geslacht || '';
+    const description = perfume.beschrijving || perfume.description || 'Keine Beschreibung verfügbar.';
+    
+    html += `
+      <div class="fc-detailed-view">
+        <div class="fc-detailed-header">
+          <img class="fc-detailed-image" src="${imageUrl}" alt="${name}" loading="lazy">
+          <div>
+            <div class="fc-detailed-name">${name}</div>
+            <div class="fc-detailed-brand">${brand}</div>
+            ${year ? `<div class="fc-detailed-meta">${year}</div>` : ''}
+            ${gender ? `<div class="fc-detailed-meta">${gender}</div>` : ''}
+          </div>
+        </div>
+
+        <div class="fc-notes-section">
+          ${perfume.topnoten ? `
+            <div class="fc-note-category">
+              <h4>KOPFNOTEN</h4>
+              <div class="fc-note-tags">
+                ${perfume.topnoten.map(note => `<span class="fc-note-tag">${note}</span>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+          
+          ${perfume.hartnoten ? `
+            <div class="fc-note-category">
+              <h4>HERZNOTEN</h4>
+              <div class="fc-note-tags">
+                ${perfume.hartnoten.map(note => `<span class="fc-note-tag">${note}</span>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+          
+          ${perfume.basisnoten ? `
+            <div class="fc-note-category">
+              <h4>BASISNOTEN</h4>
+              <div class="fc-note-tags">
+                ${perfume.basisnoten.map(note => `<span class="fc-note-tag">${note}</span>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+        
+        <div class="fc-description">
+          ${description}
+        </div>
+      </div>
+    `;
+    
+    content.innerHTML = html;
+  };
+
+  // ===== INITIALIZE =====
+  document.addEventListener('DOMContentLoaded', function() {
+    fcInitProducts();
+    combineCatalogs();
+    
+    console.log('📊 Katalog Status:');
+    console.log('- window.NederlandseParfumCatalogus:', window.NederlandseParfumCatalogus ? '✓ Geladen' : '✗ Nicht gefunden');
+    console.log('- Parfums insgesamt:', allPerfumes.length);
+    console.log('- Hardcoded Produkte:', hardcodedProducts.length);
+    
+    // ===== MOBILE CART & PRODUCT PAGE DETECTION =====
+    const searchPopup = document.getElementById('fcSearchPopup');
+    const stickyButton = document.getElementById('fcStickyButton');
+    
+    function isMobile() {
+      // Check ONLY user agent, NOT viewport width
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    
+    function isCartPage() {
+      return window.location.pathname.includes('/cart') || window.location.href.includes('/cart');
+    }
+    
+    function isProductPage() {
+      return window.location.pathname.includes('/products/') || window.location.pathname.includes('/product/');
+    }
+    
+    function updateSearchButtonVisibility() {
+      if (!stickyButton) return;
+      
+      const mobile = isMobile();
+      const onCart = isCartPage();
+      const onProduct = isProductPage();
+      
+      // ONLY hide if BOTH: mobile AND (cart OR product)
+      if (mobile && (onCart || onProduct)) {
+        stickyButton.setAttribute('style', 'display: none !important;');
+        if (searchPopup && searchPopup.classList.contains('active')) {
+          searchPopup.classList.remove('active');
+        }
+      } else {
+        // ALWAYS show on desktop regardless of page
+        stickyButton.setAttribute('style', 'display: flex !important; visibility: visible !important;');
+        stickyButton.classList.remove('hidden');
+      }
+    }
+    
+    // Initial check on page load
+    updateSearchButtonVisibility();
+    
+    // Check visibility on window resize
+    window.addEventListener('resize', updateSearchButtonVisibility);
+    
+    // Check visibility when page becomes visible
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') {
+        updateSearchButtonVisibility();
+      }
+    });
+    
+    // Detect back/forward navigation
+    window.addEventListener('popstate', updateSearchButtonVisibility);
+    
+    // Monitor for page navigation changes
+    let lastPath = window.location.pathname;
+    setInterval(function() {
+      if (window.location.pathname !== lastPath) {
+        lastPath = window.location.pathname;
+        setTimeout(updateSearchButtonVisibility, 50);
+      }
+    }, 1000);
+    
+    if (searchInput) {
+      searchInput.addEventListener('keyup', fcHandleSearch);
+    }
+    
+    if (clearSearch) {
+      clearSearch.addEventListener('click', function() {
+        searchInput.value = '';
+        searchInput.focus();
+        steps.style.display = 'block';
+        content.innerHTML = '';
+        currentView = 'search';
+      });
+    }
+    
+    setTimeout(fetchCartAndUpdate, 500);
+    
+    // Close popup when clicking outside
+    document.addEventListener('click', function(event) {
+      const searchPopup = document.getElementById('fcSearchPopup');
+      const stickyButton = document.getElementById('fcStickyButton');
+      
+      if (searchPopup && searchPopup.contains(event.target)) return;
+      if (stickyButton && stickyButton.contains(event.target)) return;
+      if (event.target.closest('.fc-real-perfume-item')) return;
+      if (event.target.closest('.fc-product-card')) return;
+      if (event.target.closest('.fc-add-to-cart') || event.target.closest('.fc-view-link') || event.target.closest('.fc-back-btn')) return;
+      
+      if (searchPopup && searchPopup.classList.contains('active')) {
+        searchPopup.classList.remove('active');
+      }
+    });
+
+    // Escape key handler
+    document.addEventListener('keydown', function(e) {
+      const searchPopup = document.getElementById('fcSearchPopup');
+      if (e.key === 'Escape' && searchPopup && searchPopup.classList.contains('active')) {
+        searchPopup.classList.remove('active');
+      }
+    });
+    
+    console.log('✓ Fragrance Search initialisiert');
+  });
+})();
+</script> 

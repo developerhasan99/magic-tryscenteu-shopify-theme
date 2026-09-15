@@ -1,0 +1,44 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "czech"
+  },
+  "parent": "header-group.json",
+  "sections": {
+    "offer_timebar_4WVn7P": {
+      "settings": {
+        "prepend_text": "Letní výprodej:",
+        "append_text": "Kupte 2, 1 zdarma"
+      },
+      "blocks": {
+        "payment_icon_MmG3KL": {
+          "settings": {
+            "label": "Rychle"
+          }
+        },
+        "payment_icon_tUQYaX": {
+          "disabled": true,
+          "settings": {}
+        },
+        "payment_icon_HNd7bU": {
+          "settings": {
+            "label": "Flexibilní"
+          }
+        },
+        "payment_icon_EMjaQY": {
+          "settings": {
+            "label": "Přímo"
+          }
+        }
+      }
+    }
+  }
+}
