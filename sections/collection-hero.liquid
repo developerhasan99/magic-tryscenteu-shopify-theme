@@ -3,7 +3,7 @@
 <div class="relative flex h-auto min-h-[520px] items-end bg-[#eef1f3] bg-[image:var(--hero-img-mobile)] bg-cover bg-[position:50%_10%] bg-no-repeat pb-[34px] sm:h-[clamp(430px,33.33vw,600px)] sm:min-h-0 sm:items-center sm:bg-[image:var(--hero-img-desktop)] sm:bg-[position:50%_3%] sm:pb-0" style="{% if hero_mobile_image %}--hero-img-mobile: url('{{ hero_mobile_image | image_url: width: 750 }}');{% endif %} {% if hero_desktop_image %}--hero-img-desktop: url('{{ hero_desktop_image | image_url: width: 1920 }}');{% endif %}">
   <div class="!block absolute inset-0 bg-[linear-gradient(180deg,rgba(246,247,248,0)_38%,rgba(246,247,248,.82)_58%,rgba(246,247,248,.97)_74%,#f6f7f8_100%)] sm:bg-[linear-gradient(90deg,rgba(248,248,247,.97)_0%,rgba(248,248,247,.93)_30%,rgba(248,248,247,.72)_46%,rgba(248,248,247,0)_68%)]"></div>
   <div class="page-width relative z-[1] w-full">
-    <div class="md:w-1/2">
+    <div class="md:w-1/2 {%  if hero_mobile_image != blank %} pt-80 md:pt-0 {% endif %}">
       {% if section.settings.show_rating_badge %}
         <p class="mb-[10px] flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#8f6329]">
           <span class="tracking-[0.06em]">★★★★★</span>

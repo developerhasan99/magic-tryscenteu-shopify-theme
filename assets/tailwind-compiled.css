@@ -1573,6 +1573,26 @@
     padding-top: 32px
 }
 
+.pt-24 {
+    padding-top: 96px
+}
+
+.pt-40 {
+    padding-top: 160px
+}
+
+.pt-80 {
+    padding-top: 320px
+}
+
+.pt-60 {
+    padding-top: 240px
+}
+
+.pt-72 {
+    padding-top: 288px
+}
+
 .text-left {
     text-align: left
 }
@@ -2640,6 +2660,10 @@
     .md\:py-20 {
         padding-top: 80px;
         padding-bottom: 80px
+    }
+
+    .md\:pt-0 {
+        padding-top: 0px
     }
 
     .md\:text-left {
