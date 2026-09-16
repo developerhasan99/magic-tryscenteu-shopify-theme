@@ -181,11 +181,6 @@
         "disabled": false,
         "settings": {}
       },
-      "11349500561483629931": {
-        "type": "shopify://apps/notify-back-in-stock-preorder/blocks/app-embed/b399b727-6c85-44fc-9e21-63114bd72054",
-        "disabled": false,
-        "settings": {}
-      },
       "12995158295224700252": {
         "type": "shopify://apps/insureful/blocks/app-embed/9d68bce0-511b-458e-a75c-59b30247783c",
         "disabled": false,
@@ -196,9 +191,9 @@
         "disabled": false,
         "settings": {}
       },
-      "1173261918193615741": {
-        "type": "shopify://apps/geo-pro-geolocation/blocks/geopro/16fc5313-7aee-4e90-ac95-f50fc7c8b657",
-        "disabled": false,
+      "11349500561483629931": {
+        "type": "shopify://apps/notify-me/blocks/app-embed/b399b727-6c85-44fc-9e21-63114bd72054",
+        "disabled": true,
         "settings": {}
       }
     },
