@@ -21,8 +21,12 @@
     "tryscent_hero_VWyBcY": {
       "disabled": false,
       "settings": {
+        "review_text": "",
         "button_text": "Für sie",
-        "review_text": ""
+        "background_image": "shopify://shop_images/MAGYX_Site_Header.webp",
+        "mobile_background_image": "shopify://shop_images/MAGYX_Site_Header_Mobile_B.webp",
+        "secondary_button_link": "shopify://collections/top-sellers-men",
+        "button_link": "shopify://collections/top-seller-women"
       },
       "blocks": {}
     },
