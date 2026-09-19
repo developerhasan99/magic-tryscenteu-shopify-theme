@@ -14,16 +14,16 @@
   "parent": "collection.json",
   "sections": {
     "collection_hero_ezAzaW": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "custom_liquid_Y9k4Ai": {
       "disabled": true,
       "settings": {},
       "blocks": {}
     },
     "custom_liquid_MYjrA4": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
-    "custom_liquid_Y9k4Ai": {
       "disabled": true,
       "settings": {},
       "blocks": {}
