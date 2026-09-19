@@ -13,14 +13,20 @@
   },
   "parent": "collection.bestsellers.json",
   "sections": {
+    "custom_liquid_JXCdfb": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
     "popular_products_3Lx6bB": {
       "disabled": true,
       "settings": {},
       "blocks": {}
     },
-    "custom_liquid_JXCdfb": {
-      "disabled": true,
-      "settings": {},
+    "custom_liquid_MxhLrU": {
+      "settings": {
+        "custom_liquid": "<style>\n#ts-hero-custom{\n  position:relative;\n  min-height:560px;\n  overflow:hidden;\n  background:\n    linear-gradient(90deg,rgba(250,249,246,.92) 0%,rgba(250,249,246,.72) 30%,rgba(250,249,246,.12) 54%,rgba(250,249,246,0) 72%),\n    url('https://cdn.shopify.com/s/files/1/0762/7662/9763/files/MAGYX_Site_Header.webp?v=1789812534') center right/cover no-repeat,\n    #faf9f6;\n}\n#ts-hero-custom .ts-container{\n  width:min(1180px,calc(100% - 36px));\n  margin-inline:auto;\n}\n#ts-hero-custom .ts-hero-inner{\n  min-height:560px;\n  display:flex;\n  align-items:center;\n  position:relative;\n  z-index:2;\n}\n#ts-hero-custom .ts-hero-copy{max-width:640px}\n#ts-hero-custom h1{\n  margin:0 0 24px;\n  font-size:36px;\n  font-weight:900;\n  line-height:1.12;\n  letter-spacing:-.9px;\n  color:#121212;\n}\n#ts-hero-custom .ts-category-line{\n  max-width:670px;\n  margin-bottom:14px;\n  font-size:18px;\n  font-weight:600;\n  letter-spacing:.4px;\n  line-height:1.45;\n  color:#121212;\n}\n#ts-hero-custom .ts-expert-line{\n  max-width:620px;\n  margin:0;\n  font-size:16px;\n  line-height:1.7;\n  color:rgba(18,18,18,.62);\n}\n#ts-hero-custom .ts-microcopy{\n  margin:12px 0 0;\n  font-size:14px;\n  color:rgba(18,18,18,.5);\n}\n@media(max-width:700px){\n  #ts-hero-custom{\n    min-height:auto;\n    background:\n      url('https://cdn.shopify.com/s/files/1/0762/7662/9763/files/MAGYX_Site_Header.webp?v=1789812534') 96% 100%/auto 420px no-repeat,\n      #f3ebe5;\n  }\n  #ts-hero-custom .ts-hero-inner{\n    min-height:auto;\n    display:block;\n    padding-top:40px;\n    padding-bottom:380px;\n  }\n  #ts-hero-custom .ts-hero-copy{\n    max-width:100%;\n    text-align:center;\n  }\n  #ts-hero-custom h1{\n    font-size:30px;\n    margin-bottom:18px;\n  }\n  #ts-hero-custom .ts-category-line,\n  #ts-hero-custom .ts-expert-line{\n    margin-inline:auto;\n  }\n  #ts-hero-custom .ts-microcopy{\n    color:rgba(18,18,18,.8);\n    font-weight:600;\n  }\n}\n</style>\n<section id=\"ts-hero-custom\">\n  <div class=\"ts-container\">\n    <div class=\"ts-hero-inner\">\n      <div class=\"ts-hero-copy\">\n        <h1>Znajdź zapach, dzięki któremu zawsze będą o Tobie myśleć.</h1>\n        <div class=\"ts-category-line\">Pierwszy wybór wśród perfum inspirowanych zapachami znanych marek.</div>\n        <p class=\"ts-expert-line\">Tworzone przez tych samych perfumiarzy, którzy stoją za jednymi z najbardziej znanych zapachów świata.</p>\n        <p class=\"ts-microcopy\">Nie wierz nam na słowo. Przekonaj się na własnej skórze.</p>\n      </div>\n    </div>\n  </div>\n</section>"
+      },
       "blocks": {}
     }
   }
