@@ -12,5 +12,12 @@
     "market": "poland"
   },
   "parent": "product.expressive-notes.json",
-  "sections": {}
+  "sections": {
+    "stacks_up_WR4y4d": {
+      "settings": {
+        "title": "Warum MagyX?"
+      },
+      "blocks": {}
+    }
+  }
 }
