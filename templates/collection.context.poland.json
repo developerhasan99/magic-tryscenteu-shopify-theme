@@ -11,30 +11,11 @@
   "context": {
     "market": "poland"
   },
-  "parent": "index.json",
+  "parent": "collection.json",
   "sections": {
-    "home_hero_XQyQrf": {
+    "collection_hero_ezAzaW": {
       "disabled": true,
       "settings": {},
-      "blocks": {}
-    },
-    "tryscent_hero_VWyBcY": {
-      "disabled": false,
-      "settings": {
-        "button_text": "Für sie",
-        "review_text": ""
-      },
-      "blocks": {}
-    },
-    "feature_heighlights_EpJcyT": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
-    "popular_products_RyfRNL": {
-      "settings": {
-        "show_all_button_text": "Alle anzeigen"
-      },
       "blocks": {}
     }
   }
