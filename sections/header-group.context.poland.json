@@ -14,12 +14,12 @@
   "parent": "header-group.json",
   "sections": {
     "blocky_lys_scrolling_text_bar_GLkKNr": {
-      "disabled": true,
+      "disabled": false,
       "settings": {},
       "blocks": {
         "text_XmbGh": {
           "type": "text",
-          "disabled": false,
+          "disabled": true,
           "settings": {
             "text": "DARMOWA DOSTAWA OD 190 PLN"
           }
@@ -27,6 +27,19 @@
         "text_DiPtyi": {
           "disabled": true,
           "settings": {}
+        },
+        "text_39tt9p": {
+          "disabled": true,
+          "settings": {}
+        },
+        "text_7Mhc9j": {
+          "disabled": true,
+          "settings": {}
+        },
+        "text_QD7JEH": {
+          "settings": {
+            "text": "TryScent zmienia się w MagyX!"
+          }
         }
       },
       "block_order": [
@@ -84,5 +97,11 @@
       },
       "blocks": {}
     }
-  }
+  },
+  "order": [
+    "offer_annoucement_4tnBfB",
+    "offer_timebar_4WVn7P",
+    "blocky_lys_scrolling_text_bar_GLkKNr",
+    "header"
+  ]
 }
