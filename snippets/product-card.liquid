@@ -7,7 +7,7 @@
             <span>Bestseller</span>
         </div>
         {% elsif product.tags contains 'onsale' %}
-        <div class="bg-red-50 text-red-600 px-2 py-1 text-xs rounded-full">⚡ Angebot</div>
+        <div class="bg-red-50 text-red-600 px-2 py-1 text-xs rounded-full">⚡ Promocja</div>
         {% endif %}
     </div>
     {% endif %}
@@ -22,7 +22,7 @@
                 <img
                     class="w-full h-auto"
                     src="{{ image.src |  image_url: width: 300 }}"
-                    alt="{{ product.title }}"
+                    alt="{% render 'polish-store-text', text: product.title %}"
                     height="{{ image.height }}"
                     width="{{ image.width }}"
                 >
@@ -32,7 +32,7 @@
             <img
                 class="w-full h-auto"
                 src="{{ product.images.first |  image_url: width: 300 }}"
-                alt="{{ product.title }}"
+                alt="{% render 'polish-store-text', text: product.title %}"
                 height="{{ product.images.first.height }}"
                 width="{{ product.images.first.width }}"
             >
@@ -41,24 +41,24 @@
             <img
                 class="w-full h-auto"
                 src="{{ product.images.first |  image_url: width: 300 }}"
-                alt="{{ product.title }}"
+                alt="{% render 'polish-store-text', text: product.title %}"
                 height="{{ product.images.first.height }}"
                 width="{{ product.images.first.width }}"
             >
         {% endif %}
     {% unless product.tags contains 'Bundle_Price_Show' or true %}
-      <div class="card__promo-marquee absolute left-0 right-0 bottom-0 bg-[#137c44] text-white" aria-label="Köp 3, få 1 gratis">
+      <div class="card__promo-marquee absolute left-0 right-0 bottom-0 bg-[#137c44] text-white" aria-label="Kup 3, a 1 otrzymasz gratis">
         <div class="card__promo-marquee-rail">
           <div class="card__promo-marquee-group">
-            <span class="card__promo-marquee-text">3 kaufen, 1 gratis dazu</span>
+            <span class="card__promo-marquee-text">Kup 3, a 1 otrzymasz gratis</span>
             <span class="card__promo-marquee-dot" aria-hidden="true"></span>
-            <span class="card__promo-marquee-text">3 kaufen, 1 gratis dazu</span>
+            <span class="card__promo-marquee-text">Kup 3, a 1 otrzymasz gratis</span>
             <span class="card__promo-marquee-dot" aria-hidden="true"></span>
           </div>
           <div class="card__promo-marquee-group" aria-hidden="true">
-            <span class="card__promo-marquee-text">3 kaufen, 1 gratis dazu</span>
+            <span class="card__promo-marquee-text">Kup 3, a 1 otrzymasz gratis</span>
             <span class="card__promo-marquee-dot" aria-hidden="true"></span>
-            <span class="card__promo-marquee-text">3 kaufen, 1 gratis dazu</span>
+            <span class="card__promo-marquee-text">Kup 3, a 1 otrzymasz gratis</span>
             <span class="card__promo-marquee-dot" aria-hidden="true"></span>
           </div>
         </div>
@@ -70,7 +70,7 @@
     </div> {% endcomment %}
     <h3 class="mb-0">
     <a class="no-underline text-black font-semibold text-sm md:text-base line-clamp-2" href="{{product.url}}">
-        {{ product.title }}
+        {% render 'polish-store-text', text: product.title %}
     </a>
     </h3>
 
@@ -78,7 +78,7 @@
     <div class="flex items-center gap-2 mt-3">
         <img style="filter: blur(2px);" class="object-contain object-center" src="{{ product.metafields.custom.inspired_by.value.image |  image_url }}" alt="{{ product.metafields.custom.inspired_by.value.image.alt | escape }}" width="35" height="35">
         <div>
-        <p class="text-xs my-0">Inspiriert von:</p>
+        <p class="text-xs my-0">Inspiracja:</p>
         <h4 class="text-sm font-semibold my-0 line-clamp-1 inspiration_heading">{{ product.metafields.custom.inspired_by.value.name }}</h4>
         </div>
     </div>
@@ -96,7 +96,7 @@
     </div>
     <div class="mt-auto">
     <a class="hover:bg-[#17803d] bg-[#146b32] text-white uppercase text-sm font-semibold tracking-[2px] py-3 px-1 rounded-lg no-underline w-full text-center block" href="{{ product.url }}">
-        Jetzt kaufen
+        Kup teraz
     </a>
     </div>
 </div>

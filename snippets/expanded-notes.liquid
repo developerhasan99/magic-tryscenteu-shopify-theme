@@ -6,7 +6,7 @@
       aria-controls="ProductAccordion-collapsible_tab_FAAFhb-template--22305367884034__main"
     >
       <div class="summary__title">
-        <h2 class="h4 accordion__title inline-richtext">Duftnoten</h2>
+        <h2 class="h4 accordion__title inline-richtext">Nuty zapachowe</h2>
       </div>
       <svg
         aria-hidden="true"
@@ -29,7 +29,7 @@
     >
       <div class="scent-notes-panel text-gray-800">
         <div class="mb-5">
-          <p class="text-xs text-gray-500 mb-3 m-0">Hauptnoten:</p>
+          <p class="text-xs text-gray-500 mb-3 m-0">Główne nuty:</p>
           <div class="flex flex-wrap gap-x-6">
             {% for note in product.metafields.custom.main_notes.value %}
               <figure class="m-0 flex flex-col items-center text-center">
@@ -69,7 +69,7 @@
             </svg>
             <div class="min-w-0">
               <p class="text-sm m-0">
-                <strong class="font-bold">Kopfnoten:</strong>
+                <strong class="font-bold">Nuty głowy:</strong>
                 {{ product.metafields.custom.top_notes.value.heading }}
               </p>
               <p class="text-sm text-gray-700 m-0">
@@ -104,7 +104,7 @@
             </svg>
             <div class="min-w-0">
               <p class="text-sm m-0">
-                <strong class="font-bold">Herznoten:</strong>
+                <strong class="font-bold">Nuty serca:</strong>
                 {{ product.metafields.custom.middle_notes.value.heading }}
               </p>
               <p class="text-sm text-gray-700 m-0">
@@ -139,7 +139,7 @@
             </svg>
             <div class="min-w-0">
               <p class="text-sm m-0">
-                <strong class="font-bold">Basisnoten:</strong>
+                <strong class="font-bold">Nuty bazy:</strong>
                 {{ product.metafields.custom.base_notes.value.heading }}
               </p>
               <p class="text-sm text-gray-700 m-0">
@@ -152,13 +152,13 @@
         <hr class="border-0 border-b border-solid border-gray-200 my-4">
 
         <p class="text-xs leading-relaxed text-gray-700 mb-4 m-0">
-          <strong class="font-bold">Inhaltsstoffe:</strong>
+          <strong class="font-bold">Składniki:</strong>
           {% if product.metafields.custom.ingredients.value != blank %}
             {{ product.metafields.custom.ingredients.value | metafield_text }}
           {% else %}
-            Vergällter Alkohol, Duftstoff, Wasser, Limonen, Linalool,
-            Citronellol, Geraniol, Citral, Benzylsalicylat, Cumarin,
-            Alpha-Isomethylionon, Hexylcinnamal, Benzylbenzoat.
+            Alkohol denaturowany, kompozycja zapachowa, woda, limonen, linalol,
+            Citronellol, Geraniol, Citral, salicylan benzylu, kumaryna,
+            alfa-izometylojonon, aldehyd heksylocynamonowy, benzoesan benzylu.
           {% endif %}
         </p>
 
@@ -172,11 +172,11 @@
             >
               <path d="M10 2 C7 5 4 8 4 12 C4 16 7 18 10 18 C13 18 16 16 16 12 C16 8 13 5 10 2 Z"></path>
             </svg>
-            Vegan
+            Wegańskie
           </span>
 
           <span class="inline-flex items-center whitespace-nowrap px-3 py-1.5 rounded-full bg-white border border-solid border-gray-200 text-xs text-gray-800">
-            Tierversuchsfrei
+            Nietestowane na zwierzętach
             <svg
               class="w-4 h-4 ml-1.5"
               viewBox="0 0 24 24"
@@ -204,7 +204,7 @@
             >
               <path d="M5 10 l3 3 l7-7"></path>
             </svg>
-            Reine Inhaltsstoffe
+            Czyste składniki
           </span>
         </div>
       </div>

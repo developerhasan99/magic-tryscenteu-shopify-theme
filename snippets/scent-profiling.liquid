@@ -5,7 +5,7 @@
     height="24"
     width="24">
   <div class="font-semibold text-black text-sm md:text-base">
-    Bis zu 12 Std. Halt, 21 % Konzentration
+    Do 12 godzin trwałości, 21% koncentracji
   </div>
 </div>
 
@@ -13,11 +13,11 @@
   <a
     href="#expanded-notes"
     data-scroll-to-foldable="1"
-    class="text-xs font-bold tracking-wider uppercase text-gray-900 underline underline-offset-4 decoration-2 hover:decoration-[#22613A] cursor-pointer">Vollständige Beschreibung</a>
+    class="text-xs font-bold tracking-wider uppercase text-gray-900 underline underline-offset-4 decoration-2 hover:decoration-[#22613A] cursor-pointer">Pełny opis</a>
   <a
     href="#clean_label"
     data-scroll-to-anchor="clean-label-section"
-    class="text-xs font-bold tracking-wider uppercase text-gray-900 underline underline-offset-4 decoration-2 hover:decoration-[#22613A] cursor-pointer">Reines Etikett</a>
+    class="text-xs font-bold tracking-wider uppercase text-gray-900 underline underline-offset-4 decoration-2 hover:decoration-[#22613A] cursor-pointer">Czysta etykieta</a>
 </div>
 <div class="scent-attributes flex gap-6 md:gap-12">
   {% if product.metafields.custom.fragrance_family != blank %}
@@ -233,9 +233,9 @@
       </div>
       <figcaption class="text-sm text-gray-800">
         {% case product.metafields.custom.scent_intensity %}
-          {% when 1 %}Leicht
-        {% when 2 %}Mittel
-      {% when 3 %}Stark
+          {% when 1 %}Lekki
+        {% when 2 %}Średni
+      {% when 3 %}Mocny
     {% else %}
       {{ product.metafields.custom.scent_intensity }}
   {% endcase %}

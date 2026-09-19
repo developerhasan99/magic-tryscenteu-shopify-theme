@@ -66,13 +66,13 @@
                     <div class="aspect-square mb-3 overflow-hidden rounded bg-gray-50">
                       <img
                         src="{{ product.featured_image | image_url: width: 300 }}"
-                        alt="{{ product.title }}"
+                        alt="{% render 'polish-store-text', text: product.title %}"
                         class="w-full h-full object-cover object-center"
                         width="300"
                         height="300">
                     </div>
 
-                    <a href="{{ product.url }}" class="text-sm font-medium mb-2 line-clamp-2 block text-black no-underline hover:underline">{{ product.title }}</a>
+                    <a href="{{ product.url }}" class="text-sm font-medium mb-2 line-clamp-2 block text-black no-underline hover:underline">{% render 'polish-store-text', text: product.title %}</a>
 
                     {% unless product.has_only_default_variant %}
                       <select

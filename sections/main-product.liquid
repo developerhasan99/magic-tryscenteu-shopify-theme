@@ -130,7 +130,7 @@
                       {% if product.tags contains 'onsale' and product.compare_at_price != blank and product.compare_at_price > product.price %}
                         {%- assign discount_percent = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
                         <span class="inline-block bg-red-600 text-white text-sm font-bold px-3 py-1">
-                          {{ discount_percent }}% Aus
+                          {{ discount_percent }}% rabatu
                         </span>
                       {% endif %}
                       {% if product.tags contains 'Bestseller' %}
@@ -141,16 +141,16 @@
                       {% if product.template_suffix == 'expressive-notes' %}
                         <span class="inline-flex items-center px-3 py-1 rounded-md border border-solid border-[#3b82f6] text-[#3b82f6] text-sm font-medium bg-white">
                         {% if product.tags contains 'Woman' or product.tags contains 'fuer-frauen' %}
-                         FRAUEN
+                         KOBIETY
                         {% else %}
-                         MÄNNER
+                         MĘŻCZYŹNI
                         {% endif %}
                         </span>
                       {% endif %}
                     </div>
                   {%- endif -%}  
                   <h1 class="font-[700] leading-tight capitalize !tracking-normal flex flex-col {% if product.tags contains 'Bestseller' or product.tags contains 'onsale' %} pt-12 {% endif %}">
-                      {{ product.title }}
+                      {% render 'polish-store-text', text: product.title %}
                   </h1>
                 </div>
               {%- when 'price' -%}

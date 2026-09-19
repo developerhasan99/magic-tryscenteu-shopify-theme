@@ -30,7 +30,7 @@
     {% endif %}
   </div>
   <div class="text-lg font-semibold text-black leading-normal">
-    Das entspricht nur {{ product.price | divided_by: product.metafields.custom.choose_your_fragrances_options | money }} pro Flasche.
+    To tylko {{ product.price | divided_by: product.metafields.custom.choose_your_fragrances_options | money }} za flakon.
   </div>
 </div>
 
@@ -71,9 +71,9 @@
           stroke-width="2"
           d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
       </svg>
-      <span>Upgrade auf
+      <span>Wybierz większą pojemność:
         <a href="{{ next_bundle_product.url }}" class="ml-auto font-medium text-[#22613A] whitespace-nowrap transition-colors">
-          {{ next_size }} ML für nur {{ price_difference }} mehr.</a>
+          {{ next_size }} ML za jedyne {{ price_difference }} więcej.</a>
       </span>
     </div>
   </div>
@@ -94,7 +94,7 @@
             , size: 40 %}
             <div class="min-w-0 flex-1">
               <div class="text-sm text-[#6b7280] overflow-hidden whitespace-nowrap [text-overflow:ellipsis]">
-                Wähle deinen Duft
+                Wybierz swój zapach
               </div>
             </div>
             <span class="ml-auto shrink-0 text-[#6b7280]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></span>
@@ -132,8 +132,8 @@
       }"
     class="w-full flex gap-2 flex-wrap items-center !mb-0 text-lg font-bold !py-3 !px-2 rounded-full button bg-[#22613a] transition-colors shadow-xl tracking-normal button--full-width"
   >
-    <span x-show="$store.bundleBuilder.selectedProducts.length < {{ product_count }}" x-text="'Wähle noch ' + ({{ product_count }} - $store.bundleBuilder.selectedProducts.length) + ' aus'"></span>
-    <span x-show="$store.bundleBuilder.selectedProducts.length === {{ product_count }}">Jetzt kaufen</span>
+    <span x-show="$store.bundleBuilder.selectedProducts.length < {{ product_count }}" x-text="'Wybierz jeszcze: ' + ({{ product_count }} - $store.bundleBuilder.selectedProducts.length) + ' szt.'"></span>
+    <span x-show="$store.bundleBuilder.selectedProducts.length === {{ product_count }}">Kup teraz</span>
     <span class="size-2 rounded-full inline-block bg-white/50"></span>
     <span class="current-price">{{ selected_variant.price | money }}</span>
     <div x-show="$store.bundleBuilder.addingToCart" class="loading__spinner">
@@ -167,7 +167,7 @@
           {% for fixed_var in fixed_bundle_products %}
             {
               id: {{ fixed_var.product.id }},
-              name: "{{ fixed_var.product.title }}",
+              name: {% render 'polish-store-text', text: fixed_var.product.title, format: 'json' %},
               image: "{{ fixed_var.product.featured_image | image_url }}",
               inspiration_name: "{% if fixed_var.product.metafields.custom.inspired_by.value %}{{ fixed_var.product.metafields.custom.inspired_by.value.name }}{% endif %}",
               variant: {
@@ -191,13 +191,13 @@
           %}
           {
             id: {{ bundle_product.id }},
-            name: "{{ bundle_product.title }}",
+            name: {% render 'polish-store-text', text: bundle_product.title, format: 'json' %},
             image: "{{ bundle_product.featured_image | image_url: width: 120, height: 120 }}",
             nuta: "{% if bundle_product.metafields.custom.inspired_by.value %}{{ bundle_product.metafields.custom.inspired_by.value.name }}{% endif %}",
             inspiration_image: "{% if bundle_product.metafields.custom.inspired_by.value %}{{ bundle_product.metafields.custom.inspired_by.value.image | image_url: width: 90, height: 90 }}{% endif %}",
             inspiration_name: "{% if bundle_product.metafields.custom.inspired_by.value %}{{ bundle_product.metafields.custom.inspired_by.value.name }}{% endif %}",
             tags: {{ bundle_product.tags | json }},
-            gender: "{% if bundle_product.tags contains 'fuer-maenner' and bundle_product.tags contains 'fuer-frauen' %}Unisex{% elsif bundle_product.tags contains 'fuer-maenner' %}Für Herren{% elsif bundle_product.tags contains 'fuer-frauen' %}Für Damen{% endif %}",
+            gender: "{% if bundle_product.tags contains 'fuer-maenner' and bundle_product.tags contains 'fuer-frauen' %}Unisex{% elsif bundle_product.tags contains 'fuer-maenner' %}Dla mężczyzn{% elsif bundle_product.tags contains 'fuer-frauen' %}Dla kobiet{% endif %}",
             occasion: {{ bundle_product.metafields.custom.occasion.value | json }},
             collections: "{{ collection_handles }}",
             variants: {
@@ -243,8 +243,8 @@
         };
         // Add each selected product as a separate property
         this.selectedProducts.forEach((product, index) => {
-          properties[`Flasche ${index + 1}`] =
-            `${product.name} Inspiriert von ${product.inspiration_name} - ${product.variant.title}`;
+          properties[`Flakon ${index + 1}`] =
+            `${product.name} Inspiracja: ${product.inspiration_name} - ${product.variant.title}`;
         });
         // Prepare cart items
         const items = {
@@ -294,8 +294,8 @@
       width="40"
       height="40" />
     <div class="text-slate-900">
-      <strong class="font-semibold">Teste es 60 Tage lang – völlig risikofrei.</strong>
-      <div class="[display:none] md:block">Sollten Sie nicht absolut begeistert sein, erstatten wir Ihnen den vollen Betrag zurück!</div>
+      <strong class="font-semibold">Wypróbuj przez 60 dni — bez ryzyka.</strong>
+      <div class="[display:none] md:block">Jeśli produkt nie spełni Twoich oczekiwań, zwrócimy Ci pełną kwotę!</div>
     </div>
   </div>
 </div>

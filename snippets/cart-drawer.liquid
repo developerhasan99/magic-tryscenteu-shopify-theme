@@ -113,7 +113,7 @@
                           {%- endif -%}
 
                           <a href="{{ item.url }}" class="cart-item__name h4 break">
-                            {{- item.product.title | escape -}}
+                            {%- render 'polish-store-text', text: item.product.title -%}
                           </a>
 
                           {% comment %} Disabled for aesthetic reasons {% endcomment %}

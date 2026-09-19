@@ -22,12 +22,12 @@
             <img
               class="w-[80px] md:w-full h-auto"
               src="{{ item.images.first.src | image_url: width: 350 }}"
-              alt="{{ item.title }}"
+              alt="{% render 'polish-store-text', text: item.title %}"
               width="350"
               height="350">
             <div>
               <h3 class="mt-0 mb-2 text-base leading-tight font-semibold">
-                <a class="no-underline text-black line-clamp-2" href="{{ item.url }}">{{ item.title }}</a>
+                <a class="no-underline text-black line-clamp-2" href="{{ item.url }}">{% render 'polish-store-text', text: item.title %}</a>
               </h3>
               <p class="my-0 font-semibold text-base">{{ item.price | money }}</p>
             </div>
@@ -41,7 +41,7 @@
         <div class="flex-grow flex flex-col gap-2 pb-4">
           {% for item in product.metafields.custom.shaving_routine_products.value %}
             <div class="flex justify-between items-center gap-4">
-              <span class="text-sm text-black">{{ item.title }}</span>
+              <span class="text-sm text-black">{% render 'polish-store-text', text: item.title %}</span>
               <span>{{ item.price | money }}</span>
             </div>
           {% endfor %}

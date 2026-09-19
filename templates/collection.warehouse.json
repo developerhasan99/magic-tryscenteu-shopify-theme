@@ -15,43 +15,43 @@
         "step_piURBQ": {
           "type": "step",
           "settings": {
-            "step_title": "Erhalten Sie 30 % Rabatt auf Ihren gesamten Warenkorb",
-            "step_description": "Wählen Sie Ihre Lieblingsdüfte aus und legen Sie sie in den Warenkorb"
+            "step_title": "Otrzymaj 30% rabatu na cały koszyk",
+            "step_description": "Wybierz ulubione zapachy i dodaj je do koszyka"
           }
         },
         "step_7eTiRE": {
           "type": "step",
           "settings": {
-            "step_title": "Mit den Paketen sparst du noch mehr!",
-            "step_description": "Kaufen Sie 3 – sparen Sie 40%. Kaufen Sie 6 – sparen Sie 48%."
+            "step_title": "Z zestawami oszczędzasz jeszcze więcej!",
+            "step_description": "Kup 3 – oszczędź 40%. Kup 6 – oszczędź 48%."
           }
         },
         "step_KKtVmi": {
           "type": "step",
           "settings": {
-            "step_title": "Bestellwert von mindestens 65 Euros",
-            "step_description": "Erhalten Sie KOSTENLOSEN Versand und KOSTENLOSE Geschenke!"
+            "step_title": "Wartość zamówienia co najmniej 65 euro",
+            "step_description": "Odbierz DARMOWĄ dostawę i prezenty GRATIS!"
           }
         },
         "guarantee_mtd9Gw": {
           "type": "guarantee",
           "settings": {
             "icon": "shopify://shop_images/sandwatch_1.svg",
-            "text": "Hält 12+ Stunden"
+            "text": "Trwałość ponad 12 godzin"
           }
         },
         "guarantee_x7hFWP": {
           "type": "guarantee",
           "settings": {
             "icon": "shopify://shop_images/icons_quality_3.png",
-            "text": "19–21 % Duftölkonzentration"
+            "text": "19–21% olejków zapachowych"
           }
         },
         "guarantee_xY66Fn": {
           "type": "guarantee",
           "settings": {
             "icon": "shopify://shop_images/sheild-star_1.svg",
-            "text": "60 Tage Geld-zurück-Garantie"
+            "text": "60-dniowa gwarancja zwrotu pieniędzy"
           }
         }
       },
@@ -69,9 +69,9 @@
         "text_color": "#000000",
         "bg_image": "shopify://shop_images/payday_banner.png",
         "bg_mobile_image": "shopify://shop_images/payday_mobile_Nobottles.jpg",
-        "social_proof_text": "Von über 10.000 zufriedenen Duftliebhabern empfohlen",
-        "collection_title": "Sonderangebot zum Zahltag!",
-        "collection_description": "Kaufen Sie Ihre Lieblingsdüfte zu noch günstigeren Preisen! Und sparen Sie mit Paketangeboten noch mehr!",
+        "social_proof_text": "Polecane przez ponad 10 000 zadowolonych miłośników zapachów",
+        "collection_title": "Specjalna oferta na dzień wypłaty!",
+        "collection_description": "Kup ulubione zapachy w jeszcze niższych cenach! Z zestawami oszczędzasz jeszcze więcej!",
         "btn_link": "",
         "btn_text": "",
         "padding_top": 72,
@@ -86,10 +86,10 @@
       "name": "Popular Products",
       "settings": {
         "background_color": "#fcfbf9",
-        "heading": "🔥Heißeste Sommerdüfte 2026🔥",
-        "subheading": "Entworfen und formuliert für Qualität.",
+        "heading": "🔥Najgorętsze zapachy lata 2026🔥",
+        "subheading": "Stworzone z myślą o jakości.",
         "collection": "neue-angesagte-dufte",
-        "show_all_button_text": "ANSEHEN",
+        "show_all_button_text": "ZOBACZ",
         "padding_top": 12,
         "padding_bottom": 12
       }

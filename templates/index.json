@@ -25,11 +25,11 @@
         "background_color": "#000000",
         "background_image": "shopify://shop_images/newheader.webp",
         "mobile_background_image": "shopify://shop_images/newheader_mobile.webp",
-        "title": "Luxusdüfte Duftinspiriert. Bis zu 95% günstiger.",
-        "subtitle": "3 kaufen – 1 gratis",
-        "button_text": "FÜR MÄNNER",
+        "title": "Zapachy inspirowane luksusowymi perfumami. Nawet o 95% taniej.",
+        "subtitle": "Kup 3 – 1 gratis",
+        "button_text": "DLA MĘŻCZYZN",
         "button_link": "shopify://collections/man",
-        "second_button_text": "FÜR FRAUEN",
+        "second_button_text": "DLA KOBIET",
         "second_button_link": "shopify://collections/woman",
         "padding_top": 36,
         "padding_bottom": 36
@@ -42,12 +42,12 @@
         "background_color": "#fcfbf9",
         "background_image": "shopify://shop_images/MAGYX_Site_Header.webp",
         "mobile_background_image": "shopify://shop_images/MAGYX_Site_Header_Mobile_B.webp",
-        "review_text": "VON 10.000 KUNDEN GELIEBT",
-        "title": "Premium-Qualität Duft-Zwillinge",
-        "subtitle": "Ohne Flasche und Logo: Würdest du den Unterschied bemerken?",
-        "button_text": "Für sie",
+        "review_text": "POKOCHANE PRZEZ 10 000 KLIENTÓW",
+        "title": "Odpowiedniki perfum najwyższej jakości",
+        "subtitle": "Bez flakonu i logo — czy poczujesz różnicę?",
+        "button_text": "Dla niej",
         "button_link": "shopify://collections/abenddufte-damen",
-        "secondary_button_text": "Für ihn",
+        "secondary_button_text": "Dla niego",
         "secondary_button_link": "shopify://collections/abenddufte-herren",
         "padding_top": 100,
         "padding_bottom": 100,
@@ -61,7 +61,7 @@
         "heading_c6chEf": {
           "type": "heading",
           "settings": {
-            "content": "Mehr als nur ein Duft. Ein Statement.",
+            "content": "Więcej niż zapach. Wyraz Twojego stylu.",
             "heading_type": "h2",
             "font_size": 28,
             "mobile_font_size": 20,
@@ -71,7 +71,7 @@
         "text_VJRcpx": {
           "type": "text",
           "settings": {
-            "content": "<p>Entwickelt für alle, die selbstbewusst auftreten und einen bleibenden Eindruck hinterlassen.</p>",
+            "content": "<p>Stworzone dla tych, którzy chcą czuć się pewnie i pozostawiać niezapomniane wrażenie.</p>",
             "mobile_content": "",
             "font_size": 18,
             "text_color": "#eff0f5"
@@ -80,7 +80,7 @@
         "button_rGwjWF": {
           "type": "button",
           "settings": {
-            "button_text": "Alle anzeigen",
+            "button_text": "Zobacz wszystkie",
             "button_url": "shopify://collections",
             "button_color": "#ffffff",
             "text_color": "#000000"
@@ -115,7 +115,7 @@
       "type": "custom-liquid",
       "name": "t:sections.custom-liquid.presets.name",
       "settings": {
-        "custom_liquid": "<style>\n#ts-trust-custom{\n  padding:30px 0;\n  background:#fff;\n  border-bottom:1px solid #f0efec;\n}\n#ts-trust-custom .ts-container{\n  width:min(1180px,calc(100% - 36px));\n  margin-inline:auto;\n}\n#ts-trust-custom .ts-trust-grid{\n  display:grid;\n  grid-template-columns:repeat(4,1fr);\n  gap:24px;\n}\n#ts-trust-custom .ts-trust-item{\n  text-align:center;\n  padding:10px 18px;\n}\n#ts-trust-custom .ts-icon{\n  height:44px;\n  margin:0 auto 12px;\n  color:#121212;\n}\n#ts-trust-custom .ts-icon svg{\n  width:40px;\n  height:40px;\n}\n#ts-trust-custom h3{\n  margin:0 0 8px;\n  font-size:18px;\n  font-weight:600;\n  letter-spacing:.4px;\n  color:#121212;\n}\n#ts-trust-custom p{\n  margin:0;\n  font-size:16px;\n  line-height:1.5;\n  color:rgba(18,18,18,.6);\n}\n@media(max-width:700px){\n  #ts-trust-custom{padding:15px 0}\n  #ts-trust-custom .ts-trust-grid{\n    grid-template-columns:1fr 1fr;\n    gap:10px;\n  }\n  #ts-trust-custom .ts-trust-item{padding:12px 4px}\n  #ts-trust-custom h3{font-size:16px}\n}\n</style>\n\n<section id=\"ts-trust-custom\">\n  <div class=\"ts-container\">\n    <div class=\"ts-trust-grid\">\n      <div class=\"ts-trust-item\">\n        <div class=\"ts-icon\" aria-hidden=\"true\">\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"7.5\" width=\"16\" height=\"12.5\" rx=\"1\"/><path d=\"M4 7.5 6.5 4h11L20 7.5\"/><path d=\"M12 4v3.5\"/><path d=\"M9.5 12h5\"/></svg>\n        </div>\n        <h3>Hergestellt in Europa</h3>\n        <p>Produziert nach strengen europäischen Parfüm-Standards.</p>\n      </div>\n      <div class=\"ts-trust-item\">\n        <div class=\"ts-icon\" aria-hidden=\"true\">\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5c3.4 4.3 5.8 7.4 5.8 10.2a5.8 5.8 0 1 1-11.6 0C6.2 10.9 8.6 7.8 12 3.5z\"/><path d=\"M9.6 14.2a2.6 2.6 0 0 0 2.3 2.5\"/></svg>\n        </div>\n        <h3>21 % Duftkonzentration</h3>\n        <p>Gemacht, um den ganzen Tag wahrnehmbar zu bleiben.</p>\n      </div>\n      <div class=\"ts-trust-item\">\n        <div class=\"ts-icon\" aria-hidden=\"true\">\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5 19 6v5.4c0 4.4-2.9 7.7-7 9.1-4.1-1.4-7-4.7-7-9.1V6z\"/><path d=\"m9 11.9 2.2 2.2 3.8-4.2\"/></svg>\n        </div>\n        <h3>60 Tage Garantie</h3>\n        <p>Teste das Parfüm zu Hause. Passt es nicht zu dir, hast du 60 Tage Zeit, es zurückzuschicken.</p>\n      </div>\n      <div class=\"ts-trust-item\">\n        <div class=\"ts-icon\" aria-hidden=\"true\">\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 7.5V12l3 2\"/></svg>\n        </div>\n        <h3>Langanhaltender Duft</h3>\n        <p>Bleibt bis zu 12 Stunden wahrnehmbar.</p>\n      </div>\n    </div>\n  </div>\n</section>",
+        "custom_liquid": "<style>\n#ts-trust-custom{\n  padding:30px 0;\n  background:#fff;\n  border-bottom:1px solid #f0efec;\n}\n#ts-trust-custom .ts-container{\n  width:min(1180px,calc(100% - 36px));\n  margin-inline:auto;\n}\n#ts-trust-custom .ts-trust-grid{\n  display:grid;\n  grid-template-columns:repeat(4,1fr);\n  gap:24px;\n}\n#ts-trust-custom .ts-trust-item{\n  text-align:center;\n  padding:10px 18px;\n}\n#ts-trust-custom .ts-icon{\n  height:44px;\n  margin:0 auto 12px;\n  color:#121212;\n}\n#ts-trust-custom .ts-icon svg{\n  width:40px;\n  height:40px;\n}\n#ts-trust-custom h3{\n  margin:0 0 8px;\n  font-size:18px;\n  font-weight:600;\n  letter-spacing:.4px;\n  color:#121212;\n}\n#ts-trust-custom p{\n  margin:0;\n  font-size:16px;\n  line-height:1.5;\n  color:rgba(18,18,18,.6);\n}\n@media(max-width:700px){\n  #ts-trust-custom{padding:15px 0}\n  #ts-trust-custom .ts-trust-grid{\n    grid-template-columns:1fr 1fr;\n    gap:10px;\n  }\n  #ts-trust-custom .ts-trust-item{padding:12px 4px}\n  #ts-trust-custom h3{font-size:16px}\n}\n</style>\n\n<section id=\"ts-trust-custom\">\n  <div class=\"ts-container\">\n    <div class=\"ts-trust-grid\">\n      <div class=\"ts-trust-item\">\n        <div class=\"ts-icon\" aria-hidden=\"true\">\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"7.5\" width=\"16\" height=\"12.5\" rx=\"1\"/><path d=\"M4 7.5 6.5 4h11L20 7.5\"/><path d=\"M12 4v3.5\"/><path d=\"M9.5 12h5\"/></svg>\n        </div>\n        <h3>Wyprodukowano w Europie</h3>\n        <p>Produkcja zgodna z rygorystycznymi europejskimi normami perfumeryjnymi.</p>\n      </div>\n      <div class=\"ts-trust-item\">\n        <div class=\"ts-icon\" aria-hidden=\"true\">\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5c3.4 4.3 5.8 7.4 5.8 10.2a5.8 5.8 0 1 1-11.6 0C6.2 10.9 8.6 7.8 12 3.5z\"/><path d=\"M9.6 14.2a2.6 2.6 0 0 0 2.3 2.5\"/></svg>\n        </div>\n        <h3>21% olejków zapachowych</h3>\n        <p>Zapach stworzony, by towarzyszyć Ci przez cały dzień.</p>\n      </div>\n      <div class=\"ts-trust-item\">\n        <div class=\"ts-icon\" aria-hidden=\"true\">\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5 19 6v5.4c0 4.4-2.9 7.7-7 9.1-4.1-1.4-7-4.7-7-9.1V6z\"/><path d=\"m9 11.9 2.2 2.2 3.8-4.2\"/></svg>\n        </div>\n        <h3>60 dni gwarancji</h3>\n        <p>Wypróbuj perfumy w domu. Jeśli nie pasują do Ciebie, masz 60 dni na zwrot.</p>\n      </div>\n      <div class=\"ts-trust-item\">\n        <div class=\"ts-icon\" aria-hidden=\"true\">\n          <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 7.5V12l3 2\"/></svg>\n        </div>\n        <h3>Długotrwały zapach</h3>\n        <p>Utrzymuje się nawet przez 12 godzin.</p>\n      </div>\n    </div>\n  </div>\n</section>",
         "color_scheme": "",
         "padding_top": 0,
         "padding_bottom": 0
@@ -128,7 +128,7 @@
           "type": "perks",
           "settings": {
             "perk_image": "shopify://shop_images/DELIVERY.webp",
-            "perk_title": "Kostenloser Versand ab 45€",
+            "perk_title": "Darmowa dostawa od 45€",
             "perk_content": ""
           }
         },
@@ -136,24 +136,24 @@
           "type": "perks",
           "settings": {
             "perk_image": "shopify://shop_images/SAVINGS.avif",
-            "perk_title": "Treuerabatte für Stammkunden",
-            "perk_content": "Gutscheine bis zu 100 €"
+            "perk_title": "Rabaty dla stałych klientów",
+            "perk_content": "Bony podarunkowe do 100 €"
           }
         },
         "perks_yTdgqz": {
           "type": "perks",
           "settings": {
             "perk_image": "shopify://shop_images/GIFTS.webp",
-            "perk_title": "Kostenlose Geschenke - Tester",
-            "perk_content": "Mit persönlicher Nachricht (bis 100 Zeichen)"
+            "perk_title": "Próbki w prezencie",
+            "perk_content": "Z osobistą wiadomością (do 100 znaków)"
           }
         },
         "perks_7zj6gB": {
           "type": "perks",
           "settings": {
             "perk_image": "shopify://shop_images/SSUPPORT.webp",
-            "perk_title": "Persönliche Beratung",
-            "perk_content": "Täglich von 8 bis 20 Uhr"
+            "perk_title": "Indywidualne doradztwo",
+            "perk_content": "Codziennie od 8:00 do 20:00"
           }
         }
       },
@@ -176,10 +176,10 @@
       "name": "Popular Products",
       "settings": {
         "background_color": "#fcfbf9",
-        "heading": "Neue Düfte🔥",
+        "heading": "Nowe zapachy🔥",
         "subheading": "",
         "collection": "neue-angesagte-dufte",
-        "show_all_button_text": "Alle anzeigen",
+        "show_all_button_text": "Zobacz wszystkie",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -192,7 +192,7 @@
         "heading": "BESTSELLERS",
         "subheading": "",
         "collection": "top-sellers",
-        "show_all_button_text": "Alle Bestseller ansehen",
+        "show_all_button_text": "Zobacz wszystkie bestsellery",
         "padding_top": 32,
         "padding_bottom": 24
       }
@@ -206,23 +206,23 @@
           "settings": {
             "tab_title": "🔥 BESTSELLERS",
             "collection": "bestsellers",
-            "button_text": "Alle anzeigen"
+            "button_text": "Zobacz wszystkie"
           }
         },
         "collection_xgUpzQ": {
           "type": "collection",
           "settings": {
-            "tab_title": "FÜR MÄNNER",
+            "tab_title": "DLA MĘŻCZYZN",
             "collection": "man",
-            "button_text": "Alle anzeigen"
+            "button_text": "Zobacz wszystkie"
           }
         },
         "collection_3WBTm3": {
           "type": "collection",
           "settings": {
-            "tab_title": "FÜR FRAUEN",
+            "tab_title": "DLA KOBIET",
             "collection": "woman",
-            "button_text": "Alle anzeigen"
+            "button_text": "Zobacz wszystkie"
           }
         }
       },
@@ -234,8 +234,8 @@
       "name": "Homepage Products Tab",
       "settings": {
         "background_color": "#f7f7f7",
-        "heading": "Ein Duft für jede Facette Ihrer Persönlichkeit",
-        "subheading": "Entdecken Sie Parfums, die sich mit Ihrem Stil und Ihrer Ausstrahlung weiterentwickeln.",
+        "heading": "Zapach na każdą stronę Twojej osobowości",
+        "subheading": "Odkryj perfumy, które zmieniają się wraz z Twoim stylem i podkreślają Twój charakter.",
         "padding_top": 24,
         "padding_bottom": 24
       }
@@ -246,7 +246,7 @@
         "heading_CcxYji": {
           "type": "heading",
           "settings": {
-            "content": "Warum fühlen sich in der EU hergestellte Parfums anders an?",
+            "content": "Co wyróżnia perfumy produkowane w UE?",
             "heading_type": "h2",
             "font_size": 40,
             "mobile_font_size": 24,
@@ -256,7 +256,7 @@
         "text_gHnd8C": {
           "type": "text",
           "settings": {
-            "content": "<p>Hergestellt in EU-Anlagen mit Inhaltsstoffen und Zusammensetzungen, die den IFRA-Anforderungen entsprechen.</p><ul><li>Phthalatefrei</li><li>Ohne Parabene</li><li>Vegan</li><li>Nicht an Tieren getestet</li><li>IFRA-zertifiziert</li><li>Nach EU-Standards entwickelt</li><li>Keine bekannten hormonellen Störstoffe</li></ul><p>Wir stellen Parfums nach strengen europäischen Kosmetikstandards her</p>",
+            "content": "<p>Produkowane w zakładach na terenie UE, ze składników i według receptur zgodnych z wymogami IFRA.</p><ul><li>Bez ftalanów</li><li>Bez parabenów</li><li>Wegańskie</li><li>Nietestowane na zwierzętach</li><li>Z certyfikatem IFRA</li><li>Opracowane zgodnie z normami UE</li><li>Bez znanych substancji zaburzających gospodarkę hormonalną</li></ul><p>Tworzymy perfumy zgodnie z rygorystycznymi europejskimi normami kosmetycznymi</p>",
             "mobile_content": "",
             "font_size": 18,
             "text_color": "#000000"
@@ -329,9 +329,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/345.png",
-            "content": "<p>\"Ich bin zufrieden mit Tryscent. Der Duft riecht dem Original sehr ähnlich und hält gut. Die Verpackung ist ordentlich und die Flasche sieht schön aus. Insgesamt ist es eine großartige Option, wenn man einen Qualitätsduft zu einem vernünftigen Preis möchte.\"</p>",
+            "content": "<p>„Jestem zadowolona z Tryscent. Zapach jest bardzo podobny do oryginału i dobrze się utrzymuje. Opakowanie jest porządne, a flakon ładnie wygląda. To świetny wybór, jeśli szukasz dobrego zapachu w rozsądnej cenie.”</p>",
             "author": "Alina M",
-            "date": "vor 5 Monaten",
+            "date": "5 miesięcy temu",
             "rating": 5,
             "show_verified_badge": false,
             "product": ""
@@ -341,9 +341,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Aleksandra_Kosin.jpg",
-            "content": "<p>\"Dies ist mein erster Einkauf und ich bin begeistert. Ich werde nie wieder woanders Parfüm kaufen. Ich konnte nie einen Duft-Dupe finden, der wirklich authentisch und konsistent roch.\"</p>",
+            "content": "<p>„To moje pierwsze zakupy i jestem zachwycony. Już nigdy nie kupię perfum gdzie indziej. Wcześniej nie udało mi się znaleźć odpowiednika, który tak wiernie i równomiernie odtwarzałby zapach oryginału.”</p>",
             "author": "Killian P.",
-            "date": "vor 1 Tag",
+            "date": "1 dzień temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -353,9 +353,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/WhatsApp_Image_2026-09-09_at_8.35.55_AM.jpg",
-            "content": "<p>\"Großartiges Produkt! Super erschwingliche Alternative zu den Markenparfüms. Der Duft hält lange und man bekommt viel für sein Geld\"</p>",
+            "content": "<p>„Świetny produkt! Bardzo przystępna cenowo alternatywa dla markowych perfum. Zapach długo się utrzymuje i jest wart swojej ceny.”</p>",
             "author": "EM",
-            "date": "vor 4 Monaten",
+            "date": "4 miesiące temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -364,9 +364,9 @@
         "review_UPwGBF": {
           "type": "review",
           "settings": {
-            "content": "<p>\"Das ist der beste Duft, den ich seit sehr langer Zeit gerochen habe, die Noten machen mich wahnsinnig vor Glück. Ich werde diesen für immer in meiner Rotation behalten.\"</p>",
+            "content": "<p>„To najlepszy zapach, jaki czułam od bardzo dawna. Jego nuty wprawiają mnie w zachwyt. Na stałe zagości w mojej kolekcji.”</p>",
             "author": "Jenniffer W.",
-            "date": "vor 2 Tagen",
+            "date": "2 dni temu",
             "rating": 4,
             "show_verified_badge": true,
             "product": ""
@@ -376,9 +376,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/2026-07-02_16h41_42.png",
-            "content": "<p>\"Alle drei Düfte, die ich erhalten habe, sind sehr gut. Halten lange und riechen so wie sie sollten. Ich war nur mit der Zeit unzufrieden, die es dauerte, sie zu erhalten. Aber ehrlich gesagt habe ich eine zweite Bestellung aufgegeben, also erwarte einfach eine Wartezeit. Haha!<br/>\"</p>",
+            "content": "<p>„Wszystkie trzy otrzymane zapachy są bardzo dobre. Długo się utrzymują i pachną tak, jak powinny. Jedynie czas oczekiwania na dostawę mnie rozczarował. Ale szczerze mówiąc, złożyłam już drugie zamówienie, więc po prostu warto uzbroić się w cierpliwość. Haha!<br/>”</p>",
             "author": "Clara P.",
-            "date": "vor 2 Tagen",
+            "date": "2 dni temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -388,9 +388,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Chiara_Onorini_2.jpg",
-            "content": "<p>\"Ich habe vergeblich versucht, Düfte zu finden, die teuer riechen und lange halten. Die Passform ist genau das, wonach ich gesucht habe.\"</p>",
+            "content": "<p>„Długo bezskutecznie szukałam zapachów, które pachną luksusowo i długo się utrzymują. Te są dokładnie tym, czego szukałam.”</p>",
             "author": "Tiana N.",
-            "date": "vor 2 Tagen",
+            "date": "2 dni temu",
             "rating": 4,
             "show_verified_badge": true,
             "product": ""
@@ -400,9 +400,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/WhatsApp_Image_2026-09-09_at_8.35.58_AM.jpg",
-            "content": "<p>\"Ich mag es! Mag diesen Duft. Guter Duft\"</p>",
+            "content": "<p>„Podoba mi się! Lubię ten zapach. Naprawdę dobry.”</p>",
             "author": "Aleksandra M",
-            "date": "vor 7 Monaten",
+            "date": "7 miesięcy temu",
             "rating": 5,
             "show_verified_badge": false,
             "product": ""
@@ -412,9 +412,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/WhatsApp_Image_2026-09-09_at_8.35.58_AM_1.jpg",
-            "content": "<p>\"Ich war mir nicht sicher, was ich erwarten sollte, aber das hat mich wirklich beeindruckt. Riecht super frisch und ehrlich ziemlich nah an Aventus. Es hält gut und der Preis ist viel besser.\"</p>",
+            "content": "<p>„Nie wiedziałem, czego się spodziewać, ale ten zapach naprawdę zrobił na mnie wrażenie. Pachnie bardzo świeżo i szczerze mówiąc, jest zbliżony do Aventusa. Dobrze się utrzymuje, a cena jest znacznie lepsza.”</p>",
             "author": "Michael T.",
-            "date": "vor 2 Tagen",
+            "date": "2 dni temu",
             "rating": 4,
             "show_verified_badge": true,
             "product": ""
@@ -424,9 +424,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/2026-07-02_16h58_13.png",
-            "content": "<p>\"Einer meiner Lieblingsdüfte. Kam wirklich schnell zu mir. Riecht so schön.\"</p>",
+            "content": "<p>„Jeden z moich ulubionych zapachów. Dotarł naprawdę szybko. Przepięknie pachnie.”</p>",
             "author": "Alex W.",
-            "date": "vor 2 Tagen",
+            "date": "2 dni temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -436,9 +436,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/2026-07-02_16h49_01.png",
-            "content": "<p>\"Ich liiiebe diese Parfüms!!! Jedes einzelne, das ich bekommen habe, riecht göttlich. Einige würde ich sagen sind besser als das Original.\"</p>",
+            "content": "<p>„Uwieeelbiam te perfumy!!! Każde, które dostałam, pachną obłędnie. Niektóre są moim zdaniem nawet lepsze od oryginału.”</p>",
             "author": "Christine N.",
-            "date": "vor 5 Tagen",
+            "date": "5 dni temu",
             "rating": 4,
             "show_verified_badge": false,
             "product": ""
@@ -448,9 +448,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/WhatsApp_Image_2026-09-09_at_8.35.37_AM.jpg",
-            "content": "<p>\"Zuerst war ich besorgt, dass sich die Lieferung etwas verzögert hat, aber als ich sie erhalten habe, war ich erstaunt über den Geruch, sobald er sich gesetzt hat, meine Güte, es ist einfach fantastisch.\"</p>",
+            "content": "<p>„Początkowo martwiłem się niewielkim opóźnieniem dostawy. Ale gdy perfumy dotarły i zapach rozwinął się na skórze, byłem zachwycony. Po prostu rewelacja!”</p>",
             "author": "Lionel M.",
-            "date": "vor 7 Tagen",
+            "date": "7 dni temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -460,9 +460,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/WhatsApp_Image_2026-09-09_at_8.35.55_AM_1.jpg",
-            "content": "<p>\"Es riecht sehr schön, aber hält nicht so lange wie es sollte\"</p>",
+            "content": "<p>„Pachnie bardzo ładnie, ale nie utrzymuje się tak długo, jak powinien.”</p>",
             "author": "Terence M.",
-            "date": "vor 2 Monaten",
+            "date": "2 miesiące temu",
             "rating": 5,
             "show_verified_badge": false,
             "product": ""
@@ -472,9 +472,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Anastasiia_Komisarova.jpg",
-            "content": "<p>\"Ist perfekt und wunderschön 🥰🥰🥰\"</p>",
+            "content": "<p>„Idealny i przepiękny 🥰🥰🥰”</p>",
             "author": "Lidis A.",
-            "date": "vor 2 Monaten",
+            "date": "2 miesiące temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -484,9 +484,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Carolina_Maresca_3.png",
-            "content": "<p>\"Riecht sehr gut, es hat mich fasziniert\"</p>",
+            "content": "<p>„Pachnie bardzo dobrze, oczarował mnie.”</p>",
             "author": "Castillo B.",
-            "date": "vor 3 Monaten",
+            "date": "3 miesiące temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -496,9 +496,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/2026-07-02_16h34_24.png",
-            "content": "<p>\"Das Produkt kam schön verpackt an. Das Parfüm war nicht kaputt, ist nicht ausgelaufen und war in gutem Zustand. Der Duft ist perfekt und roch nicht schlecht. Ich liebe es, hohe Qualität\"</p>",
+            "content": "<p>„Produkt dotarł pięknie zapakowany. Flakon był cały, nic się nie wylało i wszystko było w dobrym stanie. Zapach jest idealny, bez żadnych nieprzyjemnych nut. Uwielbiam go, świetna jakość.”</p>",
             "author": "Roxanne S",
-            "date": "vor 5 Monaten",
+            "date": "5 miesięcy temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -508,9 +508,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Ana_Gandarez.jpg",
-            "content": "<p>\"Perfekt duftende Parfüms, die Düfte halten sehr lange, hervorragende Qualität\"</p>",
+            "content": "<p>„Przepięknie pachnące perfumy, bardzo trwałe zapachy i doskonała jakość.”</p>",
             "author": "Kamila G.",
-            "date": "vor 3 Monaten",
+            "date": "3 miesiące temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -520,9 +520,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Celia_Sahki.jpg",
-            "content": "<p>\"Riecht genau wie Luna Rossa Carbon, aber viel günstiger. Kann nicht glauben, wie nah es dran ist.\"</p>",
+            "content": "<p>„Pachnie dokładnie jak Luna Rossa Carbon, ale kosztuje znacznie mniej. Nie mogę uwierzyć, jak bardzo jest podobny.”</p>",
             "author": "Robinson D.",
-            "date": "vor 4 Monaten",
+            "date": "4 miesiące temu",
             "rating": 4,
             "show_verified_badge": false,
             "product": ""
@@ -532,9 +532,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/WhatsApp_Image_2026-09-09_at_8.33.40_AM.jpg",
-            "content": "<p>\"Das ist die Art von Duft, die einen gepflegt fühlen lässt. Nicht überwältigend, genau richtig. 👌\"</p>",
+            "content": "<p>„To taki zapach, dzięki któremu czujesz się zadbany. Nie przytłacza, jest w sam raz. 👌”</p>",
             "author": "Michael R.",
-            "date": "vor 4 Monaten",
+            "date": "4 miesiące temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -544,9 +544,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Carolina_Maresca_2.png",
-            "content": "<p>\"Ich trage Creed Aventus seit Jahren, aber das ist der nächste Dupe, den ich gefunden habe – und das zu einem Bruchteil des Preises. Die Ananas-Vanille-Kombination ist perfekt getroffen.\"</p>",
+            "content": "<p>„Od lat używam Creed Aventus, ale to najbardziej zbliżony odpowiednik, jaki udało mi się znaleźć — za ułamek ceny. Połączenie ananasa i wanilii jest idealnie odwzorowane.”</p>",
             "author": "Alvarez P.",
-            "date": "vor 4 Monaten",
+            "date": "4 miesiące temu",
             "rating": 4,
             "show_verified_badge": true,
             "product": ""
@@ -556,9 +556,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/beatricedcastle_2.jpg",
-            "content": "<p>\"Das Produkt kam schön verpackt an. Das Parfüm war nicht kaputt, ist nicht ausgelaufen und war in gutem Zustand. Der Duft ist perfekt und roch nicht schlecht. Ich liebe es, hohe Qualität\"</p>",
+            "content": "<p>„Produkt dotarł pięknie zapakowany. Flakon był cały, nic się nie wylało i wszystko było w dobrym stanie. Zapach jest idealny, bez żadnych nieprzyjemnych nut. Uwielbiam go, świetna jakość.”</p>",
             "author": "Anne E.",
-            "date": "vor 4 Monaten",
+            "date": "4 miesiące temu",
             "rating": 4,
             "show_verified_badge": true,
             "product": ""
@@ -568,9 +568,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/2026-07-02_16h57_29.png",
-            "content": "<p>\"Wunderschöner Duft. Langanhaltend. <br/>Süß und warm. Gute schnelle Lieferung. <br/>Werde wieder kaufen.\"</p>",
+            "content": "<p>„Przepiękny zapach. Długo się utrzymuje. <br/>Słodki i ciepły. Sprawna, szybka dostawa. <br/>Kupię ponownie.”</p>",
             "author": "Lucy R",
-            "date": "vor 4 Monaten",
+            "date": "4 miesiące temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -580,9 +580,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Camila_Sena_Oliveira.jpg",
-            "content": "<p>\"Ihre Produkte sind von guter Qualität zu einem sehr erschwinglichen Preis.\"</p>",
+            "content": "<p>„Ich produkty są dobrej jakości i mają bardzo przystępne ceny.”</p>",
             "author": "Amanda G",
-            "date": "vor 5 Monaten",
+            "date": "5 miesięcy temu",
             "rating": 4,
             "show_verified_badge": true,
             "product": ""
@@ -592,9 +592,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/WhatsApp_Image_2026-09-09_at_8.35.50_AM.jpg",
-            "content": "<p>\"Tolle Düfte, tolle Produkte, keine Probleme.\"</p>",
+            "content": "<p>„Świetne zapachy, świetne produkty, żadnych problemów.”</p>",
             "author": "Alex S.",
-            "date": "vor 6 Monaten",
+            "date": "6 miesięcy temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -604,9 +604,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/WhatsApp_Image_2026-09-09_at_8.35.36_AM_1.jpg",
-            "content": "<p>\"Vom Service bis zum Produkt war die Erfahrung phänomenal. Kaufe gerne jederzeit wieder.\"</p>",
+            "content": "<p>„Od obsługi po sam produkt — wszystko było rewelacyjne. Z przyjemnością kupię ponownie.”</p>",
             "author": "Benjamin M",
-            "date": "vor 5 Monaten",
+            "date": "5 miesięcy temu",
             "rating": 5,
             "show_verified_badge": false,
             "product": ""
@@ -616,9 +616,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Daria_Kononenko_3.jpg",
-            "content": "<p>\"Omg ich liebte es Wow! Genau wie das Original und es hält den ganzen Tag!❤️‍🔥❤️‍🔥\"</p>",
+            "content": "<p>„O rany, uwielbiam! Wow! Dokładnie jak oryginał, a zapach utrzymuje się cały dzień!❤️‍🔥❤️‍🔥”</p>",
             "author": "YT",
-            "date": "vor 4 Monaten",
+            "date": "4 miesiące temu",
             "rating": 4,
             "show_verified_badge": true,
             "product": ""
@@ -628,9 +628,9 @@
           "type": "review",
           "settings": {
             "review_image": "shopify://shop_images/Claudia_Martins_4.png",
-            "content": "<p>\"Der Duft dieses Parfüms ist super reichhaltig und ich liebe wie schön die Flasche und ihr Design ist.. Ich würde es wirklich wieder verwenden.\"</p>",
+            "content": "<p>„Zapach tych perfum jest niezwykle bogaty, a flakon i jego design są przepiękne. Z przyjemnością sięgnę po nie ponownie.”</p>",
             "author": "Eliannys Y",
-            "date": "vor 7 Monaten",
+            "date": "7 miesięcy temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -639,9 +639,9 @@
         "review_EniFK9": {
           "type": "review",
           "settings": {
-            "content": "<p>\"Tolles Produkt, riecht fantastisch. Ich bekomme immer Leute, die mir Fragen zu meinem Duft stellen und was ich benutze\"</p>",
+            "content": "<p>„Świetny produkt, pachnie fantastycznie. Ludzie ciągle pytają mnie, czym pachnę i jakich perfum używam.”</p>",
             "author": "Damario R",
-            "date": "vor 7 Monaten",
+            "date": "7 miesięcy temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -650,9 +650,9 @@
         "review_r8Gi8i": {
           "type": "review",
           "settings": {
-            "content": "<p>\"Tolle Marke und tolle Produkte!\"</p>",
+            "content": "<p>„Świetna marka i świetne produkty!”</p>",
             "author": "Juliana B",
-            "date": "vor 4 Monaten",
+            "date": "4 miesiące temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -661,9 +661,9 @@
         "review_LRkiUH": {
           "type": "review",
           "settings": {
-            "content": "<p>\"Nach einer kleinen Verzögerung habe ich endlich meine Tryscent-Parfüms und sie sind genau richtig! Ich kann fast nicht glauben, wie genau sie den Originalen entsprechen, zur Referenz habe ich \"Ylang Ylang Rose Jasmine\" und \"Aldehydes Rose Sandalwood\" bekommen, es sind wirklich schöne Düfte\"</p>",
+            "content": "<p>„Po niewielkim opóźnieniu wreszcie mam swoje perfumy Tryscent i są dokładnie takie, jak trzeba! Trudno uwierzyć, jak wiernie odwzorowują oryginały. Dla jasności: zamówiłam „Ylang Ylang Rose Jasmine” i „Aldehydes Rose Sandalwood”. To naprawdę piękne zapachy.”</p>",
             "author": "Gabriella K",
-            "date": "vor 7 Monaten",
+            "date": "7 miesięcy temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -672,9 +672,9 @@
         "review_Vb9HW7": {
           "type": "review",
           "settings": {
-            "content": "<p>\"Sehr gute Marke, ich liebe die Verpackung und das Aroma\"</p>",
+            "content": "<p>„Bardzo dobra marka, uwielbiam opakowanie i zapach.”</p>",
             "author": "Rosa B",
-            "date": "vor 7 Monaten",
+            "date": "7 miesięcy temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -683,9 +683,9 @@
         "review_JdiNyt": {
           "type": "review",
           "settings": {
-            "content": "<p>\"Ich bin ein großer Kölnisch-Wasser-Fan, also bin ich ein wählerischer Typ, wenn es um Klone geht, aber Tryscent hat mich komplett überzeugt. Ich habe ursprünglich den Sauvage-Klon auf der Homepage bestellt und den Duft beim Sprühen sofort erkannt. Ich besitze jetzt insgesamt 4 Tryscent-Düfte und ich liebe sie alle. Habe dank ihrer Bundle-Angebote 3 weitere auf dem Weg. Wenn du etwas willst, das mit kleinem Budget funktioniert und Designer-Leistung liefert, könnte ich sie nicht mehr empfehlen.\"</p>",
+            "content": "<p>„Jestem wielkim fanem wód kolońskich, więc mam wysokie wymagania wobec odpowiedników, ale Tryscent całkowicie mnie przekonało. Najpierw zamówiłem ze strony odpowiednik Sauvage i rozpoznałem zapach od pierwszego psiknięcia. Mam teraz 4 zapachy Tryscent i uwielbiam je wszystkie. Dzięki ofertom zestawów kolejne 3 są już w drodze. Jeśli szukasz jakości markowych perfum w niewielkim budżecie, zdecydowanie polecam.”</p>",
             "author": "Sean P",
-            "date": "vor 4 Monaten",
+            "date": "4 miesiące temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -694,9 +694,9 @@
         "review_bNVhH6": {
           "type": "review",
           "settings": {
-            "content": "<p>\"Ich bin sehr zufrieden mit dem Parfüm von dieser Marke, sie haben einen so schönen Duft wie das Original und günstiger, ich werde es definitiv wieder kaufen\"</p>",
+            "content": "<p>„Jestem bardzo zadowolona z perfum tej marki. Pachną równie pięknie jak oryginał, a kosztują mniej. Na pewno kupię ponownie.”</p>",
             "author": "Angel",
-            "date": "vor 8 Monaten",
+            "date": "8 miesięcy temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -705,9 +705,9 @@
         "review_PiLjha": {
           "type": "review",
           "settings": {
-            "content": "<p>\"Diesen Sommer bekam ich eine Probe von Creed Aventus als Geschenk und ich mochte es wirklich, aber ich konnte das Original nicht kaufen, also suchte ich nach Dupes. Ich fand Tryscent und bestellte \"Pineapple Smoke Vanilla\", es kam in etwa einer Woche zu mir und es riecht wirklich gut, auch nah an meiner Originalprobe, sehr zufrieden mit dem Produkt, besonders für den Preis\"</p>",
+            "content": "<p>„Tego lata dostałem w prezencie próbkę Creed Aventus i bardzo mi się spodobała, ale nie mogłem sobie pozwolić na oryginał, więc zacząłem szukać odpowiedników. Trafiłem na Tryscent i zamówiłem „Pineapple Smoke Vanilla”. Perfumy dotarły w około tydzień, pachną naprawdę dobrze i są bardzo zbliżone do mojej próbki oryginału. Jestem bardzo zadowolony, szczególnie w tej cenie.”</p>",
             "author": "Hwan H",
-            "date": "vor 8 Monaten",
+            "date": "8 miesięcy temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -716,9 +716,9 @@
         "review_AEQxcH": {
           "type": "review",
           "settings": {
-            "content": "<p>\"Ich habe ihre 7,5ml Proben-Düfte ausprobiert und zu meiner Überraschung mochte ich sie. Habe eine 2. Bestellung aufgegeben, aber dieses Mal habe ich die größeren Flaschen genommen. Ich muss sagen, ich bekam meine Bestellungen pünktlich und sie lieferten die Düfte, die ich mag!\"</p>",
+            "content": "<p>„Wypróbowałam próbki ich zapachów o pojemności 7,5 ml i ku mojemu zaskoczeniu bardzo mi się spodobały. Złożyłam drugie zamówienie, tym razem na większe flakony. Muszę przyznać, że zamówienia dotarły na czas, a zapachy są dokładnie takie, jakie lubię!”</p>",
             "author": "Lauri E",
-            "date": "vor 8 Monaten",
+            "date": "8 miesięcy temu",
             "rating": 5,
             "show_verified_badge": true,
             "product": ""
@@ -764,9 +764,9 @@
       "name": "Massive Review",
       "settings": {
         "background_color": "#fcfbf9",
-        "heading": "Kundenrezensionen",
-        "review_text": "4,7/5 Sternen basierend auf über 10.400 Bewertungen",
-        "button_text": "Weitere Bewertungen anzeigen",
+        "heading": "Opinie klientów",
+        "review_text": "4,7/5 na podstawie ponad 10 400 opinii",
+        "button_text": "Zobacz więcej opinii",
         "button_link": "",
         "padding_top": 72,
         "padding_bottom": 72
@@ -778,36 +778,36 @@
         "collapsible_row_b44n9F": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Warum sind Ihre Parfüms so erschwinglich?",
+            "heading": "Dlaczego Wasze perfumy są tak przystępne cenowo?",
             "icon": "none",
-            "row_content": "<p>Wir konzentrieren uns auf den Duftinhalt. Keinluxuriöses Flakon, keinebesondere Verpackung, keineteuren Läden & keineteuren Influencerdeals ermöglichen dir luxuriös zu riechen, ohne das Budget zu sprengen</p>",
+            "row_content": "<p>Skupiamy się na samym zapachu. Nie inwestujemy w luksusowe flakony, wyszukane opakowania, drogie lokale ani kosztowne współprace z influencerami. Dzięki temu możesz pachnieć luksusowo bez nadwyrężania budżetu.</p>",
             "page": ""
           }
         },
         "collapsible_row_rCVDnP": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Ist es ein Eau de Toilette oder ein Eau de Parfum?",
+            "heading": "Czy to woda toaletowa czy perfumowana?",
             "icon": "none",
-            "row_content": "<p>Unsere Parfums liegen an der Grenze zwischen Eau de Parfum und Extrait de Parfum und enthalten eine Konzentration von 19% bis 21% Duftölen.<br/>Eau de Toilette (EDT) enthält 5% bis 8%.<br/>Extrait de Parfum hingegen 20% bis 40%.</p><p>Die perfekte Konzentration, die dafür sorgt, dass der Duft mindestens 8 bis über 12 Stunden anhält — und gleichzeitig nicht zu intensiv oder aufdringlich ist.</p>",
+            "row_content": "<p>Nasze perfumy łączą cechy wody perfumowanej (Eau de Parfum) i ekstraktu perfum (Extrait de Parfum), zawierając od 19% do 21% olejków zapachowych.<br/>Woda toaletowa (EDT) zawiera ich od 5% do 8%.<br/>Ekstrakt perfum zawiera natomiast od 20% do 40%.</p><p>To idealne stężenie, dzięki któremu zapach utrzymuje się od 8 do ponad 12 godzin, a jednocześnie nie jest zbyt intensywny ani przytłaczający.</p>",
             "page": ""
           }
         },
         "collapsible_row_rNbx6p": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Wie lange hält das Parfüm?",
+            "heading": "Jak długo utrzymuje się zapach?",
             "icon": "none",
-            "row_content": "<p>Die Haltbarkeit des Parfüms ist individuell unterschiedlich und beträgt dank unserer perfekt abgestimmten Duftkonzentration zwischen <strong>8 und 12 Stunden.</strong></p><p><br/>Das Parfüm sollte auf die Haut und nicht auf die Kleidung aufgetragen werden, um die Haltbarkeit zu verlängern. </p><p>Nach einiger Zeit entwickelt sich der Duft weiter und entfaltet seine tieferen Basisnoten.</p>",
+            "row_content": "<p>Trwałość perfum zależy od indywidualnych cech skóry. Dzięki starannie dobranemu stężeniu olejków zapach utrzymuje się od <strong>8 do 12 godzin.</strong></p><p><br/>Aby przedłużyć trwałość zapachu, nakładaj perfumy na skórę, a nie na ubrania. </p><p>Z czasem zapach rozwija się, odsłaniając głębsze nuty bazy.</p>",
             "page": ""
           }
         },
         "collapsible_row_irweNa": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Was ist ein Duftzwilling?",
+            "heading": "Czym jest odpowiednik perfum?",
             "icon": "none",
-            "row_content": "<p>Es ist ein Eau de Parfum mit einem Duftölanteil von bis zu 19 %, inspiriert von teuren Luxusparfüms. Es bedeutet, dass der Inhalt des Flakons zwischen 19 % und 21 % Parfümöl enthält. Designerflakons enthalten zwischen 10 und 15 % Parfümöl für Eau de Toilette.</p>",
+            "row_content": "<p>To woda perfumowana o zawartości olejków zapachowych do 19%, inspirowana drogimi, luksusowymi perfumami. Oznacza to, że zawartość flakonu obejmuje od 19% do 21% olejków zapachowych. Markowe wody toaletowe zawierają od 10% do 15% olejków zapachowych.</p>",
             "page": ""
           }
         },
@@ -815,9 +815,9 @@
           "type": "collapsible_row",
           "disabled": true,
           "settings": {
-            "heading": "Was bedeutet ein Duftölanteil von 19% bis 21%?",
+            "heading": "Co oznacza stężenie olejków zapachowych od 19% do 21%?",
             "icon": "none",
-            "row_content": "<p>Die meisten im Handel erhältlichen Eau de Parfums enthalten zwischen 16% und 21% Duftöl. Unsere Kompositionen enthalten zwischen 19% und 21% Duftöl und gehören damit zur Spitze hochwertiger Duftkompositionen.</p>",
+            "row_content": "<p>Większość dostępnych na rynku wód perfumowanych zawiera od 16% do 21% olejków zapachowych. Nasze kompozycje zawierają ich od 19% do 21%, co plasuje je wśród kompozycji zapachowych najwyższej jakości.</p>",
             "page": ""
           }
         }

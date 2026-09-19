@@ -43,14 +43,14 @@
               <a href="{{ product.url }}" class="aspect-square rounded-lg overflow-hidden bg-[#FAF8F3] mb-3 relative">
                 <img
                   src="{{ product.featured_image | image_url: width: 300 }}"
-                  alt="{{ product.title }}"
+                  alt="{% render 'polish-store-text', text: product.title %}"
                   height="216"
                   width="216"
                   class="w-full h-full object-cover">
               </a>
-              <p class="text-xs text-gray-500 m-0 mb-1 line-clamp-1">Inspiriert von: {{ product.metafields.custom.inspired_by.value.name }}</p>
+              <p class="text-xs text-gray-500 m-0 mb-1 line-clamp-1">Inspiracja: {{ product.metafields.custom.inspired_by.value.name }}</p>
               <h3 class="text-sm font-semibold m-0 mb-2 line-clamp-1">
-                <a class="text-black no-underline" href="{{ product.url }}">{{ product.title }}</a>
+                <a class="text-black no-underline" href="{{ product.url }}">{% render 'polish-store-text', text: product.title %}</a>
               </h3>
               <div class="flex items-center gap-2 mb-2">
                 <span class="text-sm font-bold text-gray-900">{{ selected_variant.price | money }}</span>

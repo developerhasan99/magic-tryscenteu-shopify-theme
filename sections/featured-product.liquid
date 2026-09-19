@@ -105,7 +105,7 @@
                 {%- when 'title' -%}
                   <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
                     {%- if product.title != blank -%}
-                      {{ product.title | escape }}
+                      {% render 'polish-store-text', text: product.title %}
                     {%- else -%}
                       {{ 'onboarding.product_title' | t }}
                     {%- endif -%}

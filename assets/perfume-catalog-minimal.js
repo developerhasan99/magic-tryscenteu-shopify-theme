@@ -1344,7 +1344,7 @@ window.NederlandseParfumCatalogus = {
       afbeelding: "https://cdn.shopify.com/s/files/1/0762/7662/9763/files/340Mcfixed.webp?v=1773222333",
       topnoten: ["Safraan", "Grapefruit"],
       hartnoten: ["Roos", "Salie", "Oud"],
-      basisnoten: ["Edle Hölzer", "Labdanum", "Tonkaboon", "Burshine"],
+      basisnoten: ["Szlachetne drewno", "Labdanum", "Tonkaboon", "Burshine"],
       beschrijving: "Een diepzinnige, mysterieuze geur voor mannen die intensiteit en elegantie zoeken. De opening met saffraan en grapefruit combineert kruidige warmte met frisse levendigheid. In het hart ontvouwen roos, salie en oud zich, wat de geur een fascinerende, licht rokerige toets geeft. De basis van edele houtsoorten, labdanum en tonkaboon zorgt voor een warme, langdurige en sensuele uitstraling.",
       jaar: "2024",
       geslacht: "Mannelijk",

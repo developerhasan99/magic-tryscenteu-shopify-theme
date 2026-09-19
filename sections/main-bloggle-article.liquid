@@ -114,6 +114,29 @@
     {% capture commentButton %} Invia {% endcapture %}
     {% capture commentSuccessMessage %} Il tuo commento è stato aggiunto con successo {% endcapture %}
     {% capture commentErrorMessage %} Si è verificato un errore durante l'invio del tuo commento. {% endcapture %}
+{% elsif localization.language.iso_code == "pl" or localization.language.iso_code contains "pl-" %}
+    {% capture goback %} Wróć {% endcapture %}
+    {% capture lastArticles %} Najnowsze artykuły {% endcapture %}
+    {% capture author %} Autor: {% endcapture %}
+    {% capture datePublished %}  {% endcapture %}
+    {% capture dateModified %}  {% endcapture %}
+    {% capture timeToRead %} Czas czytania {% endcapture %}
+    {% capture productSideBar %} Powiązany produkt {% endcapture %}
+    {% capture ctaText %} Zobacz produkt {% endcapture %}
+    {% capture commentsListTitle %} Komentarze {% endcapture %}
+    {% capture commentsTitle %} Dodaj komentarz {% endcapture %}
+    {% capture commentNamePlaceholder %} Jan Kowalski {% endcapture %}
+    {% capture commentNameLabel %} Twoje imię {% endcapture %}
+    {% capture commentNameError %} Podaj imię {% endcapture %}
+    {% capture commentEmailPlaceholder %} jan@email.com {% endcapture %}
+    {% capture commentEmailLabel %} Twój adres e-mail {% endcapture %}
+    {% capture commentEmailError %} Podaj poprawny adres e-mail {% endcapture %}
+    {% capture commentMessagePlaceholder %} Twój komentarz {% endcapture %}
+    {% capture commentMessageLabel %} Twój komentarz {% endcapture %}
+    {% capture commentMessageError %} Wpisz komentarz {% endcapture %}
+    {% capture commentButton %} Wyślij {% endcapture %}
+    {% capture commentSuccessMessage %} Twój komentarz został dodany {% endcapture %}
+    {% capture commentErrorMessage %} Wystąpił błąd podczas wysyłania komentarza. {% endcapture %}
 {% elsif localization.language.iso_code == "de" or localization.language.iso_code contains "de-" %}
     {% capture goback %} Geh zurück {% endcapture %}
     {% capture lastArticles %} Aktuelle Nachrichten {% endcapture %}

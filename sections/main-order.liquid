@@ -61,9 +61,9 @@
               >
                 <div>
                   {%- if line_item.url != blank -%}
-                    <a href="{{ line_item.url }}">{{ line_item.title | escape }}</a>
+                    <a href="{{ line_item.url }}">{% render 'polish-store-text', text: line_item.title %}</a>
                   {%- else -%}
-                    <p>{{ line_item.title | escape }}</p>
+                    <p>{% render 'polish-store-text', text: line_item.title %}</p>
                   {%- endif -%}
                   {%- assign property_size = line_item.properties | size -%}
                   {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}

@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="small-hide">
-        <a href="{{ item.url }}" class="variant-item__name h4 break">{{ item.title | escape }}</a>
+        <a href="{{ item.url }}" class="variant-item__name h4 break">{% render 'polish-store-text', text: item.title %}</a>
       </div>
     </div>
   </td>

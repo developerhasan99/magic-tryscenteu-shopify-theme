@@ -22,7 +22,7 @@
       "disabled": false,
       "settings": {
         "review_text": "",
-        "button_text": "Für sie",
+        "button_text": "Dla niej",
         "background_image": "shopify://shop_images/MAGYX_Site_Header.webp",
         "mobile_background_image": "shopify://shop_images/MAGYX_Site_Header_Mobile_B.webp",
         "secondary_button_link": "shopify://collections/top-sellers-men",
@@ -37,7 +37,7 @@
     },
     "popular_products_RyfRNL": {
       "settings": {
-        "show_all_button_text": "Alle anzeigen"
+        "show_all_button_text": "Zobacz wszystkie"
       },
       "blocks": {}
     }

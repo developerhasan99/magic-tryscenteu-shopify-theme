@@ -14,36 +14,36 @@
       <div class="p-3 pt-5 border-0 border-b border-solid border-[#e3e8e5]">
         <h2 class="text-lg font-bold text-gray-900 my-0 text-center tracking-normal">
           <span x-show="$store.bundleBuilder.selectedProducts.length === $store.bundleBuilder.bundleLength">
-            Dein Bundle ist fertig!
+            Twój zestaw jest gotowy!
           </span>
           <span x-show="$store.bundleBuilder.selectedProducts.length < $store.bundleBuilder.bundleLength">
-            <span>Wähle noch </span>
+            <span>Wybierz jeszcze: </span>
             <span x-text="$store.bundleBuilder.bundleLength - $store.bundleBuilder.selectedProducts.length"></span>
             <span x-show="($store.bundleBuilder.bundleLength - $store.bundleBuilder.selectedProducts.length) === 1">
-              Duft aus
+              zapach
             </span>
             <span x-show="($store.bundleBuilder.bundleLength - $store.bundleBuilder.selectedProducts.length) > 1">
-              Düfte aus
+              <span x-text="(($store.bundleBuilder.bundleLength - $store.bundleBuilder.selectedProducts.length) % 10 >= 2 && ($store.bundleBuilder.bundleLength - $store.bundleBuilder.selectedProducts.length) % 10 <= 4 && !(($store.bundleBuilder.bundleLength - $store.bundleBuilder.selectedProducts.length) % 100 >= 12 && ($store.bundleBuilder.bundleLength - $store.bundleBuilder.selectedProducts.length) % 100 <= 14)) ? 'zapachy' : 'zapachów'"></span>
             </span>
           </span>
         </h2>
-        <p class="my-0 text-center text-sm text-[#6b7280]">Stelle dein Bundle mit
-          <span x-text="$store.bundleBuilder.bundleLength"></span> Flaschen zusammen</p>
+        <p class="my-0 text-center text-sm text-[#6b7280]">Liczba flakonów w Twoim zestawie:
+          <span x-text="$store.bundleBuilder.bundleLength"></span></p>
       </div>
       <div x-show="$store.bundleBuilder.selectedProducts.length < $store.bundleBuilder.bundleLength" class="px-3 py-2">
         <div class="flex gap-1.5">
           <button
             @click="$store.bundleBuilder.activeCategory = 'All'"
             :class="$store.bundleBuilder.activeCategory === 'All' ? 'border-[#22613A] bg-[#22613A] text-white hover:!text-white' : 'bg-white border-gray-200'"
-            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#22613A] hover:border-[#22613A]">Bestseller</button>
+            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#22613A] hover:border-[#22613A]">Bestsellery</button>
           <button
             @click="$store.bundleBuilder.activeCategory = 'fuer-maenner'"
             :class="$store.bundleBuilder.activeCategory === 'fuer-maenner' ? 'border-[#22613A] bg-[#22613A] text-white hover:!text-white' : 'bg-white border-gray-200'"
-            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#22613A] hover:border-[#22613A]">Herren</button>
+            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#22613A] hover:border-[#22613A]">Dla mężczyzn</button>
           <button
             @click="$store.bundleBuilder.activeCategory = 'fuer-frauen'"
             :class="$store.bundleBuilder.activeCategory === 'fuer-frauen' ? 'border-[#22613A] bg-[#22613A] text-white hover:!text-white' : 'bg-white border-gray-200'"
-            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#22613A] hover:border-[#22613A]">Damen</button>
+            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#22613A] hover:border-[#22613A]">Dla kobiet</button>
         </div>
       </div>
       <div class="px-3 pb-3">
@@ -53,7 +53,7 @@
             </div>
             <input
             type="text"
-            placeholder="Suchen..."
+            placeholder="Szukaj..."
             x-model="$store.bundleBuilder.searchText"
             class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white border-gray-200 focus:outline-none focus:border-[#22613A] focus:shadow-none focus:border-2">
         </div>
@@ -76,7 +76,7 @@
             </svg>
             <span class="sr-only">{{ 'accessibility.loading' | t }}</span>
           </div>
-          <p class="font-semibold text-lg tracking-normal">Weiterleitung zur Kasse...</p>
+          <p class="font-semibold text-lg tracking-normal">Przekierowanie do kasy...</p>
         </div>
       </template>
       <template x-if="$store.bundleBuilder.selectedProducts.length < $store.bundleBuilder.bundleLength">
@@ -117,7 +117,7 @@
                       :alt="product.inspiration_name"
                       width="35"
                       height="35">
-                      <p class="text-xs my-0 shrink-0 text-[#6b7280]">Inspiriert von:</p>
+                      <p class="text-xs my-0 shrink-0 text-[#6b7280]">Inspiracja:</p>
                       <h4 x-text="product.inspiration_name" class="text-xs font-semibold my-0 line-clamp-1 inspiration_heading"></h4>
                   </div>
                 </div>

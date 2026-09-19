@@ -24,8 +24,8 @@
 {% if product.variants.size > 1 %}
   {% comment %} Variant Selector {% endcomment %}
   <div class="flex justify-between items-center mb-3 !mt-6">
-    <h2 class="m-0 text-sm md:text-base font-semibold">Größe auswählen:</h2>
-    <div class="text-xs md:text-sm italic text-gray-500">80 % unserer Kunden kaufen 50 ml oder mehr</div>
+    <h2 class="m-0 text-sm md:text-base font-semibold">Wybierz pojemność:</h2>
+    <div class="text-xs md:text-sm italic text-gray-500">80% naszych klientów wybiera 50 ml lub więcej</div>
   </div>
 
   <div class="flex gap-3" id="variant-selector">
@@ -41,7 +41,7 @@
           <div class="text-base font-semibold">{{ variant.title }}</div>
         </div>
         {% if variant.title contains '50' %}
-          <span class="text-xs italic text-white rounded absolute -top-2.5 left-1/2 [transform:translateX(-50%)] bg-[#c8202f] px-2 py-0.5">Beliebt</span>
+          <span class="text-xs italic text-white rounded absolute -top-2.5 left-1/2 [transform:translateX(-50%)] bg-[#c8202f] px-2 py-0.5">Popularny</span>
         {% endif %}
         {% if variant.title contains '100' %}
           <span class="text-xs italic text-white rounded absolute -top-2.5 left-1/2 [transform:translateX(-50%)] bg-[#22613a] px-2 py-0.5">Bestseller</span>
@@ -214,9 +214,7 @@
 {% else %}
   <div class="!my-6">
     <p class="my-0 text-center font-semibold tracking-normal">
-      Geliefert nach
-      <span class="shipping_location">Deutschland</span>
-      in 5 Werktagen.
+      Dostawa w ciągu 5 dni roboczych.
     </p>
   </div>
 {% endif %}
@@ -230,8 +228,8 @@
       width="40"
       height="40" />
     <div class="text-slate-900">
-      <strong class="font-semibold">Teste es 60 Tage lang – völlig risikofrei.</strong>
-      <div class="[display:none] md:block">Sollten Sie nicht absolut begeistert sein, erstatten wir Ihnen den vollen Betrag zurück!</div>
+      <strong class="font-semibold">Wypróbuj przez 60 dni — bez ryzyka.</strong>
+      <div class="[display:none] md:block">Jeśli produkt nie spełni Twoich oczekiwań, zwrócimy Ci pełną kwotę!</div>
     </div>
   </div>
 </div>

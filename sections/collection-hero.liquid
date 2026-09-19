@@ -11,7 +11,7 @@
         </p>
       {% endif %}
       <h1 class="mb-3 whitespace-nowrap text-[clamp(28px,2.8vw,44px)] font-normal leading-[1.1] tracking-[-0.015em] text-[#14181c]" style="font-family: Georgia, 'Times New Roman', serif;">
-        {{ collection.title }}
+        {% render 'polish-store-text', text: collection.title %}
       </h1>
       <p class="max-w-[400px] text-[clamp(15px,1.05vw,17px)] leading-[1.5] text-[#14181c]">
         {{ collection.description }}
@@ -33,7 +33,7 @@
         "type": "text",
         "id": "rating_text",
         "label": "Rating badge text",
-        "default": "Verifiziert von über 10.000 Duftliebhabern"
+        "default": "Sprawdzone przez ponad 10 000 miłośników zapachów"
       }
     ],
     "presets": [

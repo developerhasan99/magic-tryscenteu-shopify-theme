@@ -18,13 +18,13 @@
           "type": "text",
           "settings": {
             "heading": "Tryscent",
-            "subtext": "<p>Tryscent  hochwertige Duftalternativen zu einem fairen Preis. Wir helfen Ihnen, Ihren persönlichen Lieblingsduft zu finden.</p>"
+            "subtext": "<p>Tryscent — wysokiej jakości odpowiedniki perfum w uczciwej cenie. Pomożemy Ci znaleźć Twój ulubiony zapach.</p>"
           }
         },
         "link_list_Fhdw8K": {
           "type": "link_list",
           "settings": {
-            "heading": "Links",
+            "heading": "Przydatne linki",
             "menu": "information"
           }
         },
@@ -32,7 +32,7 @@
           "type": "text",
           "settings": {
             "heading": "Kontakt",
-            "subtext": "<p><a href=\"https://www.imsig.pl/krs/0001204680/sprawozdania\" target=\"_blank\">MAGYX SP. Z O.O.</a></p><p>ul. Marszałka Józefa Piłsudskiego 31A/15, 72-300 Gryfice, Poland.</p><p>Phone: +48 500 806 058 </p><p><br/>Email: hello@tryscent.eu</p>"
+            "subtext": "<p><a href=\"https://www.imsig.pl/krs/0001204680/sprawozdania\" target=\"_blank\">MAGYX SP. Z O.O.</a></p><p>ul. Marszałka Józefa Piłsudskiego 31A/15, 72-300 Gryfice, Polska.</p><p>Telefon: +48 500 806 058 </p><p><br/>E-mail: hello@tryscent.eu</p>"
           }
         }
       },
@@ -44,7 +44,7 @@
       "settings": {
         "color_scheme": "scheme-4",
         "newsletter_enable": false,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "Zapisz się, aby otrzymywać nasze e-maile",
         "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": true,

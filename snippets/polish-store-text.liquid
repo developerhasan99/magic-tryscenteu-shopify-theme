@@ -1,0 +1,33 @@
+{% doc %}
+  Translates known German store-managed labels for this Polish storefront.
+  @param {string} [text] - Store-managed text to translate.
+  @param {string} [format] - Use json for a JavaScript string or mapping for the search dictionary.
+{% enddoc %}
+{%- liquid
+  assign translation_pairs = 'Für Männer::Dla mężczyzn||Alle Herrendüfte::Wszystkie perfumy męskie||Bestseller::Bestsellery||Bestsellers::Bestsellery||Alltagsdüfte::Zapachy na co dzień||Bürodüfte::Zapachy do biura||Verführungsdüfte::Uwodzicielskie zapachy||Abenddüfte::Zapachy na wieczór||Partydüfte::Zapachy na imprezę||Herbstdüfte::Zapachy na jesień||Winterdüfte::Zapachy na zimę||Für Frauen::Dla kobiet||Alle Damendüfte::Wszystkie perfumy damskie||Neuheiten & Trenddüfte::Nowości i modne zapachy||Duftet wie...::Pachnie jak…||Riecht wie...::Pachnie jak…||Duftet wie…::Pachnie jak…||Riecht wie…::Pachnie jak…||Duftet wie::Pachnie jak||Riecht wie::Pachnie jak||Pfeffer-Vanille::Pieprz i wanilia||Zitrus-Weihrauch::Cytrusy i kadzidło||Vertrag widerrufen::Odstąpienie od umowy' | split: '||'
+  assign translated_text = text
+-%}
+{%- if format == 'mapping' -%}
+  {
+    {%- for pair in translation_pairs -%}
+      {%- assign parts = pair | split: '::' -%}
+      {{- parts.first | json -}}:{{- parts.last | json -}}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  }
+{%- else -%}
+  {%- for pair in translation_pairs -%}
+    {%- assign parts = pair | split: '::' -%}
+    {%- if parts.first == 'Bestseller' -%}
+      {%- if translated_text == parts.first -%}
+        {%- assign translated_text = parts.last -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- assign translated_text = translated_text | replace: parts.first, parts.last -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if format == 'json' -%}
+    {{- translated_text | json -}}
+  {%- else -%}
+    {{- translated_text | escape -}}
+  {%- endif -%}
+{%- endif -%}

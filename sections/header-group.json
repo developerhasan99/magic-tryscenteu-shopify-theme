@@ -18,8 +18,8 @@
       "settings": {
         "background_color": "#000000",
         "background_color_2": "#e32402",
-        "prepend_text": "Nur zum Weltfrauentag",
-        "link_text": "3 kaufen – 1 gratis",
+        "prepend_text": "Tylko z okazji Dnia Kobiet",
+        "link_text": "Kup 3 – 1 gratis",
         "append_text": "",
         "link": "shopify://collections/best-sellers"
       }
@@ -31,31 +31,31 @@
           "type": "text",
           "disabled": true,
           "settings": {
-            "text": "ENGINEERED FOR A CLEANER SHAVE"
+            "text": "ZAPROJEKTOWANE Z MYŚLĄ O TWOIM ZAPACHU"
           }
         },
         "text_39tt9p": {
           "type": "text",
           "settings": {
-            "text": "3 KAUFEN- 1  GRATIS"
+            "text": "KUP 3 — 1 GRATIS"
           }
         },
         "text_DiPtyi": {
           "type": "text",
           "settings": {
-            "text": "KOSTENLOSER VERSAND AB 45€"
+            "text": "DARMOWA DOSTAWA OD 45€"
           }
         },
         "text_7Mhc9j": {
           "type": "text",
           "settings": {
-            "text": "60-TAGE-GELD-ZURÜCK-GARANTIE"
+            "text": "60-DNIOWA GWARANCJA ZWROTU PIENIĘDZY"
           }
         },
         "text_QD7JEH": {
           "type": "text",
           "settings": {
-            "text": "SAFE & SECURE CHECKOUT"
+            "text": "BEZPIECZNE ZAKUPY"
           }
         }
       },
@@ -83,35 +83,35 @@
           "type": "payment_icon",
           "settings": {
             "icon": "shopify://shop_images/090e7fd71af4b4e7589642874d6cae93a0a34f77.png",
-            "label": "Schnell"
+            "label": "Szybko"
           }
         },
         "payment_icon_Fgdaze": {
           "type": "payment_icon",
           "settings": {
             "icon": "shopify://shop_images/65f2284e66ff1dcb1a272319f1ef543c429f73e2.png",
-            "label": "EU-Versand"
+            "label": "Dostawa w UE"
           }
         },
         "payment_icon_tUQYaX": {
           "type": "payment_icon",
           "settings": {
             "icon": "shopify://shop_images/800c98d03dc73f77225bfa90300384e0370c7cff.png",
-            "label": "Sicher"
+            "label": "Bezpiecznie"
           }
         },
         "payment_icon_HNd7bU": {
           "type": "payment_icon",
           "settings": {
             "icon": "shopify://shop_images/777929254296c2d290f0836dc4e68451f4cfdbc4.png",
-            "label": "Flexibel"
+            "label": "Elastycznie"
           }
         },
         "payment_icon_EMjaQY": {
           "type": "payment_icon",
           "settings": {
             "icon": "shopify://shop_images/images-555x360--08-28-2026_03_03_PM.png",
-            "label": "Direkt"
+            "label": "Bezpośrednio"
           }
         }
       },
@@ -126,10 +126,10 @@
       "settings": {
         "primary_color": "#173e34",
         "secondary_color": "#dce9de",
-        "top_banner_text": "Oder solange der Vorrat reicht",
+        "top_banner_text": "Lub do wyczerpania zapasów",
         "prepend_text": "",
         "countdown_date": "",
-        "append_text": "2 KAUFEN, 1 GRATIS",
+        "append_text": "KUP 2, 1 GRATIS",
         "link": ""
       }
     },
