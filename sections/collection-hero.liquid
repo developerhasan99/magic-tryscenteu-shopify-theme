@@ -4,16 +4,18 @@
   <div class="!block absolute inset-0 bg-[linear-gradient(180deg,rgba(246,247,248,0)_38%,rgba(246,247,248,.82)_58%,rgba(246,247,248,.97)_74%,#f6f7f8_100%)] sm:bg-[linear-gradient(90deg,rgba(248,248,247,.97)_0%,rgba(248,248,247,.93)_30%,rgba(248,248,247,.72)_46%,rgba(248,248,247,0)_68%)]"></div>
   <div class="page-width relative z-[1] w-full">
     <div class="md:w-1/2 {% if hero_mobile_image != blank %} pt-80 md:pt-0 {% endif %}">
-      {% if section.settings.show_badge %}
+      {% if section.settings.show_rating_badge %}
         <p class="mb-[10px] flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#8f6329]">
-          {{ section.settings.badge_text }}
-          {% if section.settings.badge_emoji != blank %}
-            <span class="text-sm tracking-normal">{{ section.settings.badge_emoji }}</span>
-          {% endif %}
+          <span class="tracking-[0.06em]">★★★★★</span>
+          {{ section.settings.rating_text }}
         </p>
       {% endif %}
       <h1 class="mb-3 whitespace-nowrap text-[clamp(28px,2.8vw,44px)] font-normal leading-[1.1] tracking-[-0.015em] text-[#14181c]" style="font-family: Georgia, 'Times New Roman', serif;">
-        {% render 'polish-store-text', text: collection.title %}
+        {% if section.settings.heading != blank %}
+          {{ section.settings.heading }}
+        {% else %}
+          {% render 'polish-store-text', text: collection.title %}
+        {% endif %}
       </h1>
       <p class="max-w-[400px] text-[clamp(15px,1.05vw,17px)] leading-[1.5] text-[#14181c]">
         {{ collection.description }}
@@ -27,22 +29,22 @@
     "name": "Collection Hero",
     "settings": [
       {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading (empty = collection title)",
+        "default": "Najnowsze zapachy 🔥"
+      },
+      {
         "type": "checkbox",
-        "id": "show_badge",
-        "label": "Show badge",
+        "id": "show_rating_badge",
+        "label": "Show rating badge",
         "default": true
       },
       {
         "type": "text",
-        "id": "badge_text",
-        "label": "Badge text",
-        "default": "Najnowsze zapachy"
-      },
-      {
-        "type": "text",
-        "id": "badge_emoji",
-        "label": "Badge emoji",
-        "default": "🔥"
+        "id": "rating_text",
+        "label": "Rating badge text",
+        "default": "Sprawdzone przez ponad 10 000 miłośników zapachów"
       }
     ],
     "presets": [
