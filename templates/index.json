@@ -42,7 +42,7 @@
         "background_color": "#fcfbf9",
         "background_image": "shopify://shop_images/MAGYX_Site_Header.webp",
         "mobile_background_image": "shopify://shop_images/MAGYX_Site_Header_Mobile_B.webp",
-        "review_text": "POKOCHANE PRZEZ 10 000 KLIENTÓW",
+        "review_text": "POKOCHANE PRZEZ PONAD 10 000 KLIENTÓW",
         "title": "Odpowiedniki perfum najwyższej jakości",
         "subtitle": "Bez flakonu i logo — czy poczujesz różnicę?",
         "button_text": "Dla niej",
@@ -557,7 +557,7 @@
           "settings": {
             "review_image": "shopify://shop_images/beatricedcastle_2.jpg",
             "content": "<p>„Produkt dotarł pięknie zapakowany. Flakon był cały, nic się nie wylało i wszystko było w dobrym stanie. Zapach jest idealny, bez żadnych nieprzyjemnych nut. Uwielbiam go, świetna jakość.”</p>",
-            "author": "Anne E.",
+            "author": "Anna E.",
             "date": "4 miesiące temu",
             "rating": 4,
             "show_verified_badge": true,

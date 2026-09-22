@@ -13,50 +13,12 @@
   },
   "parent": "header-group.json",
   "sections": {
-    "blocky_lys_scrolling_text_bar_GLkKNr": {
-      "disabled": false,
-      "settings": {},
-      "blocks": {
-        "text_XmbGh": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "DARMOWA DOSTAWA OD 190 PLN"
-          }
-        },
-        "text_DiPtyi": {
-          "disabled": true,
-          "settings": {}
-        },
-        "text_39tt9p": {
-          "disabled": true,
-          "settings": {}
-        },
-        "text_7Mhc9j": {
-          "disabled": true,
-          "settings": {}
-        },
-        "text_QD7JEH": {
-          "settings": {
-            "text": "TryScent zmienia się w MagyX!"
-          }
-        }
-      },
-      "block_order": [
-        "text_XmbGh",
-        "text_KwnK4Y",
-        "text_39tt9p",
-        "text_DiPtyi",
-        "text_7Mhc9j",
-        "text_QD7JEH"
-      ]
-    },
     "offer_timebar_4WVn7P": {
       "settings": {
         "prepend_text": "WYPRZEDAŻ MAGAZYNU",
         "countdown_date": "2026/09/20 23:59:59",
         "append_text": "Kup 3 w cenie 2",
-        "link": "shopify://collections/bestsellers"
+        "link": "shopify://collections/top-sellers"
       },
       "blocks": {
         "payment_icon_MmG3KL": {
@@ -89,6 +51,44 @@
         "payment_icon_Fgdaze",
         "payment_icon_HNd7bU",
         "payment_icon_EMjaQY"
+      ]
+    },
+    "blocky_lys_scrolling_text_bar_GLkKNr": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {
+        "text_XmbGh": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "DARMOWA DOSTAWA OD 190 PLN"
+          }
+        },
+        "text_39tt9p": {
+          "disabled": true,
+          "settings": {}
+        },
+        "text_DiPtyi": {
+          "disabled": true,
+          "settings": {}
+        },
+        "text_7Mhc9j": {
+          "disabled": true,
+          "settings": {}
+        },
+        "text_QD7JEH": {
+          "settings": {
+            "text": "TryScent zmienia się w MagyX!"
+          }
+        }
+      },
+      "block_order": [
+        "text_XmbGh",
+        "text_KwnK4Y",
+        "text_39tt9p",
+        "text_DiPtyi",
+        "text_7Mhc9j",
+        "text_QD7JEH"
       ]
     },
     "header": {

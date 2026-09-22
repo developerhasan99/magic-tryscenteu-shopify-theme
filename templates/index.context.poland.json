@@ -21,12 +21,12 @@
     "tryscent_hero_VWyBcY": {
       "disabled": false,
       "settings": {
-        "review_text": "",
-        "button_text": "Dla niej",
         "background_image": "shopify://shop_images/MAGYX_Site_Header.webp",
         "mobile_background_image": "shopify://shop_images/MAGYX_Site_Header_Mobile_B.webp",
-        "secondary_button_link": "shopify://collections/top-sellers-men",
-        "button_link": "shopify://collections/top-seller-women"
+        "review_text": "POKOCHANE PRZEZ PONAD 10 000 KLIENTÓW",
+        "button_text": "Dla niej",
+        "button_link": "shopify://collections/top-seller-women",
+        "secondary_button_link": "shopify://collections/top-sellers-men"
       },
       "blocks": {}
     },
@@ -40,6 +40,96 @@
         "show_all_button_text": "Zobacz wszystkie"
       },
       "blocks": {}
+    },
+    "massive_review_kTc3WW": {
+      "settings": {},
+      "blocks": {
+        "review_6Bhttk": {
+          "settings": {
+            "author": "Anna E."
+          }
+        },
+        "review_HjyT3p": {
+          "settings": {
+            "author": "Tomasz P."
+          }
+        },
+        "review_G3HzBj": {
+          "settings": {
+            "author": "Robert D."
+          }
+        },
+        "review_KK6jhW": {
+          "settings": {
+            "author": "Michał R."
+          }
+        },
+        "review_YtFw34": {
+          "settings": {
+            "author": "Roksana S."
+          }
+        },
+        "review_y8tq9b": {
+          "settings": {
+            "author": "Lidia A."
+          }
+        },
+        "review_bjRzPy": {
+          "settings": {
+            "author": "Kazimierz B."
+          }
+        },
+        "review_wbXdLy": {
+          "settings": {
+            "author": "Teresa M."
+          }
+        },
+        "review_nQ6MLV": {
+          "settings": {
+            "author": "Leonl M."
+          }
+        },
+        "review_aThE8h": {
+          "settings": {
+            "author": "Aleks W."
+          }
+        },
+        "review_YXwWcc": {
+          "settings": {
+            "author": "Krystyna N."
+          }
+        },
+        "review_RnXXg9": {
+          "settings": {
+            "author": "Michał T."
+          }
+        },
+        "review_icFmQQ": {
+          "settings": {
+            "author": "Tosia N."
+          }
+        },
+        "review_XfwcAY": {
+          "settings": {
+            "author": "Klara P."
+          }
+        },
+        "review_JRzxRP": {
+          "settings": {
+            "author": "Alicja M"
+          }
+        },
+        "review_8jw9Px": {
+          "settings": {
+            "author": "Kacper P."
+          }
+        },
+        "review_UPwGBF": {
+          "settings": {
+            "author": "Janina W."
+          }
+        }
+      }
     }
   }
 }
