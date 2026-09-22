@@ -13,16 +13,102 @@
   },
   "parent": "product.expressive-notes.json",
   "sections": {
+    "feature_heighlights_fCUG3E": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
     "stacks_up_WR4y4d": {
       "settings": {
         "title": "Dlaczego MagyX?"
       },
       "blocks": {}
     },
-    "feature_heighlights_fCUG3E": {
-      "disabled": true,
+    "massive_review_Jkdtrt": {
       "settings": {},
-      "blocks": {}
+      "blocks": {
+        "review_PLe7be": {
+          "settings": {
+            "author": "Tomasz P.",
+            "review_image": "shopify://shop_images/2026-07-02_16h48_27.png"
+          }
+        },
+        "review_z6x8AG": {
+          "settings": {
+            "author": "Anna E."
+          }
+        },
+        "review_hBjgkB": {
+          "settings": {
+            "author": "Robert D."
+          }
+        },
+        "review_cAh4nN": {
+          "settings": {
+            "author": "Michał R."
+          }
+        },
+        "review_DQdaUX": {
+          "settings": {
+            "author": "Roksana S"
+          }
+        },
+        "review_7YxGpA": {
+          "settings": {
+            "author": "Kamila B."
+          }
+        },
+        "review_EwLjxK": {
+          "settings": {
+            "author": "Lidia A."
+          }
+        },
+        "review_Ed6AYP": {
+          "settings": {
+            "author": "Krystyna N."
+          }
+        },
+        "review_UaT7qJ": {
+          "settings": {
+            "author": "Teresa M."
+          }
+        },
+        "review_aiPn8L": {
+          "settings": {
+            "author": "Aleks W."
+          }
+        },
+        "review_daiQz9": {
+          "settings": {
+            "author": "Michał T."
+          }
+        },
+        "review_VycKKG": {
+          "settings": {
+            "author": "Tosia N."
+          }
+        },
+        "review_fmQ4ir": {
+          "settings": {
+            "author": "Klara P."
+          }
+        },
+        "review_MaTBEc": {
+          "settings": {
+            "author": "Janina W."
+          }
+        },
+        "review_qzP4xM": {
+          "settings": {
+            "author": "Kamil P."
+          }
+        },
+        "review_cGQ3Dd": {
+          "settings": {
+            "author": "Alicja M"
+          }
+        }
+      }
     }
   }
 }
