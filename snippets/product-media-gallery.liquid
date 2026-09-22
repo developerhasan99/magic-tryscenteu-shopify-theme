@@ -4,6 +4,9 @@
 
 {% assign marketing_images = shop.metaobjects['marketing_images']['for-de'].images.value %}
 {% assign pl_marketing_images = shop.metaobjects['marketing_images']['for-pl'].images.value %}
+{% assign irish_en_marketing_images = shop.metaobjects['marketing_images']['for-irish-en'].images.value %}
+{% assign french_marketing_images = shop.metaobjects['marketing_images']['for-french'].images.value %}
+{% assign czech_marketing_images = shop.metaobjects['marketing_images']['for-czech'].images.value %}
 
 <div class="sticky top-6">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -251,6 +254,42 @@
           ],
           thumbnail: [
             {% for item in pl_marketing_images %}
+              "{{ item | image_url: width: 300, height: 300 }}"{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ]
+        },
+        en: {
+          main: [
+            {% for item in irish_en_marketing_images %}
+              "{{ item | image_url: width: 1024, height: 1024 }}"{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ],
+          thumbnail: [
+            {% for item in irish_en_marketing_images %}
+              "{{ item | image_url: width: 300, height: 300 }}"{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ]
+        },
+        fr: {
+          main: [
+            {% for item in french_marketing_images %}
+              "{{ item | image_url: width: 1024, height: 1024 }}"{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ],
+          thumbnail: [
+            {% for item in french_marketing_images %}
+              "{{ item | image_url: width: 300, height: 300 }}"{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ]
+        },
+        cs: {
+          main: [
+            {% for item in czech_marketing_images %}
+              "{{ item | image_url: width: 1024, height: 1024 }}"{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ],
+          thumbnail: [
+            {% for item in czech_marketing_images %}
               "{{ item | image_url: width: 300, height: 300 }}"{% unless forloop.last %},{% endunless %}
             {% endfor %}
           ]
