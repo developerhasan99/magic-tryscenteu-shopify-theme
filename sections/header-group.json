@@ -24,58 +24,6 @@
         "link": "shopify://collections/best-sellers"
       }
     },
-    "blocky_lys_scrolling_text_bar_GLkKNr": {
-      "type": "blocky-lys-scrolling-text-bar",
-      "blocks": {
-        "text_KwnK4Y": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "ZAPROJEKTOWANE Z MYŚLĄ O TWOIM ZAPACHU"
-          }
-        },
-        "text_39tt9p": {
-          "type": "text",
-          "settings": {
-            "text": "KUP 3 — 1 GRATIS"
-          }
-        },
-        "text_DiPtyi": {
-          "type": "text",
-          "settings": {
-            "text": "DARMOWA DOSTAWA OD 45€"
-          }
-        },
-        "text_7Mhc9j": {
-          "type": "text",
-          "settings": {
-            "text": "60-DNIOWA GWARANCJA ZWROTU PIENIĘDZY"
-          }
-        },
-        "text_QD7JEH": {
-          "type": "text",
-          "settings": {
-            "text": "BEZPIECZNE ZAKUPY"
-          }
-        }
-      },
-      "block_order": [
-        "text_KwnK4Y",
-        "text_39tt9p",
-        "text_DiPtyi",
-        "text_7Mhc9j",
-        "text_QD7JEH"
-      ],
-      "settings": {
-        "text_size": "1.5",
-        "background_color": "#000000",
-        "text_color": "#ffffff",
-        "speed": 1,
-        "text_spacing": 3,
-        "padding_top": 16,
-        "padding_bottom": 16
-      }
-    },
     "offer_timebar_4WVn7P": {
       "type": "offer-timebar",
       "blocks": {
@@ -127,10 +75,65 @@
         "primary_color": "#173e34",
         "secondary_color": "#dce9de",
         "top_banner_text": "Lub do wyczerpania zapasów",
-        "prepend_text": "",
+        "prepend_text": "WYPRZEDAŻ MAGAZYNU",
         "countdown_date": "",
-        "append_text": "KUP 2, 1 GRATIS",
-        "link": ""
+        "append_text": "Kup 3 w cenie 2",
+        "link": "shopify://collections/top-sellers"
+      }
+    },
+    "blocky_lys_scrolling_text_bar_GLkKNr": {
+      "type": "blocky-lys-scrolling-text-bar",
+      "blocks": {
+        "text_KwnK4Y": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "ZAPROJEKTOWANE Z MYŚLĄ O TWOIM ZAPACHU"
+          }
+        },
+        "text_39tt9p": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "KUP 3 — 1 GRATIS"
+          }
+        },
+        "text_DiPtyi": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "DARMOWA DOSTAWA OD 45€"
+          }
+        },
+        "text_7Mhc9j": {
+          "type": "text",
+          "settings": {
+            "text": "TryScent zmienia się w MagyX!"
+          }
+        },
+        "text_QD7JEH": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "BEZPIECZNE ZAKUPY"
+          }
+        }
+      },
+      "block_order": [
+        "text_KwnK4Y",
+        "text_39tt9p",
+        "text_DiPtyi",
+        "text_7Mhc9j",
+        "text_QD7JEH"
+      ],
+      "settings": {
+        "text_size": "1.5",
+        "background_color": "#000000",
+        "text_color": "#ffffff",
+        "speed": 1,
+        "text_spacing": 3,
+        "padding_top": 16,
+        "padding_bottom": 16
       }
     },
     "header": {
@@ -155,8 +158,8 @@
   },
   "order": [
     "offer_annoucement_4tnBfB",
-    "blocky_lys_scrolling_text_bar_GLkKNr",
     "offer_timebar_4WVn7P",
+    "blocky_lys_scrolling_text_bar_GLkKNr",
     "header"
   ]
 }
