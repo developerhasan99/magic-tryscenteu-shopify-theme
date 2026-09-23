@@ -270,7 +270,7 @@
       "name": "Image and Text",
       "settings": {
         "background_color": "#ffffff",
-        "image": "shopify://shop_images/PRODUCTION.webp",
+        "image": "shopify://shop_images/MAGYX_Site_02_1.webp",
         "rounded_image": true,
         "image_placement": "0",
         "mobile_image_placement": "under_heading",
