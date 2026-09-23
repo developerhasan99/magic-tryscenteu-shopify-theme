@@ -249,7 +249,7 @@
       "type": "scent-bundle-builder-single",
       "name": "Bundle builder 60% off",
       "settings": {
-        "grid_collection": "",
+        "grid_collection": "bestseller-singles",
         "bundle_total": 5,
         "bundle_discount_qty": 3,
         "discount_percent": 60,
