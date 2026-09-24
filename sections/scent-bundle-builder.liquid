@@ -6,12 +6,12 @@
   assign t1_total = st.tier_1_total | plus: 0
   assign t1_free = st.tier_1_free | plus: 0
   assign t1_paid = t1_total | minus: t1_free
-  assign t1_ribbon = 'Kup ' | append: t1_paid | append: ', zyskaj ' | append: t1_free | append: ' gratis'
+  assign t1_ribbon = st.tier_1_ribbon | replace: '[paid]', t1_paid | replace: '[free]', t1_free | replace: '[total]', t1_total
 
   assign t2_total = st.tier_2_total | plus: 0
   assign t2_free = st.tier_2_free | plus: 0
   assign t2_paid = t2_total | minus: t2_free
-  assign t2_ribbon = 'Kup ' | append: t2_paid | append: ', zyskaj ' | append: t2_free | append: ' gratis'
+  assign t2_ribbon = st.tier_2_ribbon | replace: '[paid]', t2_paid | replace: '[free]', t2_free | replace: '[total]', t2_total
 
   assign eligible_handles = ''
   for p in grid_pool.products
@@ -532,6 +532,13 @@
         "default": 1
       },
       {
+        "type": "text",
+        "id": "tier_1_ribbon",
+        "label": "Image offer text",
+        "info": "Shown on product images and under the toggle. Use [paid], [free] and [total] for bottle counts. Leave blank to hide.",
+        "default": "Kup [paid], zyskaj [free] gratis"
+      },
+      {
         "type": "header",
         "content": "Offer 2"
       },
@@ -565,6 +572,13 @@
         "id": "tier_2_free",
         "label": "Free bottles",
         "default": 2
+      },
+      {
+        "type": "text",
+        "id": "tier_2_ribbon",
+        "label": "Image offer text",
+        "info": "Shown on product images and under the toggle. Use [paid], [free] and [total] for bottle counts. Leave blank to hide.",
+        "default": "Kup [paid], zyskaj [free] gratis"
       },
       {
         "type": "header",

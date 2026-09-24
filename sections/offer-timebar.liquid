@@ -146,7 +146,7 @@
   {% endif %}
 </style>
 
-{% unless product.template_suffix == 'payday-60' %}
+{% unless product.template_suffix == 'payday-60' or collection.template_suffix == 'bundle-save' %}
   <div id="{{ section.id }}">
     <a href="{{ section.settings.link }}" class="no-underline block">
       {% if section.settings.top_banner_text != blank %}
