@@ -258,7 +258,7 @@
         "heading_accent": "3 GRATIS!",
         "subheading": "<p>Kup 2x100ml swoich ulubionych perfum i otrzymaj <strong>3x100ml GRATIS</strong> w pakiecie PayDay</p>",
         "slot_label": "Wybierz swój zapach",
-        "discount_slot_label": "Flakon Gratis",
+        "discount_slot_label": "Wybierz swój zapach",
         "discount_pill_label": "Gratis!",
         "counter_text": "[selected] / [total] wybrano",
         "hint_text": "Dodaj [remaining] więcej zapachów, aby odblokować swój rabat!",
@@ -272,7 +272,7 @@
         "cta_label": "Dodaj",
         "empty_text": "Żadne zapachy nie pasują do Twojego wyszukiwania.",
         "cta_button_label": "Dodaj do koszyka",
-        "cta_disabled_label": "Dodaj [remaining] więcej zapachów",
+        "cta_disabled_label": "Dodaj jeszcze [remaining] zapachy",
         "cta_disabled_label_one": "Dodaj jeszcze 1 zapach"
       }
     }
