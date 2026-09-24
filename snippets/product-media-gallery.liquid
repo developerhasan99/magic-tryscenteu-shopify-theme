@@ -2,11 +2,16 @@
   {% assign product = product_param %}
 {% endif %}
 
-{% assign marketing_images = shop.metaobjects['marketing_images']['for-de'].images.value %}
-{% assign pl_marketing_images = shop.metaobjects['marketing_images']['for-pl'].images.value %}
-{% assign irish_en_marketing_images = shop.metaobjects['marketing_images']['for-irish-en'].images.value %}
-{% assign french_marketing_images = shop.metaobjects['marketing_images']['for-french'].images.value %}
-{% assign czech_marketing_images = shop.metaobjects['marketing_images']['for-czech'].images.value %}
+{% liquid
+  # Products tagged 'own_gallery' show only their own images, no marketing images
+  unless product.tags contains 'own_gallery'
+    assign marketing_images = shop.metaobjects['marketing_images']['for-de'].images.value
+    assign pl_marketing_images = shop.metaobjects['marketing_images']['for-pl'].images.value
+    assign irish_en_marketing_images = shop.metaobjects['marketing_images']['for-irish-en'].images.value
+    assign french_marketing_images = shop.metaobjects['marketing_images']['for-french'].images.value
+    assign czech_marketing_images = shop.metaobjects['marketing_images']['for-czech'].images.value
+  endunless
+%}
 
 <div class="sticky top-6">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -232,6 +237,7 @@
   </div>
 
   <script>
+      {% if marketing_images != blank %}
       // Local images to load for Weglot languages
       const localImages = {
         de: {
@@ -295,6 +301,7 @@
           ]
         }
       };
+      {% endif %}
       // Swiper Slider For product images with thumbnail sync
       window.addEventListener("DOMContentLoaded", function () {
         var productThumbnails = new Swiper('#productThumbnails', {
@@ -346,6 +353,7 @@
           },
         });
 
+        {% if marketing_images != blank %}
         function changeLocalImages(newLang, _previousLang) {
           console.log('Language Changed: ', newLang);
       
@@ -381,6 +389,7 @@
         const currentLang = (window.Weglot && typeof Weglot.getCurrentLang === 'function' && Weglot.getCurrentLang()) || 'de';
         changeLocalImages(currentLang, null);
         Weglot.on("languageChanged", changeLocalImages);
+        {% endif %}
       });
 
   </script>
