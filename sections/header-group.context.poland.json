@@ -15,9 +15,9 @@
   "sections": {
     "offer_timebar_4WVn7P": {
       "settings": {
-        "prepend_text": "WYPRZEDAŻ MAGAZYNU",
-        "countdown_date": "2026/09/20 23:59:59",
-        "append_text": "Kup 3 w cenie 2",
+        "prepend_text": "WEEKENDOWA PROMOCJA",
+        "countdown_date": "2026/09/28 23:59:59",
+        "append_text": "1+1 GRATIS!",
         "link": "shopify://collections/top-sellers"
       },
       "blocks": {
@@ -77,8 +77,9 @@
           "settings": {}
         },
         "text_QD7JEH": {
+          "disabled": false,
           "settings": {
-            "text": "TryScent zmienia się w MagyX!"
+            "text": "Co drugi perfum gratis!"
           }
         }
       },
