@@ -15,8 +15,8 @@
   "sections": {
     "offer_timebar_4WVn7P": {
       "settings": {
-        "prepend_text": "WEEKENDOWA PROMOCJA",
-        "countdown_date": "2026/09/28 23:59:59",
+        "prepend_text": "JESIENNA PROMOCJA",
+        "countdown_date": "",
         "append_text": "1+1 GRATIS!",
         "link": "shopify://collections/top-sellers"
       },
