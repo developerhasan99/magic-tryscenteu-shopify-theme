@@ -17,7 +17,7 @@
       "settings": {
         "prepend_text": "JESIENNA PROMOCJA",
         "countdown_date": "",
-        "append_text": "1+1 GRATIS!",
+        "append_text": "1+1, 2+2, 3+3 GRATIS!",
         "link": "shopify://collections/top-sellers"
       },
       "blocks": {
@@ -79,7 +79,7 @@
         "text_QD7JEH": {
           "disabled": false,
           "settings": {
-            "text": "Co drugi perfum gratis!"
+            "text": "Każdy drugi perfum w koszyku za darmo"
           }
         }
       },
