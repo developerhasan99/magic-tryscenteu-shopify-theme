@@ -160,7 +160,7 @@
 
           <template x-for="(slot, i) in $store.qb.slotList(tier)" :key="i">
             <div class="flex items-center gap-3 rounded-xl bg-white border border-solid border-gray-200 p-2.5">
-              <div class="relative shrink-0">
+              <div class="relative shrink-0 flex">
                 <template x-if="slot.product">
                   <img
                     :src="slot.product.image"
