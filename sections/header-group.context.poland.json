@@ -17,7 +17,7 @@
       "settings": {
         "prepend_text": "JESIENNA PROMOCJA",
         "countdown_date": "",
-        "append_text": "1+1, 2+2, 3+3 GRATIS!",
+        "append_text": "1+1, 2+3 Gratis!",
         "link": "shopify://collections/top-sellers"
       },
       "blocks": {
@@ -79,7 +79,7 @@
         "text_QD7JEH": {
           "disabled": false,
           "settings": {
-            "text": "Każdy drugi perfum w koszyku za darmo"
+            "text": "Beauty-mysteryboxy - ilość ograniczona!"
           }
         }
       },
