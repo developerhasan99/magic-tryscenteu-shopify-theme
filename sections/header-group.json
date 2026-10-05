@@ -74,10 +74,10 @@
       "settings": {
         "primary_color": "#173e34",
         "secondary_color": "#dce9de",
-        "top_banner_text": "Lub do wyczerpania zapasów",
-        "prepend_text": "JESIENNA PROMOCJA",
-        "countdown_date": "2026/09/28",
-        "append_text": "CO DRUGI PERFUM GRATIS!",
+        "top_banner_text": "",
+        "prepend_text": "Kup jeden, drugi otrzymasz gratis 🎁",
+        "countdown_date": "",
+        "append_text": "Kup teraz",
         "link": "shopify://collections/top-sellers"
       }
     },
