@@ -9,17 +9,7 @@
   </div>
 </div>
 
-<div class="product-quick-nav flex flex-wrap items-center gap-6 mt-6 mb-6">
-  <a
-    href="#expanded-notes"
-    data-scroll-to-foldable="1"
-    class="text-xs font-bold tracking-wider uppercase mgx-text underline underline-offset-4 decoration-2 mgx-underline-hover cursor-pointer">Pełny opis</a>
-  <a
-    href="#clean_label"
-    data-scroll-to-anchor="clean-label-section"
-    class="text-xs font-bold tracking-wider uppercase mgx-text underline underline-offset-4 decoration-2 mgx-underline-hover cursor-pointer">Czysta etykieta</a>
-</div>
-<div class="scent-attributes flex gap-6 md:gap-12">
+<div class="scent-attributes flex gap-6 md:gap-12 mt-6">
   {% if product.metafields.custom.fragrance_family != blank %}
     <figure class="flex flex-col items-center text-center m-0">
       <div class="relative h-16 flex items-center justify-center">
@@ -243,15 +233,4 @@
     {% else %}
       {{ product.metafields.custom.scent_intensity }}
   {% endcase %}
-</figcaption></figure>{% endif %}</div><script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const foldableSummary = document.querySelector('#expanded-notes summary');
-    const foldableLink = document.querySelector('a[href="#expanded-notes"]');
-
-    if (foldableSummary && foldableLink) {
-      foldableLink.addEventListener('click', function () {
-        foldableSummary.click();
-      });
-    }
-  });
-</script>
+</figcaption></figure>{% endif %}</div>
