@@ -376,6 +376,8 @@
       "view_all": "Pokaż wszystko"
     },
     "collection_template": {
+      "load_more": "Załaduj więcej produktów",
+      "loading_more": "Ładowanie kolejnych produktów...",
       "title": "kategoria",
       "empty": "Nie znaleziono produktów",
       "use_fewer_filters_html": "Użyj mniej filtrów lub <a class=\"{{ class }}\" href=\"{{ link }}\">usuń wszystkie</a>"
