@@ -30,7 +30,7 @@
         <h2 class="drawer__heading">
           {{ 'sections.cart.title' | t }}
           <span>
-            <span style="color: #555;">•</span>
+            <span style="color: var(--mgx-graphite);">•</span>
             <span>{{ cart.item_count }}</span>
           </span>
         </h2>
@@ -70,7 +70,7 @@
         <form
           action="{{ routes.cart_url }}"
           id="CartDrawer-Form"
-          class="cart__contents cart-drawer__form border-0 border-t border-gray-200 border-solid"
+          class="cart__contents cart-drawer__form border-0 border-t mgx-border border-solid"
           method="post">
           <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
             {%- if cart != empty -%}

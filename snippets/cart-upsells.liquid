@@ -9,7 +9,7 @@
       <div class="flex gap-2">
         <button
           type="button"
-          class="slider-prev w-8 h-8 flex items-center justify-center rounded-full border border-solid border-gray-300 hover:border-black transition-colors cursor-pointer"
+          class="slider-prev w-8 h-8 flex items-center justify-center rounded-full border border-solid mgx-border hover:border-black transition-colors cursor-pointer"
           aria-label="{{ 'sections.cart_upsells.previous_products' | t }}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="15 18 9 12 15 6"></polyline>
@@ -17,7 +17,7 @@
         </button>
         <button
           type="button"
-          class="slider-next w-8 h-8 flex items-center justify-center rounded-full border border-solid border-gray-300 hover:border-black transition-colors cursor-pointer"
+          class="slider-next w-8 h-8 flex items-center justify-center rounded-full border border-solid mgx-border hover:border-black transition-colors cursor-pointer"
           aria-label="{{ 'sections.cart_upsells.next_products' | t }}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="9 18 15 12 9 6"></polyline>
@@ -62,8 +62,8 @@
                     class="variant-id-input"
                     value="{{ variant.id }}">
 
-                  <div class="upsell-card-content border border-solid border-gray-200 rounded-lg p-3 bg-white">
-                    <div class="aspect-square mb-3 overflow-hidden rounded bg-gray-50">
+                  <div class="upsell-card-content border border-solid mgx-border rounded-lg p-3 bg-white">
+                    <div class="aspect-square mb-3 overflow-hidden rounded mgx-surface">
                       <img
                         src="{{ product.featured_image | image_url: width: 300 }}"
                         alt="{% render 'polish-store-text', text: product.title %}"
@@ -76,7 +76,7 @@
 
                     {% unless product.has_only_default_variant %}
                       <select
-                        class="w-full text-xs border border-gray-200 rounded p-2 mb-3 variant-selector cursor-pointer"
+                        class="w-full text-xs border mgx-border rounded p-2 mb-3 variant-selector cursor-pointer"
                         name="id"
                         aria-label="{{ 'sections.cart_upsells.select_variant' | t }}">
                         {% for variant in product.variants %}

@@ -19,22 +19,22 @@
   <div class="page-width">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+        <h2 class="text-3xl md:text-4xl font-bold mgx-text">
           {{ section.settings.title }}
         </h2>
-        <p class="mt-4 text-gray-600 text-lg">
+        <p class="mt-4 mgx-text-muted text-lg">
           {{ section.settings.subtitle }}
         </p>
       </div>
       <div class="grid md:grid-cols-2 gap-8 items-stretch">
-        <div class="relative bg-white rounded-2xl shadow-xl border border-gray-200 p-8 scale-100 md:scale-105">
+        <div class="relative bg-white rounded-2xl shadow-xl border mgx-border p-8 scale-100 md:scale-105">
           <span class="absolute -top-4 left-1/2 [transform:translateX(-50%)] bg-black text-white text-sm px-4 py-1 rounded-full">
             ⭐ Polecane
           </span>
           <h3 class="text-2xl font-semibold text-center mb-8 mt-4">
             MagyX Perfume
           </h3>
-          <ul class="space-y-5 text-gray-700 p-0 m-0">
+          <ul class="space-y-5 mgx-text-muted p-0 m-0">
             {% for block in section.blocks %}
               <li class="flex items-start gap-3">
                 <span class="mgx-text-accent text-xl">✔</span>
@@ -48,14 +48,14 @@
             </a>
           </div>
         </div>
-        <div class="bg-gray-100 rounded-2xl p-8 border border-gray-200">
+        <div class="mgx-surface rounded-2xl p-8 border mgx-border">
           <h3 class="text-2xl font-semibold text-center mb-8">
             Drogie marki luksusowe
           </h3>
-          <ul class="space-y-5 text-gray-600 p-0 m-0">
+          <ul class="space-y-5 mgx-text-muted p-0 m-0">
             {% for block in section.blocks %}
               <li class="flex items-start gap-3">
-                <span class="text-gray-400 text-xl">✖</span>
+                <span class="mgx-text-muted text-xl">✖</span>
                 {{ block.settings.other_brands }}
               </li>
             {% endfor %}

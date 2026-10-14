@@ -13,22 +13,23 @@
   <a
     href="#expanded-notes"
     data-scroll-to-foldable="1"
-    class="text-xs font-bold tracking-wider uppercase text-gray-900 underline underline-offset-4 decoration-2 mgx-underline-hover cursor-pointer">Pełny opis</a>
+    class="text-xs font-bold tracking-wider uppercase mgx-text underline underline-offset-4 decoration-2 mgx-underline-hover cursor-pointer">Pełny opis</a>
   <a
     href="#clean_label"
     data-scroll-to-anchor="clean-label-section"
-    class="text-xs font-bold tracking-wider uppercase text-gray-900 underline underline-offset-4 decoration-2 mgx-underline-hover cursor-pointer">Czysta etykieta</a>
+    class="text-xs font-bold tracking-wider uppercase mgx-text underline underline-offset-4 decoration-2 mgx-underline-hover cursor-pointer">Czysta etykieta</a>
 </div>
 <div class="scent-attributes flex gap-6 md:gap-12">
   {% if product.metafields.custom.fragrance_family != blank %}
     <figure class="flex flex-col items-center text-center m-0">
       <div class="relative h-16 flex items-center justify-center">
         <svg
+          class="mgx-text-muted"
           viewBox="0 0 64 64"
           width="48"
           height="48"
           fill="none"
-          stroke="#4a4a4a"
+          stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -45,7 +46,7 @@
           <path d="M14 50 Q32 44 50 50"></path>
         </svg>
       </div>
-      <figcaption class="text-sm text-gray-800">{{ product.metafields.custom.fragrance_family }}</figcaption>
+      <figcaption class="text-sm mgx-text">{{ product.metafields.custom.fragrance_family }}</figcaption>
     </figure>
   {% endif %}
 
@@ -55,11 +56,12 @@
     <figure class="flex flex-col items-center text-center m-0">
       <div class="relative h-16 flex items-center justify-center">
         <svg
+          class="mgx-text-muted"
           viewBox="0 0 64 64"
           width="48"
           height="48"
           fill="none"
-          stroke="#4a4a4a"
+          stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -70,7 +72,7 @@
             r="14"></circle>
           <path
             d="M26 22 a12 12 0 0 0 0 20 a10 10 0 0 1 0 -20 z"
-            fill="#4a4a4a"
+            fill="currentColor"
             stroke="none"></path>
           <g stroke-width="1.8">
             <line
@@ -110,7 +112,7 @@
           </g>
         </svg>
       </div>
-      <figcaption class="text-sm text-gray-800">{{ product.metafields.custom.occasion }}</figcaption>
+      <figcaption class="text-sm mgx-text">{{ product.metafields.custom.occasion }}</figcaption>
     </figure>
   {% endif %}
 
@@ -120,11 +122,12 @@
     <figure class="flex flex-col items-center text-center m-0">
       <div class="relative h-16 flex items-center justify-center">
         <svg
+          class="mgx-text-muted"
           viewBox="0 0 64 64"
           width="48"
           height="48"
           fill="none"
-          stroke="#4a4a4a"
+          stroke="currentColor"
           stroke-width="1.8"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -156,7 +159,7 @@
               x2="2"
               y2="11"></line>
           </g>
-          <path d="M50 26 q4 6 0 10 q-4 -4 0 -10z" fill="#4a4a4a"></path>
+          <path d="M50 26 q4 6 0 10 q-4 -4 0 -10z" fill="currentColor"></path>
           <g stroke-dasharray="2 2">
             <line
               x1="10"
@@ -168,7 +171,7 @@
           <path d="M30 46 q2 4 6 4 q4 0 6 -4"></path>
         </svg>
       </div>
-      <figcaption class="text-sm text-gray-800">{{ product.metafields.custom.season }}</figcaption>
+      <figcaption class="text-sm mgx-text">{{ product.metafields.custom.season }}</figcaption>
     </figure>
   {% endif %}
 
@@ -176,11 +179,12 @@
     <figure class="flex flex-col items-center text-center m-0">
       <div class="relative h-16 flex items-center justify-center">
         <svg
+          class="mgx-text-muted"
           viewBox="0 0 64 64"
           width="48"
           height="48"
           fill="none"
-          stroke="#4a4a4a"
+          stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -203,15 +207,15 @@
           <g stroke-width="1.5">
             <path
               d="M46 18 q6 -2 10 4 q-8 2 -10 -4z"
-              fill="#4a4a4a"
+              fill="currentColor"
               stroke="none"></path>
             <path
               d="M44 26 q6 0 10 6 q-8 0 -10 -6z"
-              fill="#4a4a4a"
+              fill="currentColor"
               stroke="none"></path>
             <path
               d="M46 36 q6 2 10 8 q-8 -2 -10 -8z"
-              fill="#4a4a4a"
+              fill="currentColor"
               stroke="none"></path>
             <line
               x1="42"
@@ -231,7 +235,7 @@
           </g>
         </svg>
       </div>
-      <figcaption class="text-sm text-gray-800">
+      <figcaption class="text-sm mgx-text">
         {% case product.metafields.custom.scent_intensity %}
           {% when 1 %}Lekki
         {% when 2 %}Średni

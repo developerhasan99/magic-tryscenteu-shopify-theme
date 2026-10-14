@@ -24,7 +24,7 @@
     </span>
 
     {% if product.compare_at_price > product.price %}
-      <span class="text-gray-500 font-semibold line-through compare-price">
+      <span class="mgx-text-muted font-semibold line-through compare-price">
         Designerpreis: {{ product.compare_at_price | money }}
       </span>
     {% endif %}
@@ -59,7 +59,7 @@
 -%}
 
 {% if next_bundle != blank %}
-  <div class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 mb-4">
+  <div class="bg-white border mgx-border rounded-lg px-4 py-2.5 mb-4">
     <div class="flex items-center gap-2 text-black">
       <svg
         class="size-6"
@@ -87,18 +87,18 @@
         {% unless product.tags contains 'fixed_bundle' %}
           @click="$store.bundleBuilder.showModal = true"
         {% endunless %}
-        class="bg-white border-2 border-solid border-gray-200 flex items-center p-[7px] rounded-xl gap-2 cursor-pointer relative transition duration-300 hover:border-black"
+        class="bg-white border-2 border-solid mgx-border flex items-center p-[7px] rounded-xl gap-2 cursor-pointer relative transition duration-300 hover:border-black"
         :class="{ 'mgx-selected' : typeof $store.bundleBuilder.selectedProducts[index - 1] !== 'undefined'}">
         <div x-text="index" class="mgx-check--on size-6 rounded-lg text-white font-bold text-xs flex items-center justify-center shrink-0"></div>
         <div x-show="!$store.bundleBuilder.selectedProducts[index - 1]" class="flex min-w-0 gap-2 items-center flex-grow">
             {% render 'perfume-icon'
             , size: 40 %}
             <div class="min-w-0 flex-1">
-              <div class="text-sm text-[#6b7280] overflow-hidden whitespace-nowrap [text-overflow:ellipsis]">
+              <div class="text-sm mgx-text-muted overflow-hidden whitespace-nowrap [text-overflow:ellipsis]">
                 Wybierz swój zapach
               </div>
             </div>
-            <span class="ml-auto shrink-0 text-[#6b7280]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></span>
+            <span class="ml-auto shrink-0 mgx-text-muted"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></span>
         </div>
         <div x-show="$store.bundleBuilder.selectedProducts[index - 1]" class="flex min-w-0 gap-2 items-center flex-grow">
             <img
@@ -110,7 +110,7 @@
             >
             <div class="text-left min-w-0 flex-1 flex flex-col gap-1">
                 <div class="font-bold text-sm leading-tight text-black line-clamp-1" x-text="$store.bundleBuilder.selectedProducts[index - 1].name"></div>
-                <div class="text-xs line-clamp-1 text-[#6b7280]"><span x-text="$store.bundleBuilder.selectedProducts[index - 1].inspiration_name"></span> - <span x-text="$store.bundleBuilder.selectedProducts[index - 1].variant.title"></span></div>
+                <div class="text-xs line-clamp-1 mgx-text-muted"><span x-text="$store.bundleBuilder.selectedProducts[index - 1].inspiration_name"></span> - <span x-text="$store.bundleBuilder.selectedProducts[index - 1].variant.title"></span></div>
             </div>
             {% unless product.tags contains 'fixed_bundle' %}
               <button @click.stop.prevent="$store.bundleBuilder.removeProduct(index - 1)" class="ml-auto size-7 shrink-0 bg-red-50 flex items-center justify-center rounded text-xs cursor-pointer border-0">
@@ -320,7 +320,7 @@
       class="w-10 h-10 flex-shrink-0"
       width="40"
       height="40" />
-    <div class="text-slate-900">
+    <div class="mgx-text">
       <strong class="font-semibold">Wypróbuj przez 60 dni — bez ryzyka.</strong>
       <div class="[display:none] md:block">Jeśli produkt nie spełni Twoich oczekiwań, zwrócimy Ci pełną kwotę!</div>
     </div>

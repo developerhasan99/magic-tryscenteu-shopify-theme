@@ -43,7 +43,7 @@
     {% comment %} Variant Selector — 30 / 50 / 100 ml {% endcomment %}
     <div class="flex justify-between items-center mb-3 !mt-6">
       <h2 class="m-0 text-sm md:text-base font-semibold">Wybierz pojemność:</h2>
-      <div class="text-xs md:text-sm italic text-gray-500">80% naszych klientów wybiera 50 ml lub więcej</div>
+      <div class="text-xs md:text-sm italic mgx-text-muted">80% naszych klientów wybiera 50 ml lub więcej</div>
     </div>
 
     <div class="flex gap-3" id="variant-selector">
@@ -68,7 +68,7 @@
             type="button"
             @click="$store.qb.selectSize('{{ size_key }}')"
             class="variant-button flex-grow rounded-lg px-3 py-2.5 bg-white border-2 border-solid cursor-pointer relative"
-            :class="$store.qb.selectedSize === '{{ size_key }}' ? 'border-black' : 'border-gray-200'"
+            :class="$store.qb.selectedSize === '{{ size_key }}' ? 'border-black' : 'mgx-border'"
             data-variant-id="{{ variant.id }}"
             data-variant-title="{{ variant.title }}"
             data-original-price="{{ variant.price | money }}"
@@ -76,7 +76,7 @@
             <div class="text-center leading-tight">
               <div class="text-sm font-semibold">{{ variant.title }}</div>
               {% if variant_ml > 0 %}
-                <div class="text-[11px] text-gray-500 mt-0.5">{{ price_per_ml | money }} / ml</div>
+                <div class="text-[11px] mgx-text-muted mt-0.5">{{ price_per_ml | money }} / ml</div>
               {% endif %}
             </div>
             {% if variant.title contains '50' %}
@@ -92,20 +92,20 @@
 
   {% comment %} Quantity breaker tiers {% endcomment %}
   <h2 class="m-0 text-base md:text-lg font-bold !mt-5">Kupuj więcej, oszczędzaj więcej:</h2>
-  <p class="m-0 mb-3 text-sm text-gray-500">Kup więcej i oszczędzaj – lub zamów jeden flakon.</p>
+  <p class="m-0 mb-3 text-sm mgx-text-muted">Kup więcej i oszczędzaj – lub zamów jeden flakon.</p>
 
   <div class="flex flex-col gap-3">
     <template x-for="tier in $store.qb.tiers" :key="tier.key">
       <div
         class="rounded-xl border-2 border-solid relative transition-colors duration-200"
-        :class="$store.qb.selectedTierKey === tier.key ? 'mgx-selected mgx-surface shadow-sm' : 'border-gray-200 bg-white'">
+        :class="$store.qb.selectedTierKey === tier.key ? 'mgx-selected mgx-surface shadow-sm' : 'mgx-border bg-white'">
         {% comment %} Card header — selects the tier {% endcomment %}
         <div
           @click="$store.qb.selectTier(tier.key)"
           class="px-3 py-3 cursor-pointer flex items-center gap-3">
           <span
             class="shrink-0 size-5 rounded-full border-2 border-solid flex items-center justify-center transition-colors"
-            :class="$store.qb.selectedTierKey === tier.key ? 'mgx-selected' : 'border-gray-300'">
+            :class="$store.qb.selectedTierKey === tier.key ? 'mgx-selected' : 'mgx-border'">
             <span
               x-show="$store.qb.selectedTierKey === tier.key"
               class="size-2.5 rounded-full mgx-dot"></span>
@@ -127,12 +127,12 @@
 
           <span class="shrink-0 text-right leading-tight">
             <span
-              class="block text-xs md:text-sm font-bold text-gray-500 line-through"
+              class="block text-xs md:text-sm font-bold mgx-text-muted line-through"
               x-show="$store.qb.tierCompare(tier) > $store.qb.tierPrice(tier)"
               x-text="$store.qb.money($store.qb.tierCompare(tier))"></span>
             <span class="block text-base md:text-lg font-extrabold text-black" x-text="$store.qb.money($store.qb.tierPrice(tier))"></span>
             <span
-              class="block text-[11px] text-gray-400"
+              class="block text-[11px] mgx-text-muted"
               x-show="tier.total === 1"
               x-text="'z VAT'"></span>
           </span>
@@ -152,14 +152,14 @@
           x-show="$store.qb.selectedTierKey === tier.key"
           x-cloak
           class="px-3 pb-3 flex flex-col gap-2">
-          <p x-show="tier.total > 1" class="m-0 text-[11px] font-semibold text-gray-500">
+          <p x-show="tier.total > 1" class="m-0 text-[11px] font-semibold mgx-text-muted">
             Zapachy w zestawie: <span x-text="tier.total"></span> —
             <span x-show="$store.qb.remaining > 0" x-text="'pozostało do wybrania: ' + $store.qb.remaining"></span>
             <span x-show="$store.qb.remaining === 0" class="mgx-text-accent">komplet ✓</span>
           </p>
 
           <template x-for="(slot, i) in $store.qb.slotList(tier)" :key="i">
-            <div class="flex items-center gap-3 rounded-xl bg-white border border-solid border-gray-200 p-2.5">
+            <div class="flex items-center gap-3 rounded-xl bg-white border border-solid mgx-border p-2.5">
               <div class="relative shrink-0 flex">
                 <template x-if="slot.product">
                   <img
@@ -170,7 +170,7 @@
                     class="size-12 rounded-lg object-cover bg-white border border-solid border-black/10">
                 </template>
                 <template x-if="!slot.product">
-                  <div class="size-12 rounded-lg bg-white border border-dashed border-solid border-black/25 flex items-center justify-center text-gray-300">
+                  <div class="size-12 rounded-lg bg-white border border-dashed border-solid border-black/25 flex items-center justify-center mgx-text-muted">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
                   </div>
                 </template>
@@ -181,13 +181,13 @@
                   <div>
                     <div class="text-[13px] md:text-sm font-bold text-black line-clamp-1" x-text="slot.product.name"></div>
                     <div
-                      class="text-[11px] text-gray-500 line-clamp-1"
+                      class="text-[11px] mgx-text-muted line-clamp-1"
                       x-show="slot.product.inspiration_name"
                       x-text="'Inspirowany zapachem ' + slot.product.inspiration_name"></div>
                   </div>
                 </template>
                 <template x-if="!slot.product">
-                  <div class="text-[13px] font-semibold text-gray-500">Wybierz zapach</div>
+                  <div class="text-[13px] font-semibold mgx-text-muted">Wybierz zapach</div>
                 </template>
               </div>
 
@@ -199,7 +199,7 @@
                 type="button"
                 @click="$store.qb.openModal()"
                 class="shrink-0 rounded-lg text-[11px] font-semibold px-3 py-1.5 cursor-pointer border border-solid transition-colors"
-                :class="slot.product ? 'bg-white text-black border-gray-300 hover:border-black' : 'bg-black text-white border-black hover:bg-gray-800'"
+                :class="slot.product ? 'bg-white text-black mgx-border hover:border-black' : 'bg-black text-white border-black hover:bg-gray-800'"
                 x-text="slot.product ? 'Zmień' : 'Wybierz'"></button>
             </div>
           </template>
@@ -296,11 +296,11 @@
 
       <div class="flex-shrink-0">
         <div class="p-3 pt-5 border-0 border-b border-solid mgx-border">
-          <h2 class="text-lg font-bold text-gray-900 my-0 text-center tracking-normal">
+          <h2 class="text-lg font-bold mgx-text my-0 text-center tracking-normal">
             <span x-show="$store.qb.remaining === 0">Wybór zakończony!</span>
             <span x-show="$store.qb.remaining > 0" x-text="$store.qb.chooseMoreText"></span>
           </h2>
-          <p class="my-0 text-center text-sm text-[#6b7280]">
+          <p class="my-0 text-center text-sm mgx-text-muted">
             Zapachy w zestawie: <span x-text="$store.qb.selectedTier.total"></span> ·
             Pojemność <span x-text="$store.qb.selectedSizeLabel"></span>
           </p>
@@ -332,7 +332,7 @@
               type="text"
               placeholder="Szukaj..."
               x-model="$store.qb.searchText"
-              class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white border-gray-200 focus:outline-none mgx-input focus:shadow-none focus:border-2">
+              class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white mgx-border focus:outline-none mgx-input focus:shadow-none focus:border-2">
           </div>
         </div>
       </div>
@@ -346,7 +346,7 @@
                 ($store.qb.searchText === '' || product.name.toLowerCase().includes($store.qb.searchText.toLowerCase()) || (product.inspiration_name && product.inspiration_name.toLowerCase().includes($store.qb.searchText.toLowerCase())))">
               <button
                 @click="$store.qb.addRemoveProduct(product)"
-                :class="$store.qb.isProductSelected(product.id) ? 'mgx-selected' : 'border-gray-200 border'"
+                :class="$store.qb.isProductSelected(product.id) ? 'mgx-selected' : 'mgx-border border'"
                 class="border-[1.5px] border-solid w-full p-2 flex items-center gap-2 justify-between cursor-pointer rounded-xl bg-white">
                 <img
                   class="object-cover rounded-lg"
@@ -364,18 +364,18 @@
                   <div class="flex items-center gap-1.5">
                     <span
                       x-show="product.tags.some(tag => tag === 'fuer-maenner')"
-                      class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight">Dla niego</span>
+                      class="shrink-0 px-2 py-0.5 rounded-full mgx-surface mgx-text-muted text-[10px] font-semibold leading-tight">Dla niego</span>
                     <span
                       x-show="product.tags.some(tag => tag === 'fuer-frauen')"
-                      class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight">Dla niej</span>
+                      class="shrink-0 px-2 py-0.5 rounded-full mgx-surface mgx-text-muted text-[10px] font-semibold leading-tight">Dla niej</span>
                     <span
                       x-show="product.occasion"
                       x-html="product.occasion"
-                      class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight line-clamp-1"></span>
+                      class="shrink-0 px-2 py-0.5 rounded-full mgx-surface mgx-text-muted text-[10px] font-semibold leading-tight line-clamp-1"></span>
                   </div>
                 </div>
                 <div class="shrink-0 ml-auto text-center">
-                  <div class="text-xs font-semibold text-[#6b7280]" x-text="$store.qb.selectedSizeLabel"></div>
+                  <div class="text-xs font-semibold mgx-text-muted" x-text="$store.qb.selectedSizeLabel"></div>
                   <div
                     class="size-8 rounded-full border-[1.5px] border-solid mgx-check flex items-center justify-center text-xl"
                     :class="{ 'mgx-check--on' : $store.qb.isProductSelected(product.id) }">
@@ -607,7 +607,7 @@
       class="w-10 h-10 flex-shrink-0"
       width="40"
       height="40" />
-    <div class="text-slate-900">
+    <div class="mgx-text">
       <strong class="font-semibold">Wypróbuj przez 60 dni — bez ryzyka.</strong>
       <div class="[display:none] md:block">Jeśli produkt nie spełni Twoich oczekiwań, zwrócimy Ci pełną kwotę!</div>
     </div>

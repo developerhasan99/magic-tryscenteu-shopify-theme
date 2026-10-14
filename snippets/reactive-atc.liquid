@@ -25,14 +25,14 @@
   {% comment %} Variant Selector {% endcomment %}
   <div class="flex justify-between items-center mb-3 !mt-6">
     <h2 class="m-0 text-sm md:text-base font-semibold">Wybierz pojemność:</h2>
-    <div class="text-xs md:text-sm italic text-gray-500">80% naszych klientów wybiera 50 ml lub więcej</div>
+    <div class="text-xs md:text-sm italic mgx-text-muted">80% naszych klientów wybiera 50 ml lub więcej</div>
   </div>
 
   <div class="flex gap-3" id="variant-selector">
     {% for variant in product.variants %}
       <button
         type="button"
-        class="variant-button flex-grow flex justify-center gap-2 rounded-lg px-2 pt-4 pb-3 bg-white border-2 border-solid cursor-pointer font-['Plus_Jakarta_Sans'] relative {% if variant.id == selected_variant.id %}border-black{% else %}border-gray-200{% endif %}"
+        class="variant-button flex-grow flex justify-center gap-2 rounded-lg px-2 pt-4 pb-3 bg-white border-2 border-solid cursor-pointer font-['Plus_Jakarta_Sans'] relative {% if variant.id == selected_variant.id %}border-black{% else %}mgx-border{% endif %}"
         data-variant-id="{{ variant.id }}"
         data-variant-title="{{ variant.title }}"
         data-original-price="{{ variant.price | money }}"
@@ -132,10 +132,10 @@
       variantButtons.forEach(button => {
         if (button.dataset.variantId === variantId) {
           button.classList.add('border-black');
-          button.classList.remove('border-gray-200');
+          button.classList.remove('mgx-border');
         } else {
           button.classList.remove('border-black');
-          button.classList.add('border-gray-200');
+          button.classList.add('mgx-border');
         }
       });
 
@@ -227,7 +227,7 @@
       class="w-10 h-10 flex-shrink-0"
       width="40"
       height="40" />
-    <div class="text-slate-900">
+    <div class="mgx-text">
       <strong class="font-semibold">Wypróbuj przez 60 dni — bez ryzyka.</strong>
       <div class="[display:none] md:block">Jeśli produkt nie spełni Twoich oczekiwań, zwrócimy Ci pełną kwotę!</div>
     </div>

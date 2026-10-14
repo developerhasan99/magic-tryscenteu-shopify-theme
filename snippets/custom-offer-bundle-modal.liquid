@@ -12,7 +12,7 @@
     </button>
     <div class="modal-header flex-shrink-0">
       <div class="p-3 pt-5 border-0 border-b border-solid mgx-border">
-        <h2 class="text-lg font-bold text-gray-900 my-0 text-center tracking-normal">
+        <h2 class="text-lg font-bold mgx-text my-0 text-center tracking-normal">
           <span x-show="$store.bundleBuilder.selectedProducts.length === $store.bundleBuilder.bundleLength">
             Twój zestaw jest gotowy!
           </span>
@@ -27,7 +27,7 @@
             </span>
           </span>
         </h2>
-        <p class="my-0 text-center text-sm text-[#6b7280]">Liczba flakonów w Twoim zestawie:
+        <p class="my-0 text-center text-sm mgx-text-muted">Liczba flakonów w Twoim zestawie:
           <span x-text="$store.bundleBuilder.bundleLength"></span></p>
       </div>
       <div x-show="$store.bundleBuilder.selectedProducts.length < $store.bundleBuilder.bundleLength" class="px-3 py-2">
@@ -56,7 +56,7 @@
             placeholder="Szukaj..."
             x-model="$store.bundleBuilder.searchText"
             x-effect="$store.bundleBuilder.showModal && $nextTick(() => $el.focus({ preventScroll: true }))"
-            class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white border-gray-200 focus:outline-none mgx-input focus:shadow-none focus:border-2">
+            class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white mgx-border focus:outline-none mgx-input focus:shadow-none focus:border-2">
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
           <div role="status">
             <svg
               aria-hidden="true"
-              class="size-20 text-gray-200 animate-spin mgx-fill-black"
+              class="size-20 animate-spin mgx-fill-black" style="color:var(--mgx-silver)"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +87,7 @@
          ($store.bundleBuilder.searchText === '' || product.name.toLowerCase().includes($store.bundleBuilder.searchText.toLowerCase()) || (product.inspiration_name && product.inspiration_name.toLowerCase().includes($store.bundleBuilder.searchText.toLowerCase())))">
               <button
                 @click="$store.bundleBuilder.addRemoveProduct(product)"
-                :class="$store.bundleBuilder.isProductSelected(product.id) ? 'mgx-selected' : 'border-gray-200 border'"
+                :class="$store.bundleBuilder.isProductSelected(product.id) ? 'mgx-selected' : 'mgx-border border'"
                 class="border-[1.5px] border-solid w-full p-2 flex items-center gap-2 justify-between cursor-pointer rounded-xl bg-white">
                 <img
                   class="object-cover rounded-lg"
@@ -104,10 +104,10 @@
                   </div>
                   <div x-show="product.gender || product.occasion" class="flex items-center gap-1.5 flex-wrap">
                     <template x-if="product.gender">
-                      <span class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight" x-text="product.gender"></span>
+                      <span class="shrink-0 px-2 py-0.5 rounded-full mgx-surface mgx-text-muted text-[10px] font-semibold leading-tight" x-text="product.gender"></span>
                     </template>
                     <template x-if="product.occasion">
-                      <span class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight" x-text="product.occasion"></span>
+                      <span class="shrink-0 px-2 py-0.5 rounded-full mgx-surface mgx-text-muted text-[10px] font-semibold leading-tight" x-text="product.occasion"></span>
                     </template>
                   </div>
                   <div x-show="product.inspiration_name != ''" class="flex items-center gap-2">
@@ -118,12 +118,12 @@
                       :alt="product.inspiration_name"
                       width="35"
                       height="35">
-                      <p class="text-xs my-0 shrink-0 text-[#6b7280]">Inspiracja:</p>
+                      <p class="text-xs my-0 shrink-0 mgx-text-muted">Inspiracja:</p>
                       <h4 x-text="product.inspiration_name" class="text-xs font-semibold my-0 line-clamp-1 inspiration_heading"></h4>
                   </div>
                 </div>
                 <div class="shrink-0 ml-auto text-center">
-                    <div class="text-xs font-semibold text-[#6b7280]" x-text="$store.bundleBuilder.selectedVariant"></div>
+                    <div class="text-xs font-semibold mgx-text-muted" x-text="$store.bundleBuilder.selectedVariant"></div>
                     <div class="size-8 rounded-full border-[1.5px] border-solid mgx-check flex items-center justify-center text-xl" :class="{ 'mgx-check--on' : $store.bundleBuilder.isProductSelected(product.id) }">
                         <span x-show="!$store.bundleBuilder.isProductSelected(product.id)">+</span>
                         <svg x-show="$store.bundleBuilder.isProductSelected(product.id)" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>

@@ -28,7 +28,7 @@
           width="{{ product.featured_image.width }}">
       </div>
       <div>
-        <div class="bg-[#f2f2f2] px-4 py-6 rounded-lg !mb-4">
+        <div class="mgx-surface px-4 py-6 rounded-lg !mb-4">
           <h2 class="m-0 mb-3 text-2xl tracking-normal font-semibold text-center">Kompozycja zapachowa</h2>
           <div class="[&_p]:last:mb-0 [&_p]:leading-snug [&_p]:tracking-normal text-center">
             {{ product.metafields.custom.scent_breakdown | metafield_tag }}
@@ -41,8 +41,8 @@
             </h3>
           </div>
           <div class="col-span-2">
-            <h4 class="m-0 pb-2 border-0 border-b border-solid border-gray-300">{{ product.metafields.custom.top_notes.value.heading }}</h4>
-            <p class="mb-0 mt-2 tracking-normal text-[#888888] leading-snug text-sm">{{ product.metafields.custom.top_notes.value.description | metafield_text }}</p>
+            <h4 class="m-0 pb-2 border-0 border-b border-solid mgx-border">{{ product.metafields.custom.top_notes.value.heading }}</h4>
+            <p class="mb-0 mt-2 tracking-normal mgx-text-muted leading-snug text-sm">{{ product.metafields.custom.top_notes.value.description | metafield_text }}</p>
           </div>
         </div>
         <div class="bg-white p-4 rounded-lg grid grid-cols-3 gap-4 !mb-3">
@@ -52,8 +52,8 @@
             </h3>
           </div>
           <div class="col-span-2">
-            <h4 class="m-0 pb-2 border-0 border-b border-solid border-gray-300">{{ product.metafields.custom.middle_notes.value.heading }}</h4>
-            <p class="mb-0 mt-2 tracking-normal text-[#888888] leading-snug text-sm">{{ product.metafields.custom.middle_notes.value.description | metafield_text }}</p>
+            <h4 class="m-0 pb-2 border-0 border-b border-solid mgx-border">{{ product.metafields.custom.middle_notes.value.heading }}</h4>
+            <p class="mb-0 mt-2 tracking-normal mgx-text-muted leading-snug text-sm">{{ product.metafields.custom.middle_notes.value.description | metafield_text }}</p>
           </div>
         </div>
         <div class="bg-white p-4 rounded-lg grid grid-cols-3 gap-4 !mb-0">
@@ -63,8 +63,8 @@
             </h3>
           </div>
           <div class="col-span-2">
-            <h4 class="m-0 pb-2 border-0 border-b border-solid border-gray-300">{{ product.metafields.custom.base_notes.value.heading }}</h4>
-            <p class="mb-0 mt-2 tracking-normal text-[#888888] leading-snug text-sm">{{ product.metafields.custom.base_notes.value.description | metafield_text }}</p>
+            <h4 class="m-0 pb-2 border-0 border-b border-solid mgx-border">{{ product.metafields.custom.base_notes.value.heading }}</h4>
+            <p class="mb-0 mt-2 tracking-normal mgx-text-muted leading-snug text-sm">{{ product.metafields.custom.base_notes.value.description | metafield_text }}</p>
           </div>
         </div>
       </div>

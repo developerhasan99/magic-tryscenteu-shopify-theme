@@ -182,7 +182,7 @@
                 alt="{{ image.alt }}"
                 height="150"
                 width="150"
-                class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid border-gray-200 rounded-lg cursor-pointer" />
+                class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid mgx-border rounded-lg cursor-pointer" />
             {% endif %}
           {% endfor %}
           {% if image_found == false %}
@@ -195,7 +195,7 @@
                   alt="{{ image.alt }}"
                   height="150"
                   width="150"
-                  class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid border-gray-200 rounded-lg cursor-pointer" />
+                  class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid mgx-border rounded-lg cursor-pointer" />
               {% endif %}
             {% endfor %}
           {% endif %}
@@ -207,7 +207,7 @@
                 alt="{{ image.alt }}"
                 height="150"
                 width="150"
-                class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid border-gray-200 rounded-lg cursor-pointer marketing_image" />
+                class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid mgx-border rounded-lg cursor-pointer marketing_image" />
             {% endfor %}
           {% endif %}
         {% else %}
@@ -218,7 +218,7 @@
               alt="{{ image.alt }}"
               height="150"
               width="150"
-              class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid border-gray-200 rounded-lg cursor-pointer" />
+              class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid mgx-border rounded-lg cursor-pointer" />
           {% endfor %}
           {% if marketing_images != blank %}
             {% for image in marketing_images %}
@@ -228,7 +228,7 @@
                 alt="{{ image.alt }}"
                 height="150"
                 width="150"
-                class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid border-gray-200 rounded-lg cursor-pointer marketing_image" />
+                class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid mgx-border rounded-lg cursor-pointer marketing_image" />
             {% endfor %}
           {% endif %}
         {% endif %}

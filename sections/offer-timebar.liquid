@@ -82,15 +82,6 @@
     text-transform: uppercase;
   }
 
-  .timebar-section-bg {
-    display: block;
-    text-decoration: none;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    background-color: #f87171;
-    background-repeat: repeat;
-  }
-
   .timebar-container {
     max-width: 1280px;
     margin-left: auto;
@@ -108,7 +99,7 @@
   }
 
   .timebar-sale-text {
-    color: white;
+    color: var(--mgx-white);
     font-size: 2rem;
     line-height: 1;
   }
@@ -213,7 +204,7 @@
                   {% for block in section.blocks %}
 
                     <div
-                      class="flex flex-col items-center {% unless forloop.last %}pr-4 border-0 border-r border-solid border-gray-300{% endunless %}"
+                      class="flex flex-col items-center {% unless forloop.last %}pr-4 border-0 border-r border-solid mgx-border{% endunless %}"
                       {{ block.shopify_attributes }}
                     >
 
@@ -256,7 +247,7 @@
 {% if section.settings.enable_badges %}
   {% if section.blocks.size > 0 %}
 
-    <div class="md:hidden py-3 border-0 border-b border-solid border-gray-200">
+    <div class="md:hidden py-3 border-0 border-b border-solid mgx-border">
 
       <div class="page-width">
 
@@ -288,7 +279,7 @@
             </div>
 
             {% unless forloop.last %}
-              <div class="!block w-[1px] bg-gray-200 self-stretch"></div>
+              <div class="!block w-[1px] self-stretch" style="background-color: var(--mgx-silver);"></div>
             {% endunless %}
 
           {% endfor %}

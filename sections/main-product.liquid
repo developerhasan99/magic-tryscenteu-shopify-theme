@@ -117,7 +117,7 @@
                   {{- block.settings.text -}}
                 </p>
               {%-  when 'custom_rating_text' -%}
-                <a href="#reviews" class="flex gap-1 items-center no-underline text-gray-700 scroll-smooth" {{ block.shopify_attributes }}>
+                <a href="#reviews" class="flex gap-1 items-center no-underline mgx-text-muted scroll-smooth" {{ block.shopify_attributes }}>
                   <img src="{{ 'rating-stars.svg' |  asset_url }}" alt="*****" height="16" width="80">
                   <div class="leading-snug tracking-normal text-sm md:text-base">
                     {{ block.settings.text }}
@@ -139,7 +139,7 @@
                         </span>
                       {% endif %}
                       {% if product.template_suffix == 'expressive-notes' %}
-                        <span class="inline-flex items-center px-3 py-1 rounded-md border border-solid border-[#3b82f6] text-[#3b82f6] text-sm font-medium bg-white">
+                        <span class="inline-flex items-center px-3 py-1 rounded-md border border-solid mgx-chip-outline text-sm font-medium bg-white">
                         {% if product.tags contains 'Woman' or product.tags contains 'fuer-frauen' %}
                          KOBIETY
                         {% else %}
