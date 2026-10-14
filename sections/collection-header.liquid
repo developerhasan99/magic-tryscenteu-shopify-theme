@@ -35,7 +35,7 @@
         <!-- Customer rating badge -->
         <div class="inline-flex items-center bg-black/40 backdrop-blur-sm rounded-full px-4 py-2 border border-gray-600">
           <div class="flex items-center flex-wrap justify-center space-x-2">
-            <div class="flex text-yellow-400">
+            <div class="flex mgx-star">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                 <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
               </svg>
@@ -65,7 +65,7 @@
           {% if section.settings.btn_text != blank %}
             <a
               href="{{ section.settings.btn_link }}"
-              class="no-underline text-white tracking-normal font-medium px-8 py-3 bg-[#137c44] hover:bg-[#02491c] rounded-full text-lg text-center transition-colors w-full block"
+              class="no-underline text-white tracking-normal font-medium px-8 py-3 mgx-btn-primary rounded-full text-lg text-center transition-colors w-full block"
               aria-label="View All">
               {{ section.settings.btn_text }}
             </a>
@@ -103,7 +103,7 @@
         {% for block in section.blocks %}
           {% if block.type == 'step' %}
             <div class="flex items-center space-x-4 border border-solid border-gray-600/30 bg-[#090909] backdrop-blur-sm rounded-full p-2 md:p-4" {{ block.shopify_attributes }}>
-              <div class="flex-shrink-0 w-10 h-10 bg-[linear-gradient(to_right,#28A745,#20C997,#28A745)] rounded-full flex items-center justify-center">
+              <div class="flex-shrink-0 w-10 h-10 mgx-bg-black rounded-full flex items-center justify-center">
                 <span class="text-white font-bold text-sm">0{{ forloop.index }}</span>
               </div>
               <div>

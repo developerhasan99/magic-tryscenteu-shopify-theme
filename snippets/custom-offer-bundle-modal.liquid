@@ -5,13 +5,13 @@
   class="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-[9999]"
   x-cloak>
   <div class="bg-white rounded-3xl pb-3 max-w-xl w-full h-[80vh] md:h-[90vh] flex flex-col relative" @click.away="$store.bundleBuilder.showModal = false">
-    <button @click="$store.bundleBuilder.showModal = false" class="absolute -top-10 right-2 md:top-2 md:right-2 w-8 h-8 bg-[#f1f4f2] text-black rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white border-0 text-3xl cursor-pointer transition">
+    <button @click="$store.bundleBuilder.showModal = false" class="absolute -top-10 right-2 md:top-2 md:right-2 w-8 h-8 mgx-surface text-black rounded-full flex items-center justify-center mgx-close border-0 text-3xl cursor-pointer transition">
       <span class="[rotate:-45deg] size-4 flex">
         {{- 'icon-plus.svg' | inline_asset_content -}}
       </span>
     </button>
     <div class="modal-header flex-shrink-0">
-      <div class="p-3 pt-5 border-0 border-b border-solid border-[#e3e8e5]">
+      <div class="p-3 pt-5 border-0 border-b border-solid mgx-border">
         <h2 class="text-lg font-bold text-gray-900 my-0 text-center tracking-normal">
           <span x-show="$store.bundleBuilder.selectedProducts.length === $store.bundleBuilder.bundleLength">
             Twój zestaw jest gotowy!
@@ -34,16 +34,16 @@
         <div class="flex gap-1.5">
           <button
             @click="$store.bundleBuilder.activeCategory = 'All'"
-            :class="$store.bundleBuilder.activeCategory === 'All' ? 'border-[#22613A] bg-[#22613A] text-white hover:!text-white' : 'bg-white border-gray-200'"
-            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#22613A] hover:border-[#22613A]">Bestsellery</button>
+            :class="$store.bundleBuilder.activeCategory === 'All' ? 'mgx-pill-active' : 'mgx-pill'"
+            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer">Bestsellery</button>
           <button
             @click="$store.bundleBuilder.activeCategory = 'fuer-maenner'"
-            :class="$store.bundleBuilder.activeCategory === 'fuer-maenner' ? 'border-[#22613A] bg-[#22613A] text-white hover:!text-white' : 'bg-white border-gray-200'"
-            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#22613A] hover:border-[#22613A]">Dla mężczyzn</button>
+            :class="$store.bundleBuilder.activeCategory === 'fuer-maenner' ? 'mgx-pill-active' : 'mgx-pill'"
+            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer">Dla mężczyzn</button>
           <button
             @click="$store.bundleBuilder.activeCategory = 'fuer-frauen'"
-            :class="$store.bundleBuilder.activeCategory === 'fuer-frauen' ? 'border-[#22613A] bg-[#22613A] text-white hover:!text-white' : 'bg-white border-gray-200'"
-            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#22613A] hover:border-[#22613A]">Dla kobiet</button>
+            :class="$store.bundleBuilder.activeCategory === 'fuer-frauen' ? 'mgx-pill-active' : 'mgx-pill'"
+            class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer">Dla kobiet</button>
         </div>
       </div>
       <div class="px-3 pb-3">
@@ -56,7 +56,7 @@
             placeholder="Szukaj..."
             x-model="$store.bundleBuilder.searchText"
             x-effect="$store.bundleBuilder.showModal && $nextTick(() => $el.focus({ preventScroll: true }))"
-            class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white border-gray-200 focus:outline-none focus:border-[#22613A] focus:shadow-none focus:border-2">
+            class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white border-gray-200 focus:outline-none mgx-input focus:shadow-none focus:border-2">
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
           <div role="status">
             <svg
               aria-hidden="true"
-              class="size-20 text-gray-200 animate-spin fill-[#22613A]"
+              class="size-20 text-gray-200 animate-spin mgx-fill-black"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +87,7 @@
          ($store.bundleBuilder.searchText === '' || product.name.toLowerCase().includes($store.bundleBuilder.searchText.toLowerCase()) || (product.inspiration_name && product.inspiration_name.toLowerCase().includes($store.bundleBuilder.searchText.toLowerCase())))">
               <button
                 @click="$store.bundleBuilder.addRemoveProduct(product)"
-                :class="$store.bundleBuilder.isProductSelected(product.id) ? 'border-[#22613A]' : 'border-gray-200 border'"
+                :class="$store.bundleBuilder.isProductSelected(product.id) ? 'mgx-selected' : 'border-gray-200 border'"
                 class="border-[1.5px] border-solid w-full p-2 flex items-center gap-2 justify-between cursor-pointer rounded-xl bg-white">
                 <img
                   class="object-cover rounded-lg"
@@ -99,15 +99,15 @@
                   <div class="flex items-center gap-1.5">
                     <h3 class="my-0 font-bold text-base leading-tight text-black line-clamp-1" x-text="product.name"></h3>
                     <template x-if="product.tags && product.tags.some(tag => tag.toLowerCase() === 'bestseller')">
-                      <span class="shrink-0 rounded-full bg-[#22613A] text-white text-[10px] font-semibold px-2 py-0.5 leading-none">Bestseller</span>
+                      <span class="shrink-0 rounded-full mgx-badge-amber text-white text-[10px] font-semibold px-2 py-0.5 leading-none">Bestseller</span>
                     </template>
                   </div>
                   <div x-show="product.gender || product.occasion" class="flex items-center gap-1.5 flex-wrap">
                     <template x-if="product.gender">
-                      <span class="shrink-0 px-2 py-0.5 rounded-full bg-[#f1f4f2] text-[#6b7280] text-[10px] font-semibold leading-tight" x-text="product.gender"></span>
+                      <span class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight" x-text="product.gender"></span>
                     </template>
                     <template x-if="product.occasion">
-                      <span class="shrink-0 px-2 py-0.5 rounded-full bg-[#f1f4f2] text-[#6b7280] text-[10px] font-semibold leading-tight" x-text="product.occasion"></span>
+                      <span class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight" x-text="product.occasion"></span>
                     </template>
                   </div>
                   <div x-show="product.inspiration_name != ''" class="flex items-center gap-2">
@@ -124,7 +124,7 @@
                 </div>
                 <div class="shrink-0 ml-auto text-center">
                     <div class="text-xs font-semibold text-[#6b7280]" x-text="$store.bundleBuilder.selectedVariant"></div>
-                    <div class="size-8 rounded-full border-[1.5px] border-solid border-[#22613A] flex items-center justify-center text-xl text-[#22613A]" :class="{ 'bg-[#22613A]' : $store.bundleBuilder.isProductSelected(product.id) }">
+                    <div class="size-8 rounded-full border-[1.5px] border-solid mgx-check flex items-center justify-center text-xl" :class="{ 'mgx-check--on' : $store.bundleBuilder.isProductSelected(product.id) }">
                         <span x-show="!$store.bundleBuilder.isProductSelected(product.id)">+</span>
                         <svg x-show="$store.bundleBuilder.isProductSelected(product.id)" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
                     </div>

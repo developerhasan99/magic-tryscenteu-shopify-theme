@@ -129,12 +129,12 @@
                     <div class="absolute top-1 left-0">
                       {% if product.tags contains 'onsale' and product.compare_at_price != blank and product.compare_at_price > product.price %}
                         {%- assign discount_percent = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-                        <span class="inline-block bg-red-600 text-white text-sm font-bold px-3 py-1">
+                        <span class="inline-block mgx-badge-amber text-sm font-bold px-3 py-1">
                           {{ discount_percent }}% rabatu
                         </span>
                       {% endif %}
                       {% if product.tags contains 'Bestseller' %}
-                        <span class="inline-block bg-[#22613A] text-white text-sm font-bold px-3 py-1 mr-2">
+                        <span class="inline-block mgx-badge-amber text-sm font-bold px-3 py-1 mr-2">
                           Bestseller
                         </span>
                       {% endif %}
@@ -2846,7 +2846,7 @@
         {
           "type": "color",
           "id": "star_color",
-          "default": "#FFCC00",
+          "default": "#9A5B1E",
           "label": "Stars color"
         },
         {
@@ -2976,7 +2976,7 @@
         {
           "type": "color",
           "id": "star_color",
-          "default": "#ffcc00",
+          "default": "#9A5B1E",
           "label": "Stars color"
         },
         {

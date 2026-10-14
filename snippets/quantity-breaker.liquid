@@ -80,10 +80,10 @@
               {% endif %}
             </div>
             {% if variant.title contains '50' %}
-              <span class="text-[10px] italic text-white rounded absolute -top-[10px] left-1/2 [transform:translateX(-50%)] bg-[#c8202f] px-2 py-0.5 leading-normal">Popularne</span>
+              <span class="text-[10px] italic text-white rounded absolute -top-[10px] left-1/2 [transform:translateX(-50%)] mgx-badge-amber px-2 py-0.5 leading-normal">Popularne</span>
             {% endif %}
             {% if variant.title contains '100' %}
-              <span class="text-[10px] italic text-white rounded absolute -top-[10px] left-1/2 [transform:translateX(-50%)] bg-[#17803d] px-2 py-0.5 leading-normal">Bestseller</span>
+              <span class="text-[10px] italic text-white rounded absolute -top-[10px] left-1/2 [transform:translateX(-50%)] mgx-badge-amber px-2 py-0.5 leading-normal">Bestseller</span>
             {% endif %}
           </button>
       {% endfor %}
@@ -98,17 +98,17 @@
     <template x-for="tier in $store.qb.tiers" :key="tier.key">
       <div
         class="rounded-xl border-2 border-solid relative transition-colors duration-200"
-        :class="$store.qb.selectedTierKey === tier.key ? 'border-[#c8202f] bg-[#fdf2f2] shadow-sm' : 'border-gray-200 bg-white'">
+        :class="$store.qb.selectedTierKey === tier.key ? 'mgx-selected mgx-surface shadow-sm' : 'border-gray-200 bg-white'">
         {% comment %} Card header — selects the tier {% endcomment %}
         <div
           @click="$store.qb.selectTier(tier.key)"
           class="px-3 py-3 cursor-pointer flex items-center gap-3">
           <span
             class="shrink-0 size-5 rounded-full border-2 border-solid flex items-center justify-center transition-colors"
-            :class="$store.qb.selectedTierKey === tier.key ? 'border-[#c8202f]' : 'border-gray-300'">
+            :class="$store.qb.selectedTierKey === tier.key ? 'mgx-selected' : 'border-gray-300'">
             <span
               x-show="$store.qb.selectedTierKey === tier.key"
-              class="size-2.5 rounded-full bg-[#c8202f]"></span>
+              class="size-2.5 rounded-full mgx-dot"></span>
           </span>
 
           <span class="grow min-w-0">
@@ -117,11 +117,11 @@
               <span
                 x-show="$store.qb.savingsPercent(tier) > 0"
                 x-cloak
-                class="rounded bg-[#17803d] text-white text-[11px] md:text-xs font-bold px-1.5 py-1 leading-none"
+                class="rounded mgx-badge-amber text-white text-[11px] md:text-xs font-bold px-1.5 py-1 leading-none"
                 x-text="'−' + $store.qb.savingsPercent(tier) + '%'"></span>
             </span>
             <span
-              class="block text-xs md:text-sm text-[#17803d] mt-1 font-bold"
+              class="block text-xs md:text-sm mgx-text-accent mt-1 font-bold"
               x-text="tier.total > 1 ? 'Tylko ' + $store.qb.money($store.qb.perBottle(tier)) + ' za flakon' : tier.note"></span>
           </span>
 
@@ -155,7 +155,7 @@
           <p x-show="tier.total > 1" class="m-0 text-[11px] font-semibold text-gray-500">
             Zapachy w zestawie: <span x-text="tier.total"></span> —
             <span x-show="$store.qb.remaining > 0" x-text="'pozostało do wybrania: ' + $store.qb.remaining"></span>
-            <span x-show="$store.qb.remaining === 0" class="text-[#17803d]">komplet ✓</span>
+            <span x-show="$store.qb.remaining === 0" class="mgx-text-accent">komplet ✓</span>
           </p>
 
           <template x-for="(slot, i) in $store.qb.slotList(tier)" :key="i">
@@ -193,7 +193,7 @@
 
               <span
                 x-show="slot.preselected"
-                class="shrink-0 text-[11px] md:text-xs font-bold text-[#17803d]">Wybrany</span>
+                class="shrink-0 text-[11px] md:text-xs font-bold mgx-text-accent">Wybrany</span>
               <button
                 x-show="!slot.preselected"
                 type="button"
@@ -255,7 +255,7 @@
         value="1"
         :aria-disabled="!$store.qb.isComplete"
         :class="!$store.qb.isComplete ? 'opacity-60 cursor-not-allowed' : ''"
-        class="atc-button shimmer-btn cta_product_from_submit_btn flex gap-x-2 flex-wrap items-center justify-center !mb-0 text-2xl !p-3 rounded-lg button hover:bg-[#17803d] bg-[#146b32] transition-colors shadow-xl tracking-normal button--full-width button--primary"
+        class="atc-button shimmer-btn cta_product_from_submit_btn flex gap-x-2 flex-wrap items-center justify-center !mb-0 text-2xl !p-3 rounded-lg button mgx-btn-primary transition-colors shadow-xl tracking-normal button--full-width button--primary"
         aria-label="Dodaj do koszyka">
         <span
           x-show="!$store.qb.isComplete"
@@ -265,7 +265,7 @@
         <span x-show="$store.qb.isComplete">{{ 'products.product.add_to_cart' | t }}</span>
         {% comment %} <div class="flex items-center" x-show="$store.qb.isComplete">
           <div
-            class="inline-block text-lg bg-[#0c5224] px-3 rounded"
+            class="inline-block text-lg mgx-price-pill px-3 rounded"
             id="product-price"
             role="status"
             {{ block.shopify_attributes }}>
@@ -290,12 +290,12 @@
       @click.away="$store.qb.showModal = false">
       <button
         @click="$store.qb.showModal = false"
-        class="absolute -top-10 right-2 md:top-2 md:right-2 w-8 h-8 bg-[#f1f4f2] text-black rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white border-0 text-2xl cursor-pointer transition">
+        class="absolute -top-10 right-2 md:top-2 md:right-2 w-8 h-8 mgx-surface text-black rounded-full flex items-center justify-center mgx-close border-0 text-2xl cursor-pointer transition">
         <span class="[rotate:45deg] leading-none">+</span>
       </button>
 
       <div class="flex-shrink-0">
-        <div class="p-3 pt-5 border-0 border-b border-solid border-[#e3e8e5]">
+        <div class="p-3 pt-5 border-0 border-b border-solid mgx-border">
           <h2 class="text-lg font-bold text-gray-900 my-0 text-center tracking-normal">
             <span x-show="$store.qb.remaining === 0">Wybór zakończony!</span>
             <span x-show="$store.qb.remaining > 0" x-text="$store.qb.chooseMoreText"></span>
@@ -310,16 +310,16 @@
           <div class="flex gap-1.5">
             <button
               @click="$store.qb.activeCategory = 'All'"
-              :class="$store.qb.activeCategory === 'All' ? 'border-[#17803d] bg-[#17803d] text-white hover:!text-white' : 'bg-white border-gray-200'"
-              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#17803d] hover:border-[#17803d]">Bestseller</button>
+              :class="$store.qb.activeCategory === 'All' ? 'mgx-pill-active' : 'mgx-pill'"
+              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer">Bestseller</button>
             <button
               @click="$store.qb.activeCategory = 'fuer-maenner'"
-              :class="$store.qb.activeCategory === 'fuer-maenner' ? 'border-[#17803d] bg-[#17803d] text-white hover:!text-white' : 'bg-white border-gray-200'"
-              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#17803d] hover:border-[#17803d]">Dla niego</button>
+              :class="$store.qb.activeCategory === 'fuer-maenner' ? 'mgx-pill-active' : 'mgx-pill'"
+              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer">Dla niego</button>
             <button
               @click="$store.qb.activeCategory = 'fuer-frauen'"
-              :class="$store.qb.activeCategory === 'fuer-frauen' ? 'border-[#17803d] bg-[#17803d] text-white hover:!text-white' : 'bg-white border-gray-200'"
-              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#17803d] hover:border-[#17803d]">Dla niej</button>
+              :class="$store.qb.activeCategory === 'fuer-frauen' ? 'mgx-pill-active' : 'mgx-pill'"
+              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer">Dla niej</button>
           </div>
         </div>
 
@@ -332,7 +332,7 @@
               type="text"
               placeholder="Szukaj..."
               x-model="$store.qb.searchText"
-              class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white border-gray-200 focus:outline-none focus:border-[#17803d] focus:shadow-none focus:border-2">
+              class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white border-gray-200 focus:outline-none mgx-input focus:shadow-none focus:border-2">
           </div>
         </div>
       </div>
@@ -346,7 +346,7 @@
                 ($store.qb.searchText === '' || product.name.toLowerCase().includes($store.qb.searchText.toLowerCase()) || (product.inspiration_name && product.inspiration_name.toLowerCase().includes($store.qb.searchText.toLowerCase())))">
               <button
                 @click="$store.qb.addRemoveProduct(product)"
-                :class="$store.qb.isProductSelected(product.id) ? 'border-[#17803d]' : 'border-gray-200 border'"
+                :class="$store.qb.isProductSelected(product.id) ? 'mgx-selected' : 'border-gray-200 border'"
                 class="border-[1.5px] border-solid w-full p-2 flex items-center gap-2 justify-between cursor-pointer rounded-xl bg-white">
                 <img
                   class="object-cover rounded-lg"
@@ -359,26 +359,26 @@
                     <h3 class="my-0 font-bold text-base leading-tight text-black line-clamp-1" x-text="product.name"></h3>
                     <span
                       x-show="product.tags.some(tag => tag.toLowerCase() === 'bestseller')"
-                      class="shrink-0 px-2 py-0.5 rounded-full bg-[#17803d] text-white text-[10px] font-semibold leading-tight">Bestseller</span>
+                      class="shrink-0 px-2 py-0.5 rounded-full mgx-badge-amber text-white text-[10px] font-semibold leading-tight">Bestseller</span>
                   </div>
                   <div class="flex items-center gap-1.5">
                     <span
                       x-show="product.tags.some(tag => tag === 'fuer-maenner')"
-                      class="shrink-0 px-2 py-0.5 rounded-full bg-[#f1f4f2] text-[#6b7280] text-[10px] font-semibold leading-tight">Dla niego</span>
+                      class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight">Dla niego</span>
                     <span
                       x-show="product.tags.some(tag => tag === 'fuer-frauen')"
-                      class="shrink-0 px-2 py-0.5 rounded-full bg-[#f1f4f2] text-[#6b7280] text-[10px] font-semibold leading-tight">Dla niej</span>
+                      class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight">Dla niej</span>
                     <span
                       x-show="product.occasion"
                       x-html="product.occasion"
-                      class="shrink-0 px-2 py-0.5 rounded-full bg-[#f1f4f2] text-[#6b7280] text-[10px] font-semibold leading-tight line-clamp-1"></span>
+                      class="shrink-0 px-2 py-0.5 rounded-full mgx-surface text-[#6b7280] text-[10px] font-semibold leading-tight line-clamp-1"></span>
                   </div>
                 </div>
                 <div class="shrink-0 ml-auto text-center">
                   <div class="text-xs font-semibold text-[#6b7280]" x-text="$store.qb.selectedSizeLabel"></div>
                   <div
-                    class="size-8 rounded-full border-[1.5px] border-solid border-[#17803d] flex items-center justify-center text-xl text-[#17803d]"
-                    :class="{ 'bg-[#17803d]' : $store.qb.isProductSelected(product.id) }">
+                    class="size-8 rounded-full border-[1.5px] border-solid mgx-check flex items-center justify-center text-xl"
+                    :class="{ 'mgx-check--on' : $store.qb.isProductSelected(product.id) }">
                     <span x-show="!$store.qb.isProductSelected(product.id)">+</span>
                     <svg x-show="$store.qb.isProductSelected(product.id)" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
                   </div>
@@ -392,7 +392,7 @@
       <div class="flex-shrink-0 px-3 pt-2">
         <button
           @click="$store.qb.showModal = false"
-          class="w-full rounded-full bg-[#146b32] hover:bg-[#17803d] text-white border-0 text-lg font-bold py-3 cursor-pointer transition-colors">
+          class="w-full rounded-full mgx-btn-primary text-white border-0 text-lg font-bold py-3 cursor-pointer transition-colors">
           Gotowe
         </button>
       </div>
@@ -423,7 +423,7 @@
       tiers: [
         { key: 't1', label: 'Jeden flakon', pay: 1, total: 1, badge: '', badgeColor: '', note: 'Tylko jeden flakon' },
         { key: 't2', label: '2 + 1 GRATIS', pay: 2, total: 3, badge: '', badgeColor: '' },
-        { key: 't3', label: '3 + 2 GRATIS', pay: 3, total: 5, badge: 'Najlepsza oferta 🔥', badgeColor: '#17803d' }
+        { key: 't3', label: '3 + 2 GRATIS', pay: 3, total: 5, badge: 'Najlepsza oferta 🔥', badgeColor: 'var(--mgx-amber)' }
       ],
       selectedTierKey: 't1',
 

@@ -97,7 +97,7 @@
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width shimmer-btn hover:bg-[#17803d] bg-[#146b32] {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %} rounded-full leading-[50px]"
+            class="product-form__submit button button--full-width shimmer-btn mgx-btn-primary {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %} rounded-full leading-[50px]"
             {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout or product.selected_or_first_available_variant == nil %}
             disabled
             {% endif %}>
