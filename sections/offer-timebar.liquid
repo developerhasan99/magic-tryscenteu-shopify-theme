@@ -195,7 +195,7 @@
                     style="color: {{ section.settings.primary_color }};"
                     class="text-sm md:text-base font-bold leading-none md:hidden"
                   >
-                    Endet in
+                    {{ 'sections.offer_timebar.ends_in' | t }}
                   </div>
 
                   <div id="flipdown" class="flipdown"></div>
@@ -346,7 +346,12 @@
         const deadline = getCountdownDeadline();
 
         new FlipDown(deadline, {
-          headings: ["Tage", "Std", "Min", "Sek"]
+          headings: [
+            {{ 'sections.offer_timebar.days' | t | json }},
+            {{ 'sections.offer_timebar.hours' | t | json }},
+            {{ 'sections.offer_timebar.minutes' | t | json }},
+            {{ 'sections.offer_timebar.seconds' | t | json }}
+          ]
         })
           .start()
           .ifEnded(() => {

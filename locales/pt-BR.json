@@ -283,6 +283,13 @@
     }
   },
   "sections": {
+    "offer_timebar": {
+      "ends_in": "Termina em",
+      "days": "Dias",
+      "hours": "Hrs",
+      "minutes": "Min",
+      "seconds": "Seg"
+    },
     "header": {
       "announcement": "Comunicado",
       "menu": "Menu",

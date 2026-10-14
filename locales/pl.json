@@ -292,6 +292,13 @@
     }
   },
   "sections": {
+    "offer_timebar": {
+      "ends_in": "Kończy się za",
+      "days": "Dni",
+      "hours": "Godz",
+      "minutes": "Min",
+      "seconds": "Sek"
+    },
     "header": {
       "announcement": "Ogłoszenie",
       "menu": "Menu",

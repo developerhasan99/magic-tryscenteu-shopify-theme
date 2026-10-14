@@ -273,6 +273,13 @@
     }
   },
   "sections": {
+    "offer_timebar": {
+      "ends_in": "Endet in",
+      "days": "Tage",
+      "hours": "Std",
+      "minutes": "Min",
+      "seconds": "Sek"
+    },
     "header": {
       "announcement": "Ankündigung",
       "menu": "Menü",

@@ -274,6 +274,13 @@
     }
   },
   "sections": {
+    "offer_timebar": {
+      "ends_in": "Ends in",
+      "days": "Days",
+      "hours": "Hrs",
+      "minutes": "Min",
+      "seconds": "Sec"
+    },
     "announcements": {
       "previous_announcement": "Previous announcement",
       "next_announcement": "Next announcement",

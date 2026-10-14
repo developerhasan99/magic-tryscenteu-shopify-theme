@@ -292,6 +292,13 @@
     }
   },
   "sections": {
+    "offer_timebar": {
+      "ends_in": "Končí za",
+      "days": "Dny",
+      "hours": "Hod",
+      "minutes": "Min",
+      "seconds": "Sek"
+    },
     "header": {
       "announcement": "Oznámení",
       "menu": "Menu",
