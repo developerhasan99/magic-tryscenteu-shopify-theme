@@ -52,7 +52,7 @@
         "custom_liquid_zQNhHc": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% render 'scent-profiling' %}\n{% render 'quantity-breaker' %}"
+            "custom_liquid": "{% render 'scent-profiling' %}\n{% if product.available %}\n  {% render 'quantity-breaker' %}\n{% else %}\n  {% render 'reactive-atc' %}\n{% endif %}"
           }
         },
         "reactive_atc_LBDQE9": {
