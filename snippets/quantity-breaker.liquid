@@ -579,25 +579,7 @@
     loading="lazy">
 </div>
 
-{% assign country_iso_code = localization.country.iso_code | downcase %}
-{% if country_iso_code == 'pl' %}
-  <div class="flex items-center gap-4">
-    <img
-      src="https://companieslogo.com/img/orig/INPST.AS-62b68c68.png"
-      alt="Inpost"
-      height="30"
-      width="20">
-    <div class="font-semibold">
-      Dostawa w ciągu 24 godzin
-    </div>
-  </div>
-{% else %}
-  <div class="!my-6">
-    <p class="my-0 text-center font-semibold tracking-normal">
-      Dostawa w ciągu 5 dni roboczych.
-    </p>
-  </div>
-{% endif %}
+{% render 'shipping-badges' %}
 
 <div class="my-6">
   <div class="flex items-center gap-3 text-base">

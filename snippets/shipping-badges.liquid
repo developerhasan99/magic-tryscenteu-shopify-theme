@@ -1,0 +1,36 @@
+{%- comment -%}
+  Shipping badges under the add-to-cart. Rendered by reactive-atc and quantity-breaker.
+  Poland: 48h delivery + InPost rows. Other markets: the generic delivery line.
+{%- endcomment -%}
+{%- liquid
+  assign country_iso_code = localization.country.iso_code | downcase
+-%}
+{%- if country_iso_code == 'pl' -%}
+  <style>
+    .shipping-badges__icon { width: 24px; height: 24px; }
+    .shipping-badges__icon svg { display: block; width: 100%; height: 100%; }
+    .shipping-badges__logo { height: 24px; width: auto; }
+  </style>
+  <div class="shipping-badges my-6 flex flex-col gap-3">
+    <div class="flex items-center gap-3 text-sm font-semibold mgx-text">
+      <span class="shipping-badges__icon flex-shrink-0" aria-hidden="true">{{ 'icon-truck.svg' | inline_asset_content }}</span>
+      <span>Dostawa w 48 godzin na terenie Polski</span>
+    </div>
+    <div class="flex items-center gap-3 text-sm font-semibold mgx-text">
+      <img
+        class="shipping-badges__logo flex-shrink-0 [filter:grayscale(1)]"
+        src="{{ 'inpost-logo.svg' | asset_url }}"
+        alt="InPost"
+        width="40"
+        height="24"
+        loading="lazy">
+      <span>Bezpieczna wysyłka z InPost</span>
+    </div>
+  </div>
+{%- else -%}
+  <div class="!my-6">
+    <p class="my-0 text-center font-semibold tracking-normal">
+      Dostawa w ciągu 5 dni roboczych.
+    </p>
+  </div>
+{%- endif -%}
