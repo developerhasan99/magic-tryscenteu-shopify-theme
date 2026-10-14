@@ -21,7 +21,9 @@
   }
 </style>
 
-{% if product.variants.size > 1 %}
+{% if product.available == false %}
+  {% render 'sold-out-alternative', product: product %}
+{% elsif product.variants.size > 1 %}
   {% comment %} Variant Selector {% endcomment %}
   <div class="flex justify-between items-center mb-3 !mt-6">
     <h2 class="m-0 text-sm md:text-base font-semibold">Wybierz pojemność:</h2>
@@ -51,6 +53,7 @@
   </div>
 {% endif %}
 
+{% if product.available %}
 {% comment %} Add to cart form {% endcomment %}
 <product-form
   class="product-form !m-0"
@@ -95,6 +98,7 @@
     </button>
   {%- endform -%}
 </product-form>
+{% endif %}
 
 <script>
   (function() {
@@ -117,8 +121,8 @@
     const variantButtons = document.querySelectorAll('.variant-button');
     const variantIdInput = document.getElementById('product-variant-id');
     const priceContainer = document.getElementById('product-price');
-    const comparePriceSpan = priceContainer.querySelector('.compare-price');
-    const currentPriceSpan = priceContainer.querySelector('.current-price');
+    const comparePriceSpan = priceContainer?.querySelector('.compare-price');
+    const currentPriceSpan = priceContainer?.querySelector('.current-price');
 
     // Update variant selection
     function updateVariant(variantId) {
