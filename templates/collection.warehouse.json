@@ -65,7 +65,7 @@
       ],
       "name": "Collection Header",
       "settings": {
-        "background_color": "#f5f1e9",
+        "background_color": "#ffffff",
         "text_color": "#000000",
         "bg_image": "shopify://shop_images/payday_banner.png",
         "bg_mobile_image": "shopify://shop_images/payday_mobile_Nobottles.jpg",

@@ -72,8 +72,8 @@
       ],
       "name": "Offer Timebar",
       "settings": {
-        "primary_color": "#173e34",
-        "secondary_color": "#dce9de",
+        "primary_color": "#100f0d",
+        "secondary_color": "#ffffff",
         "top_banner_text": "",
         "prepend_text": "Kup 1, odbierz 1 GRATIS! 🎁",
         "countdown_date": "",
@@ -128,7 +128,7 @@
       ],
       "settings": {
         "text_size": "1.5",
-        "background_color": "#000000",
+        "background_color": "#100f0d",
         "text_color": "#ffffff",
         "speed": 1,
         "text_spacing": 3,

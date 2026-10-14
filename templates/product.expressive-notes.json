@@ -226,7 +226,7 @@
             "text_alignment": "center",
             "text_size": 18,
             "display_stars": true,
-            "star_color": "#ffcc00",
+            "star_color": "#9a5b1e",
             "star_size": 16,
             "star_placement": "below",
             "image_shape": "circle",
@@ -283,7 +283,7 @@
       "type": "you-may-like",
       "name": "You May Like",
       "settings": {
-        "background_color": "#f7f7f7",
+        "background_color": "#ffffff",
         "title": "Może Ci się również spodobać",
         "description": "",
         "collection": "bestsellers",
@@ -346,7 +346,7 @@
       "type": "scent-breakdown",
       "name": "Scent Breakdown",
       "settings": {
-        "background_color": "#f7f7f7",
+        "background_color": "#ffffff",
         "padding_top": 72,
         "padding_bottom": 72
       }
@@ -399,7 +399,7 @@
       ],
       "name": "Stacks Up",
       "settings": {
-        "background_color": "#f7f7f7",
+        "background_color": "#ffffff",
         "title": "Dlaczego MagyX?",
         "subtitle": "Rozsądna alternatywa dla drogich marek luksusowych.",
         "padding_top": 12,
@@ -1333,7 +1333,7 @@
       ],
       "name": "Massive Review",
       "settings": {
-        "background_color": "#fcfbf9",
+        "background_color": "#ffffff",
         "heading": "Opinie klientów",
         "review_text": "4,7/5 na podstawie ponad 10 400 opinii",
         "button_text": "Zobacz więcej opinii",

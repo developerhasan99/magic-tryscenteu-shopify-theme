@@ -196,7 +196,7 @@
             "text_alignment": "center",
             "text_size": 18,
             "display_stars": true,
-            "star_color": "#ffcc00",
+            "star_color": "#9a5b1e",
             "star_size": 16,
             "star_placement": "below",
             "image_shape": "circle",
@@ -353,7 +353,7 @@
       ],
       "name": "Stacks Up",
       "settings": {
-        "background_color": "#f7f7f7",
+        "background_color": "#ffffff",
         "title": "Dlaczego Tryscent?",
         "subtitle": "Rozsądna alternatywa dla drogich marek luksusowych.",
         "padding_top": 12,
@@ -1287,7 +1287,7 @@
       ],
       "name": "Massive Review",
       "settings": {
-        "background_color": "#fcfbf9",
+        "background_color": "#ffffff",
         "heading": "Opinie klientów",
         "review_text": "4,7/5 na podstawie ponad 10 400 opinii",
         "button_text": "Zobacz więcej opinii",
