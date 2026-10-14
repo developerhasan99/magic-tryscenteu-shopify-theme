@@ -23,11 +23,11 @@
       "settings": {
         "background_image": "shopify://shop_images/MAGYX_Site_Header.webp",
         "mobile_background_image": "shopify://shop_images/MAGYX_Site_Header_Mobile_B.webp",
+        "show_review": false,
         "review_text": "POKOCHANE PRZEZ PONAD 10 000 KLIENTÓW",
         "button_text": "Dla niej",
         "button_link": "shopify://collections/top-seller-women",
-        "secondary_button_link": "shopify://collections/top-sellers-men",
-        "show_review": false
+        "secondary_button_link": "shopify://collections/top-sellers-men"
       },
       "blocks": {}
     },
@@ -37,6 +37,7 @@
       "blocks": {}
     },
     "popular_products_RyfRNL": {
+      "disabled": true,
       "settings": {
         "show_all_button_text": "Zobacz wszystkie"
       },
@@ -133,6 +134,46 @@
           }
         }
       }
+    },
+    "popular_products_3gqnEi": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "home_tabs_fcxFYG": {
+      "settings": {},
+      "blocks": {
+        "collection_gRbYPe": {
+          "disabled": false,
+          "settings": {
+            "tab_title": "🔥 BESTSELLERY"
+          }
+        },
+        "collection_hafVz": {
+          "type": "collection",
+          "disabled": false,
+          "settings": {
+            "tab_icon": null,
+            "tab_title": "Najnowsze Zapachy",
+            "collection": "neue-angesagte-dufte",
+            "button_text": "ZOBACZ"
+          }
+        },
+        "collection_xgUpzQ": {
+          "disabled": true,
+          "settings": {}
+        },
+        "collection_3WBTm3": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "collection_gRbYPe",
+        "collection_hafVz",
+        "collection_xgUpzQ",
+        "collection_3WBTm3"
+      ]
     }
   }
 }

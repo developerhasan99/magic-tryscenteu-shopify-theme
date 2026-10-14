@@ -12,5 +12,11 @@
     "market": "poland"
   },
   "parent": "product.quantity-breaker.json",
-  "sections": {}
+  "sections": {
+    "feature_heighlights_fCUG3E": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    }
+  }
 }
