@@ -16,9 +16,11 @@
     "offer_timebar_4WVn7P": {
       "settings": {
         "prepend_text": "JESIENNA PROMOCJA",
-        "countdown_date": "",
+        "countdown_date": "2026/10/18 23:59",
         "append_text": "1+1, 2+3 Gratis!",
-        "link": "shopify://collections/top-sellers"
+        "link": "shopify://collections/top-sellers",
+        "enable_badges": false,
+        "enable_timer": true
       },
       "blocks": {
         "payment_icon_MmG3KL": {
