@@ -1,0 +1,165 @@
+{% comment %}
+  Sold-out notice + first available recommended alternative (custom.recommended_alternative).
+  Rendered by reactive-atc in place of the purchase form when the product is unavailable.
+{% endcomment %}
+{% liquid
+  assign alt = nil
+  for p in product.metafields.custom.recommended_alternative.value
+    if p.available and p.id != product.id
+      assign alt = p
+      break
+    endif
+  endfor
+
+  if alt
+    assign alt_variant = alt.first_available_variant
+    for v in alt.variants
+      if v.available and v.title contains '50'
+        assign alt_variant = v
+        break
+      endif
+    endfor
+  endif
+%}
+
+<style>
+  .soa-notice { margin-top: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; border: 2px dashed #d1d5db; border-radius: 8px; background: #f3f4f6; color: #6b7280; cursor: not-allowed; user-select: none; }
+  .soa-notice__title { font-weight: 600; line-height: 1.375; font-size: 16px; }
+  .soa-notice__text { font-size: 14px; line-height: 1.375; }
+  .soa-card { margin-top: 16px; border: 2px solid #e5e7eb; border-radius: 12px; overflow: hidden; background: #fff; }
+  .soa-card__head { background: #22613a; color: #fff; font-weight: 600; padding: 8px 16px; }
+  .soa-card__body { padding: 16px; }
+  .soa-link { display: flex; align-items: center; gap: 16px; text-decoration: none; color: #000; }
+  .soa-link img { width: 80px; height: 80px; object-fit: contain; flex-shrink: 0; }
+  .soa-title { margin: 0; font-weight: 600; font-size: 18px; letter-spacing: -0.025em; }
+  .soa-insp { margin: 0; font-size: 16px; color: #374151; line-height: 1.375; }
+  .soa-stock { margin-top: 4px; font-size: 14px; color: #15803d; display: flex; align-items: center; gap: 6px; }
+  .soa-stock::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #16a34a; }
+  .soa-size-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: 24px; margin-bottom: 12px; }
+  .soa-size-head h4 { margin: 0; font-size: 14px; font-weight: 600; }
+  .soa-size-head p { margin: 0; font-size: 12px; font-style: italic; color: #6b7280; }
+  .soa-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
+  .soa-tile { position: relative; text-align: center; border-radius: 8px; padding: 16px 8px 12px; background: #fff; border: 2px solid #e5e7eb; cursor: pointer; font-family: 'Figtree', var(--font-body-family); }
+  .soa-tile:has(:checked) { border-color: #944234; }
+  .soa-tile:has(:focus-visible) { outline: 2px solid #944234; outline-offset: 2px; }
+  .soa-tile__title { font-size: 14px; font-weight: 600; }
+  .soa-tile__ml { font-size: 12px; color: #6b7280; }
+  .soa-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: 12px; font-style: italic; color: #fff; border-radius: 4px; padding: 2px 8px; white-space: nowrap; }
+  .soa .soa-atc { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; width: 100%; background: #22613a; color: #fff; border-radius: 8px; padding: 16px 12px; margin-bottom: 0; letter-spacing: normal; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); transition: background-color 0.15s; }
+  .soa .soa-atc:hover { background: #368856; }
+  .soa-atc__label { font-size: 20px; }
+  .soa-pill { background: #1e5834; padding: 0 12px; border-radius: 4px; font-size: 16px; }
+  .soa-pill s { opacity: 0.5; font-size: 14px; }
+  @media (min-width: 750px) {
+    .soa-notice__title { font-size: 19px; }
+  }
+  @media (min-width: 768px) {
+    .soa-size-head h4 { font-size: 16px; }
+    .soa-size-head p { font-size: 14px; }
+    .soa-atc__label { font-size: 24px; }
+    .soa-pill { font-size: 18px; }
+    .soa-pill s { font-size: 16px; }
+  }
+</style>
+
+<div class="soa" data-sold-out-alternative>
+  <div class="soa-notice" aria-disabled="true">
+    <div class="soa-notice__title">{{ 'products.product.sold_out' | t }} – chwilowo brak w magazynie</div>
+    <div class="soa-notice__text">
+      Tego produktu nie można teraz zamówić.{% if alt %} Wypróbuj naszą alternatywę poniżej.{% endif %}
+    </div>
+  </div>
+
+  {% if alt %}
+    <div class="soa-card">
+      <div class="soa-card__head">✓ Polecana alternatywa</div>
+      <div class="soa-card__body">
+        <a class="soa-link" href="{{ alt.url }}">
+          {% if alt.featured_image %}
+            {% assign img_alt = alt.featured_image.alt | default: alt.title %}
+            {{ alt.featured_image | image_url: width: 160 | image_tag: width: 80, height: 80, loading: 'lazy', alt: img_alt }}
+          {% endif %}
+          <div>
+            <h3 class="soa-title">{{ alt.title }}</h3>
+            {% assign insp = alt.metafields.custom.inspiration.value.name %}
+            {% if insp != blank %}
+              <p class="soa-insp">Inspirowane przez: {{ insp }}</p>
+            {% endif %}
+            <div class="soa-stock">{{ 'products.product.inventory_in_stock' | t }}</div>
+          </div>
+        </a>
+
+        <product-form class="product-form !m-0" data-section-id="{{ section.id }}">
+          {%- form 'product', alt, id: 'soa-form', class: 'form', novalidate: 'novalidate' -%}
+            {% if alt.variants.size > 1 %}
+              <div class="soa-size-head">
+                <h4>Wybierz pojemność:</h4>
+                <p>50 ml wybiera 8 na 10 klientów.</p>
+              </div>
+              <div class="soa-tiles" role="radiogroup">
+                {% for v in alt.variants %}
+                  {% unless v.available %}{% continue %}{% endunless %}
+                  {% liquid
+                    assign ml = 0
+                    if v.title contains '100'
+                      assign ml = 100
+                    elsif v.title contains '50'
+                      assign ml = 50
+                    elsif v.title contains '30'
+                      assign ml = 30
+                    endif
+                  %}
+                  <label class="soa-tile">
+                    <input class="visually-hidden" type="radio" name="id" value="{{ v.id }}" {% if v.id == alt_variant.id %}checked{% endif %}>
+                    <div class="soa-tile__title">{{ v.title }}</div>
+                    {% if ml > 0 %}
+                      <div class="soa-tile__ml">{{ v.price | times: 1.0 | divided_by: ml | round | money }} / ml</div>
+                    {% endif %}
+                    {% if v.title contains '50' %}
+                      <span class="soa-badge" style="background:#c8202f">Popularny</span>
+                    {% elsif v.title contains '100' %}
+                      <span class="soa-badge" style="background:#944234">Bestseller</span>
+                    {% endif %}
+                  </label>
+                {% endfor %}
+              </div>
+            {% else %}
+              <input type="hidden" name="id" value="{{ alt_variant.id }}">
+            {% endif %}
+
+            {% if alt.metafields.custom.nuta != blank %}
+              <input type="hidden" name="properties[Inspired By]" value="{{ alt.metafields.custom.nuta | escape }}">
+            {% endif %}
+
+            <button
+              type="submit"
+              name="add"
+              class="soa-atc button shimmer-btn"
+              aria-label="{{ 'products.product.add_to_cart' | t }}: {{ alt.title | escape }}">
+              <span class="soa-atc__label">{{ 'products.product.add_to_cart' | t }}</span>
+              <span class="soa-pill" role="status">
+                {% for v in alt.variants %}
+                  {% unless v.available %}{% continue %}{% endunless %}
+                  <span data-price-for="{{ v.id }}" {% unless v.id == alt_variant.id %}hidden{% endunless %}>
+                    {% if v.compare_at_price > v.price %}<s>{{ v.compare_at_price | money }}</s>{% endif %}
+                    {{ v.price | money }}
+                  </span>
+                {% endfor %}
+              </span>
+              {%- render 'loading-spinner' -%}
+            </button>
+          {%- endform -%}
+        </product-form>
+      </div>
+    </div>
+
+    <script>
+      document.querySelector('[data-sold-out-alternative] form').addEventListener('change', function (e) {
+        if (e.target.name !== 'id') return;
+        this.querySelectorAll('[data-price-for]').forEach(function (el) {
+          el.hidden = el.dataset.priceFor !== e.target.value;
+        });
+      });
+    </script>
+  {% endif %}
+</div>
