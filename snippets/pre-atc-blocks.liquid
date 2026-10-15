@@ -20,13 +20,3 @@
   {% endif %}
 </div>
 
-{% unless product.template_suffix == 'expressive-notes' %}
-  {% assign selling_points = product.metafields.custom.bullet_points.value %}
-  {% if selling_points %}
-    <ul id="atc_scroll_target" class="list-none pl-0">
-      {% for point in selling_points %}
-        <li>✅ {{ point }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endunless %}

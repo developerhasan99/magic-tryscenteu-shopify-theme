@@ -53,6 +53,7 @@
 
 {% comment %} Add to cart form {% endcomment %}
 <product-form
+  id="atc_scroll_target"
   class="product-form !m-0"
   data-hide-errors="{{ gift_card_recipient_feature_active }}"
   data-section-id="{{ section.id }}">
@@ -191,7 +192,7 @@
 
 <div>
   <img
-    class="max-w-[400px] mx-auto mt-8 block [filter:grayscale(1)]"
+    class="max-w-[400px] mx-auto mt-8 block"
     src="{{ 'payment-badge.svg' | asset_url }}"
     alt="Payment methods"
     width="100%"

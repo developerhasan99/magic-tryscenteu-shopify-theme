@@ -37,6 +37,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <div
+  id="atc_scroll_target"
   x-data
   x-effect="$store.qb.currentPrice; $store.qb.currentCompare; $store.qb.syncGlobalPrices()">
   {% if product.variants.size > 1 %}
@@ -571,7 +572,7 @@
 </script>
 <div>
   <img
-    class="max-w-[400px] mx-auto mt-8 block [filter:grayscale(1)]"
+    class="max-w-[400px] mx-auto mt-8 block"
     src="{{ 'payment-badge.svg' | asset_url }}"
     alt="Payment methods"
     width="100%"
