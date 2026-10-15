@@ -350,6 +350,7 @@
         "perks_qWY7Uy",
         "perks_HKnHJ8"
       ],
+      "disabled": true,
       "name": "Feature Highlights",
       "settings": {
         "background_color": "#ffffff",
@@ -379,7 +380,7 @@
         "stack_EkfTtL": {
           "type": "stack",
           "settings": {
-            "our_stack": "Komplementy każdego dnia już od 10€",
+            "our_stack": "Komplementy każdego dnia już od 54,99 zł",
             "other_brands": "Często produkowane masowo"
           }
         },
@@ -437,7 +438,7 @@
         "text_Mhwr3T": {
           "type": "text",
           "settings": {
-            "content": "<p>Produkcja w UE gwarantuje najwyższe standardy jakości i pozwala nam nadzorować każdy etap procesu. </p><p>Od wyboru wysokiej jakości surowców po staranne napełnianie każdego flakonu — dbamy o to, by każdy produkt spełniał nasze wysokie wymagania dotyczące jakości i wykonania.</p>",
+            "content": "<p>Produkowane w zakładach na terenie UE, ze składników i według receptur zgodnych z wymogami IFRA.</p><ul><li>Bez ftalanów</li><li>Bez parabenów</li><li>Wegańskie</li><li>Nietestowane na zwierzętach</li><li>Z certyfikatem IFRA</li><li>Opracowane zgodnie z normami UE</li><li>Bez znanych substancji zaburzających gospodarkę hormonalną</li></ul><p>Tworzymy perfumy zgodnie z rygorystycznymi europejskimi normami kosmetycznymi</p>",
             "mobile_content": "",
             "font_size": 18,
             "text_color": "#000000"
