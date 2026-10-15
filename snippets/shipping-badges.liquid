@@ -32,8 +32,14 @@
     <span class="shipping-badges__text">Bezpieczna wysyłka z InPost</span>
   </div>
   <div class="shipping-badges__item">
-    <span class="shipping-badges__icon" aria-hidden="true">{% render 'icon-accordion', icon: 'return' %}</span>
-    <span class="shipping-badges__text">Wypróbuj przez 60 dni — bez ryzyka.</span>
+    <img
+      class="shipping-badges__logo [filter:grayscale(1)]"
+      src="{{ 'guarantee-badge.png' | asset_url }}"
+      alt=""
+      width="28"
+      height="28"
+      loading="lazy">
+    <span class="shipping-badges__text">Wypróbuj przez 60 dni, bez ryzyka.</span>
   </div>
 </div>
 <p class="shipping-badges__note mgx-text-muted mb-6 [display:none] md:block">Jeśli produkt nie spełni Twoich oczekiwań, zwrócimy Ci pełną kwotę!</p>
