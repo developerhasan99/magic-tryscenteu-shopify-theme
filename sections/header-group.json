@@ -72,12 +72,15 @@
       ],
       "name": "Offer Timebar",
       "settings": {
+        "enable_top_bar": true,
+        "enable_timer": true,
+        "enable_badges": false,
         "primary_color": "#100f0d",
         "secondary_color": "#ffffff",
         "top_banner_text": "",
-        "prepend_text": "Kup 1, odbierz 1 GRATIS! 🎁",
-        "countdown_date": "",
-        "append_text": "Kup teraz",
+        "prepend_text": "Kup 3, zapłać za 2!",
+        "countdown_date": "2026/10/18 23:59:59",
+        "append_text": "",
         "link": "shopify://collections/top-sellers"
       }
     },
