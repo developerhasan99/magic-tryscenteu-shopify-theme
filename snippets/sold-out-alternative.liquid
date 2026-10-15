@@ -23,32 +23,32 @@
 %}
 
 <style>
-  .soa-notice { margin-top: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; border: 2px dashed #d1d5db; border-radius: 8px; background: #f3f4f6; color: #6b7280; cursor: not-allowed; user-select: none; }
+  .soa-notice { margin-top: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; border: 2px dashed var(--mgx-silver); border-radius: 8px; background: rgba(var(--mgx-silver-rgb), 0.25); color: var(--mgx-text-muted); cursor: not-allowed; user-select: none; }
   .soa-notice__title { font-weight: 600; line-height: 1.375; font-size: 16px; }
   .soa-notice__text { font-size: 14px; line-height: 1.375; }
-  .soa-card { margin-top: 16px; border: 2px solid #e5e7eb; border-radius: 12px; overflow: hidden; background: #fff; }
-  .soa-card__head { background: #22613a; color: #fff; font-weight: 600; padding: 8px 16px; }
+  .soa-card { margin-top: 16px; border: 2px solid var(--mgx-hairline); border-radius: 12px; overflow: hidden; background: var(--mgx-white); }
+  .soa-card__head { background: var(--mgx-black); color: var(--mgx-white); font-weight: 600; padding: 8px 16px; }
   .soa-card__body { padding: 16px; }
-  .soa-link { display: flex; align-items: center; gap: 16px; text-decoration: none; color: #000; }
+  .soa-link { display: flex; align-items: center; gap: 16px; text-decoration: none; color: var(--mgx-text); }
   .soa-link img { width: 80px; height: 80px; object-fit: contain; flex-shrink: 0; }
   .soa-title { margin: 0; font-weight: 600; font-size: 18px; letter-spacing: -0.025em; }
-  .soa-insp { margin: 0; font-size: 16px; color: #374151; line-height: 1.375; }
+  .soa-insp { margin: 0; font-size: 16px; color: var(--mgx-text-muted); line-height: 1.375; }
   .soa-stock { margin-top: 4px; font-size: 14px; color: #15803d; display: flex; align-items: center; gap: 6px; }
   .soa-stock::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #16a34a; }
   .soa-size-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: 24px; margin-bottom: 12px; }
   .soa-size-head h4 { margin: 0; font-size: 14px; font-weight: 600; }
-  .soa-size-head p { margin: 0; font-size: 12px; font-style: italic; color: #6b7280; }
+  .soa-size-head p { margin: 0; font-size: 12px; font-style: italic; color: var(--mgx-text-muted); }
   .soa-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
-  .soa-tile { position: relative; text-align: center; border-radius: 8px; padding: 16px 8px 12px; background: #fff; border: 2px solid #e5e7eb; cursor: pointer; font-family: 'Figtree', var(--font-body-family); }
-  .soa-tile:has(:checked) { border-color: #944234; }
-  .soa-tile:has(:focus-visible) { outline: 2px solid #944234; outline-offset: 2px; }
+  .soa-tile { position: relative; text-align: center; border-radius: 8px; padding: 16px 8px 12px; background: var(--mgx-white); border: 2px solid var(--mgx-hairline); cursor: pointer; font-family: 'Figtree', var(--font-body-family); }
+  .soa-tile:has(:checked) { border-color: var(--mgx-black); }
+  .soa-tile:has(:focus-visible) { outline: 2px solid var(--mgx-black); outline-offset: 2px; }
   .soa-tile__title { font-size: 14px; font-weight: 600; }
-  .soa-tile__ml { font-size: 12px; color: #6b7280; }
-  .soa-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: 12px; font-style: italic; color: #fff; border-radius: 4px; padding: 2px 8px; white-space: nowrap; }
-  .soa .soa-atc { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; width: 100%; background: #22613a; color: #fff; border-radius: 8px; padding: 16px 12px; margin-bottom: 0; letter-spacing: normal; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); transition: background-color 0.15s; }
-  .soa .soa-atc:hover { background: #368856; }
+  .soa-tile__ml { font-size: 12px; color: var(--mgx-text-muted); }
+  .soa-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: 12px; font-style: italic; color: var(--mgx-white); border-radius: 4px; padding: 2px 8px; white-space: nowrap; }
+  .soa .soa-atc { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; width: 100%; background: var(--mgx-cta); color: var(--mgx-cta-text); border-radius: 8px; padding: 16px 12px; margin-bottom: 0; letter-spacing: normal; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); transition: background-color 0.15s; }
+  .soa .soa-atc:hover { background: var(--mgx-cta-hover); }
   .soa-atc__label { font-size: 20px; }
-  .soa-pill { background: #1e5834; padding: 0 12px; border-radius: 4px; font-size: 16px; }
+  .soa-pill { background: rgba(var(--mgx-white-rgb), 0.15); padding: 0 12px; border-radius: 4px; font-size: 16px; }
   .soa-pill s { opacity: 0.5; font-size: 14px; }
   @media (min-width: 750px) {
     .soa-notice__title { font-size: 19px; }
@@ -64,7 +64,7 @@
 
 <div class="soa" data-sold-out-alternative>
   <div class="soa-notice" aria-disabled="true">
-    <div class="soa-notice__title">{{ 'products.product.sold_out' | t }} – chwilowo brak w magazynie</div>
+    <div class="soa-notice__title">{{ 'products.product.sold_out' | t }}: chwilowo brak w magazynie</div>
     <div class="soa-notice__text">
       Tego produktu nie można teraz zamówić.{% if alt %} Wypróbuj naszą alternatywę poniżej.{% endif %}
     </div>
@@ -116,9 +116,9 @@
                       <div class="soa-tile__ml">{{ v.price | times: 1.0 | divided_by: ml | round | money }} / ml</div>
                     {% endif %}
                     {% if v.title contains '50' %}
-                      <span class="soa-badge" style="background:#c8202f">Popularny</span>
+                      <span class="soa-badge mgx-badge-amber">Popularny</span>
                     {% elsif v.title contains '100' %}
-                      <span class="soa-badge" style="background:#944234">Bestseller</span>
+                      <span class="soa-badge mgx-badge-amber">Bestseller</span>
                     {% endif %}
                   </label>
                 {% endfor %}
