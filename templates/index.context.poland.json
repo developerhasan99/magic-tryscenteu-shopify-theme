@@ -13,11 +13,6 @@
   },
   "parent": "index.json",
   "sections": {
-    "home_hero_XQyQrf": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
     "tryscent_hero_VWyBcY": {
       "disabled": false,
       "settings": {
