@@ -100,6 +100,10 @@
 .mgx-text-muted {
   color: var(--mgx-text-muted);
 }
+/* empty-state glyphs: empty stars, empty bundle slots */
+.mgx-icon-subtle {
+  color: var(--mgx-silver);
+}
 .mgx-text-white {
   color: var(--mgx-white);
 }

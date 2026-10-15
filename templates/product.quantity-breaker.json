@@ -72,9 +72,9 @@
             "show_countdown": true,
             "countdown_label": "Ends in",
             "end_time": "",
-            "bar_color": "#22613b",
-            "track_color": "#c2dbcb",
-            "accent_color": "#22613b"
+            "bar_color": "#9a5b1e",
+            "track_color": "#c7c9cb",
+            "accent_color": "#9a5b1e"
           }
         },
         "buy_buttons_eXWBwX": {
@@ -391,7 +391,7 @@
         "stack_w3Jyyc": {
           "type": "stack",
           "settings": {
-            "our_stack": "Płacisz za jakość — nie za marketing",
+            "our_stack": "Płacisz za jakość, nie za marketing",
             "other_brands": "Płacisz za nazwę marki"
           }
         },

@@ -89,7 +89,7 @@
 
   {% comment %} Quantity breaker tiers {% endcomment %}
   <h2 class="m-0 text-base md:text-lg font-bold !mt-5">Kupuj więcej, oszczędzaj więcej:</h2>
-  <p class="m-0 mb-3 text-sm mgx-text-muted">Kup więcej i oszczędzaj – lub zamów jeden flakon.</p>
+  <p class="m-0 mb-3 text-sm mgx-text-muted">Kup więcej i oszczędzaj lub zamów jeden flakon.</p>
 
   <div class="flex flex-col gap-3">
     <template x-for="tier in $store.qb.tiers" :key="tier.key">
@@ -146,7 +146,7 @@
           x-cloak
           class="px-3 pb-3 flex flex-col gap-2">
           <p x-show="tier.total > 1" class="m-0 text-[11px] font-semibold mgx-text-muted">
-            Zapachy w zestawie: <span x-text="tier.total"></span> —
+            Zapachy w zestawie: <span x-text="tier.total"></span> ·
             <span x-show="$store.qb.remaining > 0" x-text="'pozostało do wybrania: ' + $store.qb.remaining"></span>
             <span x-show="$store.qb.remaining === 0" class="mgx-text-accent">komplet ✓</span>
           </p>
@@ -163,7 +163,7 @@
                     class="size-12 rounded-lg object-cover bg-white border border-solid border-black/10">
                 </template>
                 <template x-if="!slot.product">
-                  <div class="size-12 rounded-lg bg-white border border-dashed border-solid border-black/25 flex items-center justify-center mgx-text-muted">
+                  <div class="size-12 rounded-lg bg-white border border-dashed border-solid border-black/25 flex items-center justify-center mgx-icon-subtle">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
                   </div>
                 </template>
@@ -192,7 +192,7 @@
                 type="button"
                 @click="$store.qb.openModal()"
                 class="shrink-0 rounded-lg text-[11px] font-semibold px-3 py-1.5 cursor-pointer border border-solid transition-colors"
-                :class="slot.product ? 'bg-white text-black mgx-border hover:border-black' : 'bg-black text-white border-black hover:bg-gray-800'"
+                :class="slot.product ? 'bg-white text-black mgx-border hover:border-black' : 'mgx-btn-primary border-black'"
                 x-text="slot.product ? 'Zmień' : 'Wybierz'"></button>
             </div>
           </template>
@@ -566,7 +566,7 @@
   <img
     class="max-w-[400px] mx-auto mt-8 block"
     src="{{ 'payment-badge.svg' | asset_url }}"
-    alt="Payment methods"
+    alt="{{ 'sections.footer.payment' | t }}"
     width="100%"
     height="auto"
     loading="lazy">
