@@ -999,7 +999,8 @@
         {
           "type": "product",
           "id": "product",
-          "label": "Zestaw (produkt)"
+          "label": "Zestaw (produkt)",
+          "info": "Bez wybranego produktu karta nie wyświetla się w sklepie"
         },
         {
           "type": "text",
@@ -1019,13 +1020,19 @@
           "id": "bottles",
           "label": "Liczba flakonów",
           "default": 6,
-          "info": "Używana, gdy produkt nie ma metafielda choose_your_fragrances_options"
+          "info": "Ignorowana, jeśli produkt ma metapole custom.choose_your_fragrances_options (liczba flakonów brana jest wtedy z produktu)"
         },
         {
           "type": "text",
           "id": "savings_text",
           "label": "Tekst oszczędności",
           "info": "Puste = liczone z ceny przekreślonej (np. Oszczędzasz 54%)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_savings",
+          "label": "Pokaż oszczędność",
+          "default": true
         },
         {
           "type": "text",

@@ -1,11 +1,16 @@
 {%- comment -%}
   Featured bundle card: block 'featured_bundle' of main-product. The bundle product is picked in the theme editor.
   [cena] in the per-bottle text = bundle price / bottle count (metafield custom.choose_your_fragrances_options, else the block setting).
+  Hidden when no product is chosen, the product is unavailable, or it is this page's own product. The theme editor shows a placeholder instead.
 {%- endcomment -%}
 {%- liquid
   assign bundle = block.settings.product
+  assign show_card = false
+  if bundle != blank and bundle.available and bundle.id != product.id
+    assign show_card = true
+  endif
 -%}
-{%- if bundle != blank -%}
+{%- if show_card -%}
   {%- liquid
     assign bottles = bundle.metafields.custom.choose_your_fragrances_options.value | default: block.settings.bottles | default: 1
     assign bottles = bottles | plus: 0
@@ -13,13 +18,15 @@
       assign bottles = 1
     endif
     assign per_bottle = bundle.price | divided_by: bottles | money
-    assign per_bottle_text = block.settings.per_bottle_text | default: 'Tylko [cena] za flakon'
+    assign per_bottle_text = block.settings.per_bottle_text
     assign per_bottle_html = '<strong class="featured-bundle__price">' | append: per_bottle | append: '</strong>'
     assign per_bottle_line = per_bottle_text | escape | replace: '[cena]', per_bottle_html
     assign savings = block.settings.savings_text
-    if savings == blank and bundle.compare_at_price > bundle.price
+    if savings == blank and block.settings.show_savings and bundle.compare_at_price > bundle.price
       assign pct = bundle.compare_at_price | minus: bundle.price | times: 100.0 | divided_by: bundle.compare_at_price | round
-      assign savings = 'Oszczędzasz ' | append: pct | append: '%'
+      if pct > 0
+        assign savings = 'Oszczędzasz ' | append: pct | append: '%'
+      endif
     endif
   -%}
   <style>
@@ -40,7 +47,7 @@
       .featured-bundle__per { font-size: 15px; }
     }
   </style>
-  <a href="{{ bundle.url }}" class="featured-bundle mt-6 mb-6 no-underline" {{ block.shopify_attributes }}>
+  <a href="{{ bundle.url }}" class="featured-bundle no-underline quick-add-hidden" {{ block.shopify_attributes }}>
     <div class="featured-bundle__media">
       {%- if bundle.featured_image -%}
         <img
@@ -48,7 +55,7 @@
           src="{{ bundle.featured_image | image_url: width: 600 }}"
           srcset="{{ bundle.featured_image | image_url: width: 300 }} 300w, {{ bundle.featured_image | image_url: width: 600 }} 600w"
           sizes="(min-width: 750px) 190px, 42vw"
-          alt="{{ bundle.featured_image.alt | default: bundle.title | escape }}"
+          alt=""
           width="600"
           height="600"
           loading="lazy">
@@ -61,9 +68,17 @@
       {%- if savings != blank -%}
         <span class="featured-bundle__chip mgx-badge-amber-soft">{{ savings | escape }}</span>
       {%- endif -%}
-      <span class="featured-bundle__heading">{{ block.settings.heading | escape }}</span>
-      <span class="featured-bundle__per">{{ per_bottle_line }}</span>
+      {%- if block.settings.heading != blank -%}
+        <span class="featured-bundle__heading">{{ block.settings.heading | escape }}</span>
+      {%- endif -%}
+      {%- if per_bottle_text != blank -%}
+        <span class="featured-bundle__per">{{ per_bottle_line }}</span>
+      {%- endif -%}
       <span class="featured-bundle__total mgx-text-muted">{{ bundle.price | money }}{%- if bundle.compare_at_price > bundle.price %} <s>{{ bundle.compare_at_price | money }}</s>{%- endif -%}</span>
     </div>
   </a>
+{%- elsif request.design_mode -%}
+  <div class="featured-bundle__placeholder quick-add-hidden mgx-text-muted" style="padding: 12px; border: 2px dashed var(--mgx-amber); border-radius: 12px; font-size: 13px; line-height: 1.4;" {{ block.shopify_attributes }}>
+    Polecany zestaw: wybierz produkt w ustawieniach bloku. Karta nie wyświetla się, gdy zestaw jest pusty lub niedostępny.
+  </div>
 {%- endif -%}
