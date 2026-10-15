@@ -898,6 +898,8 @@
                   {% render 'reactive-atc' %}
                 {%- when 'selling_fast' -%}
                   {% render 'selling-fast', block: block %}
+                {%- when 'featured_bundle' -%}
+                  {% render 'featured-bundle', block: block %}
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -988,6 +990,50 @@
     {
       "type": "reactive_atc",
       "name": "Reactive ATC"
+    },
+    {
+      "type": "featured_bundle",
+      "name": "Polecany zestaw",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Zestaw (produkt)"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Nagłówek",
+          "default": "Nasza najlepsza oferta: skomponuj swój zestaw!"
+        },
+        {
+          "type": "text",
+          "id": "per_bottle_text",
+          "label": "Tekst ceny za flakon",
+          "default": "Tylko [cena] za flakon",
+          "info": "[cena] = cena zestawu podzielona przez liczbę flakonów"
+        },
+        {
+          "type": "number",
+          "id": "bottles",
+          "label": "Liczba flakonów",
+          "default": 6,
+          "info": "Używana, gdy produkt nie ma metafielda choose_your_fragrances_options"
+        },
+        {
+          "type": "text",
+          "id": "savings_text",
+          "label": "Tekst oszczędności",
+          "info": "Puste = liczone z ceny przekreślonej (np. Oszczędzasz 54%)"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Mała etykieta nad nagłówkiem",
+          "info": "Np. DOWOLNE 6 X 50 ML"
+        }
+      ]
     },
     {
       "type": "selling_fast",

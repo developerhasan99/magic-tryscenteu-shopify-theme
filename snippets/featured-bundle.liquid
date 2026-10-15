@@ -1,0 +1,69 @@
+{%- comment -%}
+  Featured bundle card: block 'featured_bundle' of main-product. The bundle product is picked in the theme editor.
+  [cena] in the per-bottle text = bundle price / bottle count (metafield custom.choose_your_fragrances_options, else the block setting).
+{%- endcomment -%}
+{%- liquid
+  assign bundle = block.settings.product
+-%}
+{%- if bundle != blank -%}
+  {%- liquid
+    assign bottles = bundle.metafields.custom.choose_your_fragrances_options.value | default: block.settings.bottles | default: 1
+    assign bottles = bottles | plus: 0
+    if bottles < 1
+      assign bottles = 1
+    endif
+    assign per_bottle = bundle.price | divided_by: bottles | money
+    assign per_bottle_text = block.settings.per_bottle_text | default: 'Tylko [cena] za flakon'
+    assign per_bottle_html = '<strong class="featured-bundle__price">' | append: per_bottle | append: '</strong>'
+    assign per_bottle_line = per_bottle_text | escape | replace: '[cena]', per_bottle_html
+    assign savings = block.settings.savings_text
+    if savings == blank and bundle.compare_at_price > bundle.price
+      assign pct = bundle.compare_at_price | minus: bundle.price | times: 100.0 | divided_by: bundle.compare_at_price | round
+      assign savings = 'Oszczędzasz ' | append: pct | append: '%'
+    endif
+  -%}
+  <style>
+    .featured-bundle { display: grid; grid-template-columns: minmax(0, 42%) minmax(0, 1fr); gap: 14px; align-items: center; padding: 12px; border: 2px solid var(--mgx-amber); border-radius: 12px; background: var(--mgx-white); color: var(--mgx-text); }
+    .featured-bundle:hover { border-color: var(--mgx-graphite); }
+    .featured-bundle__media { aspect-ratio: 1 / 1; overflow: hidden; border-radius: 8px; }
+    .featured-bundle__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .featured-bundle__body { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; }
+    .featured-bundle__kicker { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
+    .featured-bundle__chip { display: inline-block; font-size: 12px; font-weight: 700; line-height: 1; padding: 6px 10px; border-radius: 999px; }
+    .featured-bundle__heading { font-size: 15px; line-height: 1.25; font-weight: 700; }
+    .featured-bundle__per { font-size: 14px; line-height: 1.3; }
+    .featured-bundle__price { font-size: 18px; font-weight: 800; }
+    .featured-bundle__total { font-size: 12px; }
+    @media (min-width: 750px) {
+      .featured-bundle { gap: 18px; padding: 16px; }
+      .featured-bundle__heading { font-size: 16px; }
+      .featured-bundle__per { font-size: 15px; }
+    }
+  </style>
+  <a href="{{ bundle.url }}" class="featured-bundle mt-6 mb-6 no-underline" {{ block.shopify_attributes }}>
+    <div class="featured-bundle__media">
+      {%- if bundle.featured_image -%}
+        <img
+          class="featured-bundle__img"
+          src="{{ bundle.featured_image | image_url: width: 600 }}"
+          srcset="{{ bundle.featured_image | image_url: width: 300 }} 300w, {{ bundle.featured_image | image_url: width: 600 }} 600w"
+          sizes="(min-width: 750px) 190px, 42vw"
+          alt="{{ bundle.featured_image.alt | default: bundle.title | escape }}"
+          width="600"
+          height="600"
+          loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="featured-bundle__body">
+      {%- if block.settings.badge_text != blank -%}
+        <span class="featured-bundle__kicker mgx-text-muted">{{ block.settings.badge_text | escape }}</span>
+      {%- endif -%}
+      {%- if savings != blank -%}
+        <span class="featured-bundle__chip mgx-badge-amber-soft">{{ savings | escape }}</span>
+      {%- endif -%}
+      <span class="featured-bundle__heading">{{ block.settings.heading | escape }}</span>
+      <span class="featured-bundle__per">{{ per_bottle_line }}</span>
+      <span class="featured-bundle__total mgx-text-muted">{{ bundle.price | money }}{%- if bundle.compare_at_price > bundle.price %} <s>{{ bundle.compare_at_price | money }}</s>{%- endif -%}</span>
+    </div>
+  </a>
+{%- endif -%}

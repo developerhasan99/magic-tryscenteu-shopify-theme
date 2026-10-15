@@ -211,6 +211,17 @@
             "page": ""
           }
         },
+        "featured_bundle_main": {
+          "type": "featured_bundle",
+          "settings": {
+            "product": "6x-50ml-parfumflaschen",
+            "heading": "Nasza najlepsza oferta: skomponuj swój zestaw!",
+            "per_bottle_text": "Tylko [cena] za flakon",
+            "bottles": 6,
+            "savings_text": "",
+            "badge_text": ""
+          }
+        },
         "product_reviews_W3CkbE": {
           "type": "product_reviews",
           "disabled": true,
@@ -262,6 +273,7 @@
         "collapsible_tab_TKfWP3",
         "collapsible_tab_HiNKBa",
         "collapsible_tab_Qn8c4p",
+        "featured_bundle_main",
         "product_reviews_W3CkbE"
       ],
       "settings": {
