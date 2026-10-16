@@ -17,6 +17,23 @@
       "disabled": true,
       "settings": {},
       "blocks": {}
+    },
+    "main": {
+      "settings": {},
+      "blocks": {
+        "ugc_videos_main": {
+          "settings": {
+            "video_1": "shopify://files/videos/nikoolixa_7671692339257085217.mp4",
+            "video_2": "shopify://files/videos/aniaprzy_7677573659518717217.mp4",
+            "video_3": "shopify://files/videos/tryscenteu_PaulinaO_SzafNr466_9f0a1f51.mov",
+            "caption_3": "Nie musisz przepłacać"
+          }
+        },
+        "featured_bundle_main": {
+          "disabled": true,
+          "settings": {}
+        }
+      }
     }
   }
 }
