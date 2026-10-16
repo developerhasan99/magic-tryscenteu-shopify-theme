@@ -70,6 +70,7 @@
         "payment_icon_HNd7bU",
         "payment_icon_EMjaQY"
       ],
+      "disabled": true,
       "name": "Offer Timebar",
       "settings": {
         "enable_top_bar": true,
