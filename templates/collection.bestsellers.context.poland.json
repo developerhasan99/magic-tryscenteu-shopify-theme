@@ -23,6 +23,12 @@
       "disabled": true,
       "settings": {},
       "blocks": {}
+    },
+    "product-grid": {
+      "settings": {
+        "padding_top": 16
+      },
+      "blocks": {}
     }
   },
   "order": [

@@ -38,6 +38,46 @@
       },
       "blocks": {}
     },
+    "popular_products_3gqnEi": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "home_tabs_fcxFYG": {
+      "settings": {},
+      "blocks": {
+        "collection_gRbYPe": {
+          "disabled": false,
+          "settings": {
+            "tab_title": "🔥 BESTSELLERY"
+          }
+        },
+        "collection_hafVz": {
+          "type": "collection",
+          "disabled": false,
+          "settings": {
+            "tab_icon": null,
+            "tab_title": "Najnowsze Zapachy",
+            "collection": "neue-angesagte-dufte",
+            "button_text": "ZOBACZ"
+          }
+        },
+        "collection_xgUpzQ": {
+          "disabled": true,
+          "settings": {}
+        },
+        "collection_3WBTm3": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "collection_gRbYPe",
+        "collection_hafVz",
+        "collection_xgUpzQ",
+        "collection_3WBTm3"
+      ]
+    },
     "massive_review_kTc3WW": {
       "settings": {},
       "blocks": {
@@ -130,45 +170,45 @@
         }
       }
     },
-    "popular_products_3gqnEi": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
-    "home_tabs_fcxFYG": {
-      "settings": {},
+    "1792179111722dde80": {
+      "type": "apps",
+      "disabled": false,
+      "settings": {
+        "include_margins": true
+      },
       "blocks": {
-        "collection_gRbYPe": {
+        "judge_me_reviews_all_reviews_page_YdpMg": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "disabled": false,
           "settings": {
-            "tab_title": "🔥 BESTSELLERY"
+            "max_width": 1200,
+            "paragraph-466dcb46115ba4a5ebba204c270c62ac": null,
+            "review_source": "all",
+            "paragraph-93c50ace0950309c1b2a00f8ec87ae64": null,
+            "show_all_reviews_in_same_tab": true,
+            "show_first": "product",
+            "empty_state": "empty_widget",
+            "paragraph-369dfbcfdb5af17d6176ec54eb0de348": null,
+            "paragraph-6f8c940ff52b76c939b7d0c86fb394d1": null
           }
-        },
-        "collection_hafVz": {
-          "type": "collection",
-          "disabled": false,
-          "settings": {
-            "tab_icon": null,
-            "tab_title": "Najnowsze Zapachy",
-            "collection": "neue-angesagte-dufte",
-            "button_text": "ZOBACZ"
-          }
-        },
-        "collection_xgUpzQ": {
-          "disabled": true,
-          "settings": {}
-        },
-        "collection_3WBTm3": {
-          "disabled": true,
-          "settings": {}
         }
       },
       "block_order": [
-        "collection_gRbYPe",
-        "collection_hafVz",
-        "collection_xgUpzQ",
-        "collection_3WBTm3"
+        "judge_me_reviews_all_reviews_page_YdpMg"
       ]
     }
-  }
+  },
+  "order": [
+    "tryscent_hero_VWyBcY",
+    "custom_liquid_PTXDPy",
+    "feature_heighlights_EpJcyT",
+    "popular_products_RyfRNL",
+    "popular_products_3gqnEi",
+    "home_tabs_fcxFYG",
+    "image_and_text_TQajG3",
+    "massive_review_kTc3WW",
+    "179203054797d33bf0",
+    "collapsible_content_JWRDn8",
+    "1792179111722dde80"
+  ]
 }
