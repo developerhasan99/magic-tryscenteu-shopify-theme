@@ -1,7 +1,9 @@
 # UGC video tiles in the collection grid (tryscent.eu)
 
-Status: built 2026-10-16 on branch `feat/ugc-grid-tiles`, QA passed on the dev
-theme 165334122755. Ported from the live magyx.co theme
+Status: LIVE 2026-10-16 19:42 UTC (main c5462d9, merged with the collection
+search + filter bar that landed on main the same day). Live theme files match
+the repo by checksum; live collection pages unchanged until a block is added.
+QA on the dev theme 165334122755. Ported from the live magyx.co theme
 (`tryscent-magyxco-shopify-theme`, same file names).
 
 ## What it is
@@ -33,6 +35,14 @@ title, price; desktop only, as on magyx.co).
   render for the Polish market.
 - The block is available on every template that uses the section: collection,
   bestsellers, bundle-save, payday-page, warehouse.
+
+## Works with the search and filter bar (merged 2026-10-16)
+- Search (collection-search.js) hides every non-product item while a search
+  is active, so tiles hide and come back when the search is cleared.
+- Filters (mgx-filters.js) re-fetch the grid section, so tiles re-render at
+  their positions within the filtered results and re-arm. A tile whose
+  position is beyond the filtered results does not render.
+- Page loader (collection-grid-loader.js) appends product items only.
 
 ## Changes against the magyx.co files (after review)
 - Tiles fill their grid cell at every width (`height: 100%`, floor 300 px), so
