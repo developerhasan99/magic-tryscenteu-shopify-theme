@@ -13,6 +13,33 @@
   },
   "parent": "index.json",
   "sections": {
+    "1792179111722dde80": {
+      "type": "apps",
+      "disabled": false,
+      "settings": {
+        "include_margins": true
+      },
+      "blocks": {
+        "judge_me_reviews_all_reviews_page_YdpMg": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": false,
+          "settings": {
+            "max_width": 1200,
+            "paragraph-f68064b046bde76c1c0b05ee8583b84e": null,
+            "review_source": "all",
+            "paragraph-4aaed157599f408a61662c9a2d49fa8e": null,
+            "show_all_reviews_in_same_tab": true,
+            "show_first": "product",
+            "empty_state": "empty_widget",
+            "paragraph-db2927a1f8602bb854f8adca579e6b1b": null,
+            "paragraph-f7e926abceecc904633d291a2bb8891e": null
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_all_reviews_page_YdpMg"
+      ]
+    },
     "tryscent_hero_VWyBcY": {
       "disabled": false,
       "settings": {
@@ -169,33 +196,6 @@
           }
         }
       }
-    },
-    "1792179111722dde80": {
-      "type": "apps",
-      "disabled": false,
-      "settings": {
-        "include_margins": true
-      },
-      "blocks": {
-        "judge_me_reviews_all_reviews_page_YdpMg": {
-          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": false,
-          "settings": {
-            "max_width": 1200,
-            "paragraph-466dcb46115ba4a5ebba204c270c62ac": null,
-            "review_source": "all",
-            "paragraph-93c50ace0950309c1b2a00f8ec87ae64": null,
-            "show_all_reviews_in_same_tab": true,
-            "show_first": "product",
-            "empty_state": "empty_widget",
-            "paragraph-369dfbcfdb5af17d6176ec54eb0de348": null,
-            "paragraph-6f8c940ff52b76c939b7d0c86fb394d1": null
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_all_reviews_page_YdpMg"
-      ]
     }
   },
   "order": [
