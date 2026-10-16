@@ -1,0 +1,25 @@
+{% comment %}
+  Prints how many of the four slots of a 'ugc_videos' block hold a clip (a
+  Files video or a direct mp4 link). The row and the featured bundle guard in
+  main-product both read this, so "has videos" means the same thing in both.
+
+  Accepts:
+  - block: {Object} a main-product block of type 'ugc_videos'
+
+  Usage:
+  {%- capture ugc_count -%}{% render 'ugc-video-count', block: block %}{%- endcapture -%}
+  {%- assign ugc_count = ugc_count | strip | plus: 0 -%}
+{% endcomment %}
+
+{%- liquid
+  assign count = 0
+  for i in (1..4)
+    assign key_video = 'video_' | append: i
+    assign key_url = 'video_url_' | append: i
+    assign url_value = block.settings[key_url] | strip
+    if block.settings[key_video] != blank or url_value != blank
+      assign count = count | plus: 1
+    endif
+  endfor
+-%}
+{{- count -}}

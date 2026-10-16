@@ -899,7 +899,37 @@
                 {%- when 'selling_fast' -%}
                   {% render 'selling-fast', block: block %}
                 {%- when 'featured_bundle' -%}
-                  {% render 'featured-bundle', block: block %}
+                  {%- comment -%}
+                    The UGC video row can stand in for this card: its clips link
+                    the same bundle. The card steps aside only once the row has
+                    a clip and its "Ukryj Polecany zestaw" box is ticked, so the
+                    page is never left with neither.
+                  {%- endcomment -%}
+                  {%- liquid
+                    assign ugc_replaces_bundle = false
+                    for ugc_block in section.blocks
+                      if ugc_block.type == 'ugc_videos' and ugc_block.settings.replace_bundle
+                        capture ugc_count
+                          render 'ugc-video-count', block: ugc_block
+                        endcapture
+                        assign ugc_count = ugc_count | strip | plus: 0
+                        if ugc_count > 0
+                          assign ugc_replaces_bundle = true
+                        endif
+                      endif
+                    endfor
+                  -%}
+                  {%- if ugc_replaces_bundle -%}
+                    {%- if request.design_mode -%}
+                      <div class="featured-bundle__placeholder quick-add-hidden mgx-text-muted" style="padding: 12px; border: 2px dashed var(--mgx-silver); border-radius: 12px; font-size: 13px; line-height: 1.4;" {{ block.shopify_attributes }}>
+                        Polecany zestaw jest ukryty, bo blok Wideo UGC ma klipy i zaznaczone pole „Ukryj kartę Polecany zestaw”. Odznacz je, żeby karta wróciła.
+                      </div>
+                    {%- endif -%}
+                  {%- else -%}
+                    {% render 'featured-bundle', block: block %}
+                  {%- endif -%}
+                {%- when 'ugc_videos' -%}
+                  {% render 'ugc-video-row', block: block %}
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -1039,6 +1069,181 @@
           "id": "badge_text",
           "label": "Mała etykieta nad nagłówkiem",
           "info": "Np. DOWOLNE 6 X 50 ML"
+        }
+      ]
+    },
+    {
+      "type": "ugc_videos",
+      "name": "Wideo UGC",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Do 4 klipów obok siebie. Klip: wybierz z Plików (w okienku wyboru możesz też wgrać plik z komputera) albo wklej bezpośredni link do pliku .mp4. Folder, Google Drive i YouTube nie zadziałają jako klip. Pusty slot się nie wyświetla."
+        },
+        {
+          "type": "checkbox",
+          "id": "replace_bundle",
+          "label": "Ukryj kartę Polecany zestaw, gdy są klipy",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay_preview",
+          "label": "Podgląd: klipy grają po kolei bez dźwięku",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Wideo 1"
+        },
+        {
+          "type": "video",
+          "id": "video_1",
+          "label": "Wideo"
+        },
+        {
+          "type": "text",
+          "id": "video_url_1",
+          "label": "Link do wideo (.mp4)",
+          "info": "Używany, gdy nie wybrano wideo powyżej"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_1",
+          "label": "Okładka (opcjonalnie)"
+        },
+        {
+          "type": "text",
+          "id": "caption_1",
+          "label": "Podpis",
+          "default": "Pachnie jak oryginał"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_caption_1",
+          "label": "Pokaż podpis",
+          "default": true
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Produkt",
+          "info": "Zdjęcie na klipie i karta w odtwarzaczu prowadzą do tego produktu"
+        },
+        {
+          "type": "header",
+          "content": "Wideo 2"
+        },
+        {
+          "type": "video",
+          "id": "video_2",
+          "label": "Wideo"
+        },
+        {
+          "type": "text",
+          "id": "video_url_2",
+          "label": "Link do wideo (.mp4)",
+          "info": "Używany, gdy nie wybrano wideo powyżej"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_2",
+          "label": "Okładka (opcjonalnie)"
+        },
+        {
+          "type": "text",
+          "id": "caption_2",
+          "label": "Podpis",
+          "default": "Trzyma się cały dzień"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_caption_2",
+          "label": "Pokaż podpis",
+          "default": true
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Produkt",
+          "info": "Zdjęcie na klipie i karta w odtwarzaczu prowadzą do tego produktu"
+        },
+        {
+          "type": "header",
+          "content": "Wideo 3"
+        },
+        {
+          "type": "video",
+          "id": "video_3",
+          "label": "Wideo"
+        },
+        {
+          "type": "text",
+          "id": "video_url_3",
+          "label": "Link do wideo (.mp4)",
+          "info": "Używany, gdy nie wybrano wideo powyżej"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_3",
+          "label": "Okładka (opcjonalnie)"
+        },
+        {
+          "type": "text",
+          "id": "caption_3",
+          "label": "Podpis",
+          "default": "Składniki wysokiej jakości"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_caption_3",
+          "label": "Pokaż podpis",
+          "default": true
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Produkt",
+          "info": "Zdjęcie na klipie i karta w odtwarzaczu prowadzą do tego produktu"
+        },
+        {
+          "type": "header",
+          "content": "Wideo 4"
+        },
+        {
+          "type": "video",
+          "id": "video_4",
+          "label": "Wideo"
+        },
+        {
+          "type": "text",
+          "id": "video_url_4",
+          "label": "Link do wideo (.mp4)",
+          "info": "Używany, gdy nie wybrano wideo powyżej"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_4",
+          "label": "Okładka (opcjonalnie)"
+        },
+        {
+          "type": "text",
+          "id": "caption_4",
+          "label": "Podpis",
+          "default": "Bez dopłaty za markę"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_caption_4",
+          "label": "Pokaż podpis",
+          "default": true
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Produkt",
+          "info": "Zdjęcie na klipie i karta w odtwarzaczu prowadzą do tego produktu"
         }
       ]
     },

@@ -179,6 +179,25 @@
             "page": ""
           }
         },
+        "ugc_videos_main": {
+          "type": "ugc_videos",
+          "settings": {
+            "replace_bundle": true,
+            "autoplay_preview": true,
+            "caption_1": "Pachnie jak oryginał",
+            "show_caption_1": true,
+            "product_1": "6x-50ml-parfumflaschen",
+            "caption_2": "Trzyma się cały dzień",
+            "show_caption_2": true,
+            "product_2": "6x-50ml-parfumflaschen",
+            "caption_3": "Składniki wysokiej jakości",
+            "show_caption_3": true,
+            "product_3": "6x-50ml-parfumflaschen",
+            "caption_4": "Bez dopłaty za markę",
+            "show_caption_4": true,
+            "product_4": "6x-50ml-parfumflaschen"
+          }
+        },
         "featured_bundle_main": {
           "type": "featured_bundle",
           "settings": {
@@ -238,6 +257,7 @@
         "collapsible_tab_TKfWP3",
         "collapsible_tab_HiNKBa",
         "collapsible_tab_Qn8c4p",
+        "ugc_videos_main",
         "featured_bundle_main",
         "product_reviews_W3CkbE"
       ],
