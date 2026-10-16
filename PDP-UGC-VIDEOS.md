@@ -1,8 +1,9 @@
 # UGC video row on product pages (tryscent.eu)
 
-Status: built and QA'd on the dev theme 165334122755, branch
-`feat/pdp-ugc-videos` (2026-10-16). Not live yet. Reference: the video row on
-theessencevault.co.uk product pages, measured in its DOM.
+Status: LIVE since 2026-10-17 (push of `feat/pdp-ugc-videos`, main 7470c42).
+No clips are picked yet, so live pages look as before until clips are added in
+Customize. Reference: the video row on theessencevault.co.uk product pages,
+measured in its DOM.
 
 ## What it is
 A theme-editor block "Wideo UGC" (`ugc_videos`, limit 1) in the Product
@@ -105,7 +106,12 @@ Not checked on a real iPhone: the `#t=0.001` first-frame paint for pasted
 links without a cover, and the native control layout in the player.
 
 ## Go-live and rollback
-Follow the tryscent.eu pattern: merge origin/main into the branch, tag
-`live-before-pdp-ugc-<date>` and a backup branch on the remote, then
-`git push origin feat/pdp-ugc-videos:main`. Rollback: `git revert` the merge
-and push to main.
+Done 2026-10-17: origin/main (364dc55) merged into the branch, tag
+`live-before-pdp-ugc-2026-10-17` and branch `backup/live-2026-10-17` on the
+remote, live theme pulled to `Documents/dev/_backups/tryscent-eu-live-2026-10-17/`
+and uploaded as unpublished theme 165433016579 "BACKUP live 2026-10-17", then
+`git push origin feat/pdp-ugc-videos:main`. Read-back: all 11 changed files
+match the repo by Admin API checksum (templates accepted), product and bundle
+pages 200 without Liquid errors, the featured bundle card still shows (no
+clips). Rollback: publish theme 165433016579 in the admin, or `git revert -m 1`
+the merge and push to main.
