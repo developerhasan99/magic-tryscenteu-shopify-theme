@@ -255,6 +255,26 @@
       document.documentElement.classList.remove('ugc-player-open');
     };
 
+    // A card for the product of this very page (on a bundle page, its own
+    // bundle) goes to the offer on the page instead of reloading it: the
+    // add-to-cart anchor on a perfume page, the price and bundle builder on a
+    // bundle page. From the player it closes the player first. The sticky
+    // header shows again on the way up (it reveals on scroll up), so the stop
+    // leaves room for it.
+    const offerTarget = () => document.querySelector('#atc_scroll_target, .bundle-price-pdp');
+    root.querySelectorAll('[data-ugc-offer]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const target = offerTarget();
+        if (!target) return;
+        event.preventDefault();
+        if (dialog && dialog.open) dialog.close();
+        document.documentElement.classList.remove('ugc-player-open');
+        const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - header - 12;
+        window.scrollTo({ top: Math.max(0, top), behavior: reduced.matches ? 'auto' : 'smooth' });
+      });
+    });
+
     if (!dialog || !player) return;
 
     const open = (i, button) => {

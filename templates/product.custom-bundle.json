@@ -181,6 +181,19 @@
             "page": ""
           }
         },
+        "ugc_videos_main": {
+          "type": "ugc_videos",
+          "settings": {
+            "replace_bundle": true,
+            "autoplay_preview": true,
+            "caption_1": "Pachnie jak oryginał",
+            "show_caption_1": true,
+            "caption_2": "Trzyma się cały dzień",
+            "show_caption_2": true,
+            "caption_3": "Składniki wysokiej jakości",
+            "show_caption_3": true
+          }
+        },
         "product_reviews_W3CkbE": {
           "type": "product_reviews",
           "disabled": true,
@@ -229,6 +242,7 @@
         "collapsible_tab_TKfWP3",
         "collapsible_tab_HiNKBa",
         "collapsible_tab_Qn8c4p",
+        "ugc_videos_main",
         "product_reviews_W3CkbE"
       ],
       "settings": {

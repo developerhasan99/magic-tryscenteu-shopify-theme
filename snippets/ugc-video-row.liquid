@@ -95,11 +95,22 @@
             endunless
           endif
 
-          # Same rule as the featured bundle card: no link to a product that
-          # cannot be bought, or to the page the shopper is already on.
+          # No product picked means this page's own product: one bundle
+          # template serves every bundle page (3x, 6x, 8x, 10x, the themed
+          # sets), and each one's card should show that bundle, not send the
+          # shopper to another. A card for the page the shopper is already on
+          # scrolls to its offer instead of reloading it (assets/ugc-video-row.js).
+          # Never a card for a product that cannot be bought.
+          if clip_product == blank
+            assign clip_product = product
+          endif
           assign has_product = false
-          if has_clip and clip_product != blank and clip_product.available and clip_product.id != product.id
+          assign links_here = false
+          if has_clip and clip_product != blank and clip_product.available
             assign has_product = true
+            if clip_product.id == product.id
+              assign links_here = true
+            endif
           endif
           assign clip_title = ''
           if has_product
@@ -162,7 +173,7 @@
               </span>
             </button>
             {%- if has_product -%}
-              <a class="ugc-row__product" href="{{ clip_product.url }}">
+              <a class="ugc-row__product" href="{{ clip_product.url }}"{% if links_here %} data-ugc-offer{% endif %}>
                 {%- if clip_product.featured_image != blank -%}
                   <img
                     class="ugc-row__product-thumb"
@@ -185,7 +196,7 @@
         </div>
         {%- if has_product -%}
           {%- capture pill -%}
-            <a class="ugc-player__pill" href="{{ clip_product.url }}" data-slot="{{ i }}" hidden>
+            <a class="ugc-player__pill" href="{{ clip_product.url }}" data-slot="{{ i }}"{% if links_here %} data-ugc-offer{% endif %} hidden>
               {%- if clip_product.featured_image != blank -%}
                 <img
                   class="ugc-player__pill-thumb"
