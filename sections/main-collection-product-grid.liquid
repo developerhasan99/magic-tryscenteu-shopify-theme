@@ -132,6 +132,24 @@
         {% render 'collection-search', st: section.settings, section_id: section.id %}
       {%- endif -%}
 
+      {%- assign fuel05_has_tiles = false -%}
+      {%- for b in section.blocks -%}
+        {%- if b.type == 'fuel05_ugc_video' -%}
+          {%- assign fuel05_has_tiles = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- comment -%}
+        The asset tags sit outside #ProductGridContainer on purpose: facets.js replaces
+        that container's innerHTML on every filter and sort, and a script tag inserted
+        through innerHTML never runs. fuel05-ugc.js arms itself and re-scans on its own,
+        so it only has to load once, here.
+      {%- endcomment -%}
+      {%- if fuel05_has_tiles -%}
+        {{ 'fuel05-ugc.css' | asset_url | stylesheet_tag }}
+        <script src="{{ 'fuel05-ugc.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+
       <div
         class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         id="ProductGridContainer"
@@ -172,6 +190,40 @@
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
+                {%- assign product_position = forloop.index -%}
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'fuel05_ugc_video' and block.settings.position == product_position -%}
+                    {%- comment -%}
+                      Page one only: collection-grid-loader.js appends page two onwards,
+                      and a tile there would push every product after it a cell over;
+                      the positions are set against page one. A block without a clip yet
+                      (just added in the editor) renders no cell at all.
+                    {%- endcomment -%}
+                    {%- liquid
+                      assign fuel05_has_source = false
+                      if block.settings.video != blank or block.settings.video_url != blank
+                        assign fuel05_has_source = true
+                      endif
+                    -%}
+                    {%- if paginate.current_page == 1 and fuel05_has_source -%}
+                      <li
+                        class="grid__item fuel05-ugc fuel05-ugc--grid fuel05-ugc--grid-{{ block.settings.device | default: 'desktop' }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                        data-fuel05-row
+                        {% if settings.animations_reveal_on_scroll %}
+                        data-cascade
+                        style="--animation-order: {{ product_position }};"
+                        {% endif %}
+                        {{ block.shopify_attributes }}>
+                        {% render 'fuel05-ugc-tile',
+                          video: block.settings.video,
+                          video_url: block.settings.video_url,
+                          poster: block.settings.video_poster,
+                          product_item: block.settings.product
+                        %}
+                      </li>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
                 {%- capture mgx_title -%}{% render 'polish-store-text', text: product.title %}{%- endcapture -%}
                 {%- capture mgx_hay -%}
                   {{- mgx_title | strip -}} | {{ product.metafields.custom.inspired_by.value.name }} | {{ product.metafields.custom.nuta }} | {{ product.metafields.custom.searchaniser -}}
@@ -460,6 +512,61 @@
         "unit": "px",
         "label": "t:sections.all.padding.padding_bottom",
         "default": 36
+      }
+    ],
+    "blocks": [
+      {
+        "type": "fuel05_ugc_video",
+        "name": "UGC video",
+        "settings": [
+          {
+            "type": "number",
+            "id": "position",
+            "label": "Position",
+            "info": "The tile goes before the product at this place in the grid (page one). One tile per position per device."
+          },
+          {
+            "type": "select",
+            "id": "device",
+            "label": "Show on",
+            "options": [
+              {
+                "value": "desktop",
+                "label": "Desktop"
+              },
+              {
+                "value": "mobile",
+                "label": "Mobile"
+              },
+              {
+                "value": "both",
+                "label": "Desktop and mobile"
+              }
+            ],
+            "default": "desktop"
+          },
+          {
+            "type": "video",
+            "id": "video",
+            "label": "Video"
+          },
+          {
+            "type": "text",
+            "id": "video_url",
+            "label": "Video URL",
+            "info": "Used when no video is picked above"
+          },
+          {
+            "type": "image_picker",
+            "id": "video_poster",
+            "label": "Poster image"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Linked product"
+          }
+        ]
       }
     ]
   }

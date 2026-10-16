@@ -19,32 +19,21 @@
       },
       "blocks": {}
     },
-    "custom_liquid_JXCdfb": {
+    "banner": {
       "disabled": true,
       "settings": {},
       "blocks": {}
     },
-    "popular_products_3Lx6bB": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
-    "17921664096e13ac8f": {
-      "type": "apps",
-      "disabled": false,
+    "product-grid": {
       "settings": {
-        "include_margins": true
+        "padding_top": 16
       },
-      "blocks": {},
-      "block_order": []
+      "blocks": {}
     }
   },
   "order": [
     "custom_liquid_MxhLrU",
     "custom_liquid_7erUbK",
-    "17921664096e13ac8f",
-    "custom_liquid_JXCdfb",
-    "popular_products_3Lx6bB",
     "banner",
     "product-grid"
   ]
