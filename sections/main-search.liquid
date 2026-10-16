@@ -284,7 +284,8 @@
                       {%- when 'product' -%}
                         {%- capture product_settings -%}{%- if section.settings.product_show_vendor -%}vendor,{%- endif -%}title,price{%- endcapture -%}
                         {% render 'product-card'
-                          , product: item %}
+                          , product: item
+                          , show_rating: section.settings.show_rating %}
                         {%- assign skip_card_product_styles = true -%}
                       {%- when 'article' -%}
                         {% render 'article-card'

@@ -1,3 +1,11 @@
+{%- comment -%}
+  Renders the MAGYX product card.
+
+  Accepts:
+  - product: {Object} Product object (required)
+  - show_rating: {Boolean} Star rating under the title, from the Judge.me-synced
+    metafields reviews.rating / reviews.rating_count. Default: false
+{%- endcomment -%}
 <div class="flex flex-col bg-white p-4 shadow-sm rounded-lg relative h-full border border-solid mgx-border">
     {% if product.tags contains 'bestseller' or product.tags contains 'onsale' %}
     <div class="absolute top-3 left-4 flex gap-4">
@@ -75,6 +83,32 @@
         {% render 'polish-store-text', text: product.title %}
     </a>
     </h3>
+    {%- if show_rating and product.metafields.reviews.rating.value != blank -%}
+      {%- liquid
+        assign mgx_rating_count = product.metafields.reviews.rating_count | append: '' | plus: 0
+        assign mgx_rating_val = product.metafields.reviews.rating.value.rating | append: '' | plus: 0
+        assign mgx_rating_max = product.metafields.reviews.rating.value.scale_max | append: '' | plus: 0
+        if mgx_rating_max <= 0
+          assign mgx_rating_max = 5
+        endif
+        assign mgx_rating_max_label = mgx_rating_max | round
+        assign mgx_rating_pct = mgx_rating_val | times: 100.0 | divided_by: mgx_rating_max | round: 1 | at_least: 0 | at_most: 100
+      -%}
+      {%- if mgx_rating_count > 0 and mgx_rating_val > 0 -%}
+      <div class="mgx-card-rating">
+        <span
+          class="mgx-card-rating__stars"
+          role="img"
+          aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: mgx_rating_val, rating_max: mgx_rating_max_label }}"
+          style="--mgx-rating-pct: {{ mgx_rating_pct }}%;"
+        ></span>
+        <span class="mgx-card-rating__count">
+          <span aria-hidden="true">({{ mgx_rating_count }})</span>
+          <span class="visually-hidden">{{ mgx_rating_count }} {{ 'accessibility.total_reviews' | t }}</span>
+        </span>
+      </div>
+      {%- endif -%}
+    {%- endif -%}
 
     {% if product.metafields.custom.inspired_by != blank %}
     <div class="flex items-center gap-2 mt-3">

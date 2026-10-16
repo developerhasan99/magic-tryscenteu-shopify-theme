@@ -200,3 +200,44 @@
     );
   }
 }
+
+/* ---------- product card rating (Judge.me metafields, rendered server-side) ---------- */
+.mgx-card-rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--mgx-text-muted);
+}
+.mgx-card-rating__stars {
+  --mgx-rating-pct: 0%;
+  display: inline-block;
+  font-family: Times, "Times New Roman", serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.mgx-card-rating__stars::before {
+  content: "★★★★★";
+  background: linear-gradient(
+    90deg,
+    var(--mgx-star) var(--mgx-rating-pct),
+    var(--mgx-silver) var(--mgx-rating-pct)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mgx-card-rating__count {
+  font-size: 12px;
+  line-height: 1;
+}
+@media (forced-colors: active) {
+  .mgx-card-rating__stars::before {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
+}

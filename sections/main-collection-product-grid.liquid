@@ -156,7 +156,8 @@
                   style="--animation-order: {{ forloop.index }};"
                   {% endif %}>
                   {% render 'product-card'
-                    , product: product %}
+                    , product: product
+                    , show_rating: section.settings.show_rating %}
                 </li>
                 {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
@@ -226,8 +227,10 @@
       }
 
       try {
-        // Use section rendering for faster load - only fetch the product grid section
-        const sectionUrl = url + (url.includes('?') ? '&' : '?') + 'section_id=main-collection-product-grid';
+        // Section Rendering API needs the real section id (template--<id>__product-grid);
+        // the file name renders the section with schema defaults (16/page, show_rating off).
+        const sectionId = document.querySelector('#product-grid')?.dataset.id || '{{ section.id }}';
+        const sectionUrl = url + (url.includes('?') ? '&' : '?') + 'section_id=' + encodeURIComponent(sectionId);
         const res = await fetch(sectionUrl);
         const text = await res.text();
         console.log("Fetched response, length:", text.length);
