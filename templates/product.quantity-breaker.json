@@ -16,6 +16,10 @@
           "type": "title",
           "settings": {}
         },
+        "judge_me_reviews_preview_badge_tnLmYt": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
         "custom_rating_text_ehyqmQ": {
           "type": "custom_rating_text",
           "disabled": true,
@@ -254,6 +258,7 @@
       },
       "block_order": [
         "title_DkyBTh",
+        "judge_me_reviews_preview_badge_tnLmYt",
         "custom_rating_text_ehyqmQ",
         "price_MG94AW",
         "variant_picker_hH3Diz",
@@ -413,6 +418,7 @@
         "stack_w3Jyyc",
         "stack_dXbqXq"
       ],
+      "disabled": true,
       "name": "Stacks Up",
       "settings": {
         "background_color": "#ffffff",
@@ -1347,6 +1353,7 @@
         "review_r9YEmc",
         "review_79dwHH"
       ],
+      "disabled": true,
       "name": "Massive Review",
       "settings": {
         "background_color": "#ffffff",
@@ -1360,6 +1367,20 @@
     },
     "1770288371f70b6dc1": {
       "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_ti6V3R": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_ti6V3R"
+      ],
       "settings": {
         "include_margins": true
       }
