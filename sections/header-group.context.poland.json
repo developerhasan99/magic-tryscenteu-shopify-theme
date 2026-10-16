@@ -96,7 +96,9 @@
     },
     "header": {
       "settings": {
-        "enable_country_selector": false
+        "enable_country_selector": false,
+        "color_scheme": "scheme-4",
+        "menu_color_scheme": "scheme-4"
       },
       "blocks": {}
     }
