@@ -115,3 +115,38 @@ match the repo by Admin API checksum (templates accepted), product and bundle
 pages 200 without Liquid errors, the featured bundle card still shows (no
 clips). Rollback: publish theme 165433016579 in the admin, or `git revert -m 1`
 the merge and push to main.
+
+## Bundle pages: buy box and Polish texts (LIVE 2026-10-17)
+`snippets/custom-offer-bundle.liquid` (custom-bundle template only, 14 pages):
+the old guarantee block under the button (thumbs-up image with the German
+alt "Daumen-hoch-Abzeichen", "60 dni —", the desktop refund line) is replaced
+by the perfume-page layout: `payment-badge.svg` strip, then
+`render 'shipping-badges'` (48h / InPost / 60 days). "Designerpreis:" became
+"Cena oryginałów:" (shows only on bundles with a compare-at price; the 3x
+bundles have none). The offer's first div carries `id="atc_scroll_target"`,
+so the stacks-up "Odkryj MagyX" button scrolls to the offer here too.
+
+Product data, same go: metafield `custom.bundle_product_content` German to
+Polish on 3x-50ml-perfume-bottles, 3x-100ml-perfume-bottles-1,
+6x-50ml-parfumflaschen and 6x-50ml-parfumflaschen-1 ("3 flakony / 6 flakonów
+w pełnym rozmiarze. Te same designerskie zapachy – bez 90-procentowych marż
+narzucanych przez projektantów.", the 8x bundle's wording).
+
+Backups: tag `live-before-bundle-pl-2026-10-17` and branch
+`backup/live-before-bundle-pl-2026-10-17` (= f866d83), files in
+`Documents/dev/_backups/tryscent-eu-live-2026-10-17-before-bundle-pl/` (454),
+unpublished theme 165433737475 "BACKUP live 2026-10-17 (before bundle PL)".
+The German metafield values are in the session snapshot only; they are the
+"now" column of the table in the hand-over (and `git log` of this file).
+
+Read-back: both files match the repo by Admin API checksum; metafieldsSet
+returned no errors and a fresh read shows the four Polish values; all 13
+bundle pages visible on the DE market render the new block (no old block, no
+"Designerpreis", 3 badges, one anchor), 6x-50ml-parfumflaschen-1 is PL-market
+only and checked with the PL cookie. Browser check on live at 375 and 1440:
+button, payment strip 32 px below, badges, FAQ; "Odkryj MagyX" stops 12 px
+under the header.
+
+Found, not changed: 6x-50ml-parfumflaschen-1 has no product photos, so
+`sections/floating-atc.liquid` line 15 prints "Liquid error: invalid url
+input" in the desktop thumbnail (same on the old live).
