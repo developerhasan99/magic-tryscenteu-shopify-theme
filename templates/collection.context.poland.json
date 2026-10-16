@@ -28,17 +28,59 @@
       "settings": {},
       "blocks": {}
     },
+    "banner": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
     "product-grid": {
       "settings": {
         "show_rating": true,
         "padding_top": 60
       },
-      "blocks": {}
-    },
-    "banner": {
-      "disabled": false,
-      "settings": {},
-      "blocks": {}
+      "blocks": {
+        "fuel05_ugc_video_pdjwy": {
+          "type": "fuel05_ugc_video",
+          "disabled": false,
+          "settings": {
+            "position": 8,
+            "device": "both",
+            "video": "shopify://files/videos/aniaprzy_7677573659518717217.mp4",
+            "video_url": "",
+            "video_poster": null,
+            "product": "3x-50ml-perfume-bottles"
+          }
+        },
+        "fuel05_ugc_video_EjLpc": {
+          "type": "fuel05_ugc_video",
+          "disabled": false,
+          "settings": {
+            "position": 4,
+            "device": "both",
+            "video": "shopify://files/videos/tryscenteu_PaulinaO_SzafNr466_9f0a1f51.mov",
+            "video_url": "",
+            "video_poster": null,
+            "product": "8x-50ml-parfumflaschen"
+          }
+        },
+        "fuel05_ugc_video_bf9he": {
+          "type": "fuel05_ugc_video",
+          "disabled": false,
+          "settings": {
+            "position": 2,
+            "device": "both",
+            "video": "shopify://files/videos/nikoolixa_7671692339257085217.mp4",
+            "video_url": "",
+            "video_poster": null,
+            "product": "6x-50ml-parfumflaschen"
+          }
+        }
+      },
+      "block_order": [
+        "fuel05_ugc_video_pdjwy",
+        "fuel05_ugc_video_EjLpc",
+        "fuel05_ugc_video_bf9he"
+      ]
     }
   }
 }
