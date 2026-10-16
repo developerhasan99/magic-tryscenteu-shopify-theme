@@ -14,7 +14,7 @@
   "parent": "collection.json",
   "sections": {
     "collection_hero_ezAzaW": {
-      "disabled": false,
+      "disabled": true,
       "settings": {},
       "blocks": {}
     },
@@ -25,6 +25,18 @@
     },
     "custom_liquid_MYjrA4": {
       "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "product-grid": {
+      "settings": {
+        "show_rating": true,
+        "padding_top": 60
+      },
+      "blocks": {}
+    },
+    "banner": {
+      "disabled": false,
       "settings": {},
       "blocks": {}
     }
