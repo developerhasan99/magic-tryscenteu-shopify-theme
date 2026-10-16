@@ -6,18 +6,20 @@ theessencevault.co.uk product pages, measured in its DOM.
 
 ## What it is
 A theme-editor block "Wideo UGC" (`ugc_videos`, limit 1) in the Product
-information section (`sections/main-product.liquid`). Up to four clips in the
-info column, under the FAQ accordions, two per row (four = 2x2 grid; an odd
-last clip is centred). Two per row since 2026-10-16 (Adrian: four in a row
-was too small to read): clips 168 px wide on a 375 phone, 218 px at 1440,
-about 2.1x the four-in-a-row size.
+information section (`sections/main-product.liquid`). Up to three clips in
+ONE row in the info column, under the FAQ accordions. Adrian, 2026-10-16:
+four in a row was too small to read, a 2x2 grid is out ("this has to be one
+row"), so three. Clips keep their own 9:16 (110 x 195 px on a 375 phone,
+98 x 174 at 820, 143 x 254 at 1440), about 2.5x the area of the four-in-a-row
+3:4 tiles. One or two clips keep the one-third width and sit centred.
 
 - Each clip: Files video (the picker also uploads from the computer) or a
   direct `.mp4` link, optional cover image, caption with an on/off checkbox,
   linked product.
 - On the clip: the collection tile's white product card (photo, title,
-  price; "+" from 190 px of tile up) links to the product. Captions under
-  the clip, 14 px bold.
+  price) links to the product; Adrian approved its look. Under 130 px of
+  tile a 26 px photo and a 10 px title on up to three lines, from 130 px
+  32 px and 11 px; no "+" (no room). Captions under the clip, 13 px bold.
 - Tap the clip: full-screen player with sound; under the clip the collection
   tile's white product pill (photo, title, price) links to the product.
 - Preview: clips play muted one after another (2 s after a clip is half on
@@ -35,7 +37,7 @@ folder picker, and only direct mp4 files play in the row.
 ## Placement
 Placed on `product.quantity-breaker.json` (80 live products) and
 `product.json`, right after `collapsible_tab_Qn8c4p` and before
-`featured_bundle_main`, with the four Polish captions and the 6×50 ml bundle
+`featured_bundle_main`, with three Polish captions and the 6×50 ml bundle
 prefilled and no clips. Nothing changes on a live page until clips are
 picked. The Polish market templates do not override the main section, so the
 parent's block renders there. Available but not placed: custom-bundle (bundle
@@ -43,7 +45,8 @@ pages), expressive-notes, e-notes-sof, payday-60, mystery-perfume,
 christians-pdp.
 
 ## Files
-- `snippets/ugc-video-row.liquid`: row, tiles, captions, chip, player, pills.
+- `snippets/ugc-video-row.liquid`: row, tiles, captions, product cards,
+  player, pills.
 - `snippets/ugc-video-count.liquid`: number of slots with a playable clip;
   read by the row and by the featured bundle guard in main-product.
 - `snippets/ugc-video-src.liquid`: the mp4 rendition picker, moved out of
@@ -54,7 +57,7 @@ christians-pdp.
 
 ## Adding clips (Adrian)
 Customize → product template "quantity-breaker" (and "Default product") →
-Product information → Wideo UGC → Wideo 1 to 4: pick the video (or paste an
+Product information → Wideo UGC → Wideo 1 to 3: pick the video (or paste an
 mp4 link), optionally a cover, check the caption and the product → Save.
 
 ## QA (2026-10-16, localhost theme dev + dev theme on the live domain)
@@ -70,13 +73,14 @@ no clips → no row, card shown. Section re-render (editor) re-arms the row and
 tears the old one down. Theme check: no new offenses (OrphanedSnippet is a
 false positive across 121 snippets).
 
-Re-run after the two-per-row change (2026-10-16, port 9295): 360 / 375 /
-820 / 1024 / 1440 on both templates, tiles equal at 3:4, card inside the
-clip and the tap target at its centre, bundle title on two lines with
-nothing cut, play mark clear of the card, no sideways scroll. Player opens
-with sound on a real click at 375 and 1440, Esc closes, the card goes to
-the bundle. Preview with only the top row in view plays clips 1 and 2,
-with the whole grid in view 1 to 4.
+Re-run after the three-in-one-row change (2026-10-16, port 9295): 360 /
+375 / 820 / 1024 / 1440 on both templates, three equal 9:16 tiles on one
+line, card inside the clip and the tap target at its centre, bundle title
+"6X 50ml Flakony Perfum" on three lines with nothing cut, price clear of
+the card edge, play mark clear of the card, no sideways scroll. Player
+opens with sound on a real click at 375 and 1440, Esc closes, the card goes
+to the bundle. Preview 2.2 / 5.3 / 8.3 s, then the 5 s pause. Theme check:
+no new offenses (main-product's three warnings are older).
 
 Not checked on a real iPhone: the `#t=0.001` first-frame paint for pasted
 links without a cover, and the native control layout in the player.
