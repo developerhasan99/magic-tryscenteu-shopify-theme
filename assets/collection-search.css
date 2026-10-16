@@ -1,0 +1,180 @@
+/* Collection search bar (snippets/collection-search.liquid). Centred pill in the style of the
+   magyx.whop.site "Filter & sort" button: icon at the left edge, label centred in spaced capitals,
+   in MAGYX tokens. */
+.mgx-csearch {
+  padding-top: 4px;
+  padding-bottom: 16px;
+}
+
+.mgx-csearch__inner {
+  margin: 0 auto;
+}
+
+.mgx-csearch__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 54px;
+  border: 1px solid var(--mgx-black);
+  border-radius: 999px;
+  background: var(--mgx-white);
+  color: var(--mgx-black);
+  cursor: text;
+}
+
+.mgx-csearch__field:focus-within {
+  box-shadow: 0 0 0 3px rgba(var(--mgx-black-rgb), 0.12);
+}
+
+.mgx-csearch__ico {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  color: var(--mgx-black);
+  pointer-events: none;
+}
+
+/* Equal padding on both sides keeps the text centred on the pill, not on the space after the icon.
+   Wider once there is text, so it never runs under the clear button. */
+.mgx-csearch__input.mgx-csearch__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 52px;
+  margin: 0;
+  padding: 0 42px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--mgx-black);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mgx-csearch__input.mgx-csearch__input:not(:placeholder-shown) {
+  padding: 0 48px;
+}
+
+.mgx-csearch__input.mgx-csearch__input:focus,
+.mgx-csearch__input.mgx-csearch__input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Phones: slightly smaller, tighter capitals so the whole placeholder fits on one centred line. */
+.mgx-csearch__input::placeholder {
+  color: var(--mgx-black);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+.mgx-csearch__input::-webkit-search-cancel-button,
+.mgx-csearch__input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mgx-csearch__clear {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0 0 2px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(var(--mgx-silver-rgb), 0.45);
+  color: var(--mgx-black);
+  font-family: inherit;
+  font-size: 22px;
+  line-height: 1;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.mgx-csearch__clear:hover {
+  background: rgba(var(--mgx-silver-rgb), 0.8);
+}
+
+.mgx-csearch__clear:focus-visible {
+  outline: 2px solid var(--mgx-black);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.mgx-csearch__clear[hidden] {
+  display: none;
+}
+
+.mgx-csearch__status {
+  min-height: 1.5em;
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--mgx-text-muted);
+  text-align: center;
+}
+
+.mgx-csearch__reset {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: var(--mgx-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.mgx-csearch__reset:hover {
+  text-decoration-color: var(--mgx-accent);
+}
+
+#product-grid > li[hidden] {
+  display: none;
+}
+
+@media screen and (max-width: 359px) {
+  .mgx-csearch__input::placeholder {
+    font-size: 10.5px;
+    letter-spacing: 0;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .mgx-csearch {
+    padding-bottom: 20px;
+  }
+
+  .mgx-csearch__inner {
+    max-width: 460px;
+  }
+
+  .mgx-csearch__ico {
+    left: 18px;
+  }
+
+  .mgx-csearch__input.mgx-csearch__input {
+    padding: 0 48px;
+  }
+
+  .mgx-csearch__input::placeholder {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+  }
+}
