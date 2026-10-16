@@ -13,6 +13,12 @@
   },
   "parent": "collection.bestsellers.json",
   "sections": {
+    "custom_liquid_MxhLrU": {
+      "settings": {
+        "custom_liquid": "<style>\n#ts-hero-custom {\n  position: relative;\n  background: var(--mgx-white);\n  overflow: hidden;\n}\n\n#ts-hero-custom .ts-container {\n  width: min(1180px, calc(100% - 36px));\n  margin-inline: auto;\n}\n\n#ts-hero-custom .ts-hero-inner {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  align-items: center;\n  min-height: 560px;\n  gap: 40px;\n}\n\n#ts-hero-custom .ts-hero-copy {\n  max-width: 560px;\n  padding: 40px 0;\n}\n\n#ts-hero-custom h1 {\n  margin: 0 0 20px;\n  font-size: 36px;\n  font-weight: 900;\n  line-height: 1.12;\n  letter-spacing: -0.9px;\n  color: var(--mgx-black);\n}\n\n#ts-hero-custom .ts-category-line {\n  margin-bottom: 14px;\n  font-size: 18px;\n  font-weight: 600;\n  line-height: 1.45;\n  color: var(--mgx-black);\n}\n\n#ts-hero-custom .ts-expert-line {\n  margin: 0;\n  font-size: 16px;\n  line-height: 1.7;\n  color: var(--mgx-graphite);\n}\n\n#ts-hero-custom .ts-microcopy {\n  margin: 12px 0 0;\n  font-size: 14px;\n  color: var(--mgx-graphite);\n}\n\n#ts-hero-custom .ts-hero-visual {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\n\n#ts-hero-custom .ts-hero-visual img {\n  width: 100%;\n  max-width: 520px;\n  height: auto;\n  display: block;\n  object-fit: contain;\n}\n\n@media (max-width: 700px) {\n  #ts-hero-custom {\n    background:\n      linear-gradient(180deg, rgba(255,255,255,.6) 0%, rgba(255,255,255,.25) 26%, rgba(255,255,255,0) 44%),\n      url('https://cdn.shopify.com/s/files/1/0762/7662/9763/files/MAGYX_Site_Header.webp?v=1789812534') right bottom/220% auto no-repeat,\n      linear-gradient(90deg, #f2e7e0 0%, #eae0da 50%, #ded3cd 100%);\n  }\n\n  #ts-hero-custom .ts-hero-inner {\n    display: block;\n    min-height: auto;\n    padding-top: 40px;\n    padding-bottom: 380px;\n  }\n\n  #ts-hero-custom .ts-hero-copy {\n    max-width: 100%;\n    text-align: center;\n    padding: 0;\n  }\n\n  #ts-hero-custom h1 {\n    font-size: 30px;\n  }\n\n  #ts-hero-custom .ts-hero-visual {\n    display: none;\n  }\n\n  #ts-hero-custom .ts-microcopy {\n    color: var(--mgx-black);\n    font-weight: 600;\n  }\n}\n</style>\n\n<section id=\"ts-hero-custom\">\n  <div class=\"ts-container\">\n    <div class=\"ts-hero-inner\">\n      <div class=\"ts-hero-copy\">\n        <h1>Znajdź zapach, dzięki któremu zawsze będą o Tobie myśleć.</h1>\n        <div class=\"ts-category-line\">Pierwszy wybór wśród perfum inspirowanych zapachami znanych marek.</div>\n        <p class=\"ts-expert-line\">Tworzone przez tych samych perfumiarzy, którzy stoją za jednymi z najbardziej znanych zapachów świata.</p>\n        <p class=\"ts-microcopy\">Nie wierz nam na słowo. Przekonaj się na własnej skórze.</p>\n      </div>\n\n      <div class=\"ts-hero-visual\">\n        <img \n          src=\"https://cdn.shopify.com/s/files/1/0762/7662/9763/files/MAGYX_Site_Header.webp?v=1789812534\" \n          alt=\"Magyx perfume bottles\" \n          width=\"800\" \n          height=\"800\"\n          loading=\"eager\"\n        >\n      </div>\n    </div>\n  </div>\n</section>"
+      },
+      "blocks": {}
+    },
     "custom_liquid_JXCdfb": {
       "disabled": true,
       "settings": {},
@@ -23,11 +29,23 @@
       "settings": {},
       "blocks": {}
     },
-    "custom_liquid_MxhLrU": {
+    "17921664096e13ac8f": {
+      "type": "apps",
+      "disabled": false,
       "settings": {
-        "custom_liquid": "<style>\n#ts-hero-custom{\n  position:relative;\n  min-height:560px;\n  overflow:hidden;\n  background:\n    linear-gradient(90deg,rgba(var(--mgx-white-rgb),.92) 0%,rgba(var(--mgx-white-rgb),.72) 30%,rgba(var(--mgx-white-rgb),.12) 54%,rgba(var(--mgx-white-rgb),0) 72%),\n    url('https://cdn.shopify.com/s/files/1/0762/7662/9763/files/MAGYX_Site_Header.webp?v=1789812534') center right/cover no-repeat,\n    var(--mgx-white);\n}\n#ts-hero-custom .ts-container{\n  width:min(1180px,calc(100% - 36px));\n  margin-inline:auto;\n}\n#ts-hero-custom .ts-hero-inner{\n  min-height:560px;\n  display:flex;\n  align-items:center;\n  position:relative;\n  z-index:2;\n}\n#ts-hero-custom .ts-hero-copy{max-width:640px}\n#ts-hero-custom h1{\n  margin:0 0 24px;\n  font-size:36px;\n  font-weight:900;\n  line-height:1.12;\n  letter-spacing:-.9px;\n  color:var(--mgx-black);\n}\n#ts-hero-custom .ts-category-line{\n  max-width:670px;\n  margin-bottom:14px;\n  font-size:18px;\n  font-weight:600;\n  letter-spacing:.4px;\n  line-height:1.45;\n  color:var(--mgx-black);\n}\n#ts-hero-custom .ts-expert-line{\n  max-width:620px;\n  margin:0;\n  font-size:16px;\n  line-height:1.7;\n  color:var(--mgx-graphite);\n}\n#ts-hero-custom .ts-microcopy{\n  margin:12px 0 0;\n  font-size:14px;\n  color:var(--mgx-graphite);\n}\n@media(max-width:700px){\n  #ts-hero-custom{\n    min-height:auto;\n    background:\n      url('https://cdn.shopify.com/s/files/1/0762/7662/9763/files/MAGYX_Site_Header.webp?v=1789812534') 96% 100%/auto 420px no-repeat,\n      var(--mgx-white);\n  }\n  #ts-hero-custom .ts-hero-inner{\n    min-height:auto;\n    display:block;\n    padding-top:40px;\n    padding-bottom:380px;\n  }\n  #ts-hero-custom .ts-hero-copy{\n    max-width:100%;\n    text-align:center;\n  }\n  #ts-hero-custom h1{\n    font-size:30px;\n    margin-bottom:18px;\n  }\n  #ts-hero-custom .ts-category-line,\n  #ts-hero-custom .ts-expert-line{\n    margin-inline:auto;\n  }\n  #ts-hero-custom .ts-microcopy{\n    color:var(--mgx-black);\n    font-weight:600;\n  }\n}\n</style>\n<section id=\"ts-hero-custom\">\n  <div class=\"ts-container\">\n    <div class=\"ts-hero-inner\">\n      <div class=\"ts-hero-copy\">\n        <h1>Znajdź zapach, dzięki któremu zawsze będą o Tobie myśleć.</h1>\n        <div class=\"ts-category-line\">Pierwszy wybór wśród perfum inspirowanych zapachami znanych marek.</div>\n        <p class=\"ts-expert-line\">Tworzone przez tych samych perfumiarzy, którzy stoją za jednymi z najbardziej znanych zapachów świata.</p>\n        <p class=\"ts-microcopy\">Nie wierz nam na słowo. Przekonaj się na własnej skórze.</p>\n      </div>\n    </div>\n  </div>\n</section>"
+        "include_margins": true
       },
-      "blocks": {}
+      "blocks": {},
+      "block_order": []
     }
-  }
+  },
+  "order": [
+    "custom_liquid_MxhLrU",
+    "custom_liquid_7erUbK",
+    "17921664096e13ac8f",
+    "custom_liquid_JXCdfb",
+    "popular_products_3Lx6bB",
+    "banner",
+    "product-grid"
+  ]
 }
