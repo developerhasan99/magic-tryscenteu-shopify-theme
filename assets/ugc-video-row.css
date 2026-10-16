@@ -173,8 +173,11 @@
 /* The collection grid tile's white product card (fuel05-ugc.css: photo,
    title, price), sized down for a clip a third of the column wide. Tiles
    under 130px (phones, and 98px in the tablet range) get a 26px photo and a
-   10px title on up to three lines, which keeps the price clear of the edge at
-   98px; from 130px (desktop) the card takes 32px, 11px and 12px. The
+   10px title, which keeps the price clear of the edge at 98px; from 130px
+   (desktop) the card takes 32px, 11px and 12px. The title may take four
+   lines: the longest bundle name in stock ("Letnia Świeżość – Zestaw
+   Podróżny") needs four at these widths, and the cap only stops a far longer
+   name from covering the clip. The
    collection card's "+" has no room at these widths. The card is at least
    44px tall, a full thumb target, whatever the title's length. */
 .ugc-row__product {
@@ -220,7 +223,7 @@
   letter-spacing: 0;
   overflow-wrap: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

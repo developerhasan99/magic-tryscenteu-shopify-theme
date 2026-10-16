@@ -18,8 +18,14 @@ row"), so three. Clips keep their own 9:16 (110 x 195 px on a 375 phone,
   linked product.
 - On the clip: the collection tile's white product card (photo, title,
   price) links to the product; Adrian approved its look. Under 130 px of
-  tile a 26 px photo and a 10 px title on up to three lines, from 130 px
-  32 px and 11 px; no "+" (no room). Captions under the clip, 13 px bold.
+  tile a 26 px photo and a 10 px title, from 130 px 32 px and 11 px; the
+  title may take up to four lines ("Letnia Świeżość – Zestaw Podróżny"
+  needs four); no "+" (no room). Captions under the clip, 13 px bold.
+- Product left empty = this page's product. A card for the page the shopper
+  is already on scrolls to its offer (`.bundle-price-pdp` on a bundle page,
+  `#atc_scroll_target` on a perfume page), below the sticky header, and
+  closes the player first when tapped there. A product that cannot be
+  bought gets no card (the six sold-out themed sets show clips only).
 - Tap the clip: full-screen player with sound; under the clip the collection
   tile's white product pill (photo, title, price) links to the product.
 - Preview: clips play muted one after another (2 s after a clip is half on
@@ -38,11 +44,15 @@ folder picker, and only direct mp4 files play in the row.
 Placed on `product.quantity-breaker.json` (80 live products) and
 `product.json`, right after `collapsible_tab_Qn8c4p` and before
 `featured_bundle_main`, with three Polish captions and the 6×50 ml bundle
-prefilled and no clips. Nothing changes on a live page until clips are
-picked. The Polish market templates do not override the main section, so the
-parent's block renders there. Available but not placed: custom-bundle (bundle
-pages), expressive-notes, e-notes-sof, payday-60, mystery-perfume,
-christians-pdp.
+prefilled and no clips. Also on `product.custom-bundle.json` (14 bundle
+pages: 3x/6x/8x/10x and the themed sets, Adrian 2026-10-16), right after
+`collapsible_tab_Qn8c4p`, with the captions and NO product, so each bundle
+page's card shows that bundle. The block settings are per template: clips
+picked on quantity-breaker do not appear on the bundle pages, and the
+reverse. Nothing changes on a live page until clips are picked. The Polish
+market templates do not override the main section, so the parent's block
+renders there. Available but not placed: expressive-notes, e-notes-sof,
+payday-60, mystery-perfume, christians-pdp.
 
 ## Files
 - `snippets/ugc-video-row.liquid`: row, tiles, captions, product cards,
@@ -56,7 +66,8 @@ christians-pdp.
   row renders.
 
 ## Adding clips (Adrian)
-Customize → product template "quantity-breaker" (and "Default product") →
+Customize → product template "quantity-breaker" (and "Default product",
+and "custom-bundle" for the bundle pages) →
 Product information → Wideo UGC → Wideo 1 to 3: pick the video (or paste an
 mp4 link), optionally a cover, check the caption and the product → Save.
 
@@ -81,6 +92,14 @@ the card edge, play mark clear of the card, no sideways scroll. Player
 opens with sound on a real click at 375 and 1440, Esc closes, the card goes
 to the bundle. Preview 2.2 / 5.3 / 8.3 s, then the 5 s pause. Theme check:
 no new offenses (main-product's three warnings are older).
+
+Bundle pages (custom-bundle, 2026-10-16): 6x-50ml-parfumflaschen,
+3x-50ml-perfume-bottles and das-daiquiri-sommer-reiseset-fur-sie at 375 and
+1440: three in one row, each card shows the page's own bundle (6X 181,99 zł,
+3X 115,99 zł, Letnia Świeżość 87,99 zł) in full; tapping the card, or the
+card in the player (which closes), stops at the bundle price 12 px under
+the sticky header (65 px phone, 86 px desktop), no reload. The perfume
+page card still opens the 6x bundle page.
 
 Not checked on a real iPhone: the `#t=0.001` first-frame paint for pasted
 links without a cover, and the native control layout in the player.
