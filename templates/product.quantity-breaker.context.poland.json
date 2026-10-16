@@ -19,7 +19,9 @@
       "blocks": {}
     },
     "main": {
-      "settings": {},
+      "settings": {
+        "padding_bottom": 36
+      },
       "blocks": {
         "ugc_videos_main": {
           "settings": {
