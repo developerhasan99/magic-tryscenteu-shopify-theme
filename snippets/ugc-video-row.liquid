@@ -1,14 +1,14 @@
 {% comment %}
   Product page UGC video row: block 'ugc_videos' of main-product, after the
-  theessencevault.co.uk product page. Up to four clips side by side, each with
-  an optional caption under it and a round product photo on the clip that
-  links to the product. A tap on a clip opens a full-screen player with sound,
-  under which sits the same white product pill as the collection grid tiles
-  (photo, title, price).
+  theessencevault.co.uk product page. Up to four clips, two per row (four
+  make a 2x2 grid, an odd last one is centred), each with an optional caption
+  under it and a white product card on the clip (photo, title, price) that
+  links to the product. A tap on the clip opens a full-screen player with
+  sound, under which sits the collection grid tile's product pill.
 
-  The clips are too narrow for that pill (about 80px on a phone, 105px on a
-  desktop), which is why the tile carries only the photo and the pill lives in
-  the player.
+  Two per row keeps the clips twice as wide as four in a row (about 168px on
+  a phone, 218px on a desktop), wide enough for the card and for captions a
+  shopper can read.
 
   Accepts:
   - block: {Object} the 'ugc_videos' block
@@ -20,15 +20,10 @@
 {%- capture ugc_count -%}{% render 'ugc-video-count', block: block %}{%- endcapture -%}
 {%- assign ugc_count = ugc_count | strip | plus: 0 -%}
 {%- liquid
-  # Fewer clips means wider tiles (about 141px for 3-4, 218px for 2, up to
-  # 445px for 1), and the poster stays on screen for good when the preview
-  # is off, so it is asked for at a width that stays sharp on 2-3x screens.
-  assign poster_width = 360
-  if ugc_count == 2
-    assign poster_width = 600
-  elsif ugc_count == 1
-    assign poster_width = 1000
-  endif
+  # A tile is at most about 218px wide (half the info column), and the
+  # poster stays on screen for good when the preview is off, so it is asked
+  # for at a width that stays sharp on 2-3x screens.
+  assign poster_width = 600
 -%}
 
 {%- if ugc_count > 0 -%}
@@ -41,7 +36,6 @@
     data-ugc-row
     data-block-id="{{ block.id }}"
     data-autoplay="{% if block.settings.autoplay_preview %}true{% else %}false{% endif %}"
-    style="--ugc-cols: {{ ugc_count }};"
     {{ block.shopify_attributes }}>
     {%- if block.settings.autoplay_preview -%}
       {%- comment -%}
@@ -167,18 +161,22 @@
               </span>
             </button>
             {%- if has_product -%}
-              <a class="ugc-row__chip" href="{{ clip_product.url }}" aria-label="{{ clip_title }}">
+              <a class="ugc-row__product" href="{{ clip_product.url }}">
                 {%- if clip_product.featured_image != blank -%}
                   <img
-                    class="ugc-row__chip-img"
-                    src="{{ clip_product.featured_image | image_url: width: 96 }}"
+                    class="ugc-row__product-thumb"
+                    src="{{ clip_product.featured_image | image_url: width: 132 }}"
                     alt=""
-                    width="32"
-                    height="32"
+                    width="44"
+                    height="44"
                     loading="lazy">
                 {%- endif -%}
-                <span class="ugc-row__chip-add" aria-hidden="true">
-                  <svg width="8" height="8" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h2v12H7z"/><path d="M2 7h12v2H2z"/></svg>
+                <span class="ugc-row__product-info">
+                  <span class="ugc-row__product-title">{{ clip_title }}</span>
+                  <span class="ugc-row__product-price">{{ clip_product.price | money }}</span>
+                </span>
+                <span class="ugc-row__product-add" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.4 2.4h1.2v11.2H7.4z"/><path d="M2.4 7.4h11.2v1.2H2.4z"/></svg>
                 </span>
               </a>
             {%- endif -%}

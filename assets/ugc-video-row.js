@@ -49,6 +49,16 @@
 
     tiles.forEach((tile, i) => holdPoster(tile, videos[i]));
 
+    // Two clips per row, so on a phone one row of the grid can be on screen
+    // and the other not: the preview plays only clips that are at least half
+    // in view, and runs while any one of them is.
+    const seen = tiles.map(() => false);
+    const nextSeen = (from) => {
+      for (let k = from; k < videos.length; k += 1) {
+        if (seen[k]) return k;
+      }
+      return -1;
+    };
     let visible = false;
     let running = false;
     // Set when the browser refuses a muted start (iOS Low Power Mode, data
@@ -102,6 +112,19 @@
       current = -1;
     };
 
+    // The next clip in view from slot `from` on; past the last one, the
+    // 5s pause and round again from the first.
+    const playFrom = (from) => {
+      if (!running) return;
+      const i = nextSeen(from);
+      if (i < 0) {
+        current = -1;
+        timer = setTimeout(() => playFrom(0), LOOP_DELAY);
+        return;
+      }
+      playAt(i);
+    };
+
     const playAt = (i) => {
       if (!running) return;
       if (!canPreview()) {
@@ -110,7 +133,8 @@
       }
       const video = videos[i];
       current = i;
-      warm(videos[i + 1]);
+      const next = nextSeen(i + 1);
+      if (next >= 0) warm(videos[next]);
 
       let advanced = false;
       const advance = () => {
@@ -119,12 +143,7 @@
         clearTimer();
         resetClip(video);
         if (!running) return;
-        if (i + 1 < videos.length) {
-          playAt(i + 1);
-        } else {
-          current = -1;
-          timer = setTimeout(() => playAt(0), LOOP_DELAY);
-        }
+        playFrom(i + 1);
       };
 
       // The 3s count starts when the clip really plays, not when it was
@@ -152,8 +171,9 @@
     const start = () => {
       if (running || !videos.length || !canPreview()) return;
       running = true;
-      warm(videos[0]);
-      timer = setTimeout(() => playAt(0), START_DELAY);
+      const first = nextSeen(0);
+      if (first >= 0) warm(videos[first]);
+      timer = setTimeout(() => playFrom(0), START_DELAY);
     };
 
     const refresh = () => (canPreview() ? start() : stop());
@@ -166,13 +186,15 @@
       io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            visible = entry.intersectionRatio >= 0.5;
+            const i = tiles.indexOf(entry.target);
+            if (i >= 0) seen[i] = entry.intersectionRatio >= 0.5;
           });
+          visible = seen.some(Boolean);
           refresh();
         },
         { threshold: [0, 0.5] }
       );
-      io.observe(root.querySelector('.ugc-row__grid') || root);
+      tiles.forEach((tile) => io.observe(tile));
     }
     document.addEventListener('visibilitychange', refresh, { signal: ac.signal });
     if (typeof reduced.addEventListener === 'function') reduced.addEventListener('change', refresh, { signal: ac.signal });

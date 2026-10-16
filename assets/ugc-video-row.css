@@ -1,8 +1,9 @@
 /* Product page UGC video row (block 'ugc_videos' of main-product), after the
-   theessencevault.co.uk product page: up to four clips in one row inside the
-   product info column, captions under them, a full-screen player on tap.
-   Sizes follow the reference measured in its DOM: 3:4 clips, 8px gap, bold
-   captions about 11px, centred and wrapping. */
+   theessencevault.co.uk product page: up to four clips inside the product
+   info column, two per row, captions under them, a product card on each clip
+   and a full-screen player on tap. 3:4 clips with an 8px gap, as in the
+   reference; two per row instead of its four, so the clips are twice as wide
+   and the captions and the card read at a glance. */
 
 /* Anchors the pause toggle over the row's top-left corner. */
 .ugc-row {
@@ -48,16 +49,20 @@
   outline-offset: 2px;
 }
 
+/* Two clips per row: four make a 2x2 grid, and an odd last clip (three, or
+   one) is centred under the others rather than left hanging on one side. */
 .ugc-row__grid {
-  display: grid;
-  grid-template-columns: repeat(var(--ugc-cols, 4), minmax(0, 1fr));
-  gap: 8px;
-  /* A caption that wraps to three lines must not stretch its neighbours'
-     tiles; captions hang from the top of their own column. */
-  align-items: start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 8px;
+  /* A caption that wraps to two lines must not stretch its neighbour's
+     tile; captions hang from the top of their own column. */
+  align-items: flex-start;
 }
 
 .ugc-row__item {
+  flex: 0 0 calc((100% - 8px) / 2);
   min-width: 0;
 }
 
@@ -70,6 +75,9 @@
   overflow: hidden;
   background: #eee;
   -webkit-tap-highlight-color: transparent;
+  /* The product card reads the tile's own width, not the viewport's: the
+     tile is 151px at 820px of window and 218px at 1440px. */
+  container-type: inline-size;
 }
 
 /* Same grey as the tile behind it, so a clip that has not painted yet reads
@@ -98,9 +106,9 @@
   display: none;
 }
 
-/* The whole tile is the play button; the product chip sits above it as a
-   separate link, never inside it. The three positioned children paint in the
-   order they are written, so no z-index is needed. */
+/* The whole tile is the play button; the product card sits above it as a
+   separate link, never inside it. The positioned children paint in the order
+   they are written, so no z-index is needed. */
 .ugc-row__play {
   position: absolute;
   inset: 0;
@@ -125,17 +133,15 @@
   transition: opacity 150ms ease;
 }
 
-/* A small play mark stays on at every width: on a phone there is no hover to
-   tell a shopper the clip opens. 20px and 4px in, so on the narrowest tiles
-   (71.5px, four clips at 820px) it ends at 24px, clear of the chip's 44px hit
-   area (measured from 24.75px), and a tap on it plays the clip instead of
-   opening the product. */
+/* A play mark stays on at every width: on a phone there is no hover to tell
+   a shopper the clip opens. Top left, because the product card takes the
+   bottom of the clip. */
 .ugc-row__play-icon {
   position: absolute;
-  left: 4px;
-  bottom: 4px;
-  width: 20px;
-  height: 20px;
+  left: 8px;
+  top: 8px;
+  width: 28px;
+  height: 28px;
   border-radius: 9999px;
   background: rgba(var(--mgx-black-rgb, 16, 15, 13), 0.55);
   display: flex;
@@ -144,8 +150,8 @@
 }
 
 .ugc-row__play-icon svg {
-  width: 7px;
-  height: 9px;
+  width: 10px;
+  height: 12px;
   margin-left: 2px;
 }
 
@@ -164,85 +170,132 @@
   }
 }
 
-/* Round product photo, bottom right. The visible circle is 32px; the
-   ::before stretches the hit area to 44px for a thumb. Placed 8px in so the
-   44px area stays inside the tile, which clips anything outside it; the play
-   mark is sized to stay clear of that area on the narrowest tiles. */
-.ugc-row__chip {
+/* The collection grid tile's white product card (fuel05-ugc.css: photo,
+   title, price, "+"), sized down for a clip half the column wide. On the
+   narrow tiles (under 190px: phones, and the tablet range) the photo is 36px
+   and the "+" goes, which leaves the title two lines of about 85px; from
+   190px up the card takes the collection values closer. The card is 48px
+   tall at its smallest, a full thumb target. */
+.ugc-row__product {
   position: absolute;
-  right: 8px;
-  bottom: 8px;
-  width: 32px;
-  height: 32px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
   box-sizing: border-box;
-  border-radius: 9999px;
-  border: 2px solid var(--mgx-white, #fff);
   background: var(--mgx-white, #fff);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  color: var(--mgx-black, #100f0d);
+  text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-.ugc-row__chip::before {
-  content: "";
-  position: absolute;
-  inset: -8px;
-}
-
-.ugc-row__chip-img {
+.ugc-row__product-thumb {
   display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px;
+  width: 36px;
+  height: 36px;
   object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
-/* The collection pill's "+" in MAGYX black, shrunk onto the photo's corner
-   so the chip reads as "shop this". */
-.ugc-row__chip-add {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 15px;
-  height: 15px;
-  box-sizing: border-box;
-  border-radius: 9999px;
-  border: 1.5px solid var(--mgx-white, #fff);
-  background: var(--mgx-black, #100f0d);
-  color: var(--mgx-white, #fff);
+.ugc-row__product-info {
+  flex: 1 1 auto;
+  min-width: 0;
   display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ugc-row__product-title {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ugc-row__product-price {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.ugc-row__product-add {
+  display: none;
+  box-sizing: border-box;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: 1px solid var(--mgx-black, #100f0d);
+  border-radius: 6px;
+  background: var(--mgx-white, #fff);
+  color: var(--mgx-black, #100f0d);
   align-items: center;
   justify-content: center;
 }
 
-.ugc-row__chip-add svg {
-  width: 7px;
-  height: 7px;
+.ugc-row__product-add svg {
+  width: 14px;
+  height: 14px;
 }
 
-/* Black ring hugging the white chip, then a white band outside it, so the
-   ring reads on any frame of the clip. 4px wide in all, which fits in the 8px
-   between the chip and the tile edge (the tile clips anything past it). */
-.ugc-row__chip:focus-visible {
+@container (min-width: 190px) {
+  .ugc-row__product {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .ugc-row__product-thumb {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ugc-row__product-title {
+    font-size: 12px;
+  }
+
+  .ugc-row__product-price {
+    font-size: 14px;
+  }
+
+  .ugc-row__product-add {
+    display: flex;
+  }
+}
+
+/* Black ring hugging the white card, then a white band outside it, so the
+   ring reads on any frame of the clip. 4px wide in all, which fits in the
+   6-8px between the card and the tile edge (the tile clips anything past
+   it). */
+.ugc-row__product:focus-visible {
   outline: 2px solid var(--mgx-black, #100f0d);
   outline-offset: 0;
-  box-shadow: 0 0 0 4px var(--mgx-white, #fff), 0 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 4px var(--mgx-white, #fff);
 }
 
 .ugc-row__caption {
-  margin: 6px 0 0;
-  font-size: 11px;
+  margin: 8px 0 0;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0;
   text-align: center;
   color: var(--mgx-text, #100f0d);
   overflow-wrap: break-word;
-}
-
-@media screen and (min-width: 750px) {
-  .ugc-row__caption {
-    font-size: 12px;
-  }
 }
 
 /* Full-screen player. A native modal dialog sits in the browser's top layer,

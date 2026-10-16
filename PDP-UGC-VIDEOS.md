@@ -6,19 +6,25 @@ theessencevault.co.uk product pages, measured in its DOM.
 
 ## What it is
 A theme-editor block "Wideo UGC" (`ugc_videos`, limit 1) in the Product
-information section (`sections/main-product.liquid`). Up to four clips side
-by side in the info column, under the FAQ accordions:
+information section (`sections/main-product.liquid`). Up to four clips in the
+info column, under the FAQ accordions, two per row (four = 2x2 grid; an odd
+last clip is centred). Two per row since 2026-10-16 (Adrian: four in a row
+was too small to read): clips 168 px wide on a 375 phone, 218 px at 1440,
+about 2.1x the four-in-a-row size.
 
 - Each clip: Files video (the picker also uploads from the computer) or a
   direct `.mp4` link, optional cover image, caption with an on/off checkbox,
   linked product.
-- On the clip: a round product photo with "+" that links to the product.
+- On the clip: the collection tile's white product card (photo, title,
+  price; "+" from 190 px of tile up) links to the product. Captions under
+  the clip, 14 px bold.
 - Tap the clip: full-screen player with sound; under the clip the collection
   tile's white product pill (photo, title, price) links to the product.
-- Preview: clips play muted one after another (2 s after the row is half on
-  screen, 3 s each, 5 s pause, loop). Off with "Podgląd" unticked, under
-  reduced motion, on hover, and while keyboard focus is in the row. A
-  "Wstrzymaj podgląd" button appears for keyboard users (WCAG 2.2.2).
+- Preview: clips play muted one after another (2 s after a clip is half on
+  screen, 3 s each, 5 s pause, loop), only the clips that are at least half
+  in view. Off with "Podgląd" unticked, under reduced motion, on hover, and
+  while keyboard focus is in the row. A "Wstrzymaj podgląd" button appears
+  for keyboard users (WCAG 2.2.2).
 - "Ukryj kartę Polecany zestaw, gdy są klipy" (default on): the featured
   bundle card hides itself once the row has a playable clip, so the row takes
   its place. Untick it to show both.
@@ -63,6 +69,14 @@ clip. 3 clips → 3 columns; caption off; toggle off shows the bundle card;
 no clips → no row, card shown. Section re-render (editor) re-arms the row and
 tears the old one down. Theme check: no new offenses (OrphanedSnippet is a
 false positive across 121 snippets).
+
+Re-run after the two-per-row change (2026-10-16, port 9295): 360 / 375 /
+820 / 1024 / 1440 on both templates, tiles equal at 3:4, card inside the
+clip and the tap target at its centre, bundle title on two lines with
+nothing cut, play mark clear of the card, no sideways scroll. Player opens
+with sound on a real click at 375 and 1440, Esc closes, the card goes to
+the bundle. Preview with only the top row in view plays clips 1 and 2,
+with the whole grid in view 1 to 4.
 
 Not checked on a real iPhone: the `#t=0.001` first-frame paint for pasted
 links without a cover, and the native control layout in the player.
