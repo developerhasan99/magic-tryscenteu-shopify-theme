@@ -218,10 +218,25 @@
     go(urlFor(form));
   });
 
+  // Escape from inside an open dropdown puts focus back on its pill, so keyboard and
+  // screen-reader users keep their place instead of landing on <body>.
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
+    const active = document.activeElement;
+    const dd = active && active.closest ? active.closest('#' + BAR + ' .mgx-fc-dd') : null;
     closePanels();
+    if (dd) {
+      const pill = dd.querySelector('.mgx-fc-pill');
+      if (pill) pill.focus();
+    }
     closeDrawer(false);
+  });
+
+  // Tabbing out of an open dropdown closes it.
+  document.addEventListener('focusin', (event) => {
+    const bar = byId(BAR);
+    const open = bar && bar.querySelector('.mgx-fc-pill[aria-expanded="true"]');
+    if (open && !open.closest('.mgx-fc-dd').contains(event.target)) closePanels();
   });
 
   window.mgxFilters = { go };

@@ -5,7 +5,8 @@
  * - re-armed when the filter bar (assets/mgx-filters.js) swaps #ProductGridContainer (filters,
  *   sort), which used to stop loading for good, and after every load, so it keeps going while the
  *   button stays in view;
- * - loadAll() fetches the remaining pages 4 at a time and appends them in page order.
+ * - loadAll() fetches the remaining pages 4 at a time and appends them in page order, and on a
+ *   ?page=N link also the pages before it, put on top, so the search covers the whole collection.
  *
  * Pages are fetched by the grid's own section id (#product-grid data-id,
  * template--<id>__product-grid), never the file name: the file name renders the section with
@@ -22,6 +23,8 @@
   let inflight = null;
   let allPromise = null;
   let seen = new Set();
+  // False while pages before the one the grid was rendered for (?page=N) are not in it yet.
+  let headDone = true;
   let io = null;
   let containerObserver = null;
 
@@ -29,13 +32,18 @@
   const button = () => document.getElementById('load-more-btn');
   const isComplete = () => {
     const btn = button();
-    return !(btn && btn.dataset.nextUrl);
+    return headDone && !(btn && btn.dataset.nextUrl);
+  };
+  const firstPage = () => {
+    const target = grid();
+    return (target && Number(target.dataset.mgxPage)) || 1;
   };
 
   const rebuildSeen = () => {
     seen = new Set();
     const target = grid();
     if (target) target.querySelectorAll(':scope > li[data-mgx-pid]').forEach((li) => seen.add(li.dataset.mgxPid));
+    headDone = firstPage() <= 1;
   };
 
   const sectionId = () => {
@@ -67,9 +75,11 @@
       });
 
   // Skips products already in the grid (the sort can shift between page requests) and keeps
-  // images lazy: the first cards of every fetched page come back eager.
-  const append = (items, target) => {
+  // images lazy: the first cards of every fetched page come back eager. With `before`, the cards
+  // go in front of that element instead of at the end.
+  const append = (items, target, before) => {
     const added = [];
+    const batch = document.createDocumentFragment();
     items.forEach((li) => {
       const pid = li.dataset.mgxPid;
       if (pid) {
@@ -79,9 +89,10 @@
       li.querySelectorAll('img:not([loading="lazy"])').forEach((img) => {
         img.loading = 'lazy';
       });
-      target.appendChild(li);
+      batch.appendChild(li);
       added.push(li);
     });
+    target.insertBefore(batch, before && before.parentNode === target ? before : null);
     if (added.length) document.dispatchEvent(new CustomEvent('mgx:grid:append', { detail: { items: added } }));
     return added.length;
   };
@@ -151,10 +162,40 @@
     });
   };
 
+  // Pages 1 to N-1 of a ?page=N link, put in front of the first card in page order.
+  const loadHead = (myGen) => {
+    const target = grid();
+    const first = firstPage();
+    if (headDone || first <= 1 || !target) return Promise.resolve();
+    const anchor = target.firstElementChild;
+    const pages = [];
+    for (let page = 1; page < first; page += 1) pages.push(page);
+    return Promise.all(pages.map((page) => fetchPage(pageUrl(location.href, page), ctrl.signal))).then((results) => {
+      if (myGen !== gen || grid() !== target) return;
+      results.forEach((result) => append(result.items, target, anchor));
+      headDone = true;
+    });
+  };
+
   const loadAll = () => {
     if (allPromise) return allPromise;
     const myGen = gen;
     allPromise = Promise.resolve(inflight)
+      .then(() => Promise.all([loadHead(myGen), loadTail(myGen)]))
+      .catch((error) => {
+        if (error.name !== 'AbortError') console.error('Collection grid: could not load every page', error);
+      })
+      .then(() => {
+        if (myGen !== gen) return;
+        allPromise = null;
+        rearm();
+        document.dispatchEvent(new CustomEvent('mgx:grid:complete'));
+      });
+    return allPromise;
+  };
+
+  const loadTail = (myGen) =>
+    Promise.resolve()
       .then(() => {
         const btn = button();
         const url = btn && btn.dataset.nextUrl;
@@ -205,20 +246,9 @@
           );
         };
         return Promise.all(Array.from({ length: Math.min(CONCURRENCY, pages.length) }, worker)).then(() =>
-          myGen === gen && !failed && !isComplete() ? loadSequential(myGen) : undefined
+          myGen === gen && !failed && nextUrl() ? loadSequential(myGen) : undefined
         );
-      })
-      .catch((error) => {
-        if (error.name !== 'AbortError') console.error('Collection grid: could not load every page', error);
-      })
-      .then(() => {
-        if (myGen !== gen) return;
-        allPromise = null;
-        rearm();
-        document.dispatchEvent(new CustomEvent('mgx:grid:complete'));
       });
-    return allPromise;
-  };
 
   // facets.js replaces the container's children on every filter and sort.
   const onReplace = () => {
