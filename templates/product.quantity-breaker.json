@@ -20,13 +20,6 @@
           "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
         },
-        "custom_rating_text_ehyqmQ": {
-          "type": "custom_rating_text",
-          "disabled": true,
-          "settings": {
-            "text": "4,7/5 (ponad 10 000 opinii)"
-          }
-        },
         "price_MG94AW": {
           "type": "price",
           "disabled": true,
@@ -95,31 +88,6 @@
           "disabled": true,
           "settings": {
             "custom_liquid": "<div class=\"my-6\">\n  <div class=\"flex items-center gap-3 text-base\">\n    <img\n      src=\"https://cdn.shopify.com/s/files/1/0623/0691/0402/files/thimbs_up.png?v=1751372431\"\n      alt=\"Thumbs up badge\"\n      class=\"w-10 h-10 flex-shrink-0\"\n      width=\"40\"\n      height=\"40\" />\n    <div class=\"text-slate-900\">\n      <strong class=\"font-semibold\">Wypróbuj przez 60 dni — bez ryzyka.</strong>\n      <div class=\"[display:none] md:block\">Jeśli produkt nie spełni Twoich oczekiwań, zwrócimy Ci pełną kwotę!</div>\n    </div>\n  </div>\n</div>"
-          }
-        },
-        "payment_badges_FkCwVc": {
-          "type": "payment_badges",
-          "disabled": true,
-          "settings": {}
-        },
-        "delivery_deadline_CQHJwz": {
-          "type": "delivery_deadline",
-          "disabled": true,
-          "settings": {
-            "date_text": "Want it by [DATE]?",
-            "days": 2,
-            "date_format": "day, %e. month",
-            "day_label": "%A",
-            "month_label": "%b",
-            "date_size": 16,
-            "date_color": "#000000",
-            "timer_text": "ORDER WITHIN <strong>[HOURS] HOURS [MINUTES] MINUTES?</strong>",
-            "hours": 1,
-            "minutes": 30,
-            "timer_size": 16,
-            "timer_color": "#000000",
-            "text_layout": "col",
-            "text_alignment": "center"
           }
         },
         "quantity_selector_WT7P8d": {
@@ -259,7 +227,6 @@
       "block_order": [
         "title_DkyBTh",
         "judge_me_reviews_preview_badge_tnLmYt",
-        "custom_rating_text_ehyqmQ",
         "price_MG94AW",
         "variant_picker_hH3Diz",
         "custom_liquid_nLrh7P",
@@ -269,8 +236,6 @@
         "selling_fast_DRULgF",
         "buy_buttons_eXWBwX",
         "custom_liquid_QcxgR4",
-        "payment_badges_FkCwVc",
-        "delivery_deadline_CQHJwz",
         "quantity_selector_WT7P8d",
         "icon_with_text_ytpGUH",
         "expanded_notes_fm3JND",
