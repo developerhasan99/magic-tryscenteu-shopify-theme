@@ -58,9 +58,20 @@
     let current = -1;
     let onPlaying = null;
     let opener = null;
+    // WCAG 2.2.2 (Pause, Stop, Hide): the preview moves on its own for as long
+    // as the row is in view, so the shopper needs a way to stop it. paused is
+    // their choice on the toggle and outlives opening the player; hovered and
+    // focused hold the row while a pointer or keyboard focus is inside it, the
+    // same pause the theme's slideshow makes on hover and focus. Two flags, so
+    // focus leaving does not end a hover that is still there, and the reverse.
+    let paused = false;
+    let hovered = false;
+    let focused = false;
+    const toggle = root.querySelector('[data-ugc-toggle]');
 
     const canPreview = () =>
-      autoplay && !blocked && !reduced.matches && visible && !document.hidden && !(dialog && dialog.open) && root.isConnected;
+      autoplay && !blocked && !paused && !hovered && !focused && !reduced.matches && visible && !document.hidden &&
+      !(dialog && dialog.open) && root.isConnected;
 
     const clearTimer = () => {
       clearTimeout(timer);
@@ -147,8 +158,12 @@
 
     const refresh = () => (canPreview() ? start() : stop());
 
+    // Everything the row hangs outside itself (document and media-query
+    // listeners, the observer) is kept here, so a teardown can take it off.
+    const ac = new AbortController();
+    let io = null;
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(
+      io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             visible = entry.intersectionRatio >= 0.5;
@@ -156,10 +171,67 @@
           refresh();
         },
         { threshold: [0, 0.5] }
-      ).observe(root.querySelector('.ugc-row__grid') || root);
+      );
+      io.observe(root.querySelector('.ugc-row__grid') || root);
     }
-    document.addEventListener('visibilitychange', refresh);
-    if (typeof reduced.addEventListener === 'function') reduced.addEventListener('change', refresh);
+    document.addEventListener('visibilitychange', refresh, { signal: ac.signal });
+    if (typeof reduced.addEventListener === 'function') reduced.addEventListener('change', refresh, { signal: ac.signal });
+
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        paused = !paused;
+        // The label carries the state ("Wstrzymaj" / "Wznów"); no aria-pressed
+        // on top, which would read as "Wznów podgląd, pressed".
+        toggle.textContent = paused ? toggle.dataset.labelPlay : toggle.dataset.labelPause;
+        refresh();
+      });
+    }
+
+    // Hover only holds on devices that really hover: on a phone the emulated
+    // hover after a tap would leave the row stuck.
+    if (window.matchMedia('(hover: hover)').matches) {
+      root.addEventListener('pointerenter', () => {
+        hovered = true;
+        refresh();
+      });
+      root.addEventListener('pointerleave', () => {
+        hovered = false;
+        refresh();
+      });
+    }
+
+    // Keyboard focus only (:focus-visible): closing the player with a tap
+    // hands focus back to the tile, and that must not keep the row still
+    // after the player is gone. Focus on the toggle itself does not hold, as
+    // in the slideshow, so pressing it shows what it does.
+    const keyboardFocus = (element) => {
+      try {
+        return element.matches(':focus-visible');
+      } catch (error) {
+        // A browser without :focus-visible holds on any focus.
+        return true;
+      }
+    };
+    root.addEventListener('focusin', (event) => {
+      focused = event.target !== toggle && keyboardFocus(event.target);
+      refresh();
+    });
+    root.addEventListener('focusout', (event) => {
+      if (!root.contains(event.relatedTarget)) focused = false;
+      refresh();
+    });
+
+    // Theme editor only: a re-rendered section drops this row, but the
+    // document listeners and the observer would keep it alive, and an open
+    // player removed with it fires no close event, which would leave the page
+    // unable to scroll until a reload.
+    root.ugcTeardown = () => {
+      stop();
+      if (io) io.disconnect();
+      ac.abort();
+      if (dialog && dialog.open) dialog.close();
+      document.documentElement.classList.remove('ugc-player-open');
+    };
 
     if (!dialog || !player) return;
 
@@ -215,10 +287,13 @@
 
     dialog.querySelectorAll('[data-ugc-close]').forEach((button) => button.addEventListener('click', close));
 
-    // The dialog itself is the dark area around the clip: a click that lands
-    // on it, not on the clip or the pill, closes the player.
+    // The dialog itself is the dark area around the clip, and the frame's own
+    // empty parts (the band beside the close button, the gap above the pill)
+    // read as that same dark area: a click there closes the player. Clicks on
+    // the clip, the pill or the close button land on those elements instead.
+    const frame = dialog.querySelector('.ugc-player__frame');
     dialog.addEventListener('click', (event) => {
-      if (event.target === dialog) close();
+      if (event.target === dialog || event.target === frame) close();
     });
 
     // Escape, the close button and the backdrop all end here.
@@ -242,6 +317,16 @@
   // Theme editor: a re-rendered section brings fresh, unstamped rows, and
   // selecting the block in the sidebar scrolls its row into view.
   document.addEventListener('shopify:section:load', initAll);
+  // The section on its way out takes its rows down first (see ugcTeardown).
+  // The scroll lock is cleared here too, so the editor preview can always
+  // scroll again whatever state the old row was in.
+  document.addEventListener('shopify:section:unload', (event) => {
+    const target = event.target;
+    if (target && target.querySelectorAll) {
+      target.querySelectorAll('[data-ugc-row]').forEach((root) => root.ugcTeardown && root.ugcTeardown());
+    }
+    document.documentElement.classList.remove('ugc-player-open');
+  });
   document.addEventListener('shopify:block:select', (event) => {
     const id = event.detail && event.detail.blockId;
     if (!id) return;

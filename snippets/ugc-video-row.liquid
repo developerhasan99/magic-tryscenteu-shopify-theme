@@ -19,6 +19,17 @@
 
 {%- capture ugc_count -%}{% render 'ugc-video-count', block: block %}{%- endcapture -%}
 {%- assign ugc_count = ugc_count | strip | plus: 0 -%}
+{%- liquid
+  # Fewer clips means wider tiles (about 141px for 3-4, 218px for 2, up to
+  # 445px for 1), and the poster stays on screen for good when the preview
+  # is off, so it is asked for at a width that stays sharp on 2-3x screens.
+  assign poster_width = 360
+  if ugc_count == 2
+    assign poster_width = 600
+  elsif ugc_count == 1
+    assign poster_width = 1000
+  endif
+-%}
 
 {%- if ugc_count > 0 -%}
   {{ 'ugc-video-row.css' | asset_url | stylesheet_tag }}
@@ -32,6 +43,15 @@
     data-autoplay="{% if block.settings.autoplay_preview %}true{% else %}false{% endif %}"
     style="--ugc-cols: {{ ugc_count }};"
     {{ block.shopify_attributes }}>
+    {%- if block.settings.autoplay_preview -%}
+      {%- comment -%}
+        WCAG 2.2.2 asks for a way to pause an auto-advancing preview. The
+        button is hidden until a keyboard user tabs to it, so the row looks
+        like the reference for everyone else; hover and focus also pause it
+        (assets/ugc-video-row.js).
+      {%- endcomment -%}
+      <button type="button" class="ugc-row__toggle" data-ugc-toggle data-label-pause="Wstrzymaj podgląd" data-label-play="Wznów podgląd">Wstrzymaj podgląd</button>
+    {%- endif -%}
     <div class="ugc-row__grid">
       {%- for i in (1..4) -%}
         {%- liquid
@@ -39,10 +59,6 @@
           assign key_url = 'video_url_' | append: i
           assign clip_video = block.settings[key_video]
           assign clip_url = block.settings[key_url] | strip
-          assign has_clip = false
-          if clip_video != blank or clip_url != blank
-            assign has_clip = true
-          endif
 
           assign key_poster = 'poster_' | append: i
           assign key_caption = 'caption_' | append: i
@@ -51,20 +67,37 @@
           assign clip_caption = block.settings[key_caption] | strip
           assign clip_product = block.settings[key_product]
 
+          # Same rule as ugc-video-count: a Files video that is still
+          # processing has no mp4 yet, so the slot falls back to the pasted
+          # link or, with neither, stays empty.
           assign clip_src = clip_url
           if clip_video != blank
-            capture clip_src
+            capture video_src
               render 'ugc-video-src', video: clip_video
             endcapture
-            assign clip_src = clip_src | strip
+            assign video_src = video_src | strip
+            if video_src != blank
+              assign clip_src = video_src
+            endif
+          endif
+          assign has_clip = false
+          if clip_src != blank
+            assign has_clip = true
           endif
 
           # No poster picked: a Files clip still has the preview frame Shopify
           # made for it. A pasted link has nothing, so that clip asks for
-          # metadata and the browser paints its own first frame.
+          # metadata, and the #t fragment makes iOS Safari seek to frame 0
+          # and paint it (it decodes nothing on metadata alone; other
+          # browsers paint the first frame either way).
           assign poster_image = block.settings[key_poster]
           if poster_image == blank and clip_video != blank
             assign poster_image = clip_video.preview_image
+          endif
+          if has_clip and poster_image == blank
+            unless clip_src contains '#'
+              assign clip_src = clip_src | append: '#t=0.001'
+            endunless
           endif
 
           # Same rule as the featured bundle card: no link to a product that
@@ -102,7 +135,7 @@
               loop
               playsinline
               preload="{% if poster_image != blank %}none{% else %}metadata{% endif %}"
-              {% if poster_image != blank %}poster="{{ poster_image | image_url: width: 360 }}"{% endif %}>
+              {% if poster_image != blank %}poster="{{ poster_image | image_url: width: poster_width }}"{% endif %}>
               <source src="{{ clip_src }}" type="video/mp4">
             </video>
             {%- comment -%}
@@ -114,7 +147,7 @@
             {%- if poster_image != blank -%}
               <img
                 class="ugc-row__poster"
-                src="{{ poster_image | image_url: width: 360 }}"
+                src="{{ poster_image | image_url: width: poster_width }}"
                 width="{{ poster_image.width }}"
                 height="{{ poster_image.height }}"
                 alt=""

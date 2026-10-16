@@ -4,6 +4,50 @@
    Sizes follow the reference measured in its DOM: 3:4 clips, 8px gap, bold
    captions about 11px, centred and wrapping. */
 
+/* Anchors the pause toggle over the row's top-left corner. */
+.ugc-row {
+  position: relative;
+}
+
+/* Pause / resume for the auto-advancing preview: WCAG 2.2.2 needs a way to
+   pause it. Hover and focus on the row pause it too (JS), so the button is
+   hidden like a skip link and shows only when a keyboard user tabs to it,
+   which leaves the look unchanged for mouse and touch. It comes before the
+   grid in the page, so z-index keeps the tiles' layers from painting over it. */
+.ugc-row__toggle {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--mgx-black, #100f0d);
+  color: var(--mgx-white, #fff);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+
+.ugc-row__toggle:focus-visible {
+  width: auto;
+  height: auto;
+  padding: 6px 12px;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  outline: 2px solid var(--mgx-white, #fff);
+  outline-offset: 2px;
+}
+
 .ugc-row__grid {
   display: grid;
   grid-template-columns: repeat(var(--ugc-cols, 4), minmax(0, 1fr));
@@ -82,13 +126,16 @@
 }
 
 /* A small play mark stays on at every width: on a phone there is no hover to
-   tell a shopper the clip opens. */
+   tell a shopper the clip opens. 20px and 4px in, so on the narrowest tiles
+   (71.5px, four clips at 820px) it ends at 24px, clear of the chip's 44px hit
+   area (measured from 24.75px), and a tap on it plays the clip instead of
+   opening the product. */
 .ugc-row__play-icon {
   position: absolute;
-  left: 6px;
-  bottom: 6px;
-  width: 22px;
-  height: 22px;
+  left: 4px;
+  bottom: 4px;
+  width: 20px;
+  height: 20px;
   border-radius: 9999px;
   background: rgba(var(--mgx-black-rgb, 16, 15, 13), 0.55);
   display: flex;
@@ -97,14 +144,18 @@
 }
 
 .ugc-row__play-icon svg {
-  width: 8px;
-  height: 10px;
+  width: 7px;
+  height: 9px;
   margin-left: 2px;
 }
 
+/* A white band with a black band inside it, so the ring reads on a dark clip
+   as well as a light one. Drawn inward, because the tile clips anything
+   outside it. */
 .ugc-row__play:focus-visible {
-  outline: 2px solid var(--mgx-black, #100f0d);
+  outline: 2px solid var(--mgx-white, #fff);
   outline-offset: -2px;
+  box-shadow: inset 0 0 0 4px var(--mgx-black, #100f0d);
 }
 
 @media (hover: hover) {
@@ -115,7 +166,8 @@
 
 /* Round product photo, bottom right. The visible circle is 32px; the
    ::before stretches the hit area to 44px for a thumb. Placed 8px in so the
-   44px area stays inside the tile, which clips anything outside it. */
+   44px area stays inside the tile, which clips anything outside it; the play
+   mark is sized to stay clear of that area on the narrowest tiles. */
 .ugc-row__chip {
   position: absolute;
   right: 8px;
@@ -167,9 +219,13 @@
   height: 7px;
 }
 
+/* Black ring hugging the white chip, then a white band outside it, so the
+   ring reads on any frame of the clip. 4px wide in all, which fits in the 8px
+   between the chip and the tile edge (the tile clips anything past it). */
 .ugc-row__chip:focus-visible {
   outline: 2px solid var(--mgx-black, #100f0d);
-  outline-offset: 2px;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px var(--mgx-white, #fff), 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
 .ugc-row__caption {
@@ -216,32 +272,43 @@
   background: transparent;
 }
 
+/* The frame is centred by its own auto margins, not by align-items or
+   justify-content: when it is taller than the screen (text-only zoom grows
+   the pill) auto margins drop to 0 and it scrolls from the top, where centring
+   would push the close button above the edge, out of reach. */
 .ugc-player[open] {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* The clip is 9:16 and as tall as the screen allows once the padding and,
-   when the clip links a product, the pill under it are taken off. The frame
-   is exactly as wide as the clip, so the pill matches its width. */
+/* The clip is 9:16 and as tall as the screen allows once the padding, the
+   48px band above it that holds the close button (kept off the video, where
+   iOS draws its mute button top right) and, when the clip links a product,
+   the pill under it are taken off. The frame is as wide as the clip, so the
+   pill matches its width. */
 .ugc-player__frame {
   --ugc-pill-space: 0px;
-  --ugc-h: min(calc(100vh - 32px - var(--ugc-pill-space)), calc((100vw - 32px) * 16 / 9), 860px);
+  --ugc-h: min(calc(100vh - 32px - 48px - var(--ugc-pill-space)), calc((100vw - 32px) * 16 / 9), 860px);
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: calc(var(--ugc-h) * 9 / 16);
+  margin: auto;
+  padding-top: 48px;
 }
 
 @supports (height: 100dvh) {
   .ugc-player__frame {
-    --ugc-h: min(calc(100dvh - 32px - var(--ugc-pill-space)), calc((100vw - 32px) * 16 / 9), 860px);
+    --ugc-h: min(calc(100dvh - 32px - 48px - var(--ugc-pill-space)), calc((100vw - 32px) * 16 / 9), 860px);
   }
 }
 
+/* On a short screen (a phone on its side) the clip gets so narrow that the
+   pill has no room for its title and the price slides under the "+", so the
+   frame never goes below 260px (or the screen width). The video keeps its
+   height and contain fit on black, so a wider frame just letterboxes it. */
 .ugc-player--with-pill .ugc-player__frame {
   --ugc-pill-space: 100px;
+  width: max(calc(var(--ugc-h) * 9 / 16), min(260px, 100vw - 32px));
 }
 
 .ugc-player__media {
@@ -257,15 +324,19 @@
   border-radius: 8px;
 }
 
+/* In the frame's 48px band above the clip, flush with its right edge, so it
+   never sits on the native video controls. On the dark backdrop the disc
+   gets a faint white rim, or it would vanish into the black. */
 .ugc-player__close {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: -48px;
+  right: 0;
   width: 40px;
   height: 40px;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 9999px;
   background: rgba(0, 0, 0, 0.6);
   color: var(--mgx-white, #fff);

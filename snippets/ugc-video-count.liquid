@@ -1,7 +1,9 @@
 {% comment %}
-  Prints how many of the four slots of a 'ugc_videos' block hold a clip (a
-  Files video or a direct mp4 link). The row and the featured bundle guard in
-  main-product both read this, so "has videos" means the same thing in both.
+  Prints how many of the four slots of a 'ugc_videos' block hold a clip that
+  resolves to a file (a Files video with an mp4 rendition, or a direct mp4
+  link). A Files video that is still processing has no mp4 yet and does not
+  count. The row and the featured bundle guard in main-product both read
+  this, so "has videos" means the same thing in both.
 
   Accepts:
   - block: {Object} a main-product block of type 'ugc_videos'
@@ -16,8 +18,18 @@
   for i in (1..4)
     assign key_video = 'video_' | append: i
     assign key_url = 'video_url_' | append: i
-    assign url_value = block.settings[key_url] | strip
-    if block.settings[key_video] != blank or url_value != blank
+    assign clip_video = block.settings[key_video]
+    assign src = block.settings[key_url] | strip
+    if clip_video != blank
+      capture video_src
+        render 'ugc-video-src', video: clip_video
+      endcapture
+      assign video_src = video_src | strip
+      if video_src != blank
+        assign src = video_src
+      endif
+    endif
+    if src != blank
       assign count = count | plus: 1
     endif
   endfor
