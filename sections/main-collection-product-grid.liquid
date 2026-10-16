@@ -15,6 +15,9 @@
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
+{%- comment -%} Infinite scroll, shared with the collection search. {%- endcomment -%}
+<script src="{{ 'collection-grid-loader.js' | asset_url }}" defer="defer"></script>
+
 {%- if section.settings.quick_add == 'bulk' -%}
   <script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
@@ -92,22 +95,41 @@
     {%- endif -%}
 
     <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
-      {{ 'component-facets.css' | asset_url | stylesheet_tag }}
-      <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
-      {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
-        <aside
-          aria-labelledby="verticalTitle"
-          class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
-          id="main-collection-filters"
-          data-id="{{ section.id }}">
-          {% render 'facets'
-            , results: collection
-            , enable_filtering: section.settings.enable_filtering
-            , enable_sorting: section.settings.enable_sorting
-            , filter_type: section.settings.filter_type
-            , paginate: paginate
-          %}
-        </aside>
+      {%- if section.settings.filter_type == 'vertical' -%}
+        {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+        <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+        {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+          <aside
+            aria-labelledby="verticalTitle"
+            class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}"
+            id="main-collection-filters"
+            data-id="{{ section.id }}">
+            {% render 'facets'
+              , results: collection
+              , enable_filtering: section.settings.enable_filtering
+              , enable_sorting: section.settings.enable_sorting
+              , filter_type: section.settings.filter_type
+              , paginate: paginate
+            %}
+          </aside>
+        {%- endif -%}
+      {%- elsif section.settings.enable_filtering or section.settings.enable_sorting -%}
+        {%- comment -%}
+          Horizontal and drawer layouts: pill bar + phone drawer in the style of
+          theessencevault.co.uk (as on magyx.whop.site), on the same Shopify filters.
+        {%- endcomment -%}
+        {{ 'mgx-filters.css' | asset_url | stylesheet_tag }}
+        <script src="{{ 'mgx-filters.js' | asset_url }}" defer="defer"></script>
+        {% render 'mgx-filters'
+          , results: collection
+          , section_id: section.id
+          , enable_filtering: section.settings.enable_filtering
+          , enable_sorting: section.settings.enable_sorting
+        %}
+      {%- endif -%}
+
+      {%- if section.settings.enable_search -%}
+        {% render 'collection-search', st: section.settings, section_id: section.id %}
       {%- endif -%}
 
       <div
@@ -149,8 +171,15 @@
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
+                {%- capture mgx_title -%}{% render 'polish-store-text', text: product.title %}{%- endcapture -%}
+                {%- capture mgx_hay -%}
+                  {{- mgx_title | strip -}} | {{ product.metafields.custom.inspired_by.value.name }} | {{ product.metafields.custom.nuta }} | {{ product.metafields.custom.searchaniser -}}
+                {%- endcapture -%}
                 <li
                   class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                  data-mgx-pid="{{ product.id }}"
+                  data-mgx-hay="{{ mgx_hay | strip_newlines | escape }}"
+                  data-mgx-tags="{{ product.tags | join: '|' | escape }}"
                   {% if settings.animations_reveal_on_scroll %}
                   data-cascade
                   style="--animation-order: {{ forloop.index }};"
@@ -170,6 +199,8 @@
                     id="load-more-btn"
                     class="button"
                     data-next-url="{{ paginate.next.url }}"
+                    data-mgx-pages="{{ paginate.pages }}"
+                    data-section-id="{{ section.id }}"
                     style="visibility: hidden; height: 1px; overflow: hidden; padding: 0; border: none;">{{ 'sections.collection_template.load_more' | t }}</button>
                   <div id="loading-indicator" style="display: none; font-size: 16px; color: var(--mgx-black);">
                     <span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span>
@@ -197,95 +228,6 @@
     {% render 'mask-arch' %}
   {%- endif -%}
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log("Infinite scroll script loaded");
-    let loading = false;
-
-    async function loadMoreProducts() {
-      if (loading) return;
-
-      const loadMoreBtn = document.querySelector("#load-more-btn");
-      if (!loadMoreBtn) {
-        console.log("No load more button found");
-        return;
-      }
-
-      const url = loadMoreBtn.dataset.nextUrl;
-      if (!url) {
-        console.log("No next URL found");
-        return;
-      }
-
-      console.log("Loading products from:", url);
-      loading = true;
-      const loadingIndicator = document.querySelector("#loading-indicator");
-      if (loadingIndicator) {
-        loadingIndicator.style.display = "block";
-        console.log("Showing loading indicator");
-      }
-
-      try {
-        // Section Rendering API needs the real section id (template--<id>__product-grid);
-        // the file name renders the section with schema defaults (16/page, show_rating off).
-        const sectionId = document.querySelector('#product-grid')?.dataset.id || '{{ section.id }}';
-        const sectionUrl = url + (url.includes('?') ? '&' : '?') + 'section_id=' + encodeURIComponent(sectionId);
-        const res = await fetch(sectionUrl);
-        const text = await res.text();
-        console.log("Fetched response, length:", text.length);
-
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, "text/html");
-
-        const newProducts = doc.querySelectorAll("#product-grid .grid__item");
-        console.log("Found new products:", newProducts.length);
-        const grid = document.querySelector("#product-grid");
-
-        newProducts.forEach(item => grid.appendChild(item));
-
-        const newNextUrl = doc.querySelector("#load-more-btn")?.dataset.nextUrl;
-        console.log("New next URL:", newNextUrl);
-
-        if (newNextUrl) {
-          loadMoreBtn.dataset.nextUrl = newNextUrl;
-        } else {
-          loadMoreBtn.remove(); // no more pages
-          if (loadingIndicator) loadingIndicator.remove();
-          console.log("No more pages");
-        }
-
-      } catch (err) {
-        console.error("Error loading products:", err);
-      }
-
-      loading = false;
-      if (loadingIndicator) loadingIndicator.style.display = "none";
-      console.log("Loading complete");
-    }
-
-    // Use Intersection Observer for efficient scroll detection
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        console.log("Intersection observed:", entry.isIntersecting);
-        if (entry.isIntersecting && !loading) {
-          console.log("Triggering load more");
-          loadMoreProducts();
-        }
-      });
-    }, {
-      rootMargin: '100px'
-    });
-
-    const loadMoreBtn = document.querySelector("#load-more-btn");
-    if (loadMoreBtn) {
-      observer.observe(loadMoreBtn);
-      console.log("Observer attached to load more button");
-    } else {
-      console.log("Load more button not found on page load");
-    }
-  });
-</script>
 
 {% schema %}
   {
@@ -389,6 +331,46 @@
         "default": false,
         "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
         "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
+      }, {
+        "type": "header",
+        "content": "Search"
+      }, {
+        "type": "checkbox",
+        "id": "enable_search",
+        "default": true,
+        "label": "Show the search bar",
+        "info": "Filters this grid by scent name, number, brand and inspiration. Loads the whole collection on first use."
+      }, {
+        "type": "text",
+        "id": "search_placeholder",
+        "default": "Szukaj po marce, zapachu lub numerze",
+        "label": "Placeholder"
+      }, {
+        "type": "text",
+        "id": "search_results_text",
+        "default": "Wyniki dla „[query]”: [count]",
+        "label": "Results text",
+        "info": "[count] and [query] are replaced."
+      }, {
+        "type": "text",
+        "id": "search_result_text",
+        "default": "Wyniki dla „[query]”: 1",
+        "label": "Single result text"
+      }, {
+        "type": "text",
+        "id": "search_empty_text",
+        "default": "Brak wyników dla „[query]”. Wpisz markę albo nazwę oryginału.",
+        "label": "No results text"
+      }, {
+        "type": "text",
+        "id": "search_loading_text",
+        "default": "Szukamy we wszystkich zapachach…",
+        "label": "Loading text"
+      }, {
+        "type": "text",
+        "id": "search_clear_label",
+        "default": "Wyczyść wyszukiwanie",
+        "label": "Clear button label"
       }, {
         "type": "select",
         "id": "quick_add",
