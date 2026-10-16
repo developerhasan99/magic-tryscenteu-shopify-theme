@@ -1,9 +1,9 @@
 /* Product page UGC video row (block 'ugc_videos' of main-product), after the
-   theessencevault.co.uk product page: up to four clips inside the product
-   info column, two per row, captions under them, a product card on each clip
-   and a full-screen player on tap. 3:4 clips with an 8px gap, as in the
-   reference; two per row instead of its four, so the clips are twice as wide
-   and the captions and the card read at a glance. */
+   theessencevault.co.uk product page: up to three clips in one row inside the
+   product info column, captions under them, a product card on each clip and
+   a full-screen player on tap. One row with an 8px gap, as in the reference,
+   but three clips instead of its four and at the clips' own 9:16 instead of
+   3:4, so they are big enough to watch and the card has room. */
 
 /* Anchors the pause toggle over the row's top-left corner. */
 .ugc-row {
@@ -49,20 +49,20 @@
   outline-offset: 2px;
 }
 
-/* Two clips per row: four make a 2x2 grid, and an odd last clip (three, or
-   one) is centred under the others rather than left hanging on one side. */
+/* One row, each clip a third of the column. With one or two clips they keep
+   that width and sit in the middle, so the row never grows taller than with
+   three. */
 .ugc-row__grid {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 14px 8px;
-  /* A caption that wraps to two lines must not stretch its neighbour's
-     tile; captions hang from the top of their own column. */
+  gap: 8px;
+  /* A caption that wraps to more lines must not stretch its neighbours'
+     tiles; captions hang from the top of their own column. */
   align-items: flex-start;
 }
 
 .ugc-row__item {
-  flex: 0 0 calc((100% - 8px) / 2);
+  flex: 0 0 calc((100% - 16px) / 3);
   min-width: 0;
 }
 
@@ -70,13 +70,13 @@
    on touch, which read as a flash across the row on the collection tiles. */
 .ugc-row__tile {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 9 / 16;
   border-radius: 8px;
   overflow: hidden;
   background: #eee;
   -webkit-tap-highlight-color: transparent;
   /* The product card reads the tile's own width, not the viewport's: the
-     tile is 151px at 820px of window and 218px at 1440px. */
+     tile is 98px at 820px of window, 110px on a 375 phone, 143px at 1440. */
   container-type: inline-size;
 }
 
@@ -138,10 +138,10 @@
    bottom of the clip. */
 .ugc-row__play-icon {
   position: absolute;
-  left: 8px;
-  top: 8px;
-  width: 28px;
-  height: 28px;
+  left: 6px;
+  top: 6px;
+  width: 24px;
+  height: 24px;
   border-radius: 9999px;
   background: rgba(var(--mgx-black-rgb, 16, 15, 13), 0.55);
   display: flex;
@@ -150,8 +150,8 @@
 }
 
 .ugc-row__play-icon svg {
-  width: 10px;
-  height: 12px;
+  width: 9px;
+  height: 11px;
   margin-left: 2px;
 }
 
@@ -171,20 +171,22 @@
 }
 
 /* The collection grid tile's white product card (fuel05-ugc.css: photo,
-   title, price, "+"), sized down for a clip half the column wide. On the
-   narrow tiles (under 190px: phones, and the tablet range) the photo is 36px
-   and the "+" goes, which leaves the title two lines of about 85px; from
-   190px up the card takes the collection values closer. The card is 48px
-   tall at its smallest, a full thumb target. */
+   title, price), sized down for a clip a third of the column wide. Tiles
+   under 130px (phones, and 98px in the tablet range) get a 26px photo and a
+   10px title on up to three lines, which keeps the price clear of the edge at
+   98px; from 130px (desktop) the card takes 32px, 11px and 12px. The
+   collection card's "+" has no room at these widths. The card is at least
+   44px tall, a full thumb target, whatever the title's length. */
 .ugc-row__product {
   position: absolute;
-  left: 6px;
-  right: 6px;
-  bottom: 6px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  min-height: 44px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px;
+  gap: 4px;
+  padding: 4px;
   box-sizing: border-box;
   background: var(--mgx-white, #fff);
   border-radius: 6px;
@@ -196,8 +198,8 @@
 
 .ugc-row__product-thumb {
   display: block;
-  width: 36px;
-  height: 36px;
+  width: 26px;
+  height: 26px;
   object-fit: cover;
   border-radius: 4px;
   flex-shrink: 0;
@@ -212,74 +214,51 @@
 }
 
 .ugc-row__product-title {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0;
   overflow-wrap: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .ugc-row__product-price {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1.3;
   white-space: nowrap;
 }
 
-.ugc-row__product-add {
-  display: none;
-  box-sizing: border-box;
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-  border: 1px solid var(--mgx-black, #100f0d);
-  border-radius: 6px;
-  background: var(--mgx-white, #fff);
-  color: var(--mgx-black, #100f0d);
-  align-items: center;
-  justify-content: center;
-}
-
-.ugc-row__product-add svg {
-  width: 14px;
-  height: 14px;
-}
-
-@container (min-width: 190px) {
+@container (min-width: 130px) {
   .ugc-row__product {
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    gap: 8px;
-    padding: 8px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    gap: 6px;
+    padding: 6px;
     border-radius: 8px;
   }
 
   .ugc-row__product-thumb {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
   }
 
   .ugc-row__product-title {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .ugc-row__product-price {
-    font-size: 14px;
-  }
-
-  .ugc-row__product-add {
-    display: flex;
+    font-size: 12px;
   }
 }
 
 /* Black ring hugging the white card, then a white band outside it, so the
    ring reads on any frame of the clip. 4px wide in all, which fits in the
-   6-8px between the card and the tile edge (the tile clips anything past
+   4-6px between the card and the tile edge (the tile clips anything past
    it). */
 .ugc-row__product:focus-visible {
   outline: 2px solid var(--mgx-black, #100f0d);
@@ -289,7 +268,7 @@
 
 .ugc-row__caption {
   margin: 8px 0 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0;
