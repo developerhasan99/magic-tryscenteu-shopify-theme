@@ -20,7 +20,7 @@ Nothing shows while the field is empty. The theme editor shows a dashed placehol
 - No prices or currency. The store sells in several currencies and prices change.
 - No em dashes (—).
 - No designer brand names (the "Inspiracja" row already shows the original).
-- Only what the product's own data says: family, character, notes, set contents. No new claims about longevity, concentration or health. "Do 12 godzin trwałości" and "do 21% olejku perfumowego" are fine; they are on the page already.
+- Only what the product's own data says: family, character, notes, set contents. No new claims about longevity, concentration or health. "Do 12 godzin trwałości" and "20–24% olejków zapachowych" are fine; they are on the page already. The concentration is always 20–24% (Adrian, 17.10.2026), never 19–21% or 21%.
 
 ## Write or change it (Admin GraphQL)
 ```graphql
@@ -42,8 +42,7 @@ To hide it again, delete the metafield (`metafieldsDelete` with ownerId, namespa
 - `sections/main-product.liquid`: block `short_description`. Settings: link label, and the id of the accordion block to open (`collapsible_tab_FAAFhb`).
 - Templates:
   - `product.quantity-breaker.json` (81 perfumes), after the stars. The "Profil zapachowy" accordion is switched on there for this link.
-  - `product.custom-bundle.json`, after the rating text.
-  - `product.custom-bundle.context.poland.json`, after the Judge.me stars. This file only orders the block: Shopify refuses a block `type` inside a context template.
+  - `product.custom-bundle.json`, after the Judge.me stars. (The Poland overlay that used to order it was retired on 17.10.2026, see `PL-BASE.md`.)
 
 ## Message for GrokBot (paste)
 > Na tryscent.eu każdy produkt ma nowe pole „Short description” (metafield `custom.short_description`, typ `multi_line_text_field`). Tekst z tego pola pokazuje się na stronie produktu pod tytułem i gwiazdkami, a pod nim link „PEŁNY OPIS” do pełnego opisu. Pusty = nic się nie pokazuje. Zasady: po polsku, 1-2 zdania, max 220 znaków, sam tekst bez HTML, bez cen i walut, bez długich myślników (—), bez nazw marek designerskich, tylko fakty z danych produktu (rodzina zapachowa, charakter, nuty, zawartość zestawu). Zapis: `metafieldsSet` z ownerId produktu, namespace `custom`, key `short_description`, type `multi_line_text_field`. Usunięcie: `metafieldsDelete`.
