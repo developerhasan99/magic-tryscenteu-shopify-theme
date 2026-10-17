@@ -300,6 +300,14 @@
         {%- if section.settings.show_policy -%}
           <ul class="policies list-unstyled">
             {%- for policy in shop.policies -%}
+              {%- comment -%}
+                No "Polityka anulowania" (subscription / purchase options cancellation policy) link:
+                the store sells no subscriptions, but Shopify won't let the policy be emptied while
+                purchase options are switched on (17.10.2026), so it stays at checkout only.
+              {%- endcomment -%}
+              {%- if policy.url contains '/subscription-policy' -%}
+                {%- continue -%}
+              {%- endif -%}
               {%- if policy != blank -%}
                 <li>
                   <small class="copyright__content"
