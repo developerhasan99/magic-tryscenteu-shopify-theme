@@ -215,6 +215,7 @@
     }
   },
   "order": [
+    "collection_stories_home",
     "tryscent_hero_VWyBcY",
     "custom_liquid_PTXDPy",
     "feature_heighlights_EpJcyT",

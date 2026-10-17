@@ -9,6 +9,67 @@
  */
 {
   "sections": {
+    "collection_stories_coll": {
+      "type": "collection-stories",
+      "blocks": {
+        "collection_men_coll": {
+          "type": "collection",
+          "settings": {
+            "collection": "man",
+            "title": "Męskie",
+            "image": "shopify://shop_images/stories-men.jpg",
+            "ring_style": "gradient",
+            "ring_color": "#56c70f"
+          }
+        },
+        "collection_women_coll": {
+          "type": "collection",
+          "settings": {
+            "collection": "woman",
+            "title": "Damskie",
+            "image": "shopify://shop_images/stories-women.jpg",
+            "ring_style": "gradient",
+            "ring_color": "#56c70f"
+          }
+        },
+        "collection_bestsellers_coll": {
+          "type": "collection",
+          "settings": {
+            "collection": "top-sellers",
+            "title": "Bestsellery",
+            "image": "shopify://shop_images/stories-bestsellers.png",
+            "ring_style": "gradient",
+            "ring_color": "#56c70f"
+          }
+        },
+        "collection_new_coll": {
+          "type": "collection",
+          "settings": {
+            "collection": "neue-angesagte-dufte",
+            "title": "Nowości",
+            "image": "shopify://shop_images/stories-new.png",
+            "ring_style": "gradient",
+            "ring_color": "#56c70f"
+          }
+        }
+      },
+      "block_order": [
+        "collection_men_coll",
+        "collection_women_coll",
+        "collection_bestsellers_coll",
+        "collection_new_coll"
+      ],
+      "name": "Story circles",
+      "settings": {
+        "aria_label": "Kategorie",
+        "ring_color_1": "#fdf497",
+        "ring_color_2": "#fd5949",
+        "ring_color_3": "#d6249f",
+        "ring_color_4": "#285aeb",
+        "padding_top": 4,
+        "padding_bottom": 2
+      }
+    },
     "collection_hero_ezAzaW": {
       "type": "collection-hero",
       "name": "Collection Hero",
@@ -70,6 +131,7 @@
     }
   },
   "order": [
+    "collection_stories_coll",
     "collection_hero_ezAzaW",
     "custom_liquid_Y9k4Ai",
     "custom_liquid_MYjrA4",
