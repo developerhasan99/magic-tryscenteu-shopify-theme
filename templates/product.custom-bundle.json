@@ -16,6 +16,13 @@
           "type": "title",
           "settings": {}
         },
+        "short_description_Sd7mQx": {
+          "type": "short_description",
+          "settings": {
+            "link_label": "Pełny opis",
+            "description_block_id": "collapsible_tab_FAAFhb"
+          }
+        },
         "custom_rating_text_ehyqmQ": {
           "type": "custom_rating_text",
           "settings": {
@@ -224,6 +231,7 @@
       "block_order": [
         "title_DkyBTh",
         "custom_rating_text_ehyqmQ",
+        "short_description_Sd7mQx",
         "price_MG94AW",
         "variant_picker_hH3Diz",
         "custom_liquid_nLrh7P",

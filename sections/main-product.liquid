@@ -103,12 +103,7 @@
               {%- when '@app' -%}
                 {% render block %}
               {%- when 'short_description' -%}
-                <div
-                  class="product__text inline-richtext"
-                  {{ block.shopify_attributes }}
-                >
-                  {{ product.metafields.custom.short_description | metafield_tag }}
-                </div>
+                {% render 'short-description', block: block, section: section, product: product %}
               {%- when 'text' -%}
                 <p
                   class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
@@ -1011,7 +1006,26 @@
     {
       "type": "short_description",
       "name": "Short Description",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Shows the product field custom.short_description (1-2 sentences) and a link that opens the description accordion. Hidden while the field is empty."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Pełny opis"
+        },
+        {
+          "type": "text",
+          "id": "description_block_id",
+          "label": "Description accordion block id",
+          "default": "collapsible_tab_FAAFhb",
+          "info": "The link shows only when this accordion block is on the page."
+        }
+      ]
     },
     {
       "type": "expanded_notes",

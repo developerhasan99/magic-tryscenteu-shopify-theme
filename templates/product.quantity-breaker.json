@@ -16,6 +16,13 @@
           "type": "title",
           "settings": {}
         },
+        "short_description_Sd7mQx": {
+          "type": "short_description",
+          "settings": {
+            "link_label": "Pełny opis",
+            "description_block_id": "collapsible_tab_FAAFhb"
+          }
+        },
         "judge_me_reviews_preview_badge_tnLmYt": {
           "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
@@ -120,7 +127,6 @@
         },
         "collapsible_tab_FAAFhb": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
             "heading": "Profil zapachowy",
             "icon": "none",
@@ -243,6 +249,7 @@
       "block_order": [
         "title_DkyBTh",
         "judge_me_reviews_preview_badge_tnLmYt",
+        "short_description_Sd7mQx",
         "price_MG94AW",
         "variant_picker_hH3Diz",
         "custom_liquid_nLrh7P",
