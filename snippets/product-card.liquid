@@ -21,11 +21,12 @@
     {% endif %}
     <a href="{{ product.url }}" class="flex relative">
         {% if product.tags contains "local_image" %}
+          {%- capture wanted_alt -%}{% render 'bundle-image-alt', product: product %}{%- endcapture -%}
+          {%- assign wanted_alt = wanted_alt | strip -%}
           {% assign image_found = false %}
           {% for image in product.images %}
-            {% assign curr_currency = localization.country.iso_code | prepend: "bundle_" | downcase %}
             {% assign img_alt = image.alt | downcase %}
-            {% if img_alt contains "bundle_" and img_alt == curr_currency %}
+            {% if wanted_alt != blank and img_alt == wanted_alt %}
               {% assign image_found = true %}
                 <img
                     class="w-full h-auto"

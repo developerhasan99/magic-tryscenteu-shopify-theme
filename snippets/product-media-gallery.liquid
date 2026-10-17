@@ -11,6 +11,16 @@
     assign french_marketing_images = shop.metaobjects['marketing_images']['for-french'].images.value
     assign czech_marketing_images = shop.metaobjects['marketing_images']['for-czech'].images.value
   endunless
+
+  # Bundle graphic for this visitor: bundle_<storefront country>, then bundle_pl, then the first image.
+  # Root-domain markets (incl. the DE fallback) count as Poland, see snippets/storefront-country.
+  assign wanted_alt = ''
+  if product.tags contains 'local_image'
+    capture wanted_alt
+      render 'bundle-image-alt', product: product
+    endcapture
+    assign wanted_alt = wanted_alt | strip
+  endif
 %}
 
 <div class="sticky top-6">
@@ -22,9 +32,8 @@
         {% if product.tags contains "local_image" %}
           {% assign image_found = false %}
           {% for image in product.images %}
-            {% assign curr_currency = localization.country.iso_code | prepend: "bundle_" | downcase %}
             {% assign img_alt = image.alt | downcase %}
-            {% if img_alt contains "bundle_" and img_alt == curr_currency %}
+            {% if wanted_alt != blank and img_alt == wanted_alt %}
               {% assign image_found = true %}
               <img
                 src="{{ image.src | img_url: 'master' }}"
@@ -35,16 +44,13 @@
             {% endif %}
           {% endfor %}
           {% if image_found == false %}
-            {% for image in product.images %}
-              {% assign img_alt = image.alt | downcase %}
-              {% if img_alt contains "bundle_usd" %}
+            {% for image in product.images limit: 1 %}
                 <img
                   src="{{ image.src | img_url: 'master' }}"
                   alt="{{ image.alt }}"
                   height="{{ image.height }}"
                   width="{{ image.width }}"
                   class="productSwiperImage swiper-slide md:rounded-lg">
-              {% endif %}
             {% endfor %}
           {% endif %}
           {% if marketing_images != blank %}
@@ -172,9 +178,8 @@
         {% if product.tags contains "local_image" %}
           {% assign image_found = false %}
           {% for image in product.images %}
-            {% assign curr_currency = localization.country.iso_code | prepend: "bundle_" | downcase %}
             {% assign img_alt = image.alt | downcase %}
-            {% if img_alt contains "bundle_" and img_alt == curr_currency %}
+            {% if wanted_alt != blank and img_alt == wanted_alt %}
               {% assign image_found = true %}
               <img
                 id="slider-thumbnail-{{ forloop.index0 }}"
@@ -186,9 +191,7 @@
             {% endif %}
           {% endfor %}
           {% if image_found == false %}
-            {% for image in product.images %}
-              {% assign img_alt = image.alt | downcase %}
-              {% if img_alt contains "bundle_usd" %}
+            {% for image in product.images limit: 1 %}
                 <img
                   id="slider-thumbnail-{{ forloop.index0 }}"
                   src="{{ image | image_url: width: 150, height: 150 }}"
@@ -196,7 +199,6 @@
                   height="150"
                   width="150"
                   class="productThumbnail swiper-slide slide max-w-16 md:max-w-24 opacity-70 border-2 border-solid mgx-border rounded-lg cursor-pointer" />
-              {% endif %}
             {% endfor %}
           {% endif %}
           {% if marketing_images != blank %}

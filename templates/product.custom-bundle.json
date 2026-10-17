@@ -197,8 +197,14 @@
             "show_caption_1": true,
             "caption_2": "Trzyma się cały dzień",
             "show_caption_2": true,
-            "caption_3": "Składniki wysokiej jakości",
-            "show_caption_3": true
+            "caption_3": "Nie musisz przepłacać",
+            "show_caption_3": true,
+            "video_1": "shopify://files/videos/nikoolixa_7671692339257085217.mp4",
+            "product_1": "3x-50ml-perfume-bottles",
+            "video_2": "shopify://files/videos/tryscenteu_PaulinaO_SzafNr466_9f0a1f51.mov",
+            "product_2": "6x-50ml-parfumflaschen",
+            "video_3": "shopify://files/videos/aniaprzy_7677573659518717217.mp4",
+            "product_3": "8x-50ml-parfumflaschen"
           }
         },
         "product_reviews_W3CkbE": {
@@ -265,7 +271,7 @@
         "enable_video_looping": false,
         "product_info_padding": 5,
         "padding_top": 36,
-        "padding_bottom": 72
+        "padding_bottom": 36
       }
     },
     "feature_heighlights_fCUG3E": {
@@ -310,6 +316,7 @@
         "perks_qWY7Uy",
         "perks_HKnHJ8"
       ],
+      "disabled": true,
       "name": "Feature Highlights",
       "settings": {
         "background_color": "#ffffff",
@@ -373,6 +380,7 @@
         "stack_w3Jyyc",
         "stack_dXbqXq"
       ],
+      "disabled": true,
       "name": "Stacks Up",
       "settings": {
         "background_color": "#ffffff",
@@ -1307,6 +1315,7 @@
         "review_tFW9xg",
         "review_k7HCnK"
       ],
+      "disabled": true,
       "name": "Massive Review",
       "settings": {
         "background_color": "#ffffff",

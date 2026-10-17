@@ -201,14 +201,18 @@
             "product_1": "6x-50ml-parfumflaschen",
             "caption_2": "Trzyma się cały dzień",
             "show_caption_2": true,
-            "product_2": "6x-50ml-parfumflaschen",
-            "caption_3": "Składniki wysokiej jakości",
+            "product_2": "3x-50ml-perfume-bottles",
+            "caption_3": "Nie musisz przepłacać",
             "show_caption_3": true,
-            "product_3": "6x-50ml-parfumflaschen"
+            "product_3": "8x-50ml-parfumflaschen",
+            "video_1": "shopify://files/videos/nikoolixa_7671692339257085217.mp4",
+            "video_2": "shopify://files/videos/aniaprzy_7677573659518717217.mp4",
+            "video_3": "shopify://files/videos/tryscenteu_PaulinaO_SzafNr466_9f0a1f51.mov"
           }
         },
         "featured_bundle_main": {
           "type": "featured_bundle",
+          "disabled": true,
           "settings": {
             "product": "6x-50ml-parfumflaschen",
             "heading": "Skomponuj zestaw i zapłać mniej!",
@@ -285,7 +289,7 @@
         "enable_video_looping": false,
         "product_info_padding": 5,
         "padding_top": 36,
-        "padding_bottom": 72
+        "padding_bottom": 36
       }
     },
     "you_may_like_agTfti": {

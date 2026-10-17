@@ -108,14 +108,14 @@
         "step_FYgAph": {
           "type": "step",
           "settings": {
-            "step_title": "Otrzymaj 30% rabatu na cały koszyk",
-            "step_description": "Wybierz ulubione zapachy i dodaj je do koszyka"
+            "step_title": "Otrzymaj 30% zniżki na cały koszyk",
+            "step_description": "Wybierz swoje ulubione zapachy i dodaj je do koszyka"
           }
         },
         "step_Qpjtmg": {
           "type": "step",
           "settings": {
-            "step_title": "Z zestawami oszczędzasz jeszcze więcej!",
+            "step_title": "Dzięki zestawom oszczędzasz jeszcze więcej!",
             "step_description": "Kup 3 – oszczędź 40%. Kup 6 – oszczędź 48%."
           }
         },
@@ -123,21 +123,21 @@
           "type": "step",
           "settings": {
             "step_title": "Wartość zamówienia co najmniej 65 euro",
-            "step_description": "Odbierz DARMOWĄ dostawę i prezenty GRATIS!"
+            "step_description": "Otrzymaj DARMOWĄ wysyłkę i DARMOWE prezenty!"
           }
         },
         "guarantee_Dq8WtF": {
           "type": "guarantee",
           "settings": {
             "icon": "shopify://shop_images/sandwatch_1.svg",
-            "text": "Trwałość ponad 12 godzin"
+            "text": "Utrzymuje się 12+ godzin"
           }
         },
         "guarantee_kEpmJ7": {
           "type": "guarantee",
           "settings": {
             "icon": "shopify://shop_images/icons_quality_3.png",
-            "text": "19–21% olejków zapachowych"
+            "text": "19–21% stężenia olejku zapachowego"
           }
         },
         "guarantee_Hm7R4D": {
@@ -163,8 +163,8 @@
         "bg_image": "shopify://shop_images/payday_banner.png",
         "bg_mobile_image": "shopify://shop_images/payday_mobile_Nobottles.jpg",
         "social_proof_text": "Polecane przez ponad 10 000 zadowolonych miłośników zapachów",
-        "collection_title": "Specjalna oferta na dzień wypłaty!",
-        "collection_description": "Kup ulubione zapachy w jeszcze niższych cenach! Z zestawami oszczędzasz jeszcze więcej!",
+        "collection_title": "Specjalna oferta w dniu wypłaty!",
+        "collection_description": "Kup swoje ulubione zapachy w jeszcze niższych cenach! A dzięki zestawom oszczędzasz jeszcze więcej!",
         "btn_link": "",
         "btn_text": "",
         "padding_top": 72,

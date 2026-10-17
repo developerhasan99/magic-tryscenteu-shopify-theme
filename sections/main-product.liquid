@@ -748,12 +748,7 @@
                 {% render 'blocky-lys-shipping-checkpoints', block: block %}
               {%- when 'payment_badges' -%}
                 <div class="list-payment" {{ block.shopify_attributes }}>
-                  {%- for type in shop.enabled_payment_types -%}
-                    {% assign payment_type = type | strip %}
-                    <div class="list-payment__item">
-                      {{ payment_type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                    </div>
-                  {%- endfor -%}
+                  {%- render 'payment-icons', item_tag: 'div' -%}
                 </div>
               {%- when 'delivery_deadline' -%}
                 <div

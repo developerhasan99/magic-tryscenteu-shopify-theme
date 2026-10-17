@@ -30,15 +30,15 @@
         "payment_icon_MmG3KL": {
           "type": "payment_icon",
           "settings": {
-            "icon": "shopify://shop_images/090e7fd71af4b4e7589642874d6cae93a0a34f77.png",
+            "icon": "shopify://shop_images/inpost.png",
             "label": "Szybko"
           }
         },
         "payment_icon_Fgdaze": {
           "type": "payment_icon",
           "settings": {
-            "icon": "shopify://shop_images/65f2284e66ff1dcb1a272319f1ef543c429f73e2.png",
-            "label": "Dostawa w UE"
+            "icon": "shopify://shop_images/poland_flag.png",
+            "label": "Z Polski"
           }
         },
         "payment_icon_tUQYaX": {
@@ -51,15 +51,15 @@
         "payment_icon_HNd7bU": {
           "type": "payment_icon",
           "settings": {
-            "icon": "shopify://shop_images/777929254296c2d290f0836dc4e68451f4cfdbc4.png",
-            "label": "Elastycznie"
+            "icon": "shopify://shop_images/blik.DeRA9syl.svg",
+            "label": "Wygodnie"
           }
         },
         "payment_icon_EMjaQY": {
           "type": "payment_icon",
           "settings": {
-            "icon": "shopify://shop_images/images-555x360--08-28-2026_03_03_PM.png",
-            "label": "Bezpośrednio"
+            "icon": "shopify://shop_images/visa.CjeXrSa5.svg",
+            "label": "Bezpiecznie"
           }
         }
       },
@@ -74,14 +74,14 @@
       "name": "Offer Timebar",
       "settings": {
         "enable_top_bar": false,
-        "enable_timer": false,
+        "enable_timer": true,
         "enable_badges": false,
         "primary_color": "#FFFFFF",
         "secondary_color": "#000000",
         "top_banner_text": "Promocja Jesienna",
-        "prepend_text": "Kup 3, zapłać za 2!",
-        "countdown_date": "2026/10/18 23:59:59",
-        "append_text": "",
+        "prepend_text": "JESIENNA PROMOCJA",
+        "countdown_date": "2026/10/18 23:59",
+        "append_text": "2+1, 3+2 Gratis!",
         "link": "shopify://collections/top-sellers"
       }
     },
@@ -111,15 +111,15 @@
         },
         "text_7Mhc9j": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "TryScent zmienia się w MagyX!"
           }
         },
         "text_QD7JEH": {
           "type": "text",
-          "disabled": true,
           "settings": {
-            "text": "BEZPIECZNE ZAKUPY"
+            "text": "Beauty-mysteryboxy - ilość ograniczona!"
           }
         }
       },
@@ -130,6 +130,7 @@
         "text_7Mhc9j",
         "text_QD7JEH"
       ],
+      "disabled": true,
       "settings": {
         "text_size": "1.5",
         "background_color": "#100f0d",
@@ -148,9 +149,9 @@
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-2",
-        "enable_country_selector": true,
+        "color_scheme": "scheme-4",
+        "menu_color_scheme": "scheme-4",
+        "enable_country_selector": false,
         "enable_language_selector": false,
         "enable_customer_avatar": false,
         "mobile_logo_position": "center",
