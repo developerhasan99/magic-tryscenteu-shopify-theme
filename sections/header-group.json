@@ -43,6 +43,7 @@
         },
         "payment_icon_tUQYaX": {
           "type": "payment_icon",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/800c98d03dc73f77225bfa90300384e0370c7cff.png",
             "label": "Bezpiecznie"
@@ -121,9 +122,17 @@
           "settings": {
             "text": "Beauty-mysteryboxy - ilość ograniczona!"
           }
+        },
+        "text_XmbGh": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "DARMOWA DOSTAWA OD 190 PLN"
+          }
         }
       },
       "block_order": [
+        "text_XmbGh",
         "text_KwnK4Y",
         "text_39tt9p",
         "text_DiPtyi",
