@@ -68,6 +68,13 @@
             "paragraph-483f61495f1995d347e21be94dae3738": null
           }
         },
+        "short_description_Sd7mQx": {
+          "type": "short_description",
+          "settings": {
+            "link_label": "Pełny opis",
+            "description_block_id": "collapsible_tab_FAAFhb"
+          }
+        },
         "ugc_videos_main": {
           "settings": {
             "video_1": "shopify://files/videos/nikoolixa_7671692339257085217.mp4",
