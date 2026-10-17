@@ -13,6 +13,11 @@
   },
   "parent": "index.json",
   "sections": {
+    "collection_stories_home": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
     "1792179111722dde80": {
       "type": "apps",
       "disabled": false,
