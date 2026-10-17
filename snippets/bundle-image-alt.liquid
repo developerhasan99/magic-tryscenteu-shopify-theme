@@ -1,0 +1,35 @@
+{%- comment -%}
+  Outputs the image alt (lowercase) of the bundle graphic to show for this visitor, or nothing
+  when the product has neither (callers then show the first product image).
+  Order: bundle_<storefront country> -> bundle_pl. Root-domain markets count as 'pl'
+  (see storefront-country), so a visitor in the DE fallback sees the Polish graphic, like Poland.
+
+  Accepts:
+  - product: {Object} product tagged local_image
+
+  Usage:
+    {%- capture wanted_alt -%}{% render 'bundle-image-alt', product: product %}{%- endcapture -%}
+    {%- assign wanted_alt = wanted_alt | strip -%}
+{%- endcomment -%}
+{%- liquid
+  capture sf_country
+    render 'storefront-country'
+  endcapture
+  assign sf_country = sf_country | strip
+  assign own_alt = 'bundle_' | append: sf_country
+  assign has_own = false
+  assign has_pl = false
+  for image in product.images
+    assign img_alt = image.alt | downcase
+    if img_alt == own_alt
+      assign has_own = true
+    elsif img_alt == 'bundle_pl'
+      assign has_pl = true
+    endif
+  endfor
+  if has_own
+    echo own_alt
+  elsif has_pl
+    echo 'bundle_pl'
+  endif
+-%}

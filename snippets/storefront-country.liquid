@@ -1,0 +1,20 @@
+{%- comment -%}
+  Outputs the lowercase two-letter country the storefront is styled for.
+
+  Markets with their own subfolder (czech, france, ireland, portugal, spain, sweden) keep the
+  visitor's real country. Every root-domain market (poland, de, greece, hungary, romania,
+  slovakia, slovenia, and every visitor Shopify drops into the DE fallback) gets 'pl', so the
+  page looks exactly like Poland. Looks only: prices, catalog and checkout still follow the real market.
+
+  Usage:
+    {%- capture sf_country -%}{% render 'storefront-country' %}{%- endcapture -%}
+    {%- assign sf_country = sf_country | strip -%}
+{%- endcomment -%}
+{%- liquid
+  assign own_country_markets = 'czech,france,ireland,portugal,spain,sweden' | split: ','
+  if own_country_markets contains localization.market.handle
+    echo localization.country.iso_code | downcase
+  else
+    echo 'pl'
+  endif
+-%}

@@ -1,0 +1,30 @@
+{%- comment -%}
+  Payment icons for the footer and the PDP 'payment_badges' block.
+
+  Root-domain markets (Poland, the DE fallback and every market without its own subfolder) show
+  the Polish market's list, so DE renders exactly like Poland. Markets with their own subfolder
+  keep Shopify's live list for that market (shop.enabled_payment_types is market-scoped).
+  Icons only: checkout still offers whatever the buyer's market allows.
+
+  Accepts:
+  - item_tag: {String} 'li' (default) or 'div'
+{%- endcomment -%}
+{%- liquid
+  assign item_tag = item_tag | default: 'li'
+  capture sf_country
+    render 'storefront-country'
+  endcapture
+  assign sf_country = sf_country | strip
+  if sf_country == 'pl'
+    # Poland market list as Shopify returned it live on 17.10.2026 (?country=PL). Update here when payments change.
+    assign payment_types = 'american_express,apple_pay,bancontact,blik,google_pay,klarna,maestro,master,shopify_pay,unionpay,visa' | split: ','
+  else
+    assign payment_types = shop.enabled_payment_types
+  endif
+-%}
+{%- for type in payment_types -%}
+  {%- assign payment_type = type | strip -%}
+  <{{ item_tag }} class="list-payment__item">
+    {{ payment_type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+  </{{ item_tag }}>
+{%- endfor -%}
