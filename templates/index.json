@@ -780,7 +780,7 @@
           "settings": {
             "heading": "Czym jest odpowiednik perfum?",
             "icon": "none",
-            "row_content": "<p>To woda perfumowana o zawartości olejków zapachowych od 20% do 24%, inspirowana drogimi, luksusowymi perfumami. Oznacza to, że zawartość flakonu obejmuje od 20% do 24% olejków zapachowych. Markowe wody toaletowe zawierają od 10% do 15% olejków zapachowych.</p>",
+            "row_content": "<p>To woda perfumowana o zawartości olejków zapachowych do 19%, inspirowana drogimi, luksusowymi perfumami. Oznacza to, że zawartość flakonu obejmuje od 19% do 21% olejków zapachowych. Markowe wody toaletowe zawierają od 10% do 15% olejków zapachowych.</p>",
             "page": ""
           }
         },
@@ -788,9 +788,9 @@
           "type": "collapsible_row",
           "disabled": true,
           "settings": {
-            "heading": "Co oznacza stężenie olejków zapachowych od 20% do 24%?",
+            "heading": "Co oznacza stężenie olejków zapachowych od 19% do 21%?",
             "icon": "none",
-            "row_content": "<p>Większość dostępnych na rynku wód perfumowanych zawiera od 16% do 21% olejków zapachowych. Nasze kompozycje zawierają ich od 20% do 24%, co plasuje je wśród kompozycji zapachowych najwyższej jakości.</p>",
+            "row_content": "<p>Większość dostępnych na rynku wód perfumowanych zawiera od 16% do 21% olejków zapachowych. Nasze kompozycje zawierają ich od 19% do 21%, co plasuje je wśród kompozycji zapachowych najwyższej jakości.</p>",
             "page": ""
           }
         }

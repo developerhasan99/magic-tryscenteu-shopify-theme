@@ -169,7 +169,7 @@
           "settings": {
             "heading": "Czy to woda perfumowana?",
             "icon": "none",
-            "content": "<p>Nasze perfumy łączą cechy wody perfumowanej (Eau de Parfum) i ekstraktu perfum (Extrait de Parfum), zawierając od 20% do 24% olejków zapachowych.<br/>Woda toaletowa (EDT) zawiera ich od 5% do 8%.<br/>Ekstrakt perfum zawiera natomiast od 20% do 40%.</p><p><strong>To idealne stężenie, dzięki któremu zapach utrzymuje się od 8 do ponad 12 godzin, a jednocześnie nie jest zbyt intensywny ani przytłaczający.</strong></p>",
+            "content": "<p>Nasze perfumy łączą cechy wody perfumowanej (Eau de Parfum) i ekstraktu perfum (Extrait de Parfum), zawierając od 19% do 21% olejków zapachowych.<br/>Woda toaletowa (EDT) zawiera ich od 5% do 8%.<br/>Ekstrakt perfum zawiera natomiast od 20% do 40%.</p><p><strong>To idealne stężenie, dzięki któremu zapach utrzymuje się od 8 do ponad 12 godzin, a jednocześnie nie jest zbyt intensywny ani przytłaczający.</strong></p>",
             "page": ""
           }
         },
@@ -189,16 +189,16 @@
           "settings": {
             "heading": "Czym jest odpowiednik perfum?",
             "icon": "none",
-            "content": "<p>Ten zapach jest inspirowany tymi samymi nutami i należy do tej samej rodziny zapachowej — stężenie olejków wynoszące 20–24% zapewnia wyjątkową trwałość.</p>",
+            "content": "<p>Ten zapach jest inspirowany tymi samymi nutami i należy do tej samej rodziny zapachowej — stężenie olejków wynoszące 19–21% zapewnia wyjątkową trwałość.</p>",
             "page": ""
           }
         },
         "collapsible_tab_HiNKBa": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Co oznacza stężenie olejków zapachowych od 20% do 24%?",
+            "heading": "Co oznacza stężenie olejków zapachowych od 19% do 21%?",
             "icon": "none",
-            "content": "<p>Większość dostępnych na rynku wód perfumowanych zawiera od 16% do 21% olejków zapachowych. Nasze kompozycje zawierają ich od 20% do 24%, co plasuje je wśród kompozycji zapachowych najwyższej jakości.</p>",
+            "content": "<p>Większość dostępnych na rynku wód perfumowanych zawiera od 16% do 21% olejków zapachowych. Nasze kompozycje zawierają ich od 19% do 21%, co plasuje je wśród kompozycji zapachowych najwyższej jakości.</p>",
             "page": ""
           }
         },
