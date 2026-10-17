@@ -30,9 +30,9 @@ title, price; desktop only, as on magyx.co).
 ## Behaviour specific to this theme
 - Infinite scroll appends page two onwards; tiles are page one only, so the
   appended pages carry none and the order does not shift.
-- Polish market templates (`*.context.poland.json`) override the parents
-  without block changes; verified that blocks added on the parent template
-  render for the Polish market.
+- The Poland market overlays (`*.context.poland.json`) were retired on
+  17.10.2026: the base templates carry the Polish look for every market, and
+  the 3 tiles live in the base `collection.json` (see `PL-BASE.md`).
 - The block is available on every template that uses the section: collection,
   bestsellers, bundle-save, payday-page, warehouse.
 
