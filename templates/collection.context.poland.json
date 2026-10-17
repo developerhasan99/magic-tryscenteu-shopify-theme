@@ -30,7 +30,9 @@
     },
     "banner": {
       "disabled": false,
-      "settings": {},
+      "settings": {
+        "description_sentences": "3"
+      },
       "blocks": {}
     },
     "product-grid": {
