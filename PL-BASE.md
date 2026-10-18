@@ -8,6 +8,11 @@ country), so most real Polish visitors saw the older base. A phone showed the Po
 once been switched (`?country=PL` link, the country picker, a checkout, an in-app browser's own cookies).
 Market precedence measured live: `?country=` > cart country > `localization` cookie (1 year) > backup region DE.
 
+**Update 18.10.2026:** backup region switched to **Poland** (Settings → General → Backup region) and the Poland
+market owns the root web presence. A visitor with no stored choice now lands in market **poland** (Poland
+catalog, Kite thresholds apply), from any IP. Visitors who still carry a stored DE choice stay on DE and the
+"de" catalog until it expires, so "de" should keep every product Poland has (it has auto-publish off).
+
 ## What changed
 - The 9 Poland overlays were folded into their parents and deleted; the DE payday overlay was deleted.
   Only the 3 Czech overlays remain (`index`, `collection.payday-page`, `header-group`).
