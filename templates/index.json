@@ -238,6 +238,8 @@
         "background_color": "#ffffff",
         "heading": "Zapach na każdą stronę Twojej osobowości",
         "subheading": "Odkryj perfumy, które zmieniają się wraz z Twoim stylem i podkreślają Twój charakter.",
+        "products_to_show": 8,
+        "show_rating": true,
         "padding_top": 24,
         "padding_bottom": 24
       }

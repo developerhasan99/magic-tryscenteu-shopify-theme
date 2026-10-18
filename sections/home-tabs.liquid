@@ -40,9 +40,10 @@
         {% assign collection = block.settings.collection %}
         {% if collection and collection.products.size > 0 %}
           <div class="grid grid-cols-2 gap-3 md:gap-6 md:grid-cols-4">
-            {%- for product in collection.products limit: 4 -%}
+            {%- for product in collection.products limit: section.settings.products_to_show -%}
               {% render 'product-card'
-                , product: product %}
+                , product: product
+                , show_rating: section.settings.show_rating %}
             {%- endfor -%}
           </div>
         {% else %}
@@ -105,6 +106,23 @@
         "id": "subheading",
         "label": "Subheading",
         "default": "Odkryj nasz starannie dobrany asortyment wysokiej jakości produktów do golenia."
+      },
+      {
+        "type": "range",
+        "id": "products_to_show",
+        "min": 2,
+        "max": 12,
+        "step": 2,
+        "label": "Products per tab",
+        "info": "2 per row on phones, 4 per row on desktop",
+        "default": 8
+      },
+      {
+        "type": "checkbox",
+        "id": "show_rating",
+        "default": true,
+        "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
+        "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
       },
       {
         "type": "header",
