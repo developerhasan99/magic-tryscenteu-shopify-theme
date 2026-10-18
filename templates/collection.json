@@ -9,55 +9,55 @@
  */
 {
   "sections": {
-    "collection_stories_coll": {
+    "collection_stories_RTeLNT": {
       "type": "collection-stories",
       "blocks": {
-        "collection_men_coll": {
+        "collection_9HBNFw": {
           "type": "collection",
           "settings": {
             "collection": "man",
             "title": "Męskie",
-            "image": "shopify://shop_images/stories-men.jpg",
+            "image": "shopify://shop_images/IG_Magyx_Male.webp",
             "ring_style": "gradient",
             "ring_color": "#56c70f"
           }
         },
-        "collection_women_coll": {
+        "collection_nCNnii": {
           "type": "collection",
           "settings": {
             "collection": "woman",
             "title": "Damskie",
-            "image": "shopify://shop_images/stories-women.jpg",
+            "image": "shopify://shop_images/IG_Magyx_Fem.webp",
             "ring_style": "gradient",
             "ring_color": "#56c70f"
           }
         },
-        "collection_bestsellers_coll": {
+        "collection_QbXtG7": {
           "type": "collection",
           "settings": {
             "collection": "top-sellers",
             "title": "Bestsellery",
-            "image": "shopify://shop_images/stories-bestsellers.png",
+            "image": "shopify://shop_images/IG_Magyx_Bestsellers.webp",
             "ring_style": "gradient",
             "ring_color": "#56c70f"
           }
         },
-        "collection_new_coll": {
+        "collection_9zt7pX": {
           "type": "collection",
           "settings": {
             "collection": "neue-angesagte-dufte",
             "title": "Nowości",
-            "image": "shopify://shop_images/stories-new.png",
+            "image": "shopify://shop_images/IG_Magyx_New.webp",
             "ring_style": "gradient",
             "ring_color": "#56c70f"
           }
         }
       },
       "block_order": [
-        "collection_men_coll",
-        "collection_women_coll",
-        "collection_bestsellers_coll",
-        "collection_new_coll"
+        "collection_9HBNFw",
+        "collection_nCNnii",
+        "collection_QbXtG7",
+        "collection_9zt7pX"
       ],
       "name": "Story circles",
       "settings": {
@@ -106,9 +106,11 @@
       "type": "main-collection-banner",
       "settings": {
         "show_collection_description": true,
+        "description_sentences": "3",
+        "description_more_label": "Czytaj więcej",
+        "description_less_label": "Zwiń",
         "show_collection_image": false,
-        "color_scheme": "scheme-2",
-        "description_sentences": "3"
+        "color_scheme": "scheme-2"
       }
     },
     "product-grid": {
@@ -159,6 +161,13 @@
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": true,
+        "enable_search": true,
+        "search_placeholder": "Szukaj: marka, zapach lub numer",
+        "search_results_text": "Wyniki dla „[query]”: [count]",
+        "search_result_text": "Wyniki dla „[query]”: 1",
+        "search_empty_text": "Brak wyników dla „[query]”. Wpisz markę albo nazwę oryginału.",
+        "search_loading_text": "Szukamy we wszystkich zapachach…",
+        "search_clear_label": "Wyczyść wyszukiwanie",
         "quick_add": "standard",
         "enable_filtering": true,
         "filter_type": "horizontal",
@@ -170,7 +179,7 @@
     }
   },
   "order": [
-    "collection_stories_coll",
+    "collection_stories_RTeLNT",
     "collection_hero_ezAzaW",
     "custom_liquid_Y9k4Ai",
     "custom_liquid_MYjrA4",
