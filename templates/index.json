@@ -62,6 +62,7 @@
       "name": "Story circles",
       "settings": {
         "aria_label": "Kategorie",
+        "background_color": "#f5e6e1",
         "ring_color_1": "#fdf497",
         "ring_color_2": "#fd5949",
         "ring_color_3": "#d6249f",

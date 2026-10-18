@@ -16,6 +16,8 @@
     --mgx-stories-c2: {{ section.settings.ring_color_2 }};
     --mgx-stories-c3: {{ section.settings.ring_color_3 }};
     --mgx-stories-c4: {{ section.settings.ring_color_4 }};
+    --mgx-stories-bg: {{ section.settings.background_color }};
+    background-color: var(--mgx-stories-bg);
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
@@ -143,6 +145,13 @@
       "id": "aria_label",
       "label": "Name for screen readers",
       "default": "Kategorie"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "info": "Match the top edge of the section below, e.g. the hero's phone photo",
+      "default": "#FFFFFF"
     },
     {
       "type": "header",
