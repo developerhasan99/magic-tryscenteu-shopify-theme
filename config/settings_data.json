@@ -256,11 +256,11 @@
       },
       "scheme-5": {
         "settings": {
-          "background": "#9a5b1e",
+          "background": "#184031",
           "background_gradient": "",
           "text": "#ffffff",
           "button": "#ffffff",
-          "button_label": "#9a5b1e",
+          "button_label": "#184031",
           "secondary_button_label": "#ffffff",
           "shadow": "#100f0d"
         }

@@ -77,9 +77,9 @@
             "show_countdown": true,
             "countdown_label": "Ends in",
             "end_time": "",
-            "bar_color": "#9a5b1e",
+            "bar_color": "#184031",
             "track_color": "#c7c9cb",
-            "accent_color": "#9a5b1e"
+            "accent_color": "#184031"
           }
         },
         "buy_buttons_eXWBwX": {
@@ -238,7 +238,7 @@
             "text_alignment": "center",
             "text_size": 18,
             "display_stars": true,
-            "star_color": "#9a5b1e",
+            "star_color": "#184031",
             "star_size": 16,
             "star_placement": "below",
             "image_shape": "circle",

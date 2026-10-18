@@ -3,7 +3,8 @@
   Single source of truth for brand colours in the theme (MAGYX Brand Guidelines, Edition 01).
   Loaded last in layout/theme.liquid so single-class utilities win ties against
   tailwind-compiled.css / blocky.css without !important.
-  Palette: Magyx Black #100F0D, White #FFFFFF, Silver #C7C9CB, Graphite #3A3A3C, Amber #9A5B1E.
+  Palette: Magyx Black #100F0D, White #FFFFFF, Silver #C7C9CB, Graphite #3A3A3C, Accent Pine #184031 (token keeps the name --mgx-amber;
+  it was amber #184031 until 18.10.2026).
 */
 
 :root {
@@ -15,8 +16,8 @@
   --mgx-silver-rgb: 199, 201, 203;
   --mgx-graphite: #3A3A3C;
   --mgx-graphite-rgb: 58, 58, 60;
-  --mgx-amber: #9A5B1E;
-  --mgx-amber-rgb: 154, 91, 30;
+  --mgx-amber: #184031;
+  --mgx-amber-rgb: 24, 64, 49;
 
   /* roles */
   --mgx-hairline: var(--mgx-silver);

@@ -1,7 +1,7 @@
 {%- comment -%}
   Badges under the add-to-cart. Rendered by reactive-atc, quantity-breaker and custom-offer-bundle (bundle pages).
   One row of equal tiles: 48h delivery in Poland, InPost, 60-day guarantee.
-  InPost in its own colours; the guarantee seal is guarantee-badge.png recoloured to MAGYX amber (guarantee-badge-amber.png).
+  InPost in its own colours; the guarantee seal is guarantee-badge.png recoloured to the MAGYX accent, Pine #184031 (guarantee-badge-accent.png).
   The product templates place the UGC video row (ugc_videos block) right under this row.
   Also sets the scroll offset for #atc_scroll_target (the ATC anchor linked from stacks-up) so the sticky header never covers it.
 {%- endcomment -%}
@@ -37,7 +37,7 @@
   <div class="shipping-badges__item">
     <img
       class="shipping-badges__logo"
-      src="{{ 'guarantee-badge-amber.png' | asset_url }}"
+      src="{{ 'guarantee-badge-accent.png' | asset_url }}"
       alt=""
       width="28"
       height="28"
