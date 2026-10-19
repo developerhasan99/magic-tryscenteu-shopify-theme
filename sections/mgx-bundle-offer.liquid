@@ -260,8 +260,14 @@
           this.error = '';
           if (this.picks.length >= this.size) {
             var self = this;
-            setTimeout(function () { self.closePicker(); }, 250);
+            setTimeout(function () { self.closePicker(); self.scrollToAtc(); }, 250);
           }
+        },
+        // bundle complete -> bring the add-to-cart button to the middle of the screen
+        scrollToAtc: function () {
+          var btn = this.$refs.atc;
+          if (!btn) return;
+          requestAnimationFrame(function () { btn.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
         },
         removeOne: function (p) {
           for (var i = this.picks.length - 1; i >= 0; i--) {
@@ -793,6 +799,7 @@
           <button
             type="button"
             class="mgx-bo__atc mgx-btn-primary"
+            x-ref="atc"
             :class="{ 'is-incomplete': !complete, 'is-busy': busy }"
             :aria-busy="busy ? 'true' : 'false'"
             @click="submit()">
