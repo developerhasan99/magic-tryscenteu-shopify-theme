@@ -249,7 +249,14 @@
   display: grid;
   grid-template-columns: repeat(var(--mgx-bo-cols, 3), minmax(0, 1fr));
   gap: 8px;
-  padding-top: 14px;
+  /* room for a badge tab of up to two lines sitting above the cards */
+  padding-top: 30px;
+}
+
+@media (min-width: 750px) {
+  .mgx-bo__tiers {
+    padding-top: 22px;
+  }
 }
 
 .mgx-bo__tier {
@@ -259,7 +266,7 @@
   align-items: center;
   gap: 3px;
   min-height: 44px;
-  padding: 18px 6px 12px;
+  padding: 26px 6px 12px;
   text-align: center;
   background: var(--mgx-white);
   border: 1px solid var(--mgx-hairline);
@@ -282,20 +289,28 @@
   outline-offset: 2px;
 }
 
+/* tab attached to the card's top edge: grows upward, never covers card content */
 .mgx-bo__tier-badge {
   position: absolute;
-  top: 0;
+  bottom: 100%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   width: max-content;
-  max-width: calc(100% - 8px);
+  max-width: calc(100% - 12px);
   padding: 3px 8px;
-  border-radius: 999px;
-  font-size: 10px;
-  line-height: 1.15;
+  border-radius: 8px 8px 0 0;
+  font-size: 9px;
+  line-height: 1.2;
   font-weight: 700;
   letter-spacing: 0.02em;
+  text-align: center;
   text-transform: uppercase;
+}
+
+@media (min-width: 420px) {
+  .mgx-bo__tier-badge {
+    font-size: 10px;
+  }
 }
 
 .mgx-bo__tier-check {
@@ -314,10 +329,6 @@
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.mgx-bo__tier.has-badge .mgx-bo__tier-check {
-  top: 12px;
-}
-
 .mgx-bo__tier.is-selected .mgx-bo__tier-check {
   background: var(--mgx-black);
   border-color: var(--mgx-black);
@@ -328,10 +339,6 @@
   font-size: 13px;
   line-height: 1.2;
   font-weight: 700;
-}
-
-.mgx-bo__tier.has-badge .mgx-bo__tier-name {
-  margin-top: 6px;
 }
 
 .mgx-bo__tier-price {
@@ -559,7 +566,7 @@
 .mgx-bo__slots {
   display: grid;
   grid-template-columns: repeat(var(--mgx-bo-cols, 3), minmax(0, 88px));
-  justify-content: start;
+  justify-content: center;
   gap: 6px;
 }
 
