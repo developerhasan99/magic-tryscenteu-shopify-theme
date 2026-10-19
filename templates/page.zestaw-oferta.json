@@ -70,30 +70,6 @@
             "title": "Perfum Niespodzianka 50 ml",
             "product": "gratis-mystik-parfum-50ml"
           }
-        },
-        "trust_1": {
-          "type": "trust",
-          "settings": {
-            "label": "Darmowa wysyłka"
-          }
-        },
-        "trust_2": {
-          "type": "trust",
-          "settings": {
-            "label": "Łatwe zwroty"
-          }
-        },
-        "trust_3": {
-          "type": "trust",
-          "settings": {
-            "label": "Bezpieczne zakupy"
-          }
-        },
-        "trust_4": {
-          "type": "trust",
-          "settings": {
-            "label": "Gwarancja zwrotu pieniędzy"
-          }
         }
       },
       "block_order": [
@@ -102,11 +78,7 @@
         "tier_3",
         "gift_1",
         "gift_2",
-        "gift_3",
-        "trust_1",
-        "trust_2",
-        "trust_3",
-        "trust_4"
+        "gift_3"
       ],
       "settings": {
         "collection": "top-sellers",
