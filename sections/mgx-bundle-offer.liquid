@@ -704,7 +704,7 @@
             {{ st.slots_heading | default: 'Wybierz zapachy' }}
           </button>
           <p class="mgx-bo__note">
-            Rozmiar flakonu: {{ ml_label }}.
+            Pojemność flakonu: {{ ml_label }}.
           </p>
         </div>
 
@@ -742,7 +742,7 @@
           {%- if coll == blank -%}
             Wybierz kolekcję w ustawieniach sekcji
           {%- else -%}
-            Brak dostępnych zapachów w rozmiarze {{ ml_label }} w wybranej kolekcji.
+            Brak dostępnych zapachów o pojemności {{ ml_label }} w wybranej kolekcji.
           {%- endif -%}
         </p>
       {%- endif -%}
@@ -787,7 +787,7 @@
     {
       "type": "text",
       "id": "variant_ml",
-      "label": "Rozmiar flakonu (ml)",
+      "label": "Pojemność flakonu (ml)",
       "default": "50",
       "info": "Dopasowanie do wariantu, np. 50 = 50ml / 50 ml"
     },
