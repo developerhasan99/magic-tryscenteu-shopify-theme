@@ -1,0 +1,231 @@
+{%- comment -%}
+  MAGYX FAQ as tabs. Tab row on a hairline, active tab underlined, items below (emoji + bold heading + short text).
+  Grouping: every `item` block belongs to the nearest preceding `tab` block. Items placed before the first tab go to the first tab.
+  Vanilla JS, no Alpine. Styles: assets/mgx-info-tabs.css (scoped under .mgx-tabs).
+{%- endcomment -%}
+{{ 'mgx-info-tabs.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign tab_count = 0
+  for block in section.blocks
+    if block.type == 'tab'
+      assign tab_count = tab_count | plus: 1
+    endif
+  endfor
+-%}
+
+<div
+  class="mgx-tabs"
+  id="mgx-tabs-{{ section.id }}"
+  data-mgx-tabs
+  style="--mgx-tabs-max: {{ section.settings.max_width }}px; --mgx-tabs-pt: {{ section.settings.padding_top }}px; --mgx-tabs-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="mgx-tabs__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="mgx-tabs__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if tab_count > 0 -%}
+      <div class="mgx-tabs__list" role="tablist" data-mgx-tablist>
+        {%- assign t = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tab' -%}
+            <button
+              type="button"
+              class="mgx-tabs__tab"
+              role="tab"
+              id="mgx-tab-{{ section.id }}-{{ t }}"
+              aria-controls="mgx-panel-{{ section.id }}-{{ t }}"
+              aria-selected="{% if t == 0 %}true{% else %}false{% endif %}"
+              tabindex="{% if t == 0 %}0{% else %}-1{% endif %}"
+              data-mgx-tab="{{ t }}"
+              {{ block.shopify_attributes }}
+            >{{ block.settings.title }}</button>
+            {%- assign t = t | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- assign panel_count = tab_count -%}
+    {%- if panel_count == 0 -%}{%- assign panel_count = 1 -%}{%- endif -%}
+
+    {%- for p in (1..panel_count) -%}
+      {%- assign panel_index = p | minus: 1 -%}
+      <div
+        class="mgx-tabs__panel"
+        role="tabpanel"
+        id="mgx-panel-{{ section.id }}-{{ panel_index }}"
+        {% if tab_count > 0 %}aria-labelledby="mgx-tab-{{ section.id }}-{{ panel_index }}"{% endif %}
+        data-mgx-panel="{{ panel_index }}"
+        {% unless panel_index == 0 %}hidden{% endunless %}
+      >
+        {%- assign cur = -1 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tab' -%}
+            {%- assign cur = cur | plus: 1 -%}
+          {%- elsif block.type == 'item' -%}
+            {%- assign target = cur -%}
+            {%- if cur < 0 -%}{%- assign target = 0 -%}{%- endif -%}
+            {%- if target == panel_index -%}
+              <div class="mgx-tabs__item" {{ block.shopify_attributes }}>
+                <h3 class="mgx-tabs__item-heading">
+                  {%- if block.settings.emoji != blank -%}<span class="mgx-tabs__emoji" aria-hidden="true">{{ block.settings.emoji }}</span>{%- endif -%}
+                  <span>{{ block.settings.heading }}</span>
+                </h3>
+                {%- if block.settings.text != blank -%}
+                  <div class="mgx-tabs__text">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('mgx-tabs-{{ section.id }}');
+    if (!root || root.getAttribute('data-mgx-init') === '1') return;
+    root.setAttribute('data-mgx-init', '1');
+    var list = root.querySelector('[data-mgx-tablist]');
+    if (!list) return;
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[data-mgx-tab]'));
+    var panels = Array.prototype.slice.call(root.querySelectorAll('[data-mgx-panel]'));
+
+    function activate(index, focus) {
+      tabs.forEach(function (tab, i) {
+        var on = i === index;
+        tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        tab.setAttribute('tabindex', on ? '0' : '-1');
+        if (on) {
+          if (focus) tab.focus();
+          var left = tab.offsetLeft - (list.clientWidth - tab.offsetWidth) / 2;
+          if (list.scrollWidth > list.clientWidth) list.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+        }
+      });
+      panels.forEach(function (panel, i) {
+        panel.hidden = i !== index;
+      });
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { activate(i, false); });
+      tab.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        if (next !== null) { e.preventDefault(); activate(next, true); }
+      });
+    });
+
+    document.addEventListener('shopify:block:select', function (e) {
+      if (!root.contains(e.target)) return;
+      var panel = e.target.closest('[data-mgx-panel]');
+      if (panel) activate(panels.indexOf(panel), false);
+      else {
+        var idx = tabs.indexOf(e.target);
+        if (idx > -1) activate(idx, false);
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Zakładki FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Nagłówek sekcji",
+      "default": "Najczęstsze pytania"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "label": "Maksymalna szerokość",
+      "default": 860
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Odstęp u góry",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Odstęp u dołu",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Zakładka",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nazwa zakładki",
+          "default": "Zakładka"
+        }
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Pytanie",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji",
+          "default": "✨"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Nagłówek",
+          "default": "Pytanie:"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Odpowiedź",
+          "default": "<p>Krótka odpowiedź.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zakładki FAQ",
+      "blocks": [
+        { "type": "tab", "settings": { "title": "Pierwsza zakładka" } },
+        { "type": "item", "settings": { "emoji": "⚡", "heading": "Pierwsze pytanie:", "text": "<p>Krótka odpowiedź na pierwsze pytanie.</p>" } },
+        { "type": "item", "settings": { "emoji": "✅", "heading": "Drugie pytanie:", "text": "<p>Krótka odpowiedź na drugie pytanie.</p>" } },
+        { "type": "tab", "settings": { "title": "Druga zakładka" } },
+        { "type": "item", "settings": { "emoji": "🚚", "heading": "Trzecie pytanie:", "text": "<p>Krótka odpowiedź na trzecie pytanie.</p>" } },
+        { "type": "item", "settings": { "emoji": "🔄", "heading": "Czwarte pytanie:", "text": "<p>Krótka odpowiedź na czwarte pytanie.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
