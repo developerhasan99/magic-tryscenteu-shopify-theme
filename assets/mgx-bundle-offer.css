@@ -181,13 +181,24 @@
 }
 
 /* ---------- head of the buy box ---------- */
+/* link: tapping the stars scrolls to the Judge.me reviews */
 .mgx-bo__rating {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
+  width: max-content;
+  max-width: 100%;
   font-size: 13px;
   color: var(--mgx-text-muted);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mgx-bo__rating:hover .mgx-bo__rating-text,
+.mgx-bo__rating:focus-visible .mgx-bo__rating-text {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .mgx-bo__stars {
@@ -387,13 +398,43 @@
 .mgx-bo__bottle {
   flex: 1 1 0;
   min-width: 0;
-  max-width: 30px;
+  max-width: 28px;
   height: auto;
+}
+
+.mgx-bo__bottle-cap {
+  fill: var(--mgx-silver);
+  stroke: var(--mgx-graphite);
+  stroke-width: 0.6;
+}
+
+.mgx-bo__bottle-collar {
   fill: var(--mgx-graphite);
 }
 
-.mgx-bo__bottle.is-free {
+.mgx-bo__bottle-body {
+  fill: rgba(var(--mgx-silver-rgb), 0.45);
+  stroke: var(--mgx-graphite);
+  stroke-width: 0.8;
+}
+
+.mgx-bo__bottle-label {
+  fill: var(--mgx-black);
+}
+
+.mgx-bo__bottle-mark {
+  fill: var(--mgx-white);
+}
+
+/* free bottles: glass and cap outline in the accent colour */
+.mgx-bo__bottle.is-free .mgx-bo__bottle-body {
   fill: var(--mgx-accent);
+  fill-opacity: 0.22;
+  stroke: var(--mgx-accent);
+}
+
+.mgx-bo__bottle.is-free .mgx-bo__bottle-cap {
+  stroke: var(--mgx-accent);
 }
 
 .mgx-bo__tier-stack.is-dense {
@@ -484,17 +525,38 @@
   list-style: none;
 }
 
+/* each row: item on the left, its list value on the right */
 .mgx-bo__sum-list li {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
   font-size: 14px;
   line-height: 1.3;
   font-weight: 600;
 }
 
-.mgx-bo__sum-list svg {
+.mgx-bo__sum-label {
+  min-width: 0;
+}
+
+.mgx-bo__sum-value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.mgx-bo__sum-value s {
+  font-weight: 500;
+  color: var(--mgx-text-muted);
+}
+
+.mgx-bo__sum-free {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   color: var(--mgx-accent);
 }
 

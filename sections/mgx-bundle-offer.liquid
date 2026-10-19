@@ -181,14 +181,16 @@
           });
         },
 
-        // "what you get" lines for the price comparison box: bottles + unlocked gifts
+        // "what you get" rows for the price comparison box, each with its list value:
+        // bottles at full price, gifts at their store price (struck, GRATIS), shipping as GRATIS
         get summaryLines() {
-          var t = this.tier, n = this.slotCount(t), lines = [];
+          var self = this, t = this.tier, n = this.slotCount(t), lines = [];
           var first = n + ' ' + this.bottleWord(n) + ' po ' + (this.cfg.ml || '50 ml');
           if (t.free) first += ' (' + t.free + ' gratis)';
-          lines.push(first);
+          lines.push({ label: first, value: this.money(this.tierStruck(t, this.tierIndex)), free: false });
           (this.cfg.gifts || []).forEach(function (g) {
-            if (t.unlock && t.unlock[g.key] && g.title) lines.push(g.title);
+            if (!(t.unlock && t.unlock[g.key] && g.title)) return;
+            lines.push({ label: g.title, value: g.price ? self.money(g.price) : '', free: true });
           });
           return lines;
         },
@@ -272,6 +274,16 @@
         },
         removeAt: function (i) { this.picks.splice(i, 1); },
 
+        // rating stars -> Judge.me reviews section on the same page (any Judge.me reviews widget), offset for the sticky header
+        scrollToReviews: function () {
+          var w = document.querySelector('.jdgm-all-reviews-widget-v2025, .jdgm-all-reviews-widget, .jdgm-review-widget, [class*="jdgm-all-reviews"]');
+          var target = w ? (w.closest('.shopify-section') || w) : document.getElementById('mgx-reviews');
+          if (!target) return;
+          var header = document.querySelector('sticky-header, .section-header, header');
+          var offset = header ? Math.min(header.getBoundingClientRect().height, 140) + 8 : 16;
+          var y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        },
         openPicker: function () {
           if (!this.cfg.products.length) return;
           this.lastFocus = document.activeElement;
@@ -402,6 +414,7 @@
         {
           "key": {{ g.settings.key | json }},
           "title": {{ g.settings.title | json }},
+          "price": {% if gv %}{{ gv.price }}{% else %}0{% endif %},
           "variantId": {% if gv and gv.available %}{{ gv.id }}{% else %}null{% endif %}
         }{%- unless forloop.last -%},{%- endunless -%}
       {%- endfor -%}
@@ -547,14 +560,14 @@
         endif
       -%}
       {%- if rating_line != blank -%}
-        <div class="mgx-bo__rating">
+        <a class="mgx-bo__rating" href="#mgx-reviews" @click.prevent="scrollToReviews()" aria-label="{{ rating_line | strip_html | escape }}, przejdź do opinii">
           <span class="mgx-bo__stars mgx-star" aria-hidden="true">
             {%- for i in (1..5) -%}
               <svg viewBox="0 0 20 20" width="16" height="16" focusable="false"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg>
             {%- endfor -%}
           </span>
           <span class="mgx-bo__rating-text">{{ rating_line }}</span>
-        </div>
+        </a>
       {%- endif -%}
 
       {%- if st.heading != blank -%}
@@ -614,7 +627,8 @@
                     {%- assign t_show = t_n | at_most: 8 -%}
                     <span class="mgx-bo__tier-stack{% if t_show > 3 %} is-dense{% endif %}" aria-hidden="true">
                       {%- for i in (1..t_show) -%}
-                        <svg class="mgx-bo__bottle{% if i > t_paid %} is-free{% endif %}" viewBox="0 0 24 40" focusable="false"><rect x="9" y="1" width="6" height="5" rx="1"/><rect x="7.5" y="6" width="9" height="4" rx="1"/><rect x="2" y="10" width="20" height="29" rx="4"/></svg>
+                        {%- comment -%} MagyX flacon: tall silver cap, short collar, square glass body, dark label {%- endcomment -%}
+                        <svg class="mgx-bo__bottle{% if i > t_paid %} is-free{% endif %}" viewBox="0 0 24 46" focusable="false"><rect class="mgx-bo__bottle-cap" x="6" y="0.5" width="12" height="13" rx="1.5"/><rect class="mgx-bo__bottle-collar" x="8" y="13.5" width="8" height="2.5"/><rect class="mgx-bo__bottle-body" x="1" y="16" width="22" height="29.5" rx="2.5"/><rect class="mgx-bo__bottle-label" x="5" y="22" width="14" height="17" rx="0.8"/><rect class="mgx-bo__bottle-mark" x="8" y="27" width="8" height="1.6" rx="0.8"/></svg>
                       {%- endfor -%}
                     </span>
                   {%- endif -%}
@@ -699,10 +713,14 @@
             </div>
             <span class="mgx-bo__sum-save mgx-badge-amber"{% if d_save0 == 0 %} style="display: none;"{% endif %} x-show="tierSavings(tier) > 0" x-text="'Oszczędzasz ' + tierSavings(tier) + '%'">Oszczędzasz {{ d_save0 }}%</span>
             <ul class="mgx-bo__sum-list" role="list" x-cloak>
-              <template x-for="line in summaryLines" :key="line">
+              <template x-for="line in summaryLines" :key="line.label">
                 <li>
-                  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  <span x-text="line"></span>
+                  <span class="mgx-bo__sum-label" x-text="line.label"></span>
+                  <span class="mgx-bo__sum-value">
+                    <s x-show="line.free && line.value" x-text="line.value"></s>
+                    <span x-show="!line.free" x-text="line.value"></span>
+                    <span class="mgx-bo__sum-free" x-show="line.free">GRATIS</span>
+                  </span>
                 </li>
               </template>
             </ul>

@@ -94,7 +94,7 @@
         "tab_1": {
           "type": "tab",
           "settings": {
-            "title": "Zapach i trwałość"
+            "title": "Zapach"
           }
         },
         "item_1": {
@@ -132,7 +132,7 @@
         "tab_2": {
           "type": "tab",
           "settings": {
-            "title": "Zestawy i gratisy"
+            "title": "Zestawy"
           }
         },
         "item_5": {
@@ -200,7 +200,7 @@
         "tab_4": {
           "type": "tab",
           "settings": {
-            "title": "Zwroty i gwarancja"
+            "title": "Zwroty"
           }
         },
         "item_12": {

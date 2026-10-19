@@ -1,4 +1,4 @@
-/* MAGYX FAQ tabs. Scoped under .mgx-tabs. px only (root font-size is 10px). */
+/* MAGYX FAQ tabs, compact. Scoped under .mgx-tabs. px only (root font-size is 10px). */
 .mgx-tabs {
   background-color: var(--mgx-white);
   color: var(--mgx-text);
@@ -11,47 +11,40 @@
 }
 
 .mgx-tabs .mgx-tabs__heading {
-  margin: 0 0 28px;
-  font-size: 26px;
+  margin: 0 0 14px;
+  font-size: 20px;
   line-height: 1.2;
   font-weight: 800;
   text-align: center;
   color: var(--mgx-black);
 }
 
+/* all tabs share one row, equal widths, no horizontal scroll */
 .mgx-tabs .mgx-tabs__list {
   display: flex;
   flex-wrap: nowrap;
   gap: 0;
-  margin: 0 -16px;
-  padding: 0 16px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  margin: 0;
+  padding: 0;
   border-bottom: 1px solid var(--mgx-hairline);
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.mgx-tabs .mgx-tabs__list::-webkit-scrollbar {
-  display: none;
 }
 
 .mgx-tabs .mgx-tabs__tab {
-  flex: 0 0 auto;
-  min-height: 48px;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 44px;
   margin: 0 0 -1px;
-  padding: 0 18px;
+  padding: 0 4px;
   border: 0;
   border-bottom: 2px solid transparent;
   border-radius: 0;
   background: transparent;
   color: var(--mgx-text-muted);
   font: inherit;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1.2;
-  font-weight: 600;
-  white-space: nowrap;
+  font-weight: 700;
+  text-align: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -71,7 +64,7 @@
 }
 
 .mgx-tabs .mgx-tabs__panel {
-  padding-top: 32px;
+  padding-top: 18px;
 }
 
 .mgx-tabs .mgx-tabs__panel[hidden] {
@@ -79,15 +72,15 @@
 }
 
 .mgx-tabs .mgx-tabs__item + .mgx-tabs__item {
-  margin-top: 32px;
+  margin-top: 16px;
 }
 
 .mgx-tabs .mgx-tabs__item-heading {
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  margin: 0 0 10px;
-  font-size: 18px;
+  gap: 8px;
+  margin: 0 0 4px;
+  font-size: 15px;
   line-height: 1.35;
   font-weight: 800;
   color: var(--mgx-black);
@@ -95,13 +88,13 @@
 
 .mgx-tabs .mgx-tabs__emoji {
   flex: 0 0 auto;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1;
 }
 
 .mgx-tabs .mgx-tabs__text {
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 14px;
+  line-height: 1.55;
   color: var(--mgx-text-muted);
 }
 
@@ -110,7 +103,7 @@
 }
 
 .mgx-tabs .mgx-tabs__text p + p {
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 @media (min-width: 750px) {
@@ -120,40 +113,32 @@
   }
 
   .mgx-tabs .mgx-tabs__heading {
-    margin-bottom: 36px;
-    font-size: 34px;
-  }
-
-  .mgx-tabs .mgx-tabs__list {
-    margin: 0;
-    padding: 0;
-    overflow-x: visible;
+    margin-bottom: 18px;
+    font-size: 24px;
   }
 
   .mgx-tabs .mgx-tabs__tab {
-    flex: 1 1 0;
     padding: 0 12px;
-    text-align: center;
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .mgx-tabs .mgx-tabs__panel {
-    padding-top: 40px;
+    padding-top: 22px;
   }
 
   .mgx-tabs .mgx-tabs__item + .mgx-tabs__item {
-    margin-top: 40px;
+    margin-top: 20px;
   }
 
   .mgx-tabs .mgx-tabs__item-heading {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .mgx-tabs .mgx-tabs__emoji {
-    font-size: 22px;
+    font-size: 17px;
   }
 
   .mgx-tabs .mgx-tabs__text {
-    font-size: 17px;
+    font-size: 15px;
   }
 }
