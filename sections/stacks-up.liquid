@@ -32,7 +32,7 @@
             ⭐ Polecane
           </span>
           <h3 class="text-2xl font-semibold text-center mb-8 mt-4">
-            MagyX Perfume
+            {{ section.settings.ours_title | default: 'MagyX Perfume' }}
           </h3>
           <ul class="space-y-5 mgx-text-muted p-0 m-0">
             {% for block in section.blocks %}
@@ -43,14 +43,14 @@
             {% endfor %}
           </ul>
           <div class="mt-10 text-center">
-            <a href="#atc_scroll_target" class="inline-block mgx-btn-primary text-white px-6 py-3 rounded-xl font-medium transition no-underline scroll-smooth">
+            <a href="{{ section.settings.button_url | default: '#atc_scroll_target' }}" class="inline-block mgx-btn-primary text-white px-6 py-3 rounded-xl font-medium transition no-underline scroll-smooth">
               Odkryj MagyX
             </a>
           </div>
         </div>
         <div class="mgx-surface rounded-2xl p-8 border mgx-border">
           <h3 class="text-2xl font-semibold text-center mb-8">
-            Drogie marki luksusowe
+            {{ section.settings.others_title | default: 'Drogie marki luksusowe' }}
           </h3>
           <ul class="space-y-5 mgx-text-muted p-0 m-0">
             {% for block in section.blocks %}
@@ -88,6 +88,25 @@
         "id": "subtitle",
         "label": "Subtitle",
         "default": "Rozsądna alternatywa dla drogich marek luksusowych."
+      },
+      {
+        "type": "text",
+        "id": "ours_title",
+        "label": "Nagłówek kolumny MagyX",
+        "default": "MagyX Perfume"
+      },
+      {
+        "type": "text",
+        "id": "others_title",
+        "label": "Nagłówek kolumny porównania",
+        "default": "Drogie marki luksusowe"
+      },
+      {
+        "type": "text",
+        "id": "button_url",
+        "label": "Link przycisku",
+        "info": "Np. #atc_scroll_target albo #mgx-offer",
+        "default": "#atc_scroll_target"
       },
       {
         "type": "header",

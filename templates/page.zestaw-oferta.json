@@ -225,7 +225,7 @@
           "settings": {
             "emoji": "💧",
             "heading": "Czy to oryginalne perfumy znanych marek?",
-            "text": "<p>Nie. To zapachy inspirowane znanymi kompozycjami. Tryscent nie jest powiązany z wymienionymi markami i nie jest przez nie polecany.</p>"
+            "text": "<p>Nie. To zapachy inspirowane znanymi kompozycjami. MagyX nie jest powiązany z wymienionymi markami i nie jest przez nie polecany.</p>"
           }
         }
       },
@@ -262,36 +262,36 @@
         "stack_LGQprc": {
           "type": "stack",
           "settings": {
-            "our_stack": "Niezwykła trwałość",
-            "other_brands": "Wysoka cena za markę"
+            "our_stack": "20-24% olejku perfumeryjnego z Grasse",
+            "other_brands": "Niskie stężenie, zapach szybko znika"
           }
         },
         "stack_EkfTtL": {
           "type": "stack",
           "settings": {
-            "our_stack": "Komplementy każdego dnia już od 10€",
-            "other_brands": "Często produkowane masowo"
+            "our_stack": "Do 12 godzin na skórze",
+            "other_brands": "Trzeba poprawiać kilka razy dziennie"
           }
         },
         "stack_EwWwij": {
           "type": "stack",
           "settings": {
-            "our_stack": "Bez testów na zwierzętach",
-            "other_brands": "Niektóre testowane na zwierzętach"
+            "our_stack": "Bez ftalanów i parabenów",
+            "other_brands": "Skład często nieujawniony"
           }
         },
         "stack_w3Jyyc": {
           "type": "stack",
           "settings": {
-            "our_stack": "Płacisz za jakość, nie za marketing",
-            "other_brands": "Płacisz za nazwę marki"
+            "our_stack": "Wysyłka z Polski w 1-3 dni robocze",
+            "other_brands": "Długa wysyłka spoza UE"
           }
         },
         "stack_dXbqXq": {
           "type": "stack",
           "settings": {
-            "our_stack": "Ręcznie tworzone w małej manufakturze",
-            "other_brands": "Wysoka marża na marketing"
+            "our_stack": "Od 32,99 zł za flakon w zestawie",
+            "other_brands": "Wysoka cena za nazwę marki"
           }
         }
       },
@@ -305,8 +305,11 @@
       "name": "Stacks Up",
       "settings": {
         "background_color": "#ffffff",
-        "title": "Dlaczego Tryscent?",
-        "subtitle": "Rozsądna alternatywa dla drogich marek luksusowych.",
+        "title": "Dlaczego MagyX?",
+        "subtitle": "Porównaj z innymi markami perfum inspirowanych dostępnymi w Polsce.",
+        "ours_title": "MagyX Perfume",
+        "others_title": "Inne marki na polskim rynku",
+        "button_url": "#mgx-offer",
         "padding_top": 12,
         "padding_bottom": 16
       }
@@ -317,7 +320,7 @@
         "heading_PJdXGz": {
           "type": "heading",
           "settings": {
-            "content": "Produkcja w UE",
+            "content": "Czysty skład, olejki z Grasse",
             "heading_type": "h2",
             "font_size": 40,
             "mobile_font_size": 24,
@@ -327,7 +330,7 @@
         "text_Mhwr3T": {
           "type": "text",
           "settings": {
-            "content": "<p>Produkcja w UE gwarantuje najwyższe standardy jakości i pozwala nam nadzorować każdy etap procesu. </p><p>Od wyboru wysokiej jakości surowców po staranne napełnianie każdego flakonu, dbamy o to, by każdy produkt spełniał nasze wysokie wymagania dotyczące jakości i wykonania.</p>",
+            "content": "<p>Bez ftalanów i bez parabenów. Olejki perfumeryjne pochodzą z Grasse we Francji, stolicy perfumiarstwa.</p><p>Każdy flakon ma 20-24% olejku perfumeryjnego, dlatego zapach utrzymuje się na skórze do 12 godzin.</p>",
             "mobile_content": "",
             "font_size": 18,
             "text_color": "#000000"
