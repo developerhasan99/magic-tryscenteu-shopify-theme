@@ -414,7 +414,7 @@
         {
           "key": {{ g.settings.key | json }},
           "title": {{ g.settings.title | json }},
-          "price": {% if gv %}{{ gv.price }}{% else %}0{% endif %},
+          "price": {% if gv %}{{ gv.price }}{% elsif g.settings.list_price %}{{ g.settings.list_price | times: 100 | round }}{% else %}0{% endif %},
           "variantId": {% if gv and gv.available %}{{ gv.id }}{% else %}null{% endif %}
         }{%- unless forloop.last -%},{%- endunless -%}
       {%- endfor -%}
@@ -749,6 +749,8 @@
                   assign g_value = g.settings.value_label
                   if g_value == blank and g.settings.product != blank
                     assign g_value = g.settings.product.price | money | replace: ' ', '&nbsp;' | prepend: 'o wartości '
+                  elsif g_value == blank and g.settings.list_price
+                    assign g_value = g.settings.list_price | times: 100 | round | money | replace: ' ', '&nbsp;' | prepend: 'o wartości '
                   endif
                 -%}
                 {%- unless forloop.first -%}
@@ -827,7 +829,7 @@
       {%- endif -%}
 
       {%- if st.show_shipping_badges -%}
-        <div class="mgx-bo__badges">{% render 'shipping-badges' %}</div>
+        <div class="mgx-bo__badges">{% render 'shipping-badges', guarantee_text: st.guarantee_text %}</div>
       {%- endif -%}
       {%- if st.show_payment_strip -%}
         <div class="mgx-bo__payments">
@@ -976,6 +978,12 @@
       "default": true
     },
     {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Tekst gwarancji",
+      "default": "Do 60 dni na zwrot pieniędzy"
+    },
+    {
       "type": "checkbox",
       "id": "show_payment_strip",
       "label": "Pokaż metody płatności",
@@ -1097,6 +1105,12 @@
           "id": "product",
           "label": "Produkt gratis",
           "info": "Puste = sam benefit, np. darmowa wysyłka"
+        },
+        {
+          "type": "number",
+          "id": "list_price",
+          "label": "Cena katalogowa (zł)",
+          "info": "Dla gratisu bez produktu, np. wysyłka 14.99. Pokazana jako przekreślona"
         },
         {
           "type": "text",

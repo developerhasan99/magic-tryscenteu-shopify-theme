@@ -52,7 +52,8 @@
           "type": "gift",
           "settings": {
             "key": "shipping",
-            "title": "Darmowa wysyłka"
+            "title": "Darmowa wysyłka",
+            "list_price": 14.99
           }
         },
         "gift_2": {
