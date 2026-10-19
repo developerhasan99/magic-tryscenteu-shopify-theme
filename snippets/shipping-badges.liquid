@@ -22,7 +22,7 @@
 <div class="shipping-badges mgx-text">
   <div class="shipping-badges__item">
     <span class="shipping-badges__icon" aria-hidden="true">{{ 'icon-truck.svg' | inline_asset_content }}</span>
-    <span class="shipping-badges__text">Dostawa w 48 godzin na terenie Polski</span>
+    <span class="shipping-badges__text">{{ delivery_text | default: 'Dostawa w 48 godzin na terenie Polski' }}</span>
   </div>
   <div class="shipping-badges__item">
     <img
