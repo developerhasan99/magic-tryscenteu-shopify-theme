@@ -251,7 +251,7 @@
       "settings": {
         "heading": "Najczęstsze pytania",
         "max_width": 860,
-        "padding_top": 64,
+        "padding_top": 8,
         "padding_bottom": 64
       }
     },
