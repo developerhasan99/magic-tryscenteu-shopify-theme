@@ -181,7 +181,24 @@
           });
         },
 
+        // "what you get" lines for the price comparison box: bottles + unlocked gifts
+        get summaryLines() {
+          var t = this.tier, n = this.slotCount(t), lines = [];
+          var first = n + ' ' + this.bottleWord(n) + ' po ' + (this.cfg.ml || '50 ml');
+          if (t.free) first += ' (' + t.free + ' gratis)';
+          lines.push(first);
+          (this.cfg.gifts || []).forEach(function (g) {
+            if (t.unlock && t.unlock[g.key] && g.title) lines.push(g.title);
+          });
+          return lines;
+        },
+
         slotCount: function (t) { return (t.paid || 0) + (t.free || 0); },
+        bottleWord: function (n) {
+          if (n === 1) return 'flakon';
+          var m10 = n % 10, m100 = n % 100;
+          return m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? 'flakony' : 'flakonów';
+        },
         word: function (n) {
           if (n === 1) return 'zapach';
           var m10 = n % 10, m100 = n % 100;
@@ -359,6 +376,7 @@
   {
     "currency": {{ cart.currency.iso_code | default: shop.currency | json }},
     "base": {{ base_price }},
+    "ml": {{ ml_label | json }},
     "defaultIndex": {{ default_index }},
     "redirect": {{ st.checkout_redirect | json }},
     "atcLabel": {{ st.atc_label | default: 'Przejdź do kasy' | json }},
@@ -383,6 +401,7 @@
         {%- assign gv = g.settings.product.selected_or_first_available_variant -%}
         {
           "key": {{ g.settings.key | json }},
+          "title": {{ g.settings.title | json }},
           "variantId": {% if gv and gv.available %}{{ gv.id }}{% else %}null{% endif %}
         }{%- unless forloop.last -%},{%- endunless -%}
       {%- endfor -%}
@@ -559,7 +578,6 @@
                 assign t_free = t.settings.free | default: 0 | plus: 0 | at_least: 0
                 assign t_n = t_paid | plus: t_free
                 assign t_total = base_price | times: t_paid
-                assign t_struck = base_price | times: t_n
                 assign t_per = 0
                 assign t_save = 0
                 if t_n > 0
@@ -582,80 +600,30 @@
                 {%- if t.settings.badge != blank -%}
                   <span class="mgx-bo__tier-badge mgx-badge-amber">{{ t.settings.badge }}</span>
                 {%- endif -%}
-                <span class="mgx-bo__tier-check" aria-hidden="true">
-                  <svg viewBox="0 0 16 16" width="10" height="10" focusable="false"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="mgx-bo__tier-card">
+                  <span class="mgx-bo__tier-check" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" width="10" height="10" focusable="false"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  {%- if t_save > 0 -%}
+                    <span class="mgx-bo__tier-save mgx-badge-amber">-{{ t_save }}%</span>
+                  {%- endif -%}
+                  {%- if t.settings.image != blank -%}
+                    {{ t.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'mgx-bo__tier-img', alt: t.settings.label }}
+                  {%- else -%}
+                    {%- comment -%} default visual: one bottle per item, free ones marked {%- endcomment -%}
+                    {%- assign t_show = t_n | at_most: 8 -%}
+                    <span class="mgx-bo__tier-stack{% if t_show > 3 %} is-dense{% endif %}" aria-hidden="true">
+                      {%- for i in (1..t_show) -%}
+                        <svg class="mgx-bo__bottle{% if i > t_paid %} is-free{% endif %}" viewBox="0 0 24 40" focusable="false"><rect x="9" y="1" width="6" height="5" rx="1"/><rect x="7.5" y="6" width="9" height="4" rx="1"/><rect x="2" y="10" width="20" height="29" rx="4"/></svg>
+                      {%- endfor -%}
+                    </span>
+                  {%- endif -%}
                 </span>
                 <span class="mgx-bo__tier-name">{{ t.settings.label }}</span>
-                <span class="mgx-bo__tier-price" x-text="money(tierTotal(cfg.tiers[{{ forloop.index0 }}], {{ forloop.index0 }}))">{{ t_total | money }}</span>
-                {%- if t_free > 0 -%}
-                  <s class="mgx-bo__tier-struck" x-text="money(tierStruck(cfg.tiers[{{ forloop.index0 }}], {{ forloop.index0 }}))">{{ t_struck | money }}</s>
-                {%- endif -%}
                 <span class="mgx-bo__tier-per">
                   <span x-text="money(tierPer(cfg.tiers[{{ forloop.index0 }}], {{ forloop.index0 }}))">{{ t_per | money }}</span> / flakon
                 </span>
-                {%- if t_save > 0 -%}
-                  <span class="mgx-bo__tier-save mgx-badge-amber-soft">Oszczędzasz {{ t_save }}%</span>
-                {%- endif -%}
               </button>
-            {%- endfor -%}
-          </div>
-        </div>
-      {%- endif -%}
-
-      {%- comment -%} gifts {%- endcomment -%}
-      {%- if gift_blocks.size > 0 -%}
-        <div class="mgx-bo__block">
-          {%- if st.gifts_heading != blank -%}
-            <h2 class="mgx-bo__label">{{ st.gifts_heading }}</h2>
-          {%- endif -%}
-          <div class="mgx-bo__gifts">
-            {%- for g in gift_blocks -%}
-              {%- liquid
-                assign gkey = g.settings.key | default: 'shipping'
-                assign unlock_key = 'unlock_' | append: gkey
-                assign g_on = false
-                if default_tier and default_tier.settings[unlock_key]
-                  assign g_on = true
-                endif
-                assign g_img = g.settings.image
-                if g_img == blank and g.settings.product != blank
-                  assign g_img = g.settings.product.featured_image
-                endif
-                assign g_value = g.settings.value_label
-                if g_value == blank and g.settings.product != blank
-                  assign g_value = g.settings.product.price | money | replace: ' ', '&nbsp;' | prepend: 'o wartości '
-                endif
-              -%}
-              {%- unless forloop.first -%}
-                <span class="mgx-bo__plus" aria-hidden="true">+</span>
-              {%- endunless -%}
-              <div
-                class="mgx-bo__gift{% unless g_on %} is-locked{% endunless %}"
-                :class="{ 'is-locked': !giftUnlocked({{ gkey | json | escape }}) }"
-                {{ g.shopify_attributes }}>
-                <div class="mgx-bo__gift-media">
-                  {%- if g_img != blank -%}
-                    {{ g_img | image_url: width: 300 | image_tag: loading: 'lazy', class: 'mgx-bo__gift-img', alt: g.settings.title }}
-                  {%- elsif gkey == 'shipping' -%}
-                    <span class="mgx-bo__gift-icon" aria-hidden="true">{{ 'icon-truck.svg' | inline_asset_content }}</span>
-                  {%- else -%}
-                    <span class="mgx-bo__gift-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" focusable="false"><path d="M20 7h-2.2A3 3 0 0012 3.9 3 3 0 006.2 7H4a1 1 0 00-1 1v3a1 1 0 001 1h1v8a1 1 0 001 1h12a1 1 0 001-1v-8h1a1 1 0 001-1V8a1 1 0 00-1-1zm-6-2a1 1 0 110 2h-1V6a1 1 0 011-1zM9 5a1 1 0 011 1v1H9a1 1 0 010-2zM5 9h6v1H5zm2 3h4v7H7zm10 7h-4v-7h4zm2-9h-6V9h6z" fill="currentColor"/></svg>
-                    </span>
-                  {%- endif -%}
-                  <span class="mgx-bo__gift-lock" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="14" height="14" focusable="false"><path d="M17 10V8a5 5 0 00-10 0v2H6a1 1 0 00-1 1v9a1 1 0 001 1h12a1 1 0 001-1v-9a1 1 0 00-1-1zm-8-2a3 3 0 016 0v2H9z" fill="currentColor"/></svg>
-                  </span>
-                  <span class="mgx-bo__gift-ok" aria-hidden="true">
-                    <svg viewBox="0 0 16 16" width="10" height="10" focusable="false"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </span>
-                </div>
-                <span class="mgx-bo__gift-title">{{ g.settings.title }}</span>
-                {%- if g_value != blank -%}
-                  <span class="mgx-bo__gift-value">{{ g_value }}</span>
-                {%- endif -%}
-                <span class="mgx-bo__gift-caption" x-text="giftCaption({{ gkey | json | escape }})"></span>
-              </div>
             {%- endfor -%}
           </div>
         </div>
@@ -707,6 +675,99 @@
             Pojemność flakonu: {{ ml_label }}.
           </p>
         </div>
+
+        {%- comment -%} price comparison for the selected tier {%- endcomment -%}
+        {%- liquid
+          assign d_paid = default_tier.settings.paid | default: 1 | plus: 0
+          assign d_free = default_tier.settings.free | default: 0 | plus: 0
+          assign d_cnt = d_paid | plus: d_free
+          assign d_total0 = base_price | times: d_paid
+          assign d_struck0 = base_price | times: d_cnt
+          assign d_save0 = 0
+          if d_cnt > 0
+            assign d_save0 = d_free | times: 100.0 | divided_by: d_cnt | round
+          endif
+        -%}
+        <div class="mgx-bo__block">
+          <div class="mgx-bo__sum">
+            <div class="mgx-bo__sum-head">
+              <span class="mgx-bo__sum-name" x-text="tier.label">{{ default_tier.settings.label }}</span>
+              <span class="mgx-bo__sum-prices">
+                <span class="mgx-bo__sum-total" x-text="money(tierTotal(tier, tierIndex))">{{ d_total0 | money }}</span>
+                <s class="mgx-bo__sum-struck" x-show="tier.free > 0" x-text="money(tierStruck(tier, tierIndex))">{{ d_struck0 | money }}</s>
+              </span>
+            </div>
+            <span class="mgx-bo__sum-save mgx-badge-amber"{% if d_save0 == 0 %} style="display: none;"{% endif %} x-show="tierSavings(tier) > 0" x-text="'Oszczędzasz ' + tierSavings(tier) + '%'">Oszczędzasz {{ d_save0 }}%</span>
+            <ul class="mgx-bo__sum-list" role="list" x-cloak>
+              <template x-for="line in summaryLines" :key="line">
+                <li>
+                  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span x-text="line"></span>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </div>
+
+        {%- comment -%} gifts {%- endcomment -%}
+        {%- if gift_blocks.size > 0 -%}
+          <div class="mgx-bo__block">
+            {%- if st.gifts_heading != blank -%}
+              <h2 class="mgx-bo__label">{{ st.gifts_heading }}</h2>
+            {%- endif -%}
+            <div class="mgx-bo__gifts">
+              {%- for g in gift_blocks -%}
+                {%- liquid
+                  assign gkey = g.settings.key | default: 'shipping'
+                  assign unlock_key = 'unlock_' | append: gkey
+                  assign g_on = false
+                  if default_tier and default_tier.settings[unlock_key]
+                    assign g_on = true
+                  endif
+                  assign g_img = g.settings.image
+                  if g_img == blank and g.settings.product != blank
+                    assign g_img = g.settings.product.featured_image
+                  endif
+                  assign g_value = g.settings.value_label
+                  if g_value == blank and g.settings.product != blank
+                    assign g_value = g.settings.product.price | money | replace: ' ', '&nbsp;' | prepend: 'o wartości '
+                  endif
+                -%}
+                {%- unless forloop.first -%}
+                  <span class="mgx-bo__plus" aria-hidden="true">+</span>
+                {%- endunless -%}
+                <div
+                  class="mgx-bo__gift{% unless g_on %} is-locked{% endunless %}"
+                  :class="{ 'is-locked': !giftUnlocked({{ gkey | json | escape }}) }"
+                  {{ g.shopify_attributes }}>
+                  <div class="mgx-bo__gift-media">
+                    {%- if g_img != blank -%}
+                      {{ g_img | image_url: width: 300 | image_tag: loading: 'lazy', class: 'mgx-bo__gift-img', alt: g.settings.title }}
+                    {%- elsif gkey == 'shipping' -%}
+                      <span class="mgx-bo__gift-icon" aria-hidden="true">{{ 'icon-truck.svg' | inline_asset_content }}</span>
+                    {%- else -%}
+                      <span class="mgx-bo__gift-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><path d="M20 7h-2.2A3 3 0 0012 3.9 3 3 0 006.2 7H4a1 1 0 00-1 1v3a1 1 0 001 1h1v8a1 1 0 001 1h12a1 1 0 001-1v-8h1a1 1 0 001-1V8a1 1 0 00-1-1zm-6-2a1 1 0 110 2h-1V6a1 1 0 011-1zM9 5a1 1 0 011 1v1H9a1 1 0 010-2zM5 9h6v1H5zm2 3h4v7H7zm10 7h-4v-7h4zm2-9h-6V9h6z" fill="currentColor"/></svg>
+                      </span>
+                    {%- endif -%}
+                    <span class="mgx-bo__gift-lock" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="14" height="14" focusable="false"><path d="M17 10V8a5 5 0 00-10 0v2H6a1 1 0 00-1 1v9a1 1 0 001 1h12a1 1 0 001-1v-9a1 1 0 00-1-1zm-8-2a3 3 0 016 0v2H9z" fill="currentColor"/></svg>
+                    </span>
+                    <span class="mgx-bo__gift-ok" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" width="10" height="10" focusable="false"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </div>
+                  <span class="mgx-bo__gift-title">{{ g.settings.title }}</span>
+                  {%- if g_value != blank -%}
+                    <span class="mgx-bo__gift-value">{{ g_value }}</span>
+                  {%- endif -%}
+                  <span class="mgx-bo__gift-caption" x-text="giftCaption({{ gkey | json | escape }})"></span>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
 
         <div class="mgx-bo__block mgx-bo__block--atc">
           <button

@@ -255,6 +255,61 @@
         "padding_bottom": 64
       }
     },
+    "stacks_up_zestaw": {
+      "type": "stacks-up",
+      "blocks": {
+        "stack_LGQprc": {
+          "type": "stack",
+          "settings": {
+            "our_stack": "Niezwykła trwałość",
+            "other_brands": "Wysoka cena za markę"
+          }
+        },
+        "stack_EkfTtL": {
+          "type": "stack",
+          "settings": {
+            "our_stack": "Komplementy każdego dnia już od 10€",
+            "other_brands": "Często produkowane masowo"
+          }
+        },
+        "stack_EwWwij": {
+          "type": "stack",
+          "settings": {
+            "our_stack": "Bez testów na zwierzętach",
+            "other_brands": "Niektóre testowane na zwierzętach"
+          }
+        },
+        "stack_w3Jyyc": {
+          "type": "stack",
+          "settings": {
+            "our_stack": "Płacisz za jakość, nie za marketing",
+            "other_brands": "Płacisz za nazwę marki"
+          }
+        },
+        "stack_dXbqXq": {
+          "type": "stack",
+          "settings": {
+            "our_stack": "Ręcznie tworzone w małej manufakturze",
+            "other_brands": "Wysoka marża na marketing"
+          }
+        }
+      },
+      "block_order": [
+        "stack_LGQprc",
+        "stack_EkfTtL",
+        "stack_EwWwij",
+        "stack_w3Jyyc",
+        "stack_dXbqXq"
+      ],
+      "name": "Stacks Up",
+      "settings": {
+        "background_color": "#ffffff",
+        "title": "Dlaczego Tryscent?",
+        "subtitle": "Rozsądna alternatywa dla drogich marek luksusowych.",
+        "padding_top": 12,
+        "padding_bottom": 72
+      }
+    },
     "image_and_text": {
       "type": "image-and-text",
       "blocks": {
@@ -327,6 +382,7 @@
   "order": [
     "offer",
     "info_tabs",
+    "stacks_up_zestaw",
     "image_and_text",
     "judgeme_all_reviews"
   ]
