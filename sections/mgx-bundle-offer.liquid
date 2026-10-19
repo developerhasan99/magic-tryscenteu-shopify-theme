@@ -506,14 +506,35 @@
 
     {%- comment -%} ---------- buy box ---------- {%- endcomment -%}
     <div class="mgx-bo__box">
-      {%- if st.rating_text != blank -%}
+      {%- liquid
+        # Judge.me writes the store-wide rating and review count to shop metafields; [rating] / [count] read them live
+        assign jm_rating = shop.metafields.judgeme.all_reviews_rating.value | default: shop.metafields.judgeme.all_reviews_rating
+        assign jm_count = shop.metafields.judgeme.all_reviews_count.value | default: shop.metafields.judgeme.all_reviews_count
+        assign rating_line = st.rating_text
+        if rating_line contains '[rating]' or rating_line contains '[count]'
+          if jm_rating != blank and jm_count != blank
+            assign jm_rating_fmt = jm_rating | plus: 0 | round: 1 | append: '' | replace: '.', ','
+            assign jm_count_n = jm_count | plus: 0
+            assign jm_count_fmt = jm_count_n | append: ''
+            if jm_count_n >= 1000
+              assign jm_thousands = jm_count_n | divided_by: 1000
+              assign jm_rest = jm_count_n | modulo: 1000 | prepend: '00' | slice: -3, 3
+              assign jm_count_fmt = jm_thousands | append: '&nbsp;' | append: jm_rest
+            endif
+            assign rating_line = rating_line | replace: '[rating]', jm_rating_fmt | replace: '[count]', jm_count_fmt
+          else
+            assign rating_line = st.rating_fallback
+          endif
+        endif
+      -%}
+      {%- if rating_line != blank -%}
         <div class="mgx-bo__rating">
           <span class="mgx-bo__stars mgx-star" aria-hidden="true">
             {%- for i in (1..5) -%}
               <svg viewBox="0 0 20 20" width="16" height="16" focusable="false"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg>
             {%- endfor -%}
           </span>
-          <span class="mgx-bo__rating-text">{{ st.rating_text }}</span>
+          <span class="mgx-bo__rating-text">{{ rating_line }}</span>
         </div>
       {%- endif -%}
 
@@ -785,7 +806,13 @@
       "type": "text",
       "id": "rating_text",
       "label": "Ocena (obok 5 gwiazdek)",
-      "default": "4,8/5 · ponad 13 000 zadowolonych klientów"
+      "default": "[rating]/5 · [count] opinii klientów",
+      "info": "[rating] i [count] = ocena i liczba opinii z Judge.me, aktualizowane automatycznie"
+    },
+    {
+      "type": "text",
+      "id": "rating_fallback",
+      "label": "Ocena, gdy brak danych Judge.me"
     },
     {
       "type": "text",
