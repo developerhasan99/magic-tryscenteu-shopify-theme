@@ -49,6 +49,7 @@
           "productId": {{ p.id }},
           "title": {% render 'polish-store-text', text: p.title, format: 'json' %},
           "inspiration": {{ insp | json }},
+          "variantTitle": {{ match.title | json }},
           "image": {% if p.featured_image %}{{ p.featured_image | image_url: width: 300 | json }}{% else %}""{% endif %},
           "price": {{ match.price }},
           "compare": {{ match.compare_at_price | default: 0 }},
@@ -211,6 +212,8 @@
         // [struck, total] for a tier; only the selected tier uses the real picks
         totals: function (t, idx) {
           var n = this.slotCount(t), units = [], i;
+          // set product carries the price (like the 6X bundles): total = its price, struck = compare-at or full bottle price
+          if (t.setVariantId && t.setPrice != null) return [t.setCompare || (this.cfg.base * n), t.setPrice];
           for (i = 0; i < n; i++) {
             var pick = idx === this.tierIndex ? this.picks[i] : null;
             units.push(pick ? pick.price : this.cfg.base);
@@ -331,15 +334,21 @@
           this.error = '';
           var label = this.tier.label;
           var tier = this.tier;
-          // same cart structure as the quantity-breaker bundles: the set line, then one line per bottle
-          // with "Bundle Fragrance", then each unlocked gift as its own line
+          // same cart structure as the 6X / custom-offer-bundle products: ONE set line carrying the price,
+          // scents as _bundle_items + "Flakon N" properties (read by fulfillment), then each unlocked gift as its own line.
+          // Without a set product the bottles go in as separate lines (fallback).
           var items = [];
           if (tier.setVariantId) {
-            items.push({ id: tier.setVariantId, quantity: 1, properties: { Zestaw: label } });
+            var props = { _bundle_items: this.picks.map(function (p) { return p.variantId; }).join(',') };
+            this.picks.forEach(function (p, i) {
+              props['Flakon ' + (i + 1)] = p.title + ' Inspiracja: ' + (p.inspiration || '') + ' - ' + (p.variantTitle || '');
+            });
+            items.push({ id: tier.setVariantId, quantity: 1, properties: props });
+          } else {
+            this.picks.forEach(function (p) {
+              items.push({ id: p.variantId, quantity: 1, properties: { 'Bundle Fragrance': p.title } });
+            });
           }
-          this.picks.forEach(function (p) {
-            items.push({ id: p.variantId, quantity: 1, properties: { 'Bundle Fragrance': p.title } });
-          });
           this.cfg.gifts.forEach(function (g) {
             if (g.variantId && tier.unlock && tier.unlock[g.key]) {
               items.push({ id: g.variantId, quantity: 1, properties: { Zestaw: label } });
@@ -411,6 +420,8 @@
           "codes": {{ t.settings.discount_codes | default: '' | json }},
           {%- assign bv = t.settings.bundle_product.selected_or_first_available_variant -%}
           "setVariantId": {% if bv and bv.available %}{{ bv.id }}{% else %}null{% endif %},
+          "setPrice": {% if bv %}{{ bv.price }}{% else %}null{% endif %},
+          "setCompare": {% if bv and bv.compare_at_price > bv.price %}{{ bv.compare_at_price }}{% else %}null{% endif %},
           "unlock": {
             "shipping": {{ t.settings.unlock_shipping | json }},
             "box": {{ t.settings.unlock_box | json }},

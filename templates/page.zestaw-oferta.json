@@ -47,7 +47,7 @@
             "unlock_shipping": true,
             "unlock_box": true,
             "unlock_perfume": true,
-            "discount_codes": "ZESTAW-WYSYLKA,ZESTAW-GRATISY",
+            "discount_codes": "ZESTAW-WYSYLKA",
             "bundle_product": "zestaw-5-bonusy"
           }
         },
