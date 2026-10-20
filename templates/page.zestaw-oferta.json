@@ -90,7 +90,7 @@
         "variant_ml": "50",
         "max_products": 120,
         "heading": "Zbuduj swój zestaw perfum i zgarnij gratisy",
-        "benefits": "<p>⚡ Trwałość do 12 godzin</p><p>⭐ Zaperfumowanie 20-24%</p><p>✅ Bez ftalanów i parabenów</p>"
+        "benefits": "<p>⚡ Trwałość do 12 godzin</p><p>⭐ Zaperfumowanie 20%</p><p>✅ Bez ftalanów i parabenów</p>"
       }
     },
     "info_tabs": {
@@ -107,7 +107,7 @@
           "settings": {
             "emoji": "💧",
             "heading": "Ile olejków zapachowych jest w perfumach?",
-            "text": "<p>Od 20% do 24% - skąd ta różnica? Nasze bestsellery posiadają 24% zaperfumowania. Pozostałe perfumy mają 20%. Dzięki temu zapach jest wyraźny i dobrze się utrzymuje, a jednocześnie nie jest przytłaczający.</p>"
+            "text": "<p>Nasze perfumy mają 20% zaperfumowania. Dzięki temu zapach jest wyraźny i dobrze się utrzymuje, a jednocześnie nie jest przytłaczający.</p>"
           }
         },
         "item_2": {
@@ -275,7 +275,7 @@
         "stack_LGQprc": {
           "type": "stack",
           "settings": {
-            "our_stack": "20-24% olejku perfumeryjnego z Grasse",
+            "our_stack": "20% olejku perfumeryjnego z Grasse",
             "other_brands": "Woda toaletowa, bardzo często w okolicy 15% lub mniej. Krótko wyczuwalne"
           }
         },
