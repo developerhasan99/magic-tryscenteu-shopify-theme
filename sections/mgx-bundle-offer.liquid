@@ -232,6 +232,10 @@
         },
         tierSavings: function (t) {
           var n = this.slotCount(t);
+          if (t.setVariantId && t.setPrice != null) {
+            var full = this.tierStruck(t, -1);
+            return full > t.setPrice ? Math.round((full - t.setPrice) * 100 / full) : 0;
+          }
           return n ? Math.round((t.free || 0) * 100 / n) : 0;
         },
 
@@ -624,6 +628,18 @@
                   assign t_per = t_total | times: 1.0 | divided_by: t_n | round
                   assign t_save = t_free | times: 100.0 | divided_by: t_n | round
                 endif
+                assign t_set = t.settings.bundle_product.selected_or_first_available_variant
+                if t_set and t_n > 0
+                  assign t_full = t_set.compare_at_price | default: 0
+                  if t_full <= t_set.price
+                    assign t_full = base_price | times: t_n
+                  endif
+                  assign t_per = t_set.price | times: 1.0 | divided_by: t_n | round
+                  assign t_save = 0
+                  if t_full > t_set.price
+                    assign t_save = t_full | minus: t_set.price | times: 100.0 | divided_by: t_full | round
+                  endif
+                endif
                 assign is_default = false
                 if forloop.index0 == default_index
                   assign is_default = true
@@ -658,6 +674,21 @@
                         <svg class="mgx-bo__bottle{% if i > t_paid %} is-free{% endif %}" viewBox="0 0 24 46" focusable="false"><rect class="mgx-bo__bottle-cap" x="6" y="0.5" width="12" height="13" rx="1.5"/><rect class="mgx-bo__bottle-collar" x="8" y="13.5" width="8" height="2.5"/><rect class="mgx-bo__bottle-body" x="1" y="16" width="22" height="29.5" rx="2.5"/><rect class="mgx-bo__bottle-label" x="5" y="22" width="14" height="17" rx="0.8"/><rect class="mgx-bo__bottle-mark" x="8" y="27" width="8" height="1.6" rx="0.8"/></svg>
                       {%- endfor -%}
                     </span>
+                  {%- endif -%}
+                  {%- comment -%} gifts this tier unlocks that are real products: store photo as a small "+" thumbnail {%- endcomment -%}
+                  {%- capture t_gifts -%}
+                    {%- for g in gift_blocks -%}
+                      {%- assign g_unlock = 'unlock_' | append: g.settings.key -%}
+                      {%- if t.settings[g_unlock] and g.settings.product != blank -%}
+                        {%- assign g_img = g.settings.image | default: g.settings.product.featured_image -%}
+                        {%- if g_img != blank -%}
+                          <span class="mgx-bo__tier-gift">{{ g_img | image_url: width: 120 | image_tag: loading: 'lazy', alt: g.settings.title }}</span>
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endcapture -%}
+                  {%- if t_gifts != blank -%}
+                    <span class="mgx-bo__tier-gifts"><span class="mgx-bo__tier-plus" aria-hidden="true">+</span>{{ t_gifts }}</span>
                   {%- endif -%}
                 </span>
                 <span class="mgx-bo__tier-name">{{ t.settings.label }}</span>
@@ -735,7 +766,7 @@
               <span class="mgx-bo__sum-name" x-text="tier.label">{{ default_tier.settings.label }}</span>
               <span class="mgx-bo__sum-prices">
                 <span class="mgx-bo__sum-total" x-text="money(tierTotal(tier, tierIndex))">{{ d_total0 | money }}</span>
-                <s class="mgx-bo__sum-struck" x-show="tier.free > 0" x-text="money(tierStruck(tier, tierIndex))">{{ d_struck0 | money }}</s>
+                <s class="mgx-bo__sum-struck" x-show="tierStruck(tier, tierIndex) > tierTotal(tier, tierIndex)" x-text="money(tierStruck(tier, tierIndex))">{{ d_struck0 | money }}</s>
               </span>
             </div>
             <span class="mgx-bo__sum-save mgx-badge-amber"{% if d_save0 == 0 %} style="display: none;"{% endif %} x-show="tierSavings(tier) > 0" x-text="'Oszczędzasz ' + tierSavings(tier) + '%'">Oszczędzasz {{ d_save0 }}%</span>

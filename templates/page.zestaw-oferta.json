@@ -32,8 +32,9 @@
             "free": 1,
             "badge": "Najczęściej wybierany",
             "default_selected": true,
-            "unlock_shipping": true,
-            "discount_codes": "ZESTAW-WYSYLKA",
+            "unlock_shipping": false,
+            "unlock_box": true,
+            "discount_codes": "",
             "bundle_product": "zestaw-2-1-gratis"
           }
         },
@@ -41,13 +42,13 @@
           "type": "tier",
           "settings": {
             "label": "5 + bonusy",
-            "paid": 3,
-            "free": 2,
+            "paid": 5,
+            "free": 0,
             "badge": "Najlepsza oferta",
             "unlock_shipping": true,
             "unlock_box": true,
             "unlock_perfume": true,
-            "discount_codes": "ZESTAW-WYSYLKA",
+            "discount_codes": "",
             "bundle_product": "zestaw-5-bonusy"
           }
         },
@@ -144,7 +145,7 @@
           "settings": {
             "emoji": "🎁",
             "heading": "Jak działa zestaw 2+1 GRATIS?",
-            "text": "<p>Wybierasz 3 flakony, a płacisz za 2. Od tego zestawu wysyłka jest darmowa.</p>"
+            "text": "<p>Wybierasz 3 flakony, a płacisz za 2. W zestawie dostajesz też Mystery Beauty Box.</p>"
           }
         },
         "item_6": {
@@ -152,7 +153,7 @@
           "settings": {
             "emoji": "⭐",
             "heading": "Co dostanę przy zestawie 5 flakonów?",
-            "text": "<p>Płacisz za 3, a dostajesz 5. Dodatkowo odblokowujesz Mystery Beauty Box i Perfum Niespodzianka 50 ml oraz darmową wysyłkę.</p>"
+            "text": "<p>5 flakonów za 200 zł. W zestawie dostajesz też Mystery Beauty Box, Perfum Niespodzianka 50 ml oraz darmową wysyłkę.</p>"
           }
         },
         "item_7": {
@@ -206,7 +207,7 @@
           "settings": {
             "emoji": "🎁",
             "heading": "Kiedy wysyłka jest darmowa?",
-            "text": "<p>Od zestawu 2+1 GRATIS. Przy większych zestawach też.</p>"
+            "text": "<p>Przy zestawie 5 + bonusy wysyłka jest darmowa.</p>"
           }
         },
         "tab_4": {
@@ -302,7 +303,7 @@
         "stack_dXbqXq": {
           "type": "stack",
           "settings": {
-            "our_stack": "Od 32,99 zł za flakon w zestawie (Oszczędzasz nawet 40%)",
+            "our_stack": "Od 36,66 zł za flakon w zestawie (Oszczędzasz nawet 33%)",
             "other_brands": "Niska cena, niska jakość"
           }
         }

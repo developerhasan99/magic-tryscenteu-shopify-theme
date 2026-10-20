@@ -441,6 +441,51 @@
   gap: 2px;
 }
 
+/* unlocked gifts: store photos as small round thumbnails under the bottles */
+.mgx-bo__tier-card {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mgx-bo__tier-gifts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.mgx-bo__tier-plus {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 800;
+  color: var(--mgx-accent);
+}
+
+.mgx-bo__tier-gift {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--mgx-white);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--mgx-white);
+  box-shadow: 0 0 0 1px var(--mgx-hairline);
+}
+
+.mgx-bo__tier-gift img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 750px) {
+  .mgx-bo__tier-gift {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 .mgx-bo__tier-name {
   font-size: 11px;
   line-height: 1.2;
