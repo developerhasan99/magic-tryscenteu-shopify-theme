@@ -20,7 +20,8 @@
             "free": 0,
             "unlock_shipping": false,
             "unlock_box": false,
-            "unlock_perfume": false
+            "unlock_perfume": false,
+            "bundle_product": "zestaw-1-flakon"
           }
         },
         "tier_2": {
@@ -32,7 +33,8 @@
             "badge": "Najczęściej wybierany",
             "default_selected": true,
             "unlock_shipping": true,
-            "discount_codes": "ZESTAW-WYSYLKA"
+            "discount_codes": "ZESTAW-WYSYLKA",
+            "bundle_product": "zestaw-2-1-gratis"
           }
         },
         "tier_3": {
@@ -45,7 +47,8 @@
             "unlock_shipping": true,
             "unlock_box": true,
             "unlock_perfume": true,
-            "discount_codes": "ZESTAW-WYSYLKA,ZESTAW-GRATISY"
+            "discount_codes": "ZESTAW-WYSYLKA,ZESTAW-GRATISY",
+            "bundle_product": "zestaw-5-bonusy"
           }
         },
         "gift_1": {

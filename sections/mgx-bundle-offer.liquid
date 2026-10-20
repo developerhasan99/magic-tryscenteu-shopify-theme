@@ -330,16 +330,19 @@
           this.busy = true;
           this.error = '';
           var label = this.tier.label;
-          var items = [], byId = {};
-          this.picks.forEach(function (p) {
-            if (byId[p.variantId]) { byId[p.variantId].quantity += 1; return; }
-            byId[p.variantId] = { id: p.variantId, quantity: 1, properties: { _offer: label } };
-            items.push(byId[p.variantId]);
-          });
           var tier = this.tier;
+          // same cart structure as the quantity-breaker bundles: the set line, then one line per bottle
+          // with "Bundle Fragrance", then each unlocked gift as its own line
+          var items = [];
+          if (tier.setVariantId) {
+            items.push({ id: tier.setVariantId, quantity: 1, properties: { Zestaw: label } });
+          }
+          this.picks.forEach(function (p) {
+            items.push({ id: p.variantId, quantity: 1, properties: { 'Bundle Fragrance': p.title } });
+          });
           this.cfg.gifts.forEach(function (g) {
             if (g.variantId && tier.unlock && tier.unlock[g.key]) {
-              items.push({ id: g.variantId, quantity: 1, properties: { _gift: 'true', _offer: label } });
+              items.push({ id: g.variantId, quantity: 1, properties: { Zestaw: label } });
             }
           });
           var root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
@@ -406,6 +409,8 @@
           "paid": {{ t.settings.paid | default: 1 | plus: 0 | at_least: 0 }},
           "free": {{ t.settings.free | default: 0 | plus: 0 | at_least: 0 }},
           "codes": {{ t.settings.discount_codes | default: '' | json }},
+          {%- assign bv = t.settings.bundle_product.selected_or_first_available_variant -%}
+          "setVariantId": {% if bv and bv.available %}{{ bv.id }}{% else %}null{% endif %},
           "unlock": {
             "shipping": {{ t.settings.unlock_shipping | json }},
             "box": {{ t.settings.unlock_box | json }},
@@ -1074,6 +1079,12 @@
           "id": "discount_codes",
           "label": "Kody rabatowe",
           "info": "Kody stosowane automatycznie przy przejściu do kasy"
+        },
+        {
+          "type": "product",
+          "id": "bundle_product",
+          "label": "Produkt zestawu",
+          "info": "Dodawany jako osobna linia w koszyku (obok flakonów). Do niego przypisujesz kody i rabaty."
         }
       ]
     },
