@@ -238,9 +238,10 @@
         },
         tierTotal: function (t, idx) { return this.totals(t, idx)[1]; },
         tierStruck: function (t, idx) { return this.totals(t, idx)[0]; },
+        // price per bottle after taking out the list value of the bonuses (the gifts are "free", the rest pays for the bottles)
         tierPer: function (t, idx) {
           var n = this.slotCount(t);
-          return n ? Math.round(this.tierTotal(t, idx) / n) : 0;
+          return n ? Math.round(Math.max(0, this.tierTotal(t, idx) - this.giftValue(t)) / n) : 0;
         },
         tierSaved: function (t, idx) { return Math.max(0, this.tierStruck(t, idx) - this.tierTotal(t, idx)); },
         tierSavings: function (t, idx) {
@@ -659,7 +660,8 @@
                   assign t_pay = t_set.price
                 endif
                 if t_n > 0
-                  assign t_per = t_pay | times: 1.0 | divided_by: t_n | round
+                  assign t_net = t_pay | minus: t_gv | at_least: 0
+                  assign t_per = t_net | times: 1.0 | divided_by: t_n | round
                 endif
                 assign t_save = 0
                 if t_full > t_pay
