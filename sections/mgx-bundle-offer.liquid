@@ -188,7 +188,7 @@
           var self = this, t = this.tier, n = this.slotCount(t), lines = [];
           var first = n + ' ' + this.bottleWord(n) + ' po ' + (this.cfg.ml || '50 ml');
           if (t.free) first += ' (' + t.free + ' gratis)';
-          lines.push({ label: first, value: this.money(this.tierStruck(t, this.tierIndex)), free: false });
+          lines.push({ label: first, value: this.money(this.bottlesFull(t, this.tierIndex)), free: false });
           (this.cfg.gifts || []).forEach(function (g) {
             if (!(t.unlock && t.unlock[g.key] && g.title)) return;
             lines.push({ label: g.title, value: g.price ? self.money(g.price) : '', free: true });
@@ -209,20 +209,32 @@
         },
         money: function (cents) { return moneyFormatter(this.cfg.currency).format((cents || 0) / 100); },
 
-        // [struck, total] for a tier; only the selected tier uses the real picks
-        totals: function (t, idx) {
+        // bottle prices for a tier (selected tier uses the real picks, others the base 50 ml price)
+        units: function (t, idx) {
           var n = this.slotCount(t), units = [], i;
-          // set product carries the price (like the 6X bundles): total = its price, struck = compare-at or full bottle price
-          if (t.setVariantId && t.setPrice != null) return [t.setCompare || (this.cfg.base * n), t.setPrice];
           for (i = 0; i < n; i++) {
             var pick = idx === this.tierIndex ? this.picks[i] : null;
             units.push(pick ? pick.price : this.cfg.base);
           }
-          var struck = units.reduce(function (a, b) { return a + b; }, 0);
-          var sorted = units.slice().sort(function (a, b) { return a - b; });
-          var freeSum = 0;
-          for (i = 0; i < Math.min(t.free || 0, n); i++) freeSum += sorted[i];
-          return [struck, struck - freeSum];
+          return units;
+        },
+        bottlesFull: function (t, idx) {
+          return this.units(t, idx).reduce(function (a, b) { return a + b; }, 0);
+        },
+        // list value of every bonus the tier unlocks (gift products + shipping list price)
+        giftValue: function (t) {
+          return (this.cfg.gifts || []).reduce(function (sum, g) {
+            return sum + (t.unlock && t.unlock[g.key] ? (g.price || 0) : 0);
+          }, 0);
+        },
+        // [struck, total]: struck = bottles at full price + bonus values; total = set product price
+        // (like the 6X bundles) or, without a set product, bottles minus the cheapest free ones
+        totals: function (t, idx) {
+          var struck = this.bottlesFull(t, idx) + this.giftValue(t);
+          if (t.setVariantId && t.setPrice != null) return [struck, t.setPrice];
+          var sorted = this.units(t, idx).sort(function (a, b) { return a - b; }), freeSum = 0, i;
+          for (i = 0; i < Math.min(t.free || 0, sorted.length); i++) freeSum += sorted[i];
+          return [struck, this.bottlesFull(t, idx) - freeSum];
         },
         tierTotal: function (t, idx) { return this.totals(t, idx)[1]; },
         tierStruck: function (t, idx) { return this.totals(t, idx)[0]; },
@@ -230,13 +242,10 @@
           var n = this.slotCount(t);
           return n ? Math.round(this.tierTotal(t, idx) / n) : 0;
         },
-        tierSavings: function (t) {
-          var n = this.slotCount(t);
-          if (t.setVariantId && t.setPrice != null) {
-            var full = this.tierStruck(t, -1);
-            return full > t.setPrice ? Math.round((full - t.setPrice) * 100 / full) : 0;
-          }
-          return n ? Math.round((t.free || 0) * 100 / n) : 0;
+        tierSaved: function (t, idx) { return Math.max(0, this.tierStruck(t, idx) - this.tierTotal(t, idx)); },
+        tierSavings: function (t, idx) {
+          var full = this.tierStruck(t, idx == null ? -1 : idx);
+          return full > 0 ? Math.round(this.tierSaved(t, idx == null ? -1 : idx) * 100 / full) : 0;
         },
 
         selectTier: function (i) {
@@ -628,17 +637,33 @@
                   assign t_per = t_total | times: 1.0 | divided_by: t_n | round
                   assign t_save = t_free | times: 100.0 | divided_by: t_n | round
                 endif
+                comment
+                  full value = bottles at full price + list value of every bonus this tier unlocks (same as the JS)
+                endcomment
+                assign t_gv = 0
+                for g in gift_blocks
+                  assign g_unlock = 'unlock_' | append: g.settings.key
+                  if t.settings[g_unlock]
+                    if g.settings.product != blank
+                      assign t_gv = t_gv | plus: g.settings.product.selected_or_first_available_variant.price
+                    elsif g.settings.list_price
+                      assign g_lp = g.settings.list_price | times: 100 | round
+                      assign t_gv = t_gv | plus: g_lp
+                    endif
+                  endif
+                endfor
+                assign t_full = base_price | times: t_n | plus: t_gv
+                assign t_pay = t_total
                 assign t_set = t.settings.bundle_product.selected_or_first_available_variant
-                if t_set and t_n > 0
-                  assign t_full = t_set.compare_at_price | default: 0
-                  if t_full <= t_set.price
-                    assign t_full = base_price | times: t_n
-                  endif
-                  assign t_per = t_set.price | times: 1.0 | divided_by: t_n | round
-                  assign t_save = 0
-                  if t_full > t_set.price
-                    assign t_save = t_full | minus: t_set.price | times: 100.0 | divided_by: t_full | round
-                  endif
+                if t_set
+                  assign t_pay = t_set.price
+                endif
+                if t_n > 0
+                  assign t_per = t_pay | times: 1.0 | divided_by: t_n | round
+                endif
+                assign t_save = 0
+                if t_full > t_pay
+                  assign t_save = t_full | minus: t_pay | times: 100.0 | divided_by: t_full | round
                 endif
                 assign is_default = false
                 if forloop.index0 == default_index
@@ -769,7 +794,7 @@
                 <s class="mgx-bo__sum-struck" x-show="tierStruck(tier, tierIndex) > tierTotal(tier, tierIndex)" x-text="money(tierStruck(tier, tierIndex))">{{ d_struck0 | money }}</s>
               </span>
             </div>
-            <span class="mgx-bo__sum-save mgx-badge-amber"{% if d_save0 == 0 %} style="display: none;"{% endif %} x-show="tierSavings(tier) > 0" x-text="'Oszczędzasz ' + tierSavings(tier) + '%'">Oszczędzasz {{ d_save0 }}%</span>
+            <span class="mgx-bo__sum-save mgx-badge-amber"{% if d_save0 == 0 %} style="display: none;"{% endif %} x-show="tierSaved(tier, tierIndex) > 0" x-text="'Oszczędzasz ' + money(tierSaved(tier, tierIndex)) + ' (' + tierSavings(tier, tierIndex) + '%)'">Oszczędzasz {{ d_save0 }}%</span>
             <ul class="mgx-bo__sum-list" role="list" x-cloak>
               <template x-for="line in summaryLines" :key="line.label">
                 <li>
