@@ -339,10 +339,15 @@
           // Without a set product the bottles go in as separate lines (fallback).
           var items = [];
           if (tier.setVariantId) {
-            var props = { _bundle_items: this.picks.map(function (p) { return p.variantId; }).join(',') };
+            // unlocked gifts ride inside the set too (in _bundle_items + "Gratis N"), so they are not separate cart lines
+            var giftsIn = this.cfg.gifts.filter(function (g) { return g.variantId && tier.unlock && tier.unlock[g.key]; });
+            var ids = this.picks.map(function (p) { return p.variantId; })
+              .concat(giftsIn.map(function (g) { return g.variantId; }));
+            var props = { _bundle_items: ids.join(',') };
             this.picks.forEach(function (p, i) {
               props['Flakon ' + (i + 1)] = p.title + ' Inspiracja: ' + (p.inspiration || '') + ' - ' + (p.variantTitle || '');
             });
+            giftsIn.forEach(function (g, i) { props['Gratis ' + (i + 1)] = g.title; });
             items.push({ id: tier.setVariantId, quantity: 1, properties: props });
           } else {
             this.picks.forEach(function (p) {
@@ -350,7 +355,7 @@
             });
           }
           this.cfg.gifts.forEach(function (g) {
-            if (g.variantId && tier.unlock && tier.unlock[g.key]) {
+            if (!tier.setVariantId && g.variantId && tier.unlock && tier.unlock[g.key]) {
               items.push({ id: g.variantId, quantity: 1, properties: { Zestaw: label } });
             }
           });
