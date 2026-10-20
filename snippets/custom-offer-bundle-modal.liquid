@@ -85,8 +85,11 @@
           <template x-for="product in $store.bundleBuilder.availableProducts" :key="product.id">
             <template x-if="(product.tags.some(tag => tag === $store.bundleBuilder.activeCategory) || $store.bundleBuilder.activeCategory === 'All') &&
          ($store.bundleBuilder.searchText === '' || product.name.toLowerCase().includes($store.bundleBuilder.searchText.toLowerCase()) || (product.inspiration_name && product.inspiration_name.toLowerCase().includes($store.bundleBuilder.searchText.toLowerCase())))">
-              <button
-                @click="$store.bundleBuilder.addRemoveProduct(product)"
+              <div
+                role="button"
+                tabindex="0"
+                @click="$store.bundleBuilder.addProduct(product)"
+                @keydown.enter.self="$store.bundleBuilder.addProduct(product)"
                 :class="$store.bundleBuilder.isProductSelected(product.id) ? 'mgx-selected' : 'mgx-border border'"
                 class="border-[1.5px] border-solid w-full p-2 flex items-center gap-2 justify-between cursor-pointer rounded-xl bg-white">
                 <img
@@ -124,12 +127,14 @@
                 </div>
                 <div class="shrink-0 ml-auto text-center">
                     <div class="text-xs font-semibold mgx-text-muted" x-text="$store.bundleBuilder.selectedVariant"></div>
-                    <div class="size-8 rounded-full border-[1.5px] border-solid mgx-check flex items-center justify-center text-xl" :class="{ 'mgx-check--on' : $store.bundleBuilder.isProductSelected(product.id) }">
-                        <span x-show="!$store.bundleBuilder.isProductSelected(product.id)">+</span>
-                        <svg x-show="$store.bundleBuilder.isProductSelected(product.id)" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+                    <div x-show="!$store.bundleBuilder.isProductSelected(product.id)" class="size-8 rounded-full border-[1.5px] border-solid mgx-check flex items-center justify-center text-xl">+</div>
+                    <div x-show="$store.bundleBuilder.isProductSelected(product.id)" @click.stop class="flex items-center gap-1">
+                        <button type="button" @click="$store.bundleBuilder.decrementProduct(product.id)" aria-label="-1" class="size-8 rounded-full border-[1.5px] border-solid mgx-check flex items-center justify-center text-xl bg-white cursor-pointer">&minus;</button>
+                        <span class="w-5 text-center font-bold text-black" x-text="$store.bundleBuilder.countOf(product.id)"></span>
+                        <button type="button" @click="$store.bundleBuilder.addProduct(product)" aria-label="+1" class="size-8 rounded-full border-[1.5px] border-solid mgx-check mgx-check--on flex items-center justify-center text-xl cursor-pointer">+</button>
                     </div>
                 </div>
-              </button>
+              </div>
             </template>
           </template>
         </div>

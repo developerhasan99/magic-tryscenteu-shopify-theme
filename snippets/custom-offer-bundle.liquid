@@ -104,14 +104,14 @@
         <div x-show="$store.bundleBuilder.selectedProducts[index - 1]" class="flex min-w-0 gap-2 items-center flex-grow">
             <img
                 class="object-cover rounded"
-                :src="$store.bundleBuilder.selectedProducts[index - 1].image"
-                :alt="$store.bundleBuilder.selectedProducts[index - 1].name"
+                :src="$store.bundleBuilder.selectedProducts[index - 1]?.image"
+                :alt="$store.bundleBuilder.selectedProducts[index - 1]?.name"
                 width="40"
                 height="40"
             >
             <div class="text-left min-w-0 flex-1 flex flex-col gap-1">
-                <div class="font-bold text-sm leading-tight text-black line-clamp-1" x-text="$store.bundleBuilder.selectedProducts[index - 1].name"></div>
-                <div class="text-xs line-clamp-1 mgx-text-muted"><span x-text="$store.bundleBuilder.selectedProducts[index - 1].inspiration_name"></span> - <span x-text="$store.bundleBuilder.selectedProducts[index - 1].variant.title"></span></div>
+                <div class="font-bold text-sm leading-tight text-black line-clamp-1" x-text="$store.bundleBuilder.selectedProducts[index - 1]?.name"></div>
+                <div class="text-xs line-clamp-1 mgx-text-muted"><span x-text="$store.bundleBuilder.selectedProducts[index - 1]?.inspiration_name"></span> - <span x-text="$store.bundleBuilder.selectedProducts[index - 1]?.variant.title"></span></div>
             </div>
             {% unless product.tags contains 'fixed_bundle' %}
               <button @click.stop.prevent="$store.bundleBuilder.removeProduct(index - 1)" class="ml-auto size-7 shrink-0 bg-red-50 flex items-center justify-center rounded text-xs cursor-pointer border-0">
@@ -229,19 +229,23 @@
           },
         {% endfor %}
       ],
-      addRemoveProduct(product) {
-        if (this.selectedProducts.length < {{ product_count }} && !this.isProductSelected(product.id)) {
-          product.variant = product.variants[this.selectedVariant]
-          this.selectedProducts.push(product);
+      addProduct(product) {
+        if (this.selectedProducts.length >= {{ product_count }}) return;
+        // Copy so the same fragrance can fill several slots
+        this.selectedProducts.push({ ...product, variant: product.variants[this.selectedVariant] });
 
-          if (this.selectedProducts.length === {{ product_count }}) {
-            this.showModal = false;
-            // Do auto ATC and redirect to checkout
-            this.doATCandCheckout();
-          }
-        } else {
-          this.removeProduct(this.selectedProducts.findIndex(item => item.id === product.id));
+        if (this.selectedProducts.length === {{ product_count }}) {
+          this.showModal = false;
+          // Do auto ATC and redirect to checkout
+          this.doATCandCheckout();
         }
+      },
+      decrementProduct(productId) {
+        const index = this.selectedProducts.map(item => item.id).lastIndexOf(productId);
+        if (index > -1) this.removeProduct(index);
+      },
+      countOf(productId) {
+        return this.selectedProducts.filter(item => item.id === productId).length;
       },
       removeProduct(index) {
         this.selectedProducts.splice(index, 1);
