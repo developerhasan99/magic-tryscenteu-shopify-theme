@@ -20,7 +20,7 @@ catalog, Kite thresholds apply), from any IP. Visitors who still carry a stored 
   spain, sweden) keep the visitor's real country; every root-domain market counts as `pl`.
   Used by `bundle-image-alt` (bundle graphics in cards and the PDP gallery) and `payment-icons`
   (footer + PDP payment badges). Looks only: prices, catalog and checkout still follow the real market.
-- Concentration claim: 20–24% everywhere (was 19–21% / 21%). Comparison figures stay.
+- Concentration claim: flat 20% everywhere (Adrian, 21.10.2026; replaces the earlier range claims). Comparison figures stay.
 - Markets, catalogs, price lists and the `ttshop` market (TikTok Shop via M2E) were not touched.
 
 ## Rules from now on

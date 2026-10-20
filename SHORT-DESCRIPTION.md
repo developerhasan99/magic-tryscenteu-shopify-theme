@@ -20,7 +20,7 @@ Nothing shows while the field is empty. The theme editor shows a dashed placehol
 - No prices or currency. The store sells in several currencies and prices change.
 - No em dashes (—).
 - No designer brand names (the "Inspiracja" row already shows the original).
-- Only what the product's own data says: family, character, notes, set contents. No new claims about longevity, concentration or health. "Do 12 godzin trwałości" and "20–24% olejków zapachowych" are fine; they are on the page already. The concentration is always 20–24% (Adrian, 17.10.2026), never 19–21% or 21%.
+- Only what the product's own data says: family, character, notes, set contents. No new claims about longevity, concentration or health. "Do 12 godzin trwałości" and "20% olejków zapachowych" are fine; they are on the page already. The concentration is always a flat 20% (Adrian, 21.10.2026), never a range, 19–21% or 21%.
 
 ## Write or change it (Admin GraphQL)
 ```graphql
