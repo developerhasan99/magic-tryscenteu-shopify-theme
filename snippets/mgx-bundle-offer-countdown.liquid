@@ -1,0 +1,83 @@
+{%- comment -%}
+  Countdown for sections/mgx-bundle-offer.liquid (that page only).
+  Params: enabled, end ('YYYY-MM-DD HH:MM' Polish time), label, expired (empty = hide when over).
+{%- endcomment -%}
+{%- comment -%} page-only countdown; end time is Polish time, the script hides it on a bad date {%- endcomment -%}
+{%- if enabled and end != blank -%}
+  <div class="mgx-bo__countdown" data-mgx-countdown data-end="{{ end | strip | escape }}" data-expired="{{ expired | escape }}" hidden>
+    {%- if label != blank -%}
+      <p class="mgx-bo__countdown-label">{{ label }}</p>
+    {%- endif -%}
+    <div class="mgx-bo__countdown-units" role="timer">
+      <span class="mgx-bo__countdown-unit"><span class="mgx-bo__countdown-num" data-unit="d">00</span><span class="mgx-bo__countdown-name">dni</span></span>
+      <span class="mgx-bo__countdown-unit"><span class="mgx-bo__countdown-num" data-unit="h">00</span><span class="mgx-bo__countdown-name">godz.</span></span>
+      <span class="mgx-bo__countdown-unit"><span class="mgx-bo__countdown-num" data-unit="m">00</span><span class="mgx-bo__countdown-name">min</span></span>
+      <span class="mgx-bo__countdown-unit"><span class="mgx-bo__countdown-num" data-unit="s">00</span><span class="mgx-bo__countdown-name">sek.</span></span>
+    </div>
+    <p class="mgx-bo__countdown-expired" hidden></p>
+  </div>
+  <script>
+    (function () {
+      if (window.__mgxBoCountdown) return;
+      window.__mgxBoCountdown = true;
+
+      // minutes east of UTC for Europe/Warsaw at a given instant (handles CET/CEST)
+      function warsawOffset(date) {
+        var part = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Warsaw', timeZoneName: 'shortOffset' })
+          .formatToParts(date)
+          .filter(function (p) { return p.type === 'timeZoneName'; })[0];
+        var m = part && part.value.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);
+        if (!m) return 60;
+        return (m[1] === '-' ? -1 : 1) * (parseInt(m[2], 10) * 60 + parseInt(m[3] || '0', 10));
+      }
+
+      function parseEnd(text) {
+        var m = text.match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{1,2}):(\d{2}))?$/);
+        if (!m) return null;
+        var h = m[4] ? parseInt(m[4], 10) : 23;
+        var min = m[4] ? parseInt(m[5], 10) : 59;
+        var guess = Date.UTC(+m[1], +m[2] - 1, +m[3], h, min, m[4] ? 0 : 59);
+        var end = guess - warsawOffset(new Date(guess)) * 60000;
+        return guess - warsawOffset(new Date(end)) * 60000;
+      }
+
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+      function start(el) {
+        var end = parseEnd(el.getAttribute('data-end') || '');
+        if (end === null) return;
+        var nums = {};
+        el.querySelectorAll('[data-unit]').forEach(function (n) { nums[n.getAttribute('data-unit')] = n; });
+        var units = el.querySelector('.mgx-bo__countdown-units');
+        var expiredEl = el.querySelector('.mgx-bo__countdown-expired');
+        var expiredText = el.getAttribute('data-expired') || '';
+        var timer;
+
+        function tick() {
+          var left = Math.floor((end - Date.now()) / 1000);
+          if (left <= 0) {
+            clearInterval(timer);
+            if (!expiredText) { el.hidden = true; return; }
+            units.hidden = true;
+            expiredEl.textContent = expiredText;
+            expiredEl.hidden = false;
+            el.hidden = false;
+            return;
+          }
+          nums.d.textContent = pad(Math.floor(left / 86400));
+          nums.h.textContent = pad(Math.floor((left % 86400) / 3600));
+          nums.m.textContent = pad(Math.floor((left % 3600) / 60));
+          nums.s.textContent = pad(left % 60);
+          el.hidden = false;
+        }
+
+        tick();
+        timer = setInterval(tick, 1000);
+      }
+
+      function init() { document.querySelectorAll('[data-mgx-countdown]').forEach(start); }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+      else init();
+    })();
+  </script>
+{%- endif -%}

@@ -109,17 +109,14 @@
   display: none;
 }
 
+/* one full-width slide per view: each set shows one photo, a peek of the next slide only pushed it left */
 .mgx-bo__slide {
-  flex: 0 0 86%;
-  scroll-snap-align: start;
+  flex: 0 0 100%;
+  scroll-snap-align: center;
   aspect-ratio: 1 / 1;
   border-radius: var(--mgx-bo-radius);
   overflow: hidden;
   background: var(--mgx-bo-soft);
-}
-
-.mgx-bo__slide:only-child {
-  flex-basis: 100%;
 }
 
 .mgx-bo__img,
@@ -134,13 +131,20 @@
 }
 
 @media (min-width: 750px) {
-  .mgx-bo__slide {
-    flex-basis: 62%;
+  .mgx-bo__gallery {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .mgx-bo__track {
+    padding: 0;
+    scroll-padding-left: 0;
   }
 }
 
 @media (min-width: 900px) {
   .mgx-bo__gallery {
+    max-width: none;
     margin: 0;
   }
   .mgx-bo__track {
@@ -253,6 +257,66 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--mgx-text);
+}
+
+/* ---------- countdown (this page only; end time set in the section settings) ---------- */
+.mgx-bo__countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 20px;
+  padding: 12px 16px 14px;
+  border-radius: var(--mgx-bo-radius);
+  background: var(--mgx-bo-soft);
+  text-align: center;
+}
+
+.mgx-bo__countdown[hidden],
+.mgx-bo__countdown [hidden] {
+  display: none;
+}
+
+.mgx-bo__countdown-label,
+.mgx-bo__countdown-expired {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--mgx-text);
+}
+
+.mgx-bo__countdown-units {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mgx-bo__countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 56px;
+}
+
+.mgx-bo__countdown-num {
+  display: block;
+  width: 100%;
+  padding: 6px 0;
+  border-radius: 8px;
+  background: var(--mgx-amber);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.mgx-bo__countdown-name {
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--mgx-text-muted);
 }
 
 /* ---------- tiers: picture card (radio + savings corner) with label + per-bottle price under it ---------- */

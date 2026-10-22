@@ -475,6 +475,7 @@
       <div class="mgx-bo__gallery-sticky">
         <div class="mgx-bo__track" x-ref="track" @scroll.debounce.80ms="onTrackScroll()">
           {%- assign slide_total = 0 -%}
+          {%- assign extra_total = 0 -%}
           {%- for t in tier_blocks -%}
             {%- comment -%} set photo: block image, else the set product's main photo {%- endcomment -%}
             {%- assign t_img = t.settings.image | default: t.settings.bundle_product.featured_image -%}
@@ -498,7 +499,7 @@
                   | image_url: width: 1400
                   | image_tag:
                     widths: '375, 550, 750, 1100, 1400',
-                    sizes: '(min-width: 900px) 50vw, 86vw',
+                    sizes: '(min-width: 900px) 50vw, 100vw',
                     loading: img_loading,
                     class: 'mgx-bo__img',
                     alt: t.settings.label
@@ -513,6 +514,7 @@
             -%}
             {%- if img != blank -%}
               {%- assign slide_total = slide_total | plus: 1 -%}
+              {%- assign extra_total = extra_total | plus: 1 -%}
               <div class="mgx-bo__slide" id="MgxBoSlide{{ i }}-{{ section.id }}" data-slide>
                 {%- liquid
                   if slide_total == 1
@@ -526,7 +528,7 @@
                   | image_url: width: 1400
                   | image_tag:
                     widths: '375, 550, 750, 1100, 1400',
-                    sizes: '(min-width: 900px) 50vw, 86vw',
+                    sizes: '(min-width: 900px) 50vw, 100vw',
                     loading: img_loading,
                     class: 'mgx-bo__img'
                 }}
@@ -540,7 +542,8 @@
           {%- endif -%}
         </div>
 
-        {%- if slide_total > 1 -%}
+        {%- comment -%} only one set photo shows at a time, so thumbs only help when extra photos exist {%- endcomment -%}
+        {%- if extra_total > 0 and slide_total > 1 -%}
           <div class="mgx-bo__thumbs">
             {%- for t in tier_blocks -%}
               {%- assign t_img = t.settings.image | default: t.settings.bundle_product.featured_image -%}
@@ -621,6 +624,8 @@
       {%- if st.benefits != blank -%}
         <div class="mgx-bo__benefits">{{ st.benefits }}</div>
       {%- endif -%}
+
+      {%- render 'mgx-bundle-offer-countdown', enabled: st.countdown_enabled, end: st.countdown_end, label: st.countdown_label, expired: st.countdown_expired -%}
 
       {%- comment -%} tiers {%- endcomment -%}
       {%- if tier_count > 0 -%}
@@ -1031,6 +1036,34 @@
       "type": "image_picker",
       "id": "image_5",
       "label": "Zdjęcie 5"
+    },
+    {
+      "type": "header",
+      "content": "Licznik czasu"
+    },
+    {
+      "type": "checkbox",
+      "id": "countdown_enabled",
+      "label": "Pokaż licznik",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "countdown_end",
+      "label": "Koniec oferty",
+      "info": "Czas polski. Format: 2026-10-31 23:59 (albo sama data 2026-10-31 = do 23:59:59)."
+    },
+    {
+      "type": "text",
+      "id": "countdown_label",
+      "label": "Tekst nad licznikiem",
+      "default": "Oferta kończy się za:"
+    },
+    {
+      "type": "text",
+      "id": "countdown_expired",
+      "label": "Tekst po zakończeniu",
+      "info": "Puste = licznik znika po zakończeniu oferty."
     },
     {
       "type": "header",
