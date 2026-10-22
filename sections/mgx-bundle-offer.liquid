@@ -476,7 +476,9 @@
         <div class="mgx-bo__track" x-ref="track" @scroll.debounce.80ms="onTrackScroll()">
           {%- assign slide_total = 0 -%}
           {%- for t in tier_blocks -%}
-            {%- if t.settings.image != blank -%}
+            {%- comment -%} set photo: block image, else the set product's main photo {%- endcomment -%}
+            {%- assign t_img = t.settings.image | default: t.settings.bundle_product.featured_image -%}
+            {%- if t_img != blank -%}
               {%- assign slide_total = slide_total | plus: 1 -%}
               <div
                 class="mgx-bo__slide"
@@ -492,7 +494,7 @@
                   endif
                 -%}
                 {{
-                  t.settings.image
+                  t_img
                   | image_url: width: 1400
                   | image_tag:
                     widths: '375, 550, 750, 1100, 1400',
@@ -541,7 +543,8 @@
         {%- if slide_total > 1 -%}
           <div class="mgx-bo__thumbs">
             {%- for t in tier_blocks -%}
-              {%- if t.settings.image != blank -%}
+              {%- assign t_img = t.settings.image | default: t.settings.bundle_product.featured_image -%}
+              {%- if t_img != blank -%}
                 {%- capture slide_id -%}MgxBoSlideT{{ forloop.index0 }}-{{ section.id }}{%- endcapture -%}
                 <button
                   type="button"
@@ -551,7 +554,7 @@
                   :class="{ 'is-active': activeSlide === '{{ slide_id }}' }"
                   @click="goTo('{{ slide_id }}')"
                   aria-label="Pokaż zdjęcie {{ t.settings.label | escape }}">
-                  {{ t.settings.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+                  {{ t_img | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
                 </button>
               {%- endif -%}
             {%- endfor -%}
