@@ -29,10 +29,6 @@
             "description_block_id": "collapsible_tab_FAAFhb"
           }
         },
-        "judge_me_reviews_preview_badge_tnLmYt": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        },
         "price_MG94AW": {
           "type": "price",
           "disabled": true,
@@ -64,6 +60,28 @@
           "type": "custom_liquid",
           "settings": {
             "custom_liquid": "{% render 'scent-profiling' %}\n{% if product.available %}\n  {% render 'quantity-breaker' %}\n{% else %}\n  {% render 'reactive-atc' %}\n{% endif %}"
+          }
+        },
+        "ugc_videos_main": {
+          "type": "ugc_videos",
+          "settings": {
+            "replace_bundle": true,
+            "autoplay_preview": true,
+            "video_1": "shopify://files/videos/nikoolixa_7671692339257085217.mp4",
+            "video_url_1": "",
+            "caption_1": "Pachnie jak oryginał",
+            "show_caption_1": true,
+            "product_1": "6x-50ml-parfumflaschen",
+            "video_2": "shopify://files/videos/aniaprzy_7677573659518717217.mp4",
+            "video_url_2": "",
+            "caption_2": "Trzyma się cały dzień",
+            "show_caption_2": true,
+            "product_2": "3x-50ml-perfume-bottles",
+            "video_3": "shopify://files/videos/tryscenteu_PaulinaO_SzafNr466_9f0a1f51.mov",
+            "video_url_3": "",
+            "caption_3": "Nie musisz przepłacać",
+            "show_caption_3": true,
+            "product_3": "8x-50ml-parfumflaschen"
           }
         },
         "reactive_atc_LBDQE9": {
@@ -197,25 +215,6 @@
             "page": ""
           }
         },
-        "ugc_videos_main": {
-          "type": "ugc_videos",
-          "settings": {
-            "replace_bundle": true,
-            "autoplay_preview": true,
-            "caption_1": "Pachnie jak oryginał",
-            "show_caption_1": true,
-            "product_1": "6x-50ml-parfumflaschen",
-            "caption_2": "Trzyma się cały dzień",
-            "show_caption_2": true,
-            "product_2": "3x-50ml-perfume-bottles",
-            "caption_3": "Nie musisz przepłacać",
-            "show_caption_3": true,
-            "product_3": "8x-50ml-parfumflaschen",
-            "video_1": "shopify://files/videos/nikoolixa_7671692339257085217.mp4",
-            "video_2": "shopify://files/videos/aniaprzy_7677573659518717217.mp4",
-            "video_3": "shopify://files/videos/tryscenteu_PaulinaO_SzafNr466_9f0a1f51.mov"
-          }
-        },
         "featured_bundle_main": {
           "type": "featured_bundle",
           "disabled": true,
@@ -259,7 +258,6 @@
       "block_order": [
         "title_DkyBTh",
         "custom_liquid_jmStoreRating",
-        "judge_me_reviews_preview_badge_tnLmYt",
         "short_description_Sd7mQx",
         "price_MG94AW",
         "variant_picker_hH3Diz",
@@ -424,6 +422,9 @@
         "background_color": "#ffffff",
         "title": "Dlaczego MagyX?",
         "subtitle": "Rozsądna alternatywa dla drogich marek luksusowych.",
+        "ours_title": "MagyX Perfume",
+        "others_title": "Drogie marki luksusowe",
+        "button_url": "#atc_scroll_target",
         "padding_top": 12,
         "padding_bottom": 72
       }
@@ -1369,18 +1370,19 @@
     "1770288371f70b6dc1": {
       "type": "apps",
       "blocks": {
-        "judge_me_reviews_review_widget_ti6V3R": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "judge_me_reviews_all_reviews_page_6P8674": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "review_data": "sample_data",
             "max_width": 1200,
-            "show_shop_reviews": true,
+            "review_source": "all",
+            "show_all_reviews_in_same_tab": false,
+            "show_first": "product",
             "empty_state": "empty_widget"
           }
         }
       },
       "block_order": [
-        "judge_me_reviews_review_widget_ti6V3R"
+        "judge_me_reviews_all_reviews_page_6P8674"
       ],
       "settings": {
         "include_margins": true
