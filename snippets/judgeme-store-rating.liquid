@@ -27,10 +27,25 @@
       assign jm_noun = 'opinii'
     endif
   -%}
-  <div class="flex gap-1 items-center mgx-text-muted">
+  <a href="#judgeme_product_reviews" class="jm-store-rating flex gap-1 items-center no-underline mgx-text-muted">
     <img src="{{ 'rating-stars.svg' | asset_url }}" alt="{{ jm_rating_text }}/5" height="16" width="80">
     <div class="leading-snug tracking-normal text-sm md:text-base">
       {{ jm_rating_text }}/5 gwiazdek ({{ jm_count_text }} {{ jm_noun }})
     </div>
-  </div>
+  </a>
+  <script>
+    {%- comment -%} Smooth scroll to the Judge.me review widget, clear of an always-sticky header. {%- endcomment -%}
+    (function () {
+      var link = document.currentScript.previousElementSibling;
+      link.addEventListener('click', function (e) {
+        var target = document.getElementById('judgeme_product_reviews');
+        if (!target) return;
+        e.preventDefault();
+        var offset = 16;
+        var sticky = document.querySelector('sticky-header[data-sticky-type="always"], sticky-header[data-sticky-type="reduce-logo-size"]');
+        if (sticky) offset += sticky.offsetHeight;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+      });
+    })();
+  </script>
 {%- endif -%}
