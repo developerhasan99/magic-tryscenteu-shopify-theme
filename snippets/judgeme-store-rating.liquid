@@ -1,0 +1,36 @@
+{%- comment -%}
+  Store-wide Judge.me rating: all reviews of the shop (shop metafields judgeme.all_reviews_rating / all_reviews_count),
+  e.g. 4,6/5 gwiazdek (1 364 opinie). Renders nothing until Judge.me has numbers.
+  Usage: {% render 'judgeme-store-rating' %}
+{%- endcomment -%}
+{%- assign jm_rating = shop.metafields.judgeme.all_reviews_rating | plus: 0 -%}
+{%- assign jm_count = shop.metafields.judgeme.all_reviews_count | plus: 0 -%}
+{%- if jm_rating > 0 and jm_count > 0 -%}
+  {%- liquid
+    assign jm_rating_text = jm_rating | round: 1 | append: '' | replace: '.', ','
+    if jm_count >= 1000
+      assign jm_k = jm_count | divided_by: 1000
+      assign jm_rest = jm_count | modulo: 1000 | prepend: '00' | slice: -3, 3
+      assign jm_count_text = jm_k | append: '&nbsp;' | append: jm_rest
+    else
+      assign jm_count_text = jm_count
+    endif
+    assign jm_last = jm_count | modulo: 10
+    assign jm_last_two = jm_count | modulo: 100
+    if jm_count == 1
+      assign jm_noun = 'opinia'
+    elsif jm_last >= 2 and jm_last <= 4 and jm_last_two < 12
+      assign jm_noun = 'opinie'
+    elsif jm_last >= 2 and jm_last <= 4 and jm_last_two > 14
+      assign jm_noun = 'opinie'
+    else
+      assign jm_noun = 'opinii'
+    endif
+  -%}
+  <div class="flex gap-1 items-center mgx-text-muted">
+    <img src="{{ 'rating-stars.svg' | asset_url }}" alt="{{ jm_rating_text }}/5" height="16" width="80">
+    <div class="leading-snug tracking-normal text-sm md:text-base">
+      {{ jm_rating_text }}/5 gwiazdek ({{ jm_count_text }} {{ jm_noun }})
+    </div>
+  </div>
+{%- endif -%}
