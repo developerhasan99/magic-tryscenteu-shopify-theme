@@ -518,6 +518,19 @@
   gap: 3px;
 }
 
+/* on a product photo: gifts float on a white pill at the bottom of the card */
+.mgx-bo__tier-gifts.is-overlay {
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  z-index: 1;
+  transform: translateX(-50%);
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
 .mgx-bo__tier-plus {
   font-size: 12px;
   line-height: 1;

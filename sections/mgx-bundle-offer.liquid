@@ -705,8 +705,10 @@
                   {%- if t_save > 0 -%}
                     <span class="mgx-bo__tier-save mgx-badge-amber">-{{ t_save }}%</span>
                   {%- endif -%}
-                  {%- if t.settings.image != blank -%}
-                    {{ t.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'mgx-bo__tier-img', alt: t.settings.label }}
+                  {%- comment -%} card photo: block image, else the set product's main photo, else the bottle drawing {%- endcomment -%}
+                  {%- assign t_card_img = t.settings.image | default: t.settings.bundle_product.featured_image -%}
+                  {%- if t_card_img != blank -%}
+                    {{ t_card_img | image_url: width: 400 | image_tag: loading: 'lazy', class: 'mgx-bo__tier-img', alt: t.settings.label }}
                   {%- else -%}
                     {%- comment -%} default visual: one bottle per item, free ones marked {%- endcomment -%}
                     {%- assign t_show = t_n | at_most: 8 -%}
@@ -730,7 +732,7 @@
                     {%- endfor -%}
                   {%- endcapture -%}
                   {%- if t_gifts != blank -%}
-                    <span class="mgx-bo__tier-gifts"><span class="mgx-bo__tier-plus" aria-hidden="true">+</span>{{ t_gifts }}</span>
+                    <span class="mgx-bo__tier-gifts{% if t_card_img != blank %} is-overlay{% endif %}"><span class="mgx-bo__tier-plus" aria-hidden="true">+</span>{{ t_gifts }}</span>
                   {%- endif -%}
                 </span>
                 <span class="mgx-bo__tier-name">{{ t.settings.label }}</span>
