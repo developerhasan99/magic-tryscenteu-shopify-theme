@@ -445,6 +445,15 @@
   }
 }
 
+/* timer switched off: the offer half alone, full width, centred, no slanted join */
+@media (min-width: 768px) {
+  .mgx-bo__topbar.is-offer-only .mgx-bo__topbar-offer {
+    justify-content: center;
+    padding: 10px 24px;
+    clip-path: none;
+  }
+}
+
 /* ---------- benefits: magyx.co claim list (check circle + bold line) ---------- */
 .mgx-bo__benefits {
   display: flex;

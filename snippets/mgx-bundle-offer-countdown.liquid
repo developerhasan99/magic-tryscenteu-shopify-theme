@@ -1,19 +1,31 @@
 {%- comment -%}
   Countdown top bar for sections/mgx-bundle-offer.liquid (that page only), magyx.co top-bar layout:
   offer half (eyebrow + deal) and countdown half with digit tiles. Phones stack them; from 768px one row, slanted join.
-  Params: enabled, end ('YYYY-MM-DD HH:MM' Polish time), label (text before the tiles), expired (empty = hide when over),
-  eyebrow, deal, offer_bg, timer_bg.
+  Params: enabled (shows the timer half only), end ('YYYY-MM-DD HH:MM' Polish time), label (text before the tiles),
+  expired (empty = hide the bar when over), eyebrow, deal, offer_bg, timer_bg.
+  Timer off: the offer half alone, full width. Timer on: the bar waits for the script (it hides it on a bad date).
 {%- endcomment -%}
-{%- comment -%} page-only countdown; end time is Polish time, the script hides it on a bad date {%- endcomment -%}
-{%- if enabled and end != blank -%}
+{%- liquid
+  assign tb_timer = false
+  if enabled and end != blank
+    assign tb_timer = true
+  endif
+  assign tb_offer = false
+  if eyebrow != blank or deal != blank
+    assign tb_offer = true
+  endif
+-%}
+{%- if tb_timer or tb_offer -%}
   <div
-    class="mgx-bo__topbar"
-    data-mgx-countdown
-    data-end="{{ end | strip | escape }}"
-    data-expired="{{ expired | escape }}"
+    class="mgx-bo__topbar{% unless tb_timer %} is-offer-only{% endunless %}"
+    {%- if tb_timer %}
+      data-mgx-countdown
+      data-end="{{ end | strip | escape }}"
+      data-expired="{{ expired | escape }}"
+    {%- endif %}
     style="--mgx-bo-tb-offer: {{ offer_bg | default: '#184031' }}; --mgx-bo-tb-timer: {{ timer_bg | default: '#100F0D' }};"
-    hidden>
-    {%- if eyebrow != blank or deal != blank -%}
+    {%- if tb_timer %} hidden{% endif %}>
+    {%- if tb_offer -%}
       <div class="mgx-bo__topbar-offer">
         {%- if eyebrow != blank -%}
           <span class="mgx-bo__topbar-eyebrow">{{ eyebrow }}</span>
@@ -26,6 +38,7 @@
         {%- endif -%}
       </div>
     {%- endif -%}
+    {%- if tb_timer -%}
     <div class="mgx-bo__topbar-timer">
       {%- if label != blank -%}
         <span class="mgx-bo__topbar-ends">{{ label | remove: ':' | strip }}</span>
@@ -41,7 +54,10 @@
       </span>
       <span class="mgx-bo__topbar-expired" hidden></span>
     </div>
+    {%- endif -%}
   </div>
+{%- endif -%}
+{%- if tb_timer -%}
   <script>
     (function () {
       // no run-once guard: the theme editor re-renders the section (timer on/off, new date) and this script runs again;
