@@ -102,7 +102,7 @@
         "rating_fallback": "",
         "heading": "Zbuduj halloweenowy zestaw perfum i zgarnij gratisy",
         "benefits": "<p>⚡ Trwałość do 12 godzin</p><p>⭐ Zaperfumowanie 20%</p><p>✅ Bez ftalanów i parabenów</p>",
-        "countdown_enabled": true,
+        "countdown_enabled": false,
         "countdown_end": "2026-10-31 23:59",
         "countdown_label": "Oferta kończy się za:",
         "countdown_expired": "",
