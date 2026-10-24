@@ -81,7 +81,7 @@
             "key": "shipping",
             "title": "Darmowa, ubezpieczona wysyłka",
             "product": "",
-            "list_price": 20.0,
+            "list_price": 20,
             "value_label": ""
           }
         }
@@ -100,12 +100,16 @@
         "max_products": 120,
         "rating_text": "[rating]/5 · [count] opinii klientów",
         "rating_fallback": "",
-        "heading": "Zbuduj swój zestaw perfum i zgarnij gratisy",
+        "heading": "Zbuduj halloweenowy zestaw perfum i zgarnij gratisy",
         "benefits": "<p>⚡ Trwałość do 12 godzin</p><p>⭐ Zaperfumowanie 20%</p><p>✅ Bez ftalanów i parabenów</p>",
         "countdown_enabled": true,
         "countdown_end": "2026-10-31 23:59",
         "countdown_label": "Oferta kończy się za:",
         "countdown_expired": "",
+        "countdown_eyebrow": "Promocja Halloween",
+        "countdown_deal": "Do -51% i gratisy",
+        "countdown_offer_bg": "#184031",
+        "countdown_timer_bg": "#100f0d",
         "tiers_heading": "Wybierz zestaw",
         "gifts_heading": "Gratisy do Twojego zamówienia",
         "slots_heading": "Wybierz zapachy",
