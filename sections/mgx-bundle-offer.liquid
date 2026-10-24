@@ -469,6 +469,17 @@
   class="mgx-bo mgx-text"
   x-data="mgxBundleOffer('MgxBoData-{{ section.id }}')"
   data-section-id="{{ section.id }}">
+  {%- comment -%} countdown as a solid bar above the photo (magyx.co top-bar layout) {%- endcomment -%}
+  {%- render 'mgx-bundle-offer-countdown',
+    enabled: st.countdown_enabled,
+    end: st.countdown_end,
+    label: st.countdown_label,
+    expired: st.countdown_expired,
+    eyebrow: st.countdown_eyebrow,
+    deal: st.countdown_deal,
+    offer_bg: st.countdown_offer_bg,
+    timer_bg: st.countdown_timer_bg
+  -%}
   <div class="mgx-bo__wrap">
     {%- comment -%} ---------- gallery ---------- {%- endcomment -%}
     <div class="mgx-bo__gallery">
@@ -622,10 +633,8 @@
       {%- endif -%}
 
       {%- if st.benefits != blank -%}
-        <div class="mgx-bo__benefits">{{ st.benefits }}</div>
+        {%- render 'mgx-bundle-offer-benefits', benefits: st.benefits -%}
       {%- endif -%}
-
-      {%- render 'mgx-bundle-offer-countdown', enabled: st.countdown_enabled, end: st.countdown_end, label: st.countdown_label, expired: st.countdown_expired -%}
 
       {%- comment -%} tiers {%- endcomment -%}
       {%- if tier_count > 0 -%}
@@ -698,15 +707,15 @@
                 {%- if t.settings.badge != blank -%}
                   <span class="mgx-bo__tier-badge mgx-badge-amber">{{ t.settings.badge }}</span>
                 {%- endif -%}
-                <span class="mgx-bo__tier-card">
+                {%- comment -%} card photo: block image, else the set product's main photo, else the bottle drawing {%- endcomment -%}
+                {%- assign t_card_img = t.settings.image | default: t.settings.bundle_product.featured_image -%}
+                <span class="mgx-bo__tier-card{% if t_card_img != blank %} has-photo{% endif %}">
                   <span class="mgx-bo__tier-check" aria-hidden="true">
                     <svg viewBox="0 0 16 16" width="10" height="10" focusable="false"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </span>
                   {%- if t_save > 0 -%}
                     <span class="mgx-bo__tier-save mgx-badge-amber">-{{ t_save }}%</span>
                   {%- endif -%}
-                  {%- comment -%} card photo: block image, else the set product's main photo, else the bottle drawing {%- endcomment -%}
-                  {%- assign t_card_img = t.settings.image | default: t.settings.bundle_product.featured_image -%}
                   {%- if t_card_img != blank -%}
                     {{ t_card_img | image_url: width: 400 | image_tag: loading: 'lazy', class: 'mgx-bo__tier-img', alt: t.settings.label }}
                   {%- else -%}
@@ -732,7 +741,7 @@
                     {%- endfor -%}
                   {%- endcapture -%}
                   {%- if t_gifts != blank -%}
-                    <span class="mgx-bo__tier-gifts{% if t_card_img != blank %} is-overlay{% endif %}"><span class="mgx-bo__tier-plus" aria-hidden="true">+</span>{{ t_gifts }}</span>
+                    <span class="mgx-bo__tier-gifts"><span class="mgx-bo__tier-plus" aria-hidden="true">+</span>{{ t_gifts }}</span>
                   {%- endif -%}
                 </span>
                 <span class="mgx-bo__tier-name">{{ t.settings.label }}</span>
@@ -1066,6 +1075,32 @@
       "id": "countdown_expired",
       "label": "Tekst po zakończeniu",
       "info": "Puste = licznik znika po zakończeniu oferty."
+    },
+    {
+      "type": "text",
+      "id": "countdown_eyebrow",
+      "label": "Pasek: nazwa promocji",
+      "info": "Lewa część paska nad zdjęciem, np. Promocja Halloween.",
+      "default": "Promocja Halloween"
+    },
+    {
+      "type": "text",
+      "id": "countdown_deal",
+      "label": "Pasek: oferta",
+      "info": "Pogrubiony tekst obok nazwy promocji.",
+      "default": "Do -51% i gratisy"
+    },
+    {
+      "type": "color",
+      "id": "countdown_offer_bg",
+      "label": "Pasek: tło oferty",
+      "default": "#184031"
+    },
+    {
+      "type": "color",
+      "id": "countdown_timer_bg",
+      "label": "Pasek: tło licznika",
+      "default": "#100F0D"
     },
     {
       "type": "header",

@@ -223,25 +223,9 @@
   color: var(--mgx-text);
 }
 
-.mgx-bo__benefits {
-  font-size: 15px;
-  line-height: 1.45;
-}
-
-.mgx-bo__benefits p {
-  margin: 0 0 6px;
-}
-
-.mgx-bo__benefits p:last-child {
-  margin-bottom: 0;
-}
-
 @media (min-width: 900px) {
   .mgx-bo__heading {
     font-size: 34px;
-  }
-  .mgx-bo__benefits {
-    font-size: 16px;
   }
 }
 
@@ -259,64 +243,190 @@
   color: var(--mgx-text);
 }
 
-/* ---------- countdown (this page only; end time set in the section settings) ---------- */
-.mgx-bo__countdown {
+/* ---------- countdown top bar above the photo (magyx.co top-bar layout; end time in the section settings) ---------- */
+.mgx-bo__topbar {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  margin: 16px 0 20px;
-  padding: 12px 16px 14px;
-  border-radius: var(--mgx-bo-radius);
-  background: var(--mgx-bo-soft);
-  text-align: center;
+  background-color: var(--mgx-bo-tb-timer);
+  color: var(--mgx-white);
 }
 
-.mgx-bo__countdown[hidden],
-.mgx-bo__countdown [hidden] {
+.mgx-bo__topbar[hidden],
+.mgx-bo__topbar [hidden] {
   display: none;
 }
 
-.mgx-bo__countdown-label,
-.mgx-bo__countdown-expired {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.3;
-  font-weight: 700;
-  color: var(--mgx-text);
-}
-
-.mgx-bo__countdown-units {
+.mgx-bo__topbar-offer {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px 12px;
+  padding: 9px 16px;
+  background-color: var(--mgx-bo-tb-offer);
+  text-align: center;
 }
 
-.mgx-bo__countdown-unit {
+.mgx-bo__topbar-eyebrow {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.mgx-bo__topbar-rule {
+  display: block;
+  width: 1px;
+  height: 14px;
+  background-color: rgba(var(--mgx-white-rgb), 0.35);
+}
+
+.mgx-bo__topbar-deal {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mgx-bo__topbar-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 7px 16px 8px;
+}
+
+.mgx-bo__topbar-ends,
+.mgx-bo__topbar-expired {
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(var(--mgx-white-rgb), 0.7);
+}
+
+.mgx-bo__topbar-expired {
+  font-size: 12px;
+  color: var(--mgx-white);
+}
+
+.mgx-bo__topbar-clock {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.mgx-bo__topbar-unit {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  min-width: 56px;
 }
 
-.mgx-bo__countdown-num {
+.mgx-bo__topbar-num {
   display: block;
-  width: 100%;
-  padding: 6px 0;
-  border-radius: 8px;
-  background: var(--mgx-amber);
-  color: #fff;
-  font-size: 24px;
-  line-height: 1.1;
+  min-width: 30px;
+  padding: 3px 4px;
+  border: 1px solid rgba(var(--mgx-white-rgb), 0.09);
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(var(--mgx-white-rgb), 0.12) 0%, rgba(var(--mgx-white-rgb), 0.03) 100%);
+  box-shadow: inset 0 1px 0 rgba(var(--mgx-white-rgb), 0.08), 0 2px 6px rgba(0, 0, 0, 0.35);
+  color: var(--mgx-white);
+  font-size: 16px;
+  line-height: 20px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  text-align: center;
 }
 
-.mgx-bo__countdown-name {
-  font-size: 12px;
-  line-height: 1.2;
-  color: var(--mgx-text-muted);
+.mgx-bo__topbar-cap {
+  margin-top: 3px;
+  font-size: 8px;
+  line-height: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(var(--mgx-white-rgb), 0.55);
+}
+
+.mgx-bo__topbar-sep {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 800;
+  color: rgba(var(--mgx-white-rgb), 0.5);
+}
+
+@media (min-width: 768px) {
+  .mgx-bo__topbar {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .mgx-bo__topbar-offer {
+    flex: 1 1 50%;
+    justify-content: flex-end;
+    padding: 10px 44px 10px 24px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 22px) 100%, 0 100%);
+  }
+  .mgx-bo__topbar-eyebrow {
+    font-size: 12px;
+  }
+  .mgx-bo__topbar-deal {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .mgx-bo__topbar-timer {
+    flex: 1 1 50%;
+    justify-content: flex-start;
+    padding: 8px 24px 8px 22px;
+  }
+  .mgx-bo__topbar-ends {
+    font-size: 11px;
+  }
+  .mgx-bo__topbar-num {
+    min-width: 34px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .mgx-bo__topbar-sep {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+
+/* ---------- benefits: magyx.co claim list (check circle + bold line) ---------- */
+.mgx-bo__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mgx-bo__benefit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--mgx-black);
+}
+
+.mgx-bo__benefit-check {
+  flex-shrink: 0;
+  fill: var(--mgx-accent);
+}
+
+@media (min-width: 750px) {
+  .mgx-bo__benefit {
+    font-size: 16px;
+  }
 }
 
 /* ---------- tiers: picture card (radio + savings corner) with label + per-bottle price under it ---------- */
@@ -518,17 +628,37 @@
   gap: 3px;
 }
 
-/* on a product photo: gifts float on a white pill at the bottom of the card */
-.mgx-bo__tier-gifts.is-overlay {
-  position: absolute;
-  left: 50%;
-  bottom: 6px;
-  z-index: 1;
-  transform: translateX(-50%);
-  padding: 2px 5px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+/* photo cards: square photo on top, gift strip under it inside the frame (nothing covers the photo) */
+.mgx-bo__tier-card.has-photo {
+  aspect-ratio: auto;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.mgx-bo__tier-card.has-photo .mgx-bo__tier-img {
+  aspect-ratio: 1 / 1;
+  height: auto;
+}
+
+.mgx-bo__tier-card.has-photo .mgx-bo__tier-gifts,
+.mgx-bo__tier-card.has-photo:not(:has(.mgx-bo__tier-gifts))::after {
+  width: 100%;
+  min-height: 32px;
+  padding: 4px;
+  border-top: 1px solid var(--mgx-hairline);
+}
+
+/* photo card without gifts: empty strip of the same height, so all cards line up */
+.mgx-bo__tier-card.has-photo:not(:has(.mgx-bo__tier-gifts))::after {
+  content: '';
+  display: block;
+}
+
+@media (min-width: 750px) {
+  .mgx-bo__tier-card.has-photo .mgx-bo__tier-gifts,
+  .mgx-bo__tier-card.has-photo:not(:has(.mgx-bo__tier-gifts))::after {
+    min-height: 40px;
+  }
 }
 
 .mgx-bo__tier-plus {

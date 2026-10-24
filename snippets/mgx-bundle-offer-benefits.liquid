@@ -1,0 +1,24 @@
+{%- comment -%}
+  Benefit lines for sections/mgx-bundle-offer.liquid. Param: benefits (richtext from the section settings).
+{%- endcomment -%}
+{%- comment -%}
+  one paragraph = one check line (magyx.co claim list); a leading emoji typed in the editor is dropped,
+  the check circle replaces it
+{%- endcomment -%}
+<ul class="mgx-bo__benefits">
+  {%- assign benefit_lines = benefits | replace: '</p>', '|' | split: '|' -%}
+  {%- for line in benefit_lines -%}
+    {%- assign benefit = line | strip_html | remove: '️' | strip -%}
+    {%- assign benefit_first = benefit | split: ' ' | first -%}
+    {%- assign benefit_emojis = '⚡,⭐,✅,✔,✓,✨,🔥,💯,🌿,💧,🎁,🚚,⏰,⌛,⏳,💎,❤,💚,👍,🌸,🌱,🧴,🏆,★' | split: ',' -%}
+    {%- if benefit_emojis contains benefit_first -%}
+      {%- assign benefit = benefit | remove_first: benefit_first | strip -%}
+    {%- endif -%}
+    {%- if benefit != blank -%}
+      <li class="mgx-bo__benefit">
+        <svg class="mgx-bo__benefit-check" viewBox="0 0 22 22" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="11"/><path d="M6.6 11.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>{{ benefit }}</span>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>

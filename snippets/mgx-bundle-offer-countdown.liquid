@@ -1,20 +1,46 @@
 {%- comment -%}
-  Countdown for sections/mgx-bundle-offer.liquid (that page only).
-  Params: enabled, end ('YYYY-MM-DD HH:MM' Polish time), label, expired (empty = hide when over).
+  Countdown top bar for sections/mgx-bundle-offer.liquid (that page only), magyx.co top-bar layout:
+  offer half (eyebrow + deal) and countdown half with digit tiles. Phones stack them; from 768px one row, slanted join.
+  Params: enabled, end ('YYYY-MM-DD HH:MM' Polish time), label (text before the tiles), expired (empty = hide when over),
+  eyebrow, deal, offer_bg, timer_bg.
 {%- endcomment -%}
 {%- comment -%} page-only countdown; end time is Polish time, the script hides it on a bad date {%- endcomment -%}
 {%- if enabled and end != blank -%}
-  <div class="mgx-bo__countdown" data-mgx-countdown data-end="{{ end | strip | escape }}" data-expired="{{ expired | escape }}" hidden>
-    {%- if label != blank -%}
-      <p class="mgx-bo__countdown-label">{{ label }}</p>
+  <div
+    class="mgx-bo__topbar"
+    data-mgx-countdown
+    data-end="{{ end | strip | escape }}"
+    data-expired="{{ expired | escape }}"
+    style="--mgx-bo-tb-offer: {{ offer_bg | default: '#184031' }}; --mgx-bo-tb-timer: {{ timer_bg | default: '#100F0D' }};"
+    hidden>
+    {%- if eyebrow != blank or deal != blank -%}
+      <div class="mgx-bo__topbar-offer">
+        {%- if eyebrow != blank -%}
+          <span class="mgx-bo__topbar-eyebrow">{{ eyebrow }}</span>
+        {%- endif -%}
+        {%- if eyebrow != blank and deal != blank -%}
+          <span class="mgx-bo__topbar-rule" aria-hidden="true"></span>
+        {%- endif -%}
+        {%- if deal != blank -%}
+          <span class="mgx-bo__topbar-deal">{{ deal }}</span>
+        {%- endif -%}
+      </div>
     {%- endif -%}
-    <div class="mgx-bo__countdown-units" role="timer">
-      <span class="mgx-bo__countdown-unit"><span class="mgx-bo__countdown-num" data-unit="d">00</span><span class="mgx-bo__countdown-name">dni</span></span>
-      <span class="mgx-bo__countdown-unit"><span class="mgx-bo__countdown-num" data-unit="h">00</span><span class="mgx-bo__countdown-name">godz.</span></span>
-      <span class="mgx-bo__countdown-unit"><span class="mgx-bo__countdown-num" data-unit="m">00</span><span class="mgx-bo__countdown-name">min</span></span>
-      <span class="mgx-bo__countdown-unit"><span class="mgx-bo__countdown-num" data-unit="s">00</span><span class="mgx-bo__countdown-name">sek.</span></span>
+    <div class="mgx-bo__topbar-timer">
+      {%- if label != blank -%}
+        <span class="mgx-bo__topbar-ends">{{ label | remove: ':' | strip }}</span>
+      {%- endif -%}
+      <span class="mgx-bo__topbar-clock" role="timer">
+        <span class="mgx-bo__topbar-unit"><span class="mgx-bo__topbar-num" data-unit="d">00</span><span class="mgx-bo__topbar-cap">dni</span></span>
+        <i class="mgx-bo__topbar-sep" aria-hidden="true">:</i>
+        <span class="mgx-bo__topbar-unit"><span class="mgx-bo__topbar-num" data-unit="h">00</span><span class="mgx-bo__topbar-cap">godz.</span></span>
+        <i class="mgx-bo__topbar-sep" aria-hidden="true">:</i>
+        <span class="mgx-bo__topbar-unit"><span class="mgx-bo__topbar-num" data-unit="m">00</span><span class="mgx-bo__topbar-cap">min</span></span>
+        <i class="mgx-bo__topbar-sep" aria-hidden="true">:</i>
+        <span class="mgx-bo__topbar-unit"><span class="mgx-bo__topbar-num" data-unit="s">00</span><span class="mgx-bo__topbar-cap">sek.</span></span>
+      </span>
+      <span class="mgx-bo__topbar-expired" hidden></span>
     </div>
-    <p class="mgx-bo__countdown-expired" hidden></p>
   </div>
   <script>
     (function () {
@@ -48,8 +74,9 @@
         if (end === null) return;
         var nums = {};
         el.querySelectorAll('[data-unit]').forEach(function (n) { nums[n.getAttribute('data-unit')] = n; });
-        var units = el.querySelector('.mgx-bo__countdown-units');
-        var expiredEl = el.querySelector('.mgx-bo__countdown-expired');
+        var clock = el.querySelector('.mgx-bo__topbar-clock');
+        var ends = el.querySelector('.mgx-bo__topbar-ends');
+        var expiredEl = el.querySelector('.mgx-bo__topbar-expired');
         var expiredText = el.getAttribute('data-expired') || '';
         var timer;
 
@@ -58,7 +85,8 @@
           if (left <= 0) {
             clearInterval(timer);
             if (!expiredText) { el.hidden = true; return; }
-            units.hidden = true;
+            clock.hidden = true;
+            if (ends) ends.hidden = true;
             expiredEl.textContent = expiredText;
             expiredEl.hidden = false;
             el.hidden = false;
