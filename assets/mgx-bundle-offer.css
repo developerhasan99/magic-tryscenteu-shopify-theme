@@ -309,6 +309,10 @@
   color: rgba(var(--mgx-white-rgb), 0.7);
 }
 
+.mgx-bo__topbar-ends {
+  white-space: nowrap;
+}
+
 .mgx-bo__topbar-expired {
   font-size: 12px;
   color: var(--mgx-white);
@@ -359,6 +363,49 @@
   line-height: 28px;
   font-weight: 800;
   color: rgba(var(--mgx-white-rgb), 0.5);
+}
+
+/* phones: offer as two centred lines (no divider), label + tiles on one row */
+@media (max-width: 767px) {
+  .mgx-bo__topbar-offer {
+    flex-direction: column;
+    gap: 1px;
+    padding: 7px 12px;
+  }
+  .mgx-bo__topbar-rule {
+    display: none;
+  }
+  .mgx-bo__topbar-eyebrow {
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: 0.14em;
+  }
+  .mgx-bo__topbar-deal {
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .mgx-bo__topbar-timer {
+    gap: 10px;
+    padding: 6px 12px 7px;
+  }
+  .mgx-bo__topbar-ends {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+  .mgx-bo__topbar-clock {
+    gap: 3px;
+  }
+  .mgx-bo__topbar-num {
+    min-width: 28px;
+  }
+}
+
+/* smallest phones: label above the tiles */
+@media (max-width: 359px) {
+  .mgx-bo__topbar-timer {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 @media (min-width: 768px) {

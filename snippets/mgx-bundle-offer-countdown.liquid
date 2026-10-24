@@ -44,8 +44,8 @@
   </div>
   <script>
     (function () {
-      if (window.__mgxBoCountdown) return;
-      window.__mgxBoCountdown = true;
+      // no run-once guard: the theme editor re-renders the section (timer on/off, new date) and this script runs again;
+      // bars already started are skipped, timers of removed bars are stopped
 
       // minutes east of UTC for Europe/Warsaw at a given instant (handles CET/CEST)
       function warsawOffset(date) {
@@ -70,6 +70,8 @@
       function pad(n) { return (n < 10 ? '0' : '') + n; }
 
       function start(el) {
+        if (el.hasAttribute('data-started')) return;
+        el.setAttribute('data-started', '');
         var end = parseEnd(el.getAttribute('data-end') || '');
         if (end === null) return;
         var nums = {};
@@ -81,6 +83,7 @@
         var timer;
 
         function tick() {
+          if (!el.isConnected) { clearInterval(timer); return; }
           var left = Math.floor((end - Date.now()) / 1000);
           if (left <= 0) {
             clearInterval(timer);
@@ -106,6 +109,10 @@
       function init() { document.querySelectorAll('[data-mgx-countdown]').forEach(start); }
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
       else init();
+      if (!window.__mgxBoCountdownEditor) {
+        window.__mgxBoCountdownEditor = true;
+        document.addEventListener('shopify:section:load', init);
+      }
     })();
   </script>
 {%- endif -%}
