@@ -131,7 +131,18 @@
                 </a>
               {%- when 'title' -%}
                 <div class="product__title relative" {{ block.shopify_attributes }}>
-                  {%- if product.tags contains 'Bestseller' or product.tags contains 'onsale' -%}
+                  {%- liquid
+                    assign title_has_badge = false
+                    if product.tags contains 'Bestseller' or product.template_suffix == 'expressive-notes'
+                      assign title_has_badge = true
+                    elsif product.tags contains 'onsale' and product.compare_at_price != blank and product.compare_at_price > product.price
+                      assign title_has_badge = true
+                    endif
+                    unless product.tags contains 'Bestseller' or product.tags contains 'onsale'
+                      assign title_has_badge = false
+                    endunless
+                  -%}
+                  {%- if title_has_badge -%}
                     <div class="absolute top-1 left-0">
                       {% if product.tags contains 'onsale' and product.compare_at_price != blank and product.compare_at_price > product.price %}
                         {%- assign discount_percent = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
@@ -155,7 +166,7 @@
                       {% endif %}
                     </div>
                   {%- endif -%}  
-                  <h1 class="font-[700] text-xl md:text-3xl capitalize !tracking-normal flex flex-col {% if product.tags contains 'Bestseller' or product.tags contains 'onsale' %} pt-12 {% endif %}">
+                  <h1 class="font-[700] text-xl md:text-3xl capitalize !tracking-normal flex flex-col {% if title_has_badge %} pt-12 {% endif %}">
                       {% render 'polish-store-text', text: product.title %}
                   </h1>
                 </div>
