@@ -103,7 +103,18 @@
               {%- when '@app' -%}
                 {% render block %}
               {%- when 'short_description' -%}
-                {% render 'short-description', block: block, section: section, product: product %}
+                {%- comment -%} When the scent-profiling block gets the section, it shows the short description under the claim lines instead. A liquid setting reads back rendered, so look for the wrapper it outputs. {%- endcomment -%}
+                {%- liquid
+                  assign sdesc_in_profile = false
+                  for b in section.blocks
+                    if b.type == 'custom_liquid' and b.settings.custom_liquid contains 'mgx-sdesc-under-match'
+                      assign sdesc_in_profile = true
+                    endif
+                  endfor
+                -%}
+                {%- unless sdesc_in_profile -%}
+                  {% render 'short-description', block: block, section: section, product: product %}
+                {%- endunless -%}
               {%- when 'text' -%}
                 <p
                   class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"

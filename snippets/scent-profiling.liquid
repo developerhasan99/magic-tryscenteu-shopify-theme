@@ -1,13 +1,32 @@
-<div class="flex gap-2 items-center">
-  <img
-    src="{{ 'icon-stopwatch.svg' |  asset_url }}"
-    alt="Watch"
-    height="24"
-    width="24">
-  <div class="font-semibold text-black text-sm md:text-base">
-    Do 12 godzin trwałości, 20% koncentracji
-  </div>
-</div>
+{%- comment -%}
+  Claim lines with check circles (magyx.co layout), then the short description and the scent description,
+  then the scent icons. Short description needs `section` passed in (render 'scent-profiling', section: section);
+  main-product then skips the short_description block's own spot under the title.
+{%- endcomment -%}
+<ul class="list-none m-0 p-0 flex flex-col gap-2">
+  {%- assign claims = '20% olejku perfumeryjnego, trwałość do 12 godzin|95% podobieństwa zapachu. Te same olejki z Grasse|Bez ftalanów i parabenów' | split: '|' -%}
+  {%- for claim in claims -%}
+    <li class="flex gap-2 items-center">
+      <svg class="shrink-0 mgx-text-accent" viewBox="0 0 22 22" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="11" fill="currentColor"/><path d="M6.6 11.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="font-semibold text-black text-sm md:text-base tracking-normal">{{ claim }}</span>
+    </li>
+  {%- endfor -%}
+</ul>
+{%- if section != blank -%}
+  {%- for sdesc_block in section.blocks -%}
+    {%- if sdesc_block.type == 'short_description' -%}
+      <div class="mgx-sdesc-under-match">
+        {%- render 'short-description', block: sdesc_block, section: section, product: product -%}
+      </div>
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{% if product.metafields.custom.scent_description != blank %}
+  <p class="tracking-normal">
+    {{ product.metafields.custom.scent_description }}
+  </p>
+{% endif %}
 
 <div class="scent-attributes flex gap-6 md:gap-12">
   {% if product.metafields.custom.fragrance_family != blank %}

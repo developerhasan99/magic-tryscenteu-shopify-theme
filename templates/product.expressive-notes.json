@@ -16,10 +16,17 @@
           "type": "title",
           "settings": {}
         },
-        "custom_rating_text_ehyqmQ": {
-          "type": "custom_rating_text",
+        "custom_liquid_jmStoreRating": {
+          "type": "custom_liquid",
           "settings": {
-            "text": "4,7/5 (ponad 10 000 opinii)"
+            "custom_liquid": "{% render 'judgeme-store-rating' %}"
+          }
+        },
+        "short_description_Sd7mQx": {
+          "type": "short_description",
+          "settings": {
+            "link_label": "Pełny opis",
+            "description_block_id": "collapsible_tab_FAAFhb"
           }
         },
         "price_MG94AW": {
@@ -52,11 +59,34 @@
         "custom_liquid_zQNhHc": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% render 'scent-profiling' %}"
+            "custom_liquid": "{% render 'scent-profiling', section: section %}\n{% render 'reactive-atc' %}"
+          }
+        },
+        "ugc_videos_main": {
+          "type": "ugc_videos",
+          "settings": {
+            "replace_bundle": true,
+            "autoplay_preview": true,
+            "video_1": "shopify://files/videos/nikoolixa_7671692339257085217.mp4",
+            "video_url_1": "",
+            "caption_1": "Pachnie jak oryginał",
+            "show_caption_1": true,
+            "product_1": "6x-50ml-parfumflaschen",
+            "video_2": "shopify://files/videos/aniaprzy_7677573659518717217.mp4",
+            "video_url_2": "",
+            "caption_2": "Trzyma się cały dzień",
+            "show_caption_2": true,
+            "product_2": "3x-50ml-perfume-bottles",
+            "video_3": "shopify://files/videos/tryscenteu_PaulinaO_SzafNr466_9f0a1f51.mov",
+            "video_url_3": "",
+            "caption_3": "Nie musisz przepłacać",
+            "show_caption_3": true,
+            "product_3": "8x-50ml-parfumflaschen"
           }
         },
         "reactive_atc_LBDQE9": {
           "type": "reactive_atc",
+          "disabled": true,
           "settings": {}
         },
         "selling_fast_DRULgF": {
@@ -71,9 +101,9 @@
             "show_countdown": true,
             "countdown_label": "Ends in",
             "end_time": "",
-            "bar_color": "#22613b",
-            "track_color": "#c2dbcb",
-            "accent_color": "#22613b"
+            "bar_color": "#184031",
+            "track_color": "#c7c9cb",
+            "accent_color": "#184031"
           }
         },
         "buy_buttons_eXWBwX": {
@@ -89,31 +119,6 @@
           "disabled": true,
           "settings": {
             "custom_liquid": "<div class=\"my-6\">\n  <div class=\"flex items-center gap-3 text-base\">\n    <img\n      src=\"https://cdn.shopify.com/s/files/1/0623/0691/0402/files/thimbs_up.png?v=1751372431\"\n      alt=\"Thumbs up badge\"\n      class=\"w-10 h-10 flex-shrink-0\"\n      width=\"40\"\n      height=\"40\" />\n    <div class=\"text-slate-900\">\n      <strong class=\"font-semibold\">Wypróbuj przez 60 dni — bez ryzyka.</strong>\n      <div class=\"[display:none] md:block\">Jeśli produkt nie spełni Twoich oczekiwań, zwrócimy Ci pełną kwotę!</div>\n    </div>\n  </div>\n</div>"
-          }
-        },
-        "payment_badges_FkCwVc": {
-          "type": "payment_badges",
-          "disabled": true,
-          "settings": {}
-        },
-        "delivery_deadline_CQHJwz": {
-          "type": "delivery_deadline",
-          "disabled": true,
-          "settings": {
-            "date_text": "Want it by [DATE]?",
-            "days": 2,
-            "date_format": "day, %e. month",
-            "day_label": "%A",
-            "month_label": "%b",
-            "date_size": 16,
-            "date_color": "#000000",
-            "timer_text": "ORDER WITHIN <strong>[HOURS] HOURS [MINUTES] MINUTES?</strong>",
-            "hours": 1,
-            "minutes": 30,
-            "timer_size": 16,
-            "timer_color": "#000000",
-            "text_layout": "col",
-            "text_alignment": "center"
           }
         },
         "quantity_selector_WT7P8d": {
@@ -146,7 +151,6 @@
         },
         "collapsible_tab_FAAFhb": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
             "heading": "Profil zapachowy",
             "icon": "none",
@@ -213,12 +217,14 @@
         },
         "featured_bundle_main": {
           "type": "featured_bundle",
+          "disabled": true,
           "settings": {
             "product": "6x-50ml-parfumflaschen",
-            "heading": "Nasza najlepsza oferta: skomponuj swój zestaw!",
+            "heading": "Skomponuj zestaw i zapłać mniej!",
             "per_bottle_text": "Tylko [cena] za flakon",
             "bottles": 6,
-            "savings_text": "",
+            "savings_text": "Zaoszczędź 45,38%",
+            "show_savings": true,
             "badge_text": ""
           }
         },
@@ -251,18 +257,18 @@
       },
       "block_order": [
         "title_DkyBTh",
-        "custom_rating_text_ehyqmQ",
+        "custom_liquid_jmStoreRating",
+        "short_description_Sd7mQx",
         "price_MG94AW",
         "variant_picker_hH3Diz",
         "custom_liquid_nLrh7P",
         "text_668gJC",
         "custom_liquid_zQNhHc",
+        "ugc_videos_main",
         "reactive_atc_LBDQE9",
         "selling_fast_DRULgF",
         "buy_buttons_eXWBwX",
         "custom_liquid_QcxgR4",
-        "payment_badges_FkCwVc",
-        "delivery_deadline_CQHJwz",
         "quantity_selector_WT7P8d",
         "icon_with_text_ytpGUH",
         "expanded_notes_fm3JND",
@@ -288,7 +294,7 @@
         "enable_video_looping": false,
         "product_info_padding": 5,
         "padding_top": 36,
-        "padding_bottom": 72
+        "padding_bottom": 36
       }
     },
     "you_may_like_agTfti": {
@@ -377,7 +383,7 @@
         "stack_EkfTtL": {
           "type": "stack",
           "settings": {
-            "our_stack": "Komplementy każdego dnia już od 10€",
+            "our_stack": "Komplementy każdego dnia już od 54,99 zł",
             "other_brands": "Często produkowane masowo"
           }
         },
@@ -391,7 +397,7 @@
         "stack_w3Jyyc": {
           "type": "stack",
           "settings": {
-            "our_stack": "Płacisz za jakość — nie za marketing",
+            "our_stack": "Płacisz za jakość, nie za marketing",
             "other_brands": "Płacisz za nazwę marki"
           }
         },
@@ -410,11 +416,15 @@
         "stack_w3Jyyc",
         "stack_dXbqXq"
       ],
+      "disabled": true,
       "name": "Stacks Up",
       "settings": {
         "background_color": "#ffffff",
         "title": "Dlaczego MagyX?",
         "subtitle": "Rozsądna alternatywa dla drogich marek luksusowych.",
+        "ours_title": "MagyX Perfume",
+        "others_title": "Drogie marki luksusowe",
+        "button_url": "#atc_scroll_target",
         "padding_top": 12,
         "padding_bottom": 72
       }
@@ -435,7 +445,7 @@
         "text_Mhwr3T": {
           "type": "text",
           "settings": {
-            "content": "<p>Produkcja w UE gwarantuje najwyższe standardy jakości i pozwala nam nadzorować każdy etap procesu. </p><p>Od wyboru wysokiej jakości surowców po staranne napełnianie każdego flakonu — dbamy o to, by każdy produkt spełniał nasze wysokie wymagania dotyczące jakości i wykonania.</p>",
+            "content": "<p>Produkowane w zakładach na terenie UE, ze składników i według receptur zgodnych z wymogami IFRA.</p><ul><li>Bez ftalanów</li><li>Bez parabenów</li><li>Wegańskie</li><li>Nietestowane na zwierzętach</li><li>Z certyfikatem IFRA</li><li>Opracowane zgodnie z normami UE</li><li>Bez znanych substancji zaburzających gospodarkę hormonalną</li></ul><p>Tworzymy perfumy zgodnie z rygorystycznymi europejskimi normami kosmetycznymi</p>",
             "mobile_content": "",
             "font_size": 18,
             "text_color": "#000000"
@@ -1345,6 +1355,7 @@
         "review_r9YEmc",
         "review_79dwHH"
       ],
+      "disabled": true,
       "name": "Massive Review",
       "settings": {
         "background_color": "#ffffff",
@@ -1358,6 +1369,21 @@
     },
     "1770288371f70b6dc1": {
       "type": "apps",
+      "blocks": {
+        "judge_me_reviews_all_reviews_page_6P8674": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "max_width": 1200,
+            "review_source": "all",
+            "show_all_reviews_in_same_tab": false,
+            "show_first": "product",
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_all_reviews_page_6P8674"
+      ],
       "settings": {
         "include_margins": true
       }
