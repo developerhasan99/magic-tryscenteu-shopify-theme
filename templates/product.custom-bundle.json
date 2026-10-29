@@ -44,9 +44,10 @@
           }
         },
         "custom_liquid_nLrh7P": {
-          "type": "custom_liquid",
+          "type": "custom_offer_bundle",
           "settings": {
-            "custom_liquid": "{% render 'custom-offer-bundle' %}"
+            "skip_atc_button": true,
+            "open_checkout": false
           }
         },
         "text_668gJC": {
